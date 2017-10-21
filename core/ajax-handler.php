@@ -97,6 +97,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 				if( !empty( $url_to_request ) ) {
 					$table_name = end( explode( '/', $url_to_request ) );
 					$table_name = str_replace( '.json', '', $table_name );
+					$table_name = preg_replace('/[0-9]+/', '', $table_name);
 					$this->clone_database_table( $table_name, $url_to_request );
 				}
 				wp_die();
@@ -132,10 +133,29 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	}
 
 	public function clone_database_table( $table_name = '', $url_to_request = '' ) {
-		$retrieved_data = file_get_contents( $url_to_request );
-		if( !empty( $retrieved_data ) ) {
-			$retrieved_data = json_decode( $retrieved_data, true );
+		$retrieved_data = '';
+		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+		// print_r($response);
+		// var_dump($table_name.'_done');
+		// die("COOL");
+		
+		if ( !is_wp_error( $response ) ) {
+			if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
+				$response = isset( $response['body'] ) ? $response['body'] : '';
+				if( !empty( $response ) ) {
+					$retrieved_data = json_decode( $response, true );
+				}
+			}
 		}
+
+		// print_r($response);
+		// var_dump(is_array($response));
+		// die("COOL");
+
+		// $retrieved_data = file_get_contents( $url_to_request );
+		// if( !empty( $retrieved_data ) ) {
+		// 	$retrieved_data = json_decode( $retrieved_data, true );
+		// }
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
@@ -297,18 +317,54 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 
 			global $wpdb;
-			$table_name = $wpdb->prefix . $table_name;
-			$sql = "DELETE FROM " . $table_name;
-			$results = $wpdb->get_results( $sql );
-
-			foreach ( $retrieved_data as $key => $value ) {
-				$wpdb->insert( $table_name, $value );
+			if( ( $table_name == 'users' ) || ( $table_name == 'usermeta' ) ) {
+				$table_name = $wpdb->prefix . $table_name;
+				foreach ( $retrieved_data as $key => $value ) {
+					if( ( isset( $value['ID'] ) ) && ( $value['ID'] == get_current_user_id() ) ) {
+						continue;
+					}
+					else if( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
+						continue;
+					}
+					$wpdb->insert( $table_name, $value );
+				}
+				return;
 			}
+			else {
+				$table_name = $wpdb->prefix . $table_name;
+				
+				$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
+				if( !isset( $wbcom_theme_demo_import_data[ $table_name.'_done' ] ) ) {
+					$sql = "DELETE FROM " . $table_name;
+					$results = $wpdb->get_results( $sql );
+					$wbcom_theme_demo_import_data[ $table_name.'_done' ] = 'yes';
+					update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
+				}
+				
+				// echo "start".'<br/>';
+				foreach ( $retrieved_data as $key => $value ) {
+					// echo $value['ID'].'<br/>';
+					// $value['post_content'] = maybe_unserialize( $value['post_content'] );
+					// $value['post_excerpt'] = maybe_unserialize( $value['post_excerpt'] );
+					$wpdb->insert( $table_name, $value );
+				}
+				// echo "end".'<br/>';
+			}
+
 		}
 	}
 
 	public function clone_uploads_folder( $url_to_request = '' ) {
+		$parentFolderName = explode( '/', $url_to_request );
+		$parentFolderName = array_filter( $parentFolderName );
+		$parentFolderName = array_values( $parentFolderName );
+		$parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
+
 		$retrieved_data = file_get_contents( $url_to_request );
+		// $retrieved_data = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+		// if ( is_wp_error( $retrieved_data ) ) {
+		// 	return;
+		// }
 		if( !empty( $retrieved_data ) ) {
 			$upload = wp_upload_dir();
 			$upload_dir = $upload['basedir'] . '/' . 'wbcom-theme-demo.zip';
@@ -320,13 +376,45 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			$zip = new ZipArchive;
 			$res = $zip->open( $upload_dir );
 			if ( $res === TRUE ) {
-				$zip->extractTo( $upload['basedir'] . '/' );
+				$zip->extractTo( $upload['basedir'] . '/' . $parentFolderName . '/' );
 				$zip->close();
 			}
 
 			unlink( $upload_dir );
 		}
 	}
+
+	// public function clone_uploads_folder( $url_to_request = '' ) {
+	// 	// $retrieved_data = file_get_contents( $url_to_request );
+	// 	$retrieved_data = '';
+	// 	$retrieved_data = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+	// 	if ( is_wp_error( $retrieved_data ) ) {
+	// 		print_r($retrieved_data);
+	// 		return;
+	// 	}
+	// 	print_r($retrieved_data);
+		
+	// 	if( !empty( $retrieved_data ) ) {
+	// 		$upload = wp_upload_dir();
+	// 		$upload_dir = $upload['basedir'] . '/' . 'wbcom-theme-demo.zip';
+
+	// 		$file = fopen( $upload_dir, "w+" );
+	// 		print_r($file);
+	// 		fputs( $file, $retrieved_data );
+	// 		echo "DATA PUT";
+	// 		fclose( $file );
+	// 		echo "DATA PUT";
+
+	// 		$zip = new ZipArchive;
+	// 		$res = $zip->open( $upload_dir );
+	// 		if ( $res === TRUE ) {
+	// 			$zip->extractTo( $upload['basedir'] . '/' );
+	// 			$zip->close();
+	// 		}
+
+	// 		// unlink( $upload_dir );
+	// 	}
+	// }
 
 }
 

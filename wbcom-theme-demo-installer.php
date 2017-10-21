@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: WBCOM_Theme_Demo_Installer
- * Plugin URI: http://WBCOM.com/
- * Description: Wordpress extension to remove plugin-update link from plugin listing page. Helpful to avoid comitting mistake in case you don't want to update any plugin.
+ * Plugin Name: Wbcom Theme Demo Installer
+ * Plugin URI: https://wbcomdesigns.com/
+ * Description: Wbcom Theme Demo Installer
  * Version: 1.0.0
- * Author: WBCOM
- * Author URI: http://WBCOM.com/
+ * Author: Wbcom Designs
+ * Author URI: https://wbcomdesigns.com/
  * Requires at least: 4.0
  * Tested up to: 4.7
  *
@@ -14,7 +14,7 @@
  *
  * @package WBCOM_Theme_Demo_Installer
  * @category Core
- * @author WBCOM
+ * @author Wbcom Designs
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -99,7 +99,8 @@ class WBCOM_Theme_Demo_Installer {
 		$this->define( 'WBCOM_Theme_Demo_Installer_TEXT_DOMAIN', 'wbcom-theme-demo-installer' );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-		$this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://localhost/wordpress/?wbcom_theme_demo_listing=yes' );
+		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://localhost/demo1/wp-admin/?wbcom_theme_demo_listing=yes' );
+		$this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://wpbp.in/wp-admin/?wbcom_theme_demo_listing=yes' );
 	}
 
 	/**

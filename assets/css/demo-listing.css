@@ -1,4 +1,13 @@
 
+
+/* The alert message box */
+div.wbcom-demo-importer .alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
 /* progress bar css :: start */
 /* Container for skill bars */
 #progress-bar-container {

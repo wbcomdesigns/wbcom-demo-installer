@@ -81,6 +81,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			if( isset( $wbcom_theme_demo_import_data['plugins_installed'] ) && ( $wbcom_theme_demo_import_data['plugins_installed'] == 'OK' ) ) {
 				echo "<div class='wrap wbcom-demo-importer'>";
 					?>
+					<div class="alert">
+						<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+					</div>
 					<div id="progress-bar-container" style="display: none;">
 						<div class="skills completed">80%</div>
 					</div>
@@ -100,6 +103,12 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		}
 
 
+		$theme_info = wp_get_theme();
+		$reflection = new ReflectionClass( $theme_info );
+		$property = $reflection->getProperty( 'headers' );
+		$property->setAccessible(true);
+		$theme_info = $property->getValue( $theme_info );
+
 		$current_url = $this->get_demo_installer_page_url();
 		$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 		$response = wp_remote_post( $url_to_request, array(
@@ -107,7 +116,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			'timeout' => 45,
 			'headers' => array(),
 			'body' => array( 
-				'theme_name' => 'Reign',
+				'theme_name' => $theme_info['Name'],
 			)
 		) );
 		if ( is_wp_error( $response ) ) {
@@ -136,6 +145,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 						<?php
 					}
 				}
+				else {
+					_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+				}
 			}
 		}
 	}
@@ -148,7 +160,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			$handle		=	'wbcom_theme_demo_installer_js',
 			$src		=	WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/importer.js',
 			$deps		=	array( 'jquery' ),
-			$ver		=	false,
+			$ver		=	time(),
 			$in_footer	=	true
 		);
 		wp_localize_script(
@@ -165,7 +177,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			$handle		=	'wbcom-demo-listing-css',
 			$src		=	WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
 			$deps		=	array(),
-			$ver		=	false,
+			$ver		=	time(),
 			$media		=	'all'
 		);
 		wp_enqueue_style( 'wbcom-demo-listing-css' );
