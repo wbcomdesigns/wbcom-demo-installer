@@ -99,8 +99,9 @@ class WBCOM_Theme_Demo_Installer {
 		$this->define( 'WBCOM_Theme_Demo_Installer_TEXT_DOMAIN', 'wbcom-theme-demo-installer' );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://localhost/demo1/wp-admin/?wbcom_theme_demo_listing=yes' );
-		$this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://wpbp.in/wp-admin/?wbcom_theme_demo_listing=yes' );
+		$this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://localhost/wordpress/wp-admin/?wbcom_theme_demo_listing=yes' );
+		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://wpbp.in/wp-admin/?wbcom_theme_demo_listing=yes' );
+		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://104.193.111.102/~cardetailsi/kleo/wp-admin/?wbcom_theme_demo_listing=yes' );
 	}
 
 	/**
@@ -122,8 +123,6 @@ class WBCOM_Theme_Demo_Installer {
 		include_once 'core/admin-settings.php';
 		include_once 'core/ajax-handler.php';
 		include_once 'core/plugins-manager.php';
-		include_once 'xml-importer/xml-importer.php';
-		include_once 'tgm-plugin-activation/example.php';
 	}
 
 	/**

@@ -1,4 +1,69 @@
 
+/*
+* Plugin Installer Manager Code
+*/
+jQuery( document ).ready( function( $ ) {
+
+	_check_all_required_plugin_installed();
+
+	$( 'button.plugin-action-button' ).click( function( event ) {
+		event.preventDefault();
+		var thisRef = $( this );
+
+		if( thisRef.hasClass( 'already-active' ) ) {
+			return;
+		}
+
+		_show_plugin_installer_loader();
+		$.ajax({
+			url : wbcom_theme_demo_installer_params.ajax_url,
+			type : 'post',
+			dataType : 'json',
+			data : {
+				action : 'wbcom_manage_plugin_installation',
+				plugin_action : thisRef.siblings( 'input.plugin-action').val(),
+				plugin_slug : thisRef.siblings( 'input.plugin-slug').val()
+			},
+			success : function( response ) {
+				_hide_plugin_installer_loader();
+				if( response.success ) {
+					thisRef.siblings( 'p.plugin-status').html( 'Active' );
+					thisRef.html( 'Already Installed & Activated' );
+					var temp_counter = parseInt( $( 'input#num_of_req_plugins_installed').val() );
+					$( 'input#num_of_req_plugins_installed').val( temp_counter );
+					_check_all_required_plugin_installed();
+				}
+				else {
+					alert( 'There was a problem performing the action.' );
+				}
+			},
+			'error' : function( response ) {
+				_hide_plugin_installer_loader();
+				alert( 'There was a problem performing the action.' );
+			}
+		});
+	});
+
+	function _check_all_required_plugin_installed() {
+		if( ( parseInt( wbcom_theme_demo_installer_params.required_plugins_to_activate ) - parseInt( $( 'input#num_of_req_plugins_installed').val() ) == 0 ) ) {
+			$( 'div.goto-install-demo-step').show();
+		}
+	}
+
+	function _show_plugin_installer_loader() {
+		jQuery( 'body' ).addClass( 'demo_listing_loading' );
+	}
+
+	function _hide_plugin_installer_loader() {
+		jQuery( 'body' ).removeClass( 'demo_listing_loading' );
+	}
+
+});
+
+
+/*
+* Demo Importer Manager Code
+*/
 jQuery( document ).ready( function( $ ) {
 
 	var wbcom_theme_demo_data = '';
