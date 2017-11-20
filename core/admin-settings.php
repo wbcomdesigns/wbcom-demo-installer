@@ -132,22 +132,28 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			</div>
 			<div id="progress-snackbar"></div>
 			<?php
-			echo "<div class='loader' style='display:none;'></div>";
+			echo "<div class='loader' style='display:none;text-align:center;'></div>";
 			echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
 			echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
+			echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
 			echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
 			echo "<div>";
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
 			if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
-				$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+				
+				$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
+				
 				$response = wp_remote_post( $url_to_request, array(
 					'method' => 'POST',
-					'timeout' => 45,
+					'timeout' => 120,
 					'headers' => array(),
+					'sslverify'   => false,
 					'body' => array(
 						'theme_slug'	=> $_GET['theme_slug'],
 						'demo_slug'	=> $_GET['demo_slug'],
+						// 'target_url' => $_GET['target_url'],
 						'plugins_list' => 'get_plugins_list',
 					)
 				) );
@@ -165,10 +171,12 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			}
 
 			$num_of_req_plugins_installed = 0;
+			$required_plugins_to_activate = 0;
 			$demo_import_url = $this->get_demo_installer_page_url(
 				array(
 					'theme_slug' => $_GET['theme_slug'],
 					'demo_slug' => $_GET['demo_slug'],
+					'target_url' => $_GET['target_url'],
 					'step' => 'demo_import',
 				) );
 			$plugins_list = get_option( 'wbcom_theme_demo_req_plugins', array() );
@@ -181,6 +189,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 				$plugin_status = instantiate_wbcom_demo_importer_plugins_manager()->get_plugin_status( $plugin['slug'] );
 				$plugin_dependency = 'Optional';
 				if( isset( $plugin['required'] ) && ( $plugin['required'] == true ) ) {
+					$required_plugins_to_activate++;
 					$plugin_dependency = 'Required';
 					if( $plugin_status['status_text'] == 'Active' ) {
 						$num_of_req_plugins_installed++;
@@ -206,6 +215,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			}
 			?>
 			<div class="demo_listing_modal"></div>
+			<input type="hidden" id="required_plugins_to_activate" name="required_plugins_to_activate" value="<?php echo $required_plugins_to_activate; ?>">
 			<input type="hidden" id="num_of_req_plugins_installed" name="num_of_req_plugins_installed" value="<?php echo $num_of_req_plugins_installed; ?>">
 			<?php
 		}
@@ -215,14 +225,34 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 
 			$current_url = $this->get_demo_installer_page_url();
 			$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
-			$response = wp_remote_post( $url_to_request, array(
-				'method' => 'POST',
-				'timeout' => 45,
-				'headers' => array(),
-				'body' => array( 
-					'theme_name' => $theme_info['Name'],
-				)
-			) );
+
+			$parent_url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "package" . "-" . $theme_info['Name'] . ".json";
+			$retrieved_data = '';
+			$response = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
+			
+			// var_dump($parent_url_to_request);
+			// if ( !is_wp_error( $response ) ) {
+			// 	if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
+			// 		$response = isset( $response['body'] ) ? $response['body'] : '';
+			// 		if( !empty( $response ) ) {
+			// 			$retrieved_data = json_decode( $response, true );
+			// 		}
+			// 	}
+			// }
+
+			// print_r($retrieved_data);
+			// die("COOL");
+
+
+			// $response = wp_remote_post( $url_to_request, array(
+			// 	'method' => 'POST',
+			// 	'timeout' => 45,
+			// 	'headers' => array(),
+			// 	'body' => array( 
+			// 		'theme_name' => $theme_info['Name'],
+			// 	)
+			// ) );
+
 			if ( is_wp_error( $response ) ) {
 				$error_message = $response->get_error_message();
 				echo "Something went wrong: $error_message";
@@ -238,79 +268,10 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 								array(
 									'theme_slug' => $value['theme_slug'],
 									'demo_slug' => $value['demo_slug'],
+									'target_url' => $value['target_url'], 
 									'step' => 'plugins_manager',
 								) );
 							?>
-							<div class='wbcom-demo-importer'>
-								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
-									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
-								</div>
-							</div>
-							<div class='wbcom-demo-importer'>
-								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
-									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
-								</div>
-							</div>
-							<div class='wbcom-demo-importer'>
-								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
-									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
-								</div>
-							</div>
-							<div class='wbcom-demo-importer'>
-								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
-									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
-								</div>
-							</div>
-							<div class='wbcom-demo-importer'>
-								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
-									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
-								</div>
-							</div>
 							<div class='wbcom-demo-importer'>
 								<div class="container">
 									<form method="get" action="<?php echo $current_url; ?>">
@@ -345,10 +306,12 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		if ( $screen->id != 'toplevel_page_wbcom-theme-demo-installer' ) { return; }
 
 		if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
-			$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+
+			$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 			$response = wp_remote_post( $url_to_request, array(
 				'method' => 'POST',
-				'timeout' => 45,
+				'timeout' => 120,
 				'headers' => array(),
 				'body' => array(
 					'theme_slug'	=> $_GET['theme_slug'],

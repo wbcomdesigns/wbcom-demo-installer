@@ -6,6 +6,6 @@
 		Demo Data successfully Imported.
 
 	</p>
-	<a href="#" title="" class="button">Visit Site</a>
+	<a href="<?php echo get_home_url(); ?>" title="" class="button" target="_blank">Visit Site</a>
 
 </div>

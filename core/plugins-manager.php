@@ -675,11 +675,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	public function get_required_plugins() {
-		// if( !isset( $_GET['theme_slug'] ) ) {
-		// 	return get_option( 'wbcom_theme_demo_req_plugins', array() );
-		// }
+		if( !isset( $_GET['theme_slug'] ) ) {
+			return get_option( 'wbcom_theme_demo_req_plugins', array() );
+		}
 		if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
-			$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+			if( !isset( $_GET['target_url'] ) ) { return array(); }
+			$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 			$response = wp_remote_post( $url_to_request, array(
 				'method' => 'POST',
 				'timeout' => 45,

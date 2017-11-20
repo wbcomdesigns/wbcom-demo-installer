@@ -30,6 +30,7 @@ jQuery( document ).ready( function( $ ) {
 					thisRef.siblings( 'p.plugin-status').html( 'Active' );
 					thisRef.html( 'Already Installed & Activated' );
 					var temp_counter = parseInt( $( 'input#num_of_req_plugins_installed').val() );
+					temp_counter++;
 					$( 'input#num_of_req_plugins_installed').val( temp_counter );
 					_check_all_required_plugin_installed();
 				}
@@ -45,8 +46,11 @@ jQuery( document ).ready( function( $ ) {
 	});
 
 	function _check_all_required_plugin_installed() {
-		if( ( parseInt( wbcom_theme_demo_installer_params.required_plugins_to_activate ) - parseInt( $( 'input#num_of_req_plugins_installed').val() ) == 0 ) ) {
+		if( ( parseInt( $( 'input#required_plugins_to_activate').val() ) - parseInt( $( 'input#num_of_req_plugins_installed').val() ) == 0 ) ) {
 			$( 'div.goto-install-demo-step').show();
+		}
+		else {
+			$( 'div.goto-install-demo-step').hide();
 		}
 	}
 
@@ -97,6 +101,7 @@ jQuery( document ).ready( function( $ ) {
 				action : 'wbcom_read_theme_demo_package_file',
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
 				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
+				target_url : thisRef.siblings( '#target_url' ).val(),
 			},
 			success : function( response ) {
 				wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );

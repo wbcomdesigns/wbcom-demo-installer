@@ -56,10 +56,11 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function wbcom_read_theme_demo_package_file() {
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
-				$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
 					'method' => 'POST',
-					'timeout' => 45,
+					'timeout' => 120,
 					'headers' => array(),
 					'body' => array(
 						'theme_slug' => $_POST['theme_slug'],
