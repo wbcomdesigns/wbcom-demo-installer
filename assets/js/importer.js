@@ -94,6 +94,7 @@ jQuery( document ).ready( function( $ ) {
     });
 
     function _wbcom_read_theme_demo_package_file() {
+    	wbcom_tdd_show_current_activity( 'Reading Package File ...' );
     	$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
@@ -138,6 +139,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function _wbcom_get_theme_demo_data( url_to_request, action_for ) {
+		wbcom_tdd_show_current_activity( 'Reading '+url_to_request+' ...' );
 		$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
@@ -225,6 +227,11 @@ jQuery( document ).ready( function( $ ) {
 	function wbcom_tdd_update_progress_bar( progress_percentage ) {
 		$( '#progress-bar-container .completed' ).css( 'width', progress_percentage );
 		$( '#progress-bar-container .completed' ).html( progress_percentage );
+	}
+
+	function wbcom_tdd_show_current_activity( message ) {
+		$( '#wbtd-current-action' ).show();
+		$( '#wbtd-current-action' ).html( message );
 	}
 
 });

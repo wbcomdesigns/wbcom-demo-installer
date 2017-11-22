@@ -11,18 +11,13 @@
                 50% 50% 
                 no-repeat;
 }
-
 body.demo_listing_loading .demo_listing_modal {
     display: block;
 }
-
-
 .demo-listing-wrap {
     display: block;
-
     padding: 0px 50px;
 }
-
 .demo-content-wrap {
     clear: both;
     display: block;
@@ -40,14 +35,12 @@ body.demo_listing_loading .demo_listing_modal {
     border-top: 2px solid rgba(68, 68, 68, 0);
     position: relative;
 }
-
 .demo-listing-wrap .tab {
     margin: 50px 0px;
     float: left;
     width: 100%;
   background-color: #444;
 }
-
 .demo-listing-wrap .tab .tablinks:hover {
     color: #fff;
     background-color: #000;
@@ -58,18 +51,39 @@ body.demo_listing_loading .demo_listing_modal {
     font-size: 18px;
     font-weight: bold;
 }
-
 .wbcom-demo-importer .wbcom-button:hover {
     background-color: #b3420b;
 }
-.wbcom-req-plugin-card {background-color: #fff;transition: 0.3s;float: left;width: 31%;display: inline-block;/* min-height: 280px; */margin: 11px;border: 1px solid #ccc;border-radius: 4px;text-align: center;padding: 0px 0px 25px;}
-
+.wbcom-req-plugin-card {
+  float: left;
+  background: #fff;
+    border: 1px solid #ccc;
+    width: 32%;
+    min-height: 400px;
+    max-height: 500px;
+    margin: 0 .5% 1%;
+    padding: 0 0 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    transition: 0.3s;
+}
+@media (max-width: 1050px) {
+.wbcom-req-plugin-card  {
+    width: 49%;
+}
+}
+@media (max-width: 570px) {
+.wbcom-req-plugin-card {
+    width: 100%;
+}
+}
 .demo-listing-wrap .tab .tablinks.active {
     background-color: #d6d6d6;
     color: #444;
     border-color: #000;
 }
-
 .demo-listing-wrap .tab .tablinks.active:after{
     content: '';
     border: 10px solid transparent;
@@ -82,14 +96,9 @@ body.demo_listing_loading .demo_listing_modal {
     bottom: -20px;
     left: 42%;
 }
-
-
 .wbcom-req-plugin-card:hover {
-
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-
 }
-
 .goto-install-demo-step {
     float: left;
     width: 100%;
@@ -102,7 +111,6 @@ body.demo_listing_loading .demo_listing_modal {
     font-style: italic;
     color: #d4d4d4;
 }
-
 .wbcom-req-plugin-card .plugin-description {
     min-height: 65px;
 }
@@ -115,12 +123,10 @@ body.demo_listing_loading .demo_listing_modal {
     text-align: center;
     box-shadow: 0px 5px 13px #c5c5c5;
 }
-
 .success-msg h2 {
     font-size: 28px;
     color: #5db70c;
 }
-
 .success-msg p {
     font-size: 16px;
 }
@@ -134,7 +140,6 @@ p.plugin-status {
     font-size: 12px;
     /* line-height: 0; */
 }
-
 .plugin-container h3 {
     font-size: 18px;
     line-height: 28px;
@@ -142,293 +147,139 @@ p.plugin-status {
     border-bottom: 1px solid #f3f3f3;
     padding: 8px 0px;
 }
-
 .plugin-container {
-
   padding: 2px 16px;
-
 }
-
-
-
-
 /* The alert message box */
-
 div.wbcom-demo-importer .alert {/* font-size: 15px; */background-color: #fff; /* Red */border-left: 4px solid #f86923;padding: 15px;/* color: #000000; */margin-bottom: 30px;}
-
-
-
 /* progress bar css :: start */
-
 /* Container for skill bars */
-
 #progress-bar-container {
-
   width: 100%; /* Full width */
-
   background-color: #ddd; /* Grey background */
-
 }
-
 #progress-bar-container .skills {
-
   text-align: right; /* Right-align text */
-
   padding-right: 20px; /* Add some right padding */
-
   line-height: 40px; /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
-
   color: white; /* White text color */
-
 }
-
 #progress-bar-container .completed {
-
   width: 0%;
-
   background-color: #2196F3; /* Blue */
-
 }
-
 /* progress bar css :: end */
-
-
-
 /* current step notification :: start */
-
 /* The snackbar - position it at the bottom and in the middle of the screen */
-
 #progress-snackbar {
-
   visibility: hidden; /* Hidden by default. Visible on click */
-
   min-width: 250px; /* Set a default minimum width */
-
   margin-left: -125px; /* Divide value of min-width by 2 */
-
   background-color: #2196F3; /* Black background color */
-
   color: #fff; /* White text color */
-
   text-align: center; /* Centered text */
-
   border-radius: 2px; /* Rounded borders */
-
   padding: 16px; /* Padding */
-
   position: fixed; /* Sit on top of the screen */
-
   z-index: 1; /* Add a z-index if needed */
-
   left: 50%; /* Center the snackbar */
-
   bottom: 30px; /* 30px from the bottom */
-
 }
-
-
-
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-
 #progress-snackbar.show {
-
   visibility: visible; /* Show the snackbar */
-
-
-
 /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-
 However, delay the fade out process for 2.5 seconds */
-
 -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-
 animation: fadein 0.5s, fadeout 0.5s 2.5s;
-
 }
-
-
-
 /* Animations to fade the snackbar in and out */
-
 @-webkit-keyframes fadein {
-
   from {bottom: 0; opacity: 0;}
-
   to {bottom: 30px; opacity: 1;}
-
 }
-
-
-
 @keyframes fadein {
-
   from {bottom: 0; opacity: 0;}
-
   to {bottom: 30px; opacity: 1;}
-
 }
-
-
-
 @-webkit-keyframes fadeout {
-
   from {bottom: 30px; opacity: 1;}
-
   to {bottom: 0; opacity: 0;}
-
 }
-
-
-
 @keyframes fadeout {
-
   from {bottom: 30px; opacity: 1;}
-
   to {bottom: 0; opacity: 0;}
-
 } 
-
 /* current step notification :: end */
-
-
-
-
-
-
-
-
-
-
-
 .wbcom-demo-importer .loader {
-
   border: 16px solid #f3f3f3;
-
   border-radius: 50%;
-
   border-top: 16px solid #3498db;
-
   width: 80px;
-
   height: 80px;
-
   -webkit-animation: spin 2s linear infinite;
-
   animation: spin 2s linear infinite;
-
+  margin: auto;
+  margin-top: 40px;
 }
-
-
-
 @-webkit-keyframes spin {
-
   0% { -webkit-transform: rotate(0deg); }
-
   100% { -webkit-transform: rotate(360deg); }
-
 }
-
-
-
 @keyframes spin {
-
   0% { transform: rotate(0deg); }
-
   100% { transform: rotate(360deg); }
-
 }
-
-
-
-.wbcom-demo-importer .wbcom-button {text-decoration: none;background-color: #f86923;color: white;padding: 9px 35px;border: none;border-radius: 25px;cursor: pointer;display: block;margin: 8px;font-weight: bold;transition: all .5s;}
+.wbcom-demo-importer .wbcom-button {text-decoration: none;background-color: #f86923;color: white;padding: 9px 35px;border: none;border-radius: 25px;cursor: pointer;display: block;margin: 50px auto;font-weight: bold;transition: all .5s;}
 }
-
-
-
 .single-container {
-
   position: relative;
-
   float: left;
-
   width: 60%;
-
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
   padding: 10px;
-
   margin: 8px;
-
 }
-
-
+div#wbtd-current-action {
+      margin: auto;
+    text-align: center;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-left: 4px solid green;
+    padding: 15px;
+    color: #000000;
+    margin-bottom: 30px;
+}
 .wbcom-demo-importer .container {position: relative;float: left;width: 29%;background-color: #fff;padding: 10px;margin: 11px;border: 1px solid #e6e6e6;border-radius: 4px;}
-
-
 .wbcom-demo-importer .image {
-
   opacity: 1;
-
   display: block;
-
   width: 100%;
-
   height: auto;
-
   transition: .5s ease;
-
   backface-visibility: hidden;
-
 }
-
-
-
 .wbcom-demo-importer .middle {
-
   transition: .5s ease;
-
   opacity: 0;
-
   position: absolute;
-
   top: 50%;
-
   left: 50%;
-
   transform: translate(-50%, -50%);
-
   -ms-transform: translate(-50%, -50%)
-
 }
-
-
-
 .wbcom-demo-importer .container:hover .image {
-
   opacity: 0.1;
-
 }
-
-
-
 .wbcom-demo-importer .container:hover .middle {
-
   opacity: 1;
-
 }
-
-
-
 /* Change the width of the three columns to 100%
-
 (to stack horizontally on small screens) */
-
 @media only screen and (max-width: 600px) {
-
   .wbcom-demo-importer .container {
-
     width: 100%;
-
   }
-
 }

@@ -137,6 +137,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
 			echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
 			echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
+			echo '<div id="wbtd-current-action" style="display:none;">downloading<div>';
 			echo "<div>";
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
@@ -224,7 +225,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			delete_option( 'wbcom_theme_demo_req_plugins' );
 
 			$current_url = $this->get_demo_installer_page_url();
-			$url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 
 			$parent_url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "package" . "-" . $theme_info['Name'] . ".json";
 			$retrieved_data = '';
@@ -305,32 +306,32 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		$screen = get_current_screen();
 		if ( $screen->id != 'toplevel_page_wbcom-theme-demo-installer' ) { return; }
 
-		if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
-			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+		// if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
+		// 	// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 
-			$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
-			$response = wp_remote_post( $url_to_request, array(
-				'method' => 'POST',
-				'timeout' => 120,
-				'headers' => array(),
-				'body' => array(
-					'theme_slug'	=> $_GET['theme_slug'],
-					'demo_slug'	=> $_GET['demo_slug'],
-					'plugins_list' => 'get_plugins_list',
-				)
-			) );
-			if ( !is_wp_error( $response ) ) {
-				if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
-					$response = isset( $response['body'] ) ? $response['body'] : '';
-					if( !empty( $response ) ) {
-						$response = json_decode( $response, true );
-					}
-					if( !empty( $response ) && is_array( $response ) ) {
-						update_option( 'wbcom_theme_demo_req_plugins', $response );
-					}
-				}
-			}
-		}
+		// 	$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
+		// 	$response = wp_remote_post( $url_to_request, array(
+		// 		'method' => 'POST',
+		// 		'timeout' => 120,
+		// 		'headers' => array(),
+		// 		'body' => array(
+		// 			'theme_slug'	=> $_GET['theme_slug'],
+		// 			'demo_slug'	=> $_GET['demo_slug'],
+		// 			'plugins_list' => 'get_plugins_list',
+		// 		)
+		// 	) );
+		// 	if ( !is_wp_error( $response ) ) {
+		// 		if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
+		// 			$response = isset( $response['body'] ) ? $response['body'] : '';
+		// 			if( !empty( $response ) ) {
+		// 				$response = json_decode( $response, true );
+		// 			}
+		// 			if( !empty( $response ) && is_array( $response ) ) {
+		// 				update_option( 'wbcom_theme_demo_req_plugins', $response );
+		// 			}
+		// 		}
+		// 	}
+		// }
 		$required_plugins_to_activate = 0;
 		$plugins_list = get_option( 'wbcom_theme_demo_req_plugins', array() );
 		foreach ( $plugins_list as $key => $value ) {

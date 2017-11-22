@@ -361,11 +361,25 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		$parentFolderName = array_values( $parentFolderName );
 		$parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
 
-		$retrieved_data = file_get_contents( $url_to_request );
+		//just now
+		//$retrieved_data = file_get_contents( $url_to_request );
+		
 		// $retrieved_data = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
 		// if ( is_wp_error( $retrieved_data ) ) {
 		// 	return;
 		// }
+
+		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+		$retrieved_data = array();
+		if ( !is_wp_error( $response ) ) {
+			if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
+				$response = isset( $response['body'] ) ? $response['body'] : '';
+				if( !empty( $response ) ) {
+					$retrieved_data = $response;
+				}
+			}
+		}
+
 		if( !empty( $retrieved_data ) ) {
 			$upload = wp_upload_dir();
 			$upload_dir = $upload['basedir'] . '/' . 'wbcom-theme-demo.zip';
