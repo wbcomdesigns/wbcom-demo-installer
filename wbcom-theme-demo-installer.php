@@ -100,9 +100,6 @@ class WBCOM_Theme_Demo_Installer {
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST', 'http://demos.wbcomdesigns.com/exporter/' );
-		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://localhost/wordpress/wp-admin/?wbcom_theme_demo_listing=yes' );
-		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://wpbp.in/wp-admin/?wbcom_theme_demo_listing=yes' );
-		// $this->define( 'WBCOM_Theme_Demo_Installer_URL_TO_REQUEST', 'http://104.193.111.102/~cardetailsi/kleo/wp-admin/?wbcom_theme_demo_listing=yes' );
 	}
 
 	/**

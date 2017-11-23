@@ -56,7 +56,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function wbcom_read_theme_demo_package_file() {
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
-				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
 					'method' => 'POST',
@@ -136,9 +135,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 		$retrieved_data = '';
 		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-		// print_r($response);
-		// var_dump($table_name.'_done');
-		// die("COOL");
 		
 		if ( !is_wp_error( $response ) ) {
 			if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
@@ -149,14 +145,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 		}
 
-		// print_r($response);
-		// var_dump(is_array($response));
-		// die("COOL");
-
-		// $retrieved_data = file_get_contents( $url_to_request );
-		// if( !empty( $retrieved_data ) ) {
-		// 	$retrieved_data = json_decode( $retrieved_data, true );
-		// }
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
@@ -271,28 +259,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					'_transient_twentyseventeen_categories',
 				);
 
-				// $default_options_keys = array(
-				// 	'wp_user_roles',
-				// );
-
-				// $_temp = array(
-				// 	'widget_search',
-				// 	'widget_recent-posts',
-				// 	'widget_recent-comments',
-				// 	'widget_archives',
-				// 	'widget_meta',
-				// 	'sidebars_widgets',
-				// 	'widget_pages',
-				// 	'widget_calendar',
-				// 	'widget_media_audio',
-				// 	'widget_media_image',
-				// 	'widget_media_video',
-				// 	'widget_tag_cloud',
-				// 	'widget_nav_menu',
-				// 	'widget_custom_html',
-				// 	'theme_mods_reign',
-				// );
-
 				foreach ( $retrieved_data as $key => $value ) {
 
 					if( !in_array( $value['option_name'], $default_options_keys ) ) {
@@ -300,19 +266,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 						update_option( $value['option_name'], $option_value, $value['autoload'] );
 					}
 
-					// if( $value['option_name'] == 'reign_options' ) {
-					// 	update_option( $value['option_name'], $value['option_value'], $value['autoload'] );
-					// }
-
-					// if( in_array( $value['option_name'], $_temp ) ) {
-					// 	$option_value = maybe_unserialize( $value['option_value'] );
-					// 	update_option( $value['option_name'], $option_value, $value['autoload'] );
-					// }
-					
-					// update_option( $value['option_name'], $option_value, $value['autoload'] );
-					// if( !in_array( $value['option_name'], $default_options_keys ) ) {
-					// 	update_option( $value['option_name'], $option_value, $value['autoload'] );
-					// }
 				}
 				return;
 			}
@@ -342,14 +295,10 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
 				}
 				
-				// echo "start".'<br/>';
 				foreach ( $retrieved_data as $key => $value ) {
-					// echo $value['ID'].'<br/>';
-					// $value['post_content'] = maybe_unserialize( $value['post_content'] );
-					// $value['post_excerpt'] = maybe_unserialize( $value['post_excerpt'] );
 					$wpdb->insert( $table_name, $value );
 				}
-				// echo "end".'<br/>';
+			
 			}
 
 		}
@@ -360,14 +309,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		$parentFolderName = array_filter( $parentFolderName );
 		$parentFolderName = array_values( $parentFolderName );
 		$parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
-
-		//just now
-		//$retrieved_data = file_get_contents( $url_to_request );
-		
-		// $retrieved_data = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-		// if ( is_wp_error( $retrieved_data ) ) {
-		// 	return;
-		// }
 
 		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
 		$retrieved_data = array();
@@ -398,38 +339,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			unlink( $upload_dir );
 		}
 	}
-
-	// public function clone_uploads_folder( $url_to_request = '' ) {
-	// 	// $retrieved_data = file_get_contents( $url_to_request );
-	// 	$retrieved_data = '';
-	// 	$retrieved_data = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-	// 	if ( is_wp_error( $retrieved_data ) ) {
-	// 		print_r($retrieved_data);
-	// 		return;
-	// 	}
-	// 	print_r($retrieved_data);
-		
-	// 	if( !empty( $retrieved_data ) ) {
-	// 		$upload = wp_upload_dir();
-	// 		$upload_dir = $upload['basedir'] . '/' . 'wbcom-theme-demo.zip';
-
-	// 		$file = fopen( $upload_dir, "w+" );
-	// 		print_r($file);
-	// 		fputs( $file, $retrieved_data );
-	// 		echo "DATA PUT";
-	// 		fclose( $file );
-	// 		echo "DATA PUT";
-
-	// 		$zip = new ZipArchive;
-	// 		$res = $zip->open( $upload_dir );
-	// 		if ( $res === TRUE ) {
-	// 			$zip->extractTo( $upload['basedir'] . '/' );
-	// 			$zip->close();
-	// 		}
-
-	// 		// unlink( $upload_dir );
-	// 	}
-	// }
 
 }
 
