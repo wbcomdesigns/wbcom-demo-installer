@@ -40,6 +40,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	 * Main class constructor
 	 */
 	function __construct() {
+
 		//register the plugins in our class
 		add_action( 'init', array( $this ,'populate_plugins' ) );
 
@@ -47,6 +48,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		add_action('wp_ajax_wbcom_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
 
 		add_action( 'tgmpa_register', array( $this, 'required_plugins' ) );
+
+		
+
+		//run code on class init
+		// do_action( 'WBCOM_Demo_Importer_Plugins_Manager_init' );
+
+		// add_filter( 'tgmpa_load', array( $this, 'tgmpa_load_hook' ) );
 	}
 
 	public function required_plugins() {
@@ -91,6 +99,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$this->tgmpa = TGM_Plugin_Activation::get_instance();
 		
 		$this->tgmpa->populate_file_path();
+
+		// $this->plugins = $this->tgmpa->plugins;
+		// $this->plugins = $this->get_required_plugins();
 
 		$get_required_plugins = $this->get_required_plugins();
 		$_get_required_plugins = array();
@@ -668,6 +679,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			return get_option( 'wbcom_theme_demo_req_plugins', array() );
 		}
 		if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
+			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 			if( !isset( $_GET['target_url'] ) ) { return array(); }
 			$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 			$response = wp_remote_post( $url_to_request, array(

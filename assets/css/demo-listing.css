@@ -1,121 +1,121 @@
 .demo_listing_modal {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 ) 
-                url('ajax-loader.gif') 
-                50% 50% 
-                no-repeat;
-                background-size: 5%;
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 ) 
+  url('ajax-loader.gif') 
+  50% 50% 
+  no-repeat;
+  background-size: 5%;
 }
 
 body.demo_listing_loading .demo_listing_modal {
-    display: block;
+  display: block;
 }
 
 .demo-listing-wrap {
-    display: block;
-    padding: 0px 15px;
+  display: block;
+  padding: 0px 15px;
 }
 
 .demo-content-wrap {
-    clear: both;
-    display: block;
+  clear: both;
+  display: block;
 }
 
 .demo-listing-wrap .tab .tablinks {
-    border: none;
-    padding: 14px 35px;
-    background-color: #444;
-    color: #c3c2b9;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline;
-    float: left;
-    border-right: 1px solid #383838;
-    border-top: 2px solid rgba(68, 68, 68, 0);
-    position: relative;
+  border: none;
+  padding: 14px 35px;
+  background-color: #444;
+  color: #c3c2b9;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline;
+  float: left;
+  border-right: 1px solid #383838;
+  border-top: 2px solid rgba(68, 68, 68, 0);
+  position: relative;
 }
 
 .demo-listing-wrap .tab {
-    margin: 20px 0px;
-    float: left;
-    width: 100%;
+  margin: 20px 0px;
+  float: left;
+  width: 100%;
   background-color: #444;
 }
 
 .demo-listing-wrap .tab .tablinks:hover {
-    color: #fff;
-    background-color: #000;
+  color: #fff;
+  background-color: #000;
 }
 
 .demo-title {
-    text-align: center;
-    padding: 16px 0px;
-    font-size: 18px;
-    font-weight: bold;
+  text-align: center;
+  padding: 16px 0px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .wbcom-demo-importer .wbcom-button:hover {
-    background-color: #b3420b;
+  background-color: #b3420b;
 }
 
 .wbcom-req-plugin-card {
   float: left;
   background: #fff;
-    border: 1px solid #ccc;
-    width: 32.3%;
-    min-height: 400px;
-    max-height: 500px;
-    margin: 0 .5% 1%;
-    padding: 0 0 20px;
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: center;
-    position: relative;
-    transition: 0.3s;
+  border: 1px solid #ccc;
+  width: 32.3%;
+  min-height: 400px;
+  max-height: 500px;
+  margin: 0 .5% 1%;
+  padding: 0 0 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  transition: 0.3s;
 }
 
 .wp-core-ui .button,
 .wp-core-ui .button-secondary {
-    border-radius: 25px;
-    height: 38px;
-    line-height: 38px;
-    padding: 0 20px;
+  border-radius: 25px;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 20px;
 }
 
 @media (max-width: 1050px) {
-.wbcom-req-plugin-card  {
+  .wbcom-req-plugin-card  {
     width: 49%;
-}
+  }
 }
 
 @media (max-width: 570px) {
-.wbcom-req-plugin-card {
+  .wbcom-req-plugin-card {
     width: 100%;
     margin-bottom: 20px;
-}
+  }
 }
 
 .demo-listing-wrap .tab .tablinks.active {
-    background-color: #d6d6d6;
-    color: #444;
-    border-color: #000;
+  background-color: #d6d6d6;
+  color: #444;
+  border-color: #000;
 }
 
 .demo-listing-wrap .tab .tablinks.active:after{
-    content: '';
-    border: 10px solid transparent;
-    border-top: 10px solid #d6d6d6;
-    display: inline-block;
-    vertical-align: bottom;
-    position:absolute;
-    bottom: -20px;
-    left: 42%;
+  content: '';
+  border: 10px solid transparent;
+  border-top: 10px solid #d6d6d6;
+  display: inline-block;
+  vertical-align: bottom;
+  position:absolute;
+  bottom: -20px;
+  left: 42%;
 }
 
 .wbcom-req-plugin-card:hover {
@@ -123,63 +123,62 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .goto-install-demo-step {
-    float: left;
-    width: 100%;
-    text-align: right;
-    margin-bottom: 25px;
+  float: left;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 25px;
 }
 
 .plugin-dependency {
-    font-size: 16px;
-    text-transform: capitalize;
-    font-style: italic;
-    color: #d4d4d4;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-style: italic;
+  color: #d4d4d4;
 }
 
 .wbcom-req-plugin-card .plugin-description {
-    min-height: 65px;
+  min-height: 65px;
 }
 
 .success-msg {
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px 55px 40px;
-    background-color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 5px 13px #c5c5c5;
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px 55px 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 5px 13px #c5c5c5;
 }
 
 .success-msg h2 {
-    font-size: 28px;
-    color: #5db70c;
+  font-size: 28px;
+  color: #5db70c;
 }
 
 .success-msg p {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 p.plugin-status {
-    display: inline-block;
-    padding: 5px 14px;
-    background-color: #4cbb1e;
-    color: #fff;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 12px;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #4cbb1e;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .plugin-container h3 {
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: bold;
-    border-bottom: 1px solid #f3f3f3;
-    padding: 8px 0px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 8px 0px;
 }
 
 .plugin-container {
   padding: 2px 16px;
-
 }
 
 /* The alert message box */
@@ -237,45 +236,29 @@ div.wbcom-demo-importer .alert {
 
 #progress-snackbar.show {
   visibility: visible; /* Show the snackbar */
-
-/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-
-However, delay the fade out process for 2.5 seconds */
-
--webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 /* Animations to fade the snackbar in and out */
 
 @-webkit-keyframes fadein {
  from {bottom: 0; opacity: 0;}
-
   to {bottom: 30px; opacity: 1;}
 }
-
 @keyframes fadein {
-
   from {bottom: 0; opacity: 0;}
-
   to {bottom: 30px; opacity: 1;}
-
 }
-
 @-webkit-keyframes fadeout {
-
   from {bottom: 30px; opacity: 1;}
-
   to {bottom: 0; opacity: 0;}
-
 }
-
 @keyframes fadeout {
-
   from {bottom: 30px; opacity: 1;}
-
   to {bottom: 0; opacity: 0;}
-
 }
 
 /* current step notification :: end */
@@ -293,19 +276,13 @@ animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @-webkit-keyframes spin {
-
   0% { -webkit-transform: rotate(0deg); }
-
   100% { -webkit-transform: rotate(360deg); }
-
 }
 
 @keyframes spin {
-
   0% { transform: rotate(0deg); }
-
   100% { transform: rotate(360deg); }
-
 }
 
 .wbcom-demo-importer .wbcom-button {
@@ -332,16 +309,16 @@ animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 div#wbtd-current-action {
-      margin: auto;
-    text-align: center;
-    max-width: 500px;
-    padding: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background-color: #fff;
-    border-left: 4px solid green;
-    padding: 15px;
-    color: #000000;
-    margin-bottom: 30px;
+  margin: auto;
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: #fff;
+  border-left: 4px solid green;
+  padding: 15px;
+  color: #000000;
+  margin-bottom: 30px;
 }
 
 .wbcom-demo-importer .container {
@@ -387,7 +364,6 @@ div#wbtd-current-action {
 (to stack horizontally on small screens) */
 
 @media only screen and (max-width: 600px) {
-
   .wbcom-demo-importer .container {
     width: 100%;
   }

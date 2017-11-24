@@ -127,6 +127,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			<div class="alert">
 				<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
 			</div>
+			<div class="alert">
+				<?php _e( 'Depending upon the server configuration and internet speed, this process might take 5-10 minutes. Your patience is appreciated.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+			</div>
 			<div id="progress-bar-container" style="display: none;">
 				<div class="skills completed">80%</div>
 			</div>
@@ -142,7 +145,10 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
 			if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
+				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
+				
 				$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
+				
 				$response = wp_remote_post( $url_to_request, array(
 					'method' => 'POST',
 					'timeout' => 120,
@@ -151,6 +157,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					'body' => array(
 						'theme_slug'	=> $_GET['theme_slug'],
 						'demo_slug'	=> $_GET['demo_slug'],
+						// 'target_url' => $_GET['target_url'],
 						'plugins_list' => 'get_plugins_list',
 					)
 				) );
@@ -226,6 +233,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			$retrieved_data = '';
 			$response = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
 			
+
 			if ( is_wp_error( $response ) ) {
 				$error_message = $response->get_error_message();
 				echo "Something went wrong: $error_message";

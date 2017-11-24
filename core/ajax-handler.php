@@ -56,6 +56,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function wbcom_read_theme_demo_package_file() {
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
+				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
 					'method' => 'POST',
@@ -145,6 +146,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 		}
 
+		
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
@@ -265,7 +267,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 						$option_value = maybe_unserialize( $value['option_value'] );
 						update_option( $value['option_name'], $option_value, $value['autoload'] );
 					}
-
 				}
 				return;
 			}
@@ -298,7 +299,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 				foreach ( $retrieved_data as $key => $value ) {
 					$wpdb->insert( $table_name, $value );
 				}
-			
 			}
 
 		}
