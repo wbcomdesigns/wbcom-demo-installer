@@ -1,4 +1,4 @@
-=== WB Demo Installer ===
+=== WBCOM Demo Installer ===
 Contributors: wbcomdesigns
 Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
