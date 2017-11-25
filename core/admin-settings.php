@@ -125,7 +125,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			echo "<div class='wrap wbcom-demo-importer'>";
 			?>
 			<div class="alert">
-				<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+				<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.<br/>If this is a multisite, please use default WordPress XML import process.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
 			</div>
 			<div class="alert">
 				<?php _e( 'Depending upon the server configuration and internet speed, this process might take 5-10 minutes. Your patience is appreciated.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
