@@ -22,7 +22,7 @@ For development purpose only, not for live sites.
 
 = From which location it will get the demo content ? =
 
-It will not work standalone and will need WB demo exporter plugin at master site.
+It will not work standalone and will need Wbcom Demo Exporter plugin at master site.
 
 == Screenshots ==
 
