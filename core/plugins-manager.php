@@ -129,8 +129,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			$_get_required_plugins[$value['slug']] = $value;
 		}
 		$this->plugins = $_get_required_plugins;
-		
-		// Perform plugin actions here
+
 		switch ( $action ) {
 			case 'enable_plugin':
 				$this->do_plugin_activate( $slug );
@@ -421,6 +420,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		}
 
 		$url = $this->get_download_url( $slug );
+		
 		$status = $this->get_plugin_status( $slug );
 
 		if( ! current_user_can( 'install_plugins' ) ){
@@ -569,9 +569,10 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	 */
 	public function get_download_url( $slug ) {
 		$dl_source = '';
-		
-		if( isset( $this->plugins[ $slug ]['source'] ) ) {
-			$plugin_source_type = $this->_get_plugin_source_type( $this->plugins[ $slug ]['source'] );
+
+		if( isset( $this->plugins[ $slug ]['external_url'] ) && !empty( $this->plugins[ $slug ]['external_url'] ) ) {
+			return $this->plugins[ $slug ]['external_url'];
+			// $plugin_source_type = $this->_get_plugin_source_type( $this->plugins[ $slug ]['source'] );
 		}
 		else {
 			$plugin_source_type = 'repo';

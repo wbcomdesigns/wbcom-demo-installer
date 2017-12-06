@@ -79,14 +79,23 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 
 	public function render_page_for_added_menu() {
 		$theme_info = wp_get_theme();
+		
+		// Get parent theme name
 		$reflection = new ReflectionClass( $theme_info );
-		$property = $reflection->getProperty( 'headers' );
+		$property = $reflection->getProperty( 'parent' );
 		$property->setAccessible(true);
-		$theme_info = $property->getValue( $theme_info );
+		$parent = $property->getValue( $theme_info );
+		if( $parent ) {
+			$theme_info = $property->getValue( $theme_info );
+		}
+		else {
+			$reflection = new ReflectionClass( $theme_info );
+			$property = $reflection->getProperty( 'headers' );
+			$property->setAccessible(true);
+			$theme_info = $property->getValue( $theme_info );
+		}
 
 		echo '<div class="wrap">';
-
-		
 
 		echo '<div class="demo-listing-wrap">';
 
