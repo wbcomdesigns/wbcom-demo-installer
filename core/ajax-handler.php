@@ -255,6 +255,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					// 'widget_tag_cloud',
 					// 'widget_nav_menu',
 					// 'widget_custom_html',
+					'reign_options',
 					'cron',
 					'theme_mods_twentyseventeen',
 					'_transient_is_multi_author',
