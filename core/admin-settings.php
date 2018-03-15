@@ -200,6 +200,13 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			<?php
 			foreach ( $plugins_list as $key => $plugin ) {
 				$plugin_status = instantiate_wbcom_demo_importer_plugins_manager()->get_plugin_status( $plugin['slug'] );
+
+				/* temp code to manage count */
+				// if( isset( $plugin['is_paid'] ) ) {
+				// 	$num_of_req_plugins_installed++;
+				// }
+				/* temp code to manage count */
+
 				$plugin_dependency = 'Optional';
 				if( isset( $plugin['required'] ) && ( $plugin['required'] == true ) ) {
 					$required_plugins_to_activate++;
@@ -221,7 +228,26 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 						<p class="plugin-description"><?php echo $plugin['description']; ?></p>
 						<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo $plugin['slug']; ?>">
 						<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo $plugin_status['action']; ?>">
-						<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
+						<?php
+						if( isset( $plugin['is_paid'] ) ) {
+							if( $plugin_status['status_text'] != 'Active' ) {
+								?>
+								<a class="button button-primary" target="_blank" href="<?php echo $plugin['external_url']; ?>"><?php _e( 'Purchase plugin here', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+								<a class="plugin-action-button button" target="_blank" href="plugin-install.php"><?php _e( 'Upload Plugin Manually', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+								<?php
+							}
+							else {
+								?>
+								<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
+								<?php
+							}
+						}
+						else {
+							?>
+							<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
+							<?php
+						}
+						?>
 					</div>
 				</div>
 				<?php

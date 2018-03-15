@@ -29,6 +29,7 @@ jQuery( document ).ready( function( $ ) {
 				if( response.success ) {
 					thisRef.siblings( 'p.plugin-status').html( 'Active' );
 					thisRef.html( 'Already Installed & Activated' );
+					thisRef.attr( 'class', 'plugin-action-button button already-active' );
 					var temp_counter = parseInt( $( 'input#num_of_req_plugins_installed').val() );
 					temp_counter++;
 					$( 'input#num_of_req_plugins_installed').val( temp_counter );
