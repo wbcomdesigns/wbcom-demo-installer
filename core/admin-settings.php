@@ -280,6 +280,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					}
 					if( !empty( $response ) && is_array( $response ) ) {
 						foreach ( $response as $key => $value ) {
+							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
 							$href = $this->get_demo_installer_page_url(
 								array(
 									'theme_slug' => $value['theme_slug'],
@@ -294,7 +295,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
 										<div class="middle">
 											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
+											<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
 										</div>
 									</form>
 									<div class="demo-title">
