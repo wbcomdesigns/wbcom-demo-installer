@@ -150,6 +150,13 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
+			if( $table_name == 'theme_mods' ) {
+				foreach ( $retrieved_data as $key => $value ) {
+					set_theme_mod( $key, $value );
+				}
+				return;
+			}
+
 			if( $table_name == 'options' ) {
 				$default_options_keys = array (
 					'siteurl',
@@ -258,12 +265,12 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					'reign_options',
 					'cron',
 					'theme_mods_twentyseventeen',
+					'theme_mods_reign-theme',
 					'_transient_is_multi_author',
 					'_transient_twentyseventeen_categories',
 				);
 
 				foreach ( $retrieved_data as $key => $value ) {
-
 					if( !in_array( $value['option_name'], $default_options_keys ) ) {
 						$option_value = maybe_unserialize( $value['option_value'] );
 						update_option( $value['option_name'], $option_value, $value['autoload'] );
@@ -351,4 +358,3 @@ endif;
  * @return WBCOM_Demo_Importer_Ajax_Handler
  */
 WBCOM_Demo_Importer_Ajax_Handler::instance();
-?>
