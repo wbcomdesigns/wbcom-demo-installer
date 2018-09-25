@@ -3,11 +3,11 @@
  * Plugin Name: Wbcom Theme Demo Installer
  * Plugin URI: https://wbcomdesigns.com/
  * Description: Wbcom Theme Demo Installer
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Wbcom Designs
  * Author URI: https://wbcomdesigns.com/
  * Requires at least: 4.0
- * Tested up to: 4.9
+ * Tested up to: 4.9.8
  *
  * Text Domain: wbcom-theme-demo-installer
  * Domain Path: /i18n/languages/
@@ -34,7 +34,7 @@ class WBCOM_Theme_Demo_Installer {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.0';
+	public $version = '1.0.3';
 	
 	/**
 	 * The single instance of the class.

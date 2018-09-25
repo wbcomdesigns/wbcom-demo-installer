@@ -30,6 +30,9 @@ It will not work standalone and will need Wbcom Demo Exporter plugin at master s
 
 == Changelog ==
 
+= 1.0.3 =
+* User table import fixes.
+
 = 1.0.2 =
 * Process Optimized.
 

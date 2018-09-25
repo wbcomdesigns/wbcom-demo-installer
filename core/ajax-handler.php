@@ -289,6 +289,16 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					else if( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
 						continue;
 					}
+					
+					/** user table strcuture mismatch fix **/
+					if( isset( $value['spam'] ) ) {
+						unset( $value['spam'] );
+					}
+					if( isset( $value['deleted'] ) ) {
+						unset( $value['deleted'] );
+					}
+					/** user table strcuture mismatch fix **/
+
 					$wpdb->insert( $table_name, $value );
 				}
 				return;
