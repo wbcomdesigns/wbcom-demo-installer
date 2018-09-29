@@ -504,7 +504,7 @@ div#wbtd-current-action {
 .wbcom-req-plugin-card  {
   width: 33.33%;
 }
-.wbcom-req-plugin-card:nth-child(4n){
+.wbcom-req-plugin-card:nth-child(4n+1){
   clear:both;
 }
 
