@@ -35,16 +35,18 @@ body.demo_listing_loading .demo_listing_modal {
 
 .demo-listing-wrap .tab .tablinks {
   border: none;
-  padding: 14px 35px;
+  padding:25px 50px;
   background-color: #444;
-  color: #c3c2b9;
-  font-weight: bold;
+  color: #efefef;
   cursor: pointer;
   display: inline;
   float: left;
-  border-right: 1px solid #383838;
-  border-top: 2px solid rgba(68, 68, 68, 0);
+  border-right:1px solid rgba(241, 241, 241, 0.18);
   position: relative;
+  transition: all 0.3s;
+  font-size: 16px;
+  letter-spacing: 1px;
+
 }
 
 .demo-listing-wrap .tab {
@@ -56,7 +58,7 @@ body.demo_listing_loading .demo_listing_modal {
 
 .demo-listing-wrap .tab .tablinks:hover {
   color: #fff;
-  background-color: #000;
+  background-color: #1388e1;
 }
 
 .wbcom-req-plugin-card {
@@ -131,15 +133,15 @@ body.demo_listing_loading .demo_listing_modal {
 
 
 .demo-listing-wrap .tab .tablinks.active {
-  background-color: #d6d6d6;
-  color: #444;
-  border-color: #000;
+  background-color: #389dfe;
+  color: #fff;
+  border-color: #389dfe;
 }
 
 .demo-listing-wrap .tab .tablinks.active:after{
   content: '';
   border: 10px solid transparent;
-  border-top: 10px solid #d6d6d6;
+  border-top: 10px solid #379dfd;
   display: inline-block;
   vertical-align: bottom;
   position:absolute;
@@ -170,7 +172,7 @@ body.demo_listing_loading .demo_listing_modal {
 
 .success-msg {
   width: 400px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px 55px 40px;
   background-color: #fff;
   border-radius: 10px;
@@ -502,10 +504,23 @@ div#wbtd-current-action {
 .wbcom-req-plugin-card  {
   width: 33.33%;
 }
-
+.wbcom-req-plugin-card:nth-child(4n){
+  clear:both;
+}
 
 
 }
 
+
+@media screen and (min-width: 1367px) and (max-width:1920) {
+
+.demo-content-wrap .wbcom-demo-importer{
+  width:33.33%;
+}
+
+
+
+
+}
  
 

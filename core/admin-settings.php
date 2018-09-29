@@ -226,6 +226,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					$already_active_class = 'already-active';
 				}
 				?>
+			
 				<div class="wbcom-req-plugin-card">
 					<div class="plugin-container">
 						<h3><?php echo $plugin['name']; ?></h3>
