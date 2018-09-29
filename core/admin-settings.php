@@ -133,24 +133,30 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
 			echo "<div class='wrap wbcom-demo-importer'>";
 			?>
-			<div class="alert">
-				<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.<br/>If this is a multisite, please use default WordPress XML import process.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+			<div class="reign-demos-alertboxes">
+				<div class="alert">
+					<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.<br/>If this is a multisite, please use default WordPress XML import process.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+				</div>
+				<div class="alert">
+					<?php _e( 'Depending upon the server configuration and internet speed, this process might take 5-10 minutes. Your patience is appreciated.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+				</div>
 			</div>
-			<div class="alert">
-				<?php _e( 'Depending upon the server configuration and internet speed, this process might take 5-10 minutes. Your patience is appreciated.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
+			<div class="reign-demos-progress-container">	
+				<div id="progress-bar-container" style="display: none;">
+					<div class="skills completed">80%</div>
+				</div>
+				<div id="progress-snackbar"></div>
+				<?php
+				echo "<div class='loader' style='display:none;text-align:center;'></div>";
+				echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
+				echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
+				echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
+				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
+				echo '<div id="wbtd-current-action" style="display:none;">downloading<div>';
+				echo "<div>";
+				?>
 			</div>
-			<div id="progress-bar-container" style="display: none;">
-				<div class="skills completed">80%</div>
-			</div>
-			<div id="progress-snackbar"></div>
 			<?php
-			echo "<div class='loader' style='display:none;text-align:center;'></div>";
-			echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
-			echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
-			echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
-			echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
-			echo '<div id="wbtd-current-action" style="display:none;">downloading<div>';
-			echo "<div>";
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
 			if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
@@ -279,7 +285,17 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 						$response = json_decode( $response, true );
 					}
 					if( !empty( $response ) && is_array( $response ) ) {
+						$motive_key = '';
 						foreach ( $response as $key => $value ) {
+							// print_r($value)
+							if( (  $key !== 0 ) && ( $motive_key !== $value['motive_key'] ) ) {
+								echo '</div>';
+							}
+							if( $motive_key !== $value['motive_key'] ) {
+								$motive_key = $value['motive_key'];
+								echo '<div class="reign-demos-wrapper">';
+								echo '<h4>'.$value['motive_name'].'</h4>';
+							}
 							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
 							$href = $this->get_demo_installer_page_url(
 								array(
@@ -304,6 +320,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 								</div>
 							</div>	
 							<?php
+							if( (  $key === (count($response)-1) ) ) {
+								echo '</div>';
+							}
 						}
 					}
 					else {
