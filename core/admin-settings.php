@@ -121,7 +121,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		}
 		?>
 
-		<div class="reign-demos-wrapper">
+		<div class="reign-demos-wrapper reign-importer-section">
 		<?php
 		
 		if( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
@@ -293,7 +293,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 							}
 							if( $motive_key !== $value['motive_key'] ) {
 								$motive_key = $value['motive_key'];
-								echo '<h4>'.$value['motive_name'].'</h4>';
+								echo '<h4 class="demo-name">'.$value['motive_name'].'</h4>';
 								echo '<div class="demo-content-wrap">';
 							}
 							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
