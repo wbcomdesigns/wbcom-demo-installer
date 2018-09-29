@@ -389,17 +389,6 @@ div#wbtd-current-action {
 }
 
 
-@media only screen and (max-width:768px) {
-
-.wbcom-demo-importer{
-  width:50%;
-}
-.wbcom-req-plugin-card {
-    width:50%;
-}
-
-
-}
 
 @media only screen and (max-width:480px){
 
@@ -414,14 +403,40 @@ div#wbtd-current-action {
 
 
 
-@media screen and (min-width: 768px) and (max-width:1170px) {
+@media only screen and (max-width:768px) {
+
+.wbcom-demo-importer{
+  width:50%;
+}
+.wbcom-req-plugin-card {
+    width:50%;
+}
+
+
+}
+
+
+
+@media screen and (min-width: 768px) and (max-width:991px) {
 
 .wbcom-demo-importer{
   width:33.33%;
 }
 
   .wbcom-req-plugin-card  {
-    width: 50%;
+    width: 33.33%;
+  }
+
+
+}
+@media screen and (min-width: 992px) and (max-width:1366px) {
+
+.wbcom-demo-importer{
+  width:33.33%;
+}
+
+  .wbcom-req-plugin-card  {
+    width: 33.33%;
   }
 
 
