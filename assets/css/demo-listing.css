@@ -330,7 +330,7 @@ div.wbcom-demo-importer .alert {
   font-weight: 600;
   outline: none;
 }
-.wbcom-demo-importer .wbcom-button.import{
+.wbcom-demo-importer  .middle .wbcom-button.import{
   background: #03A9F4;  
   color: #fff;
   }
