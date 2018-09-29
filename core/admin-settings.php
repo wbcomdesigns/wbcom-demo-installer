@@ -291,16 +291,16 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 							?>
 							<div class='wbcom-demo-importer'>
 								<div class="container">
-									<form method="get" action="<?php echo $current_url; ?>">
-										<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="middle">
-											<a href="<?php echo $href; ?>" class="wbcom-button"><?php echo 'Import'; ?></a>
-											<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
-										</div>
-									</form>
+									<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
 									<div class="demo-title">
-										<?php echo $value['demo_name']; ?>
-									</div>
+										<h2><?php echo $value['demo_name']; ?></h2>
+										<form method="get" action="<?php echo $current_url; ?>">									
+											<div class="middle">
+												<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
+												<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button"><?php echo 'Preview'; ?></a>
+											</div>
+										</form>
+									</div>									
 								</div>
 							</div>	
 							<?php

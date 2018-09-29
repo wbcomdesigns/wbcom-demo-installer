@@ -24,8 +24,14 @@ body.demo_listing_loading .demo_listing_modal {
 
 .demo-content-wrap {
   clear: both;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
+
+
 
 .demo-listing-wrap .tab .tablinks {
   border: none;
@@ -53,32 +59,54 @@ body.demo_listing_loading .demo_listing_modal {
   background-color: #000;
 }
 
-.demo-title {
-  text-align: center;
-  padding: 16px 0px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.wbcom-demo-importer .wbcom-button:hover {
-  background-color: #b3420b;
-}
-
 .wbcom-req-plugin-card {
   float: left;
-  background: #fff;
-  border: 1px solid #ccc;
-  width: 32.3%;
-  min-height: 400px;
-  max-height: 500px;
-  margin: 0 .5% 1%;
-  padding: 0 0 20px;
+  width: 25%;
+  padding:20px;
   overflow: hidden;
   box-sizing: border-box;
   text-align: center;
   position: relative;
-  transition: 0.3s;
 }
+
+.demo-title {
+  text-align: center;
+  padding: 15px;
+}
+
+.demo-title h2{
+  margin:0px;
+  line-height: 28px; 
+}
+
+.plugin-container {
+    min-height: 300px;
+    background: #fff;
+    border: 1px solid #f5f5f5;
+    margin: 0px;
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-transition: all 0.125s ease-in-out 0s;
+    -moz-transition: all 0.125s ease-in-out 0s;
+    -ms-transition: all 0.125s ease-in-out 0s;
+    -o-transition: all 0.125s ease-in-out 0s;
+    transition: all 0.125s ease-in-out 0s;
+    box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
+    -webkit-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
+    -moz-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
+    -o-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
+}
+.plugin-container:hover{
+    -webkit-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -o-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -webkit-transform: translate(0, -5px);
+    -moz-transform: translate(0, -5px);
+    -ms-transform: translate(0, -5px);
+    -o-transform: translate(0, -5px);
+    transform: translate(0, -5px);
+  }
 
 .wp-core-ui .button,
 .wp-core-ui .button-secondary {
@@ -88,18 +116,14 @@ body.demo_listing_loading .demo_listing_modal {
   padding: 0 20px;
 }
 
-@media (max-width: 1050px) {
-  .wbcom-req-plugin-card  {
-    width: 49%;
-  }
+.plugin-container .plugin-action-button.already-active{
+  background: #eee;
+  border: none;
+  box-shadow: none;
+  color: #a9a8a8;
+  outline: none;
 }
 
-@media (max-width: 570px) {
-  .wbcom-req-plugin-card {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
 
 .demo-listing-wrap .tab .tablinks.active {
   background-color: #d6d6d6;
@@ -118,9 +142,7 @@ body.demo_listing_loading .demo_listing_modal {
   left: 42%;
 }
 
-.wbcom-req-plugin-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+
 
 .goto-install-demo-step {
   float: left;
@@ -130,15 +152,17 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .plugin-dependency {
-  font-size: 16px;
-  text-transform: capitalize;
-  font-style: italic;
-  color: #d4d4d4;
+   font-size: 12px;
+  text-transform: uppercase;
+  /* font-style: italic; */
+  color: #797979;
 }
 
 .wbcom-req-plugin-card .plugin-description {
   min-height: 65px;
-}
+  font-size: 14px;
+  color: #585858;
+  }
 
 .success-msg {
   width: 400px;
@@ -161,25 +185,23 @@ body.demo_listing_loading .demo_listing_modal {
 
 p.plugin-status {
   display: inline-block;
-  padding: 5px 14px;
+  padding: 3px 14px;
   background-color: #4cbb1e;
   color: #fff;
   border-radius: 30px;
-  font-weight: bold;
-  font-size: 12px;
+/*  font-weight: bold;*/
+  font-size: 13px;
 }
 
 .plugin-container h3 {
   font-size: 18px;
   line-height: 28px;
-  font-weight: bold;
   border-bottom: 1px solid #f3f3f3;
-  padding: 8px 0px;
+  padding: 0px 0px 15px;
+  margin: 0 0 15px;
 }
 
-.plugin-container {
-  padding: 2px 16px;
-}
+
 
 /* The alert message box */
 
@@ -287,18 +309,21 @@ div.wbcom-demo-importer .alert {
 
 .wbcom-demo-importer .wbcom-button {
   text-decoration: none;
-  background-color: #f86923;
-  color: white;
-  padding: 9px 35px;
+  background-color: #eaeaea;
+  color: #565555;
+  padding: 10px 0;
   border: none;
-  border-radius: 25px;
+  border-radius: 4px;
   cursor: pointer;
-  display: block;
-  margin: 50px auto;
-  font-weight: bold;
+  display: inline-block;
+  margin: 5px;
   transition: all .5s;
+  min-width: 120px;
 }
-
+.wbcom-demo-importer .wbcom-button.import{
+  background: #03A9F4;  
+  color: #fff;
+  }
 .single-container {
   position: relative;
   float: left;
@@ -321,50 +346,74 @@ div#wbtd-current-action {
   margin-bottom: 30px;
 }
 
-.wbcom-demo-importer .container {
-  position: relative;
-  float: left;
-  width: 29%;
-  background-color: #fff;
-  padding: 10px;
-  margin: 11px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
+
+.wbcom-demo-importer{
+  width: 25%;
 }
+
+.wbcom-demo-importer .container{
+  position: relative;
+  background-color: #fff;
+  padding: 0px;
+  margin: 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  overflow: hidden;
+  -webkit-transition: all 0.125s ease-in-out 0s;
+  -moz-transition: all 0.125s ease-in-out 0s;
+  -ms-transition: all 0.125s ease-in-out 0s;
+  -o-transition: all 0.125s ease-in-out 0s;
+  transition: all 0.125s ease-in-out 0s;
+}
+.wbcom-demo-importer .container:hover{
+    -webkit-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -o-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -webkit-transform: translate(0, -5px);
+    -moz-transform: translate(0, -5px);
+    -ms-transform: translate(0, -5px);
+    -o-transform: translate(0, -5px);
+    transform: translate(0, -5px);
+  }
+
 
 .wbcom-demo-importer .image {
-  opacity: 1;
   display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
 }
+
+
 
 .wbcom-demo-importer .middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
+  margin-top: 10px;
 }
 
-.wbcom-demo-importer .container:hover .image {
-  opacity: 0.1;
+
+@media only screen and (max-width:768px) {
+
+.wbcom-demo-importer{
+  width:50%;
+}
+.wbcom-req-plugin-card {
+    width:50%;
 }
 
-.wbcom-demo-importer .container:hover .middle {
-  opacity: 1;
+
 }
 
-/* Change the width of the three columns to 100%
 
-(to stack horizontally on small screens) */
+@media screen and (min-width: 768px) and (max-width:1170px) {
 
-@media only screen and (max-width: 600px) {
-  .wbcom-demo-importer .container {
-    width: 100%;
+.wbcom-demo-importer{
+  width:33.33%;
+}
+
+  .wbcom-req-plugin-card  {
+    width: 50%;
   }
+
+
 }
+
+ 
+
