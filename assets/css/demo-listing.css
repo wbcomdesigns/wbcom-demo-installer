@@ -342,6 +342,11 @@ div.wbcom-demo-importer .alert {
   display: inline-block;
 }
 
+.wbcom-demo-importer .reign-demos-progress-container .wbcom-button{
+  margin:auto;
+}
+
+
 .single-container {
   position: relative;
   float: left;
