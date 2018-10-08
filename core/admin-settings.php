@@ -159,23 +159,30 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			<?php
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
+			
 			if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				
-				$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
+				// $url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				
-				$response = wp_remote_post( $url_to_request, array(
-					'method' => 'POST',
-					'timeout' => 120,
-					'headers' => array(),
-					'sslverify'   => false,
-					'body' => array(
-						'theme_slug'	=> $_GET['theme_slug'],
-						'demo_slug'	=> $_GET['demo_slug'],
-						// 'target_url' => $_GET['target_url'],
-						'plugins_list' => 'get_plugins_list',
-					)
-				) );
+				// $response = wp_remote_post( $url_to_request, array(
+				// 	'method' => 'POST',
+				// 	'timeout' => 120,
+				// 	'headers' => array(),
+				// 	'sslverify'   => false,
+				// 	'body' => array(
+				// 		'theme_slug'	=> $_GET['theme_slug'],
+				// 		'demo_slug'	=> $_GET['demo_slug'],
+				// 		// 'target_url' => $_GET['target_url'],
+				// 		'plugins_list' => 'get_plugins_list',
+				// 	)
+				// ) );
+
+				
+				$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "plugins_json/" . $_GET['plugins_json_key'] . "/plugins.json";
+				$retrieved_data = '';
+				$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+
 				if ( !is_wp_error( $response ) ) {
 					if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
 						$response = isset( $response['body'] ) ? $response['body'] : '';
@@ -304,6 +311,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 									'demo_slug' => $value['demo_slug'],
 									'target_url' => $value['target_url'], 
 									'step' => 'plugins_manager',
+									'plugins_json_key' => $value['plugins_json_key'],
 								) );
 							?>
 							<div class='wbcom-demo-importer'>
