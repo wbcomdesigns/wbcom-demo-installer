@@ -86,7 +86,7 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .plugin-container {
-    min-height: 300px;
+    min-height: 380px;
     background: #fff;
     border: 1px solid #f5f5f5;
     margin: 0px;
@@ -504,9 +504,9 @@ div#wbtd-current-action {
 .wbcom-req-plugin-card  {
   width: 33.33%;
 }
-.wbcom-req-plugin-card:nth-child(4n+1){
+/*.wbcom-req-plugin-card:nth-child(4n+1){
   clear:both;
-}
+}*/
 
 
 }
