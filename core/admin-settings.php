@@ -167,7 +167,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			echo "<div class='wrap wbcom-demo-importer'>";
 			?>
 			<div class="reign-demos-alertboxes">
-				<img src="<?php echo $target_demo_info['screenshot']; ?>" />
+				<img src="<?php echo $target_demo_info['screenshot']; ?>" style="width:100%;" />
 			</div>
 			<div class="reign-demos-progress-container">	
 				<div id="progress-bar-container" style="display: none;">
