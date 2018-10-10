@@ -131,15 +131,43 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			return;
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
+			
+			$target_url = $_GET['target_url'];
+			$target_demo_info = array();
+
+			$current_url = $this->get_demo_installer_page_url();
+			$parent_url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "package" . "-" . $theme_info['Name'] . ".json";
+			$retrieved_data = '';
+			$response = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
+			if ( is_wp_error( $response ) ) {
+				$error_message = $response->get_error_message();
+				echo "Something went wrong: $error_message";
+			} else {
+				if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
+					$response = isset( $response['body'] ) ? $response['body'] : '';
+					if( !empty( $response ) ) {
+						$response = json_decode( $response, true );
+					}
+					if( !empty( $response ) && is_array( $response ) ) {
+						$motive_key = '';
+						foreach ( $response as $key => $value ) {
+							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
+							if( $target_url === $preview_url ) {
+								$target_demo_info = $value;
+								break;
+							}
+						}
+					}
+					else {
+						_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+					}
+				}
+			}
+
 			echo "<div class='wrap wbcom-demo-importer'>";
 			?>
 			<div class="reign-demos-alertboxes">
-				<div class="alert">
-					<?php _e( 'ATTENTION PLEASE !!! All you data will be replaced by demo data.<br/>If this is a multisite, please use default WordPress XML import process.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
-				</div>
-				<div class="alert">
-					<?php _e( 'Depending upon the server configuration and internet speed, this process might take 5-10 minutes. Your patience is appreciated.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?>
-				</div>
+				<img src="<?php echo $target_demo_info['screenshot']; ?>" />
 			</div>
 			<div class="reign-demos-progress-container">	
 				<div id="progress-bar-container" style="display: none;">
