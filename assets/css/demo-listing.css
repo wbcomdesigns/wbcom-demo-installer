@@ -192,11 +192,15 @@ body.demo_listing_loading .demo_listing_modal {
 p.plugin-status {
   display: inline-block;
   padding: 3px 14px;
-  background-color: #4cbb1e;
+  background-color: #fd7a70;
   color: #fff;
   border-radius: 30px;
 /*  font-weight: bold;*/
   font-size: 13px;
+}
+
+p.plugin-status.already-active{
+    background-color: #4CAF50;s
 }
 
 .plugin-container h3 {
