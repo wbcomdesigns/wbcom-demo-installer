@@ -238,7 +238,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					<div class="plugin-container">
 						<h3><?php echo $plugin['name']; ?></h3>
 						<p class="plugin-status <?php echo $already_active_class; ?>"><?php echo $plugin_status['status_text']; ?></p>
-						<p class="plugin-dependency"><?php echo $plugin_dependency; ?></p>
+						<p class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></p>
 						<p class="plugin-description"><?php echo $plugin['description']; ?></p>
 						<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo $plugin['slug']; ?>">
 						<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo $plugin_status['action']; ?>">
