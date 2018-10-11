@@ -184,6 +184,20 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 				echo "<div>";
 				?>
 			</div>
+
+			<div class="info-importer">
+				<div class="info-impoter-heading">Please note:</div>
+				<div class="info-impoter-content">
+					<ul>
+						<li>Demo Importer is suggested for <storng>Fresh Installation only</storng>, Please make sure you have <storng>full backup</storng> of site before importing demo data.</li>
+						<li>Don’t do the import twice since it will duplicate all your content.</li>
+						<li>Importing All the demo content will take some time so be patient.</li>
+						<li>Revolution Sliders are not imported in this advanced section. Activate the plugin and click Import Slider from Revolution Slider.</li>
+						<p>Exported sliders can be found in the package downloaded inside the Demo content folder</p>
+					</ul>
+				</div>
+			</div>
+
 			<?php
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
