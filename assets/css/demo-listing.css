@@ -349,7 +349,9 @@ div.wbcom-demo-importer .alert {
 }
 
 .wbcom-demo-importer .reign-demos-progress-container .wbcom-button{
-  margin:auto;
+  margin: auto;
+  font-size: 16px;
+  padding: 20px 40px;
 }
 
 
@@ -428,14 +430,15 @@ div#wbtd-current-action {
 
 
 .wbcom-demo-importer .reign-demos-alertboxes{
-    float: left;
-    width: 40%;
+    /*float: left;*/
+    width: 50%;
     background: #fff;
     padding: 20px;
     box-sizing: border-box;
     margin-right: 10px;
-    max-width: 500px;
+    max-width: 600px;
     border-radius: 5px;
+    display: table-cell;
 }
 
 .wbcom-demo-importer .reign-demos-alertboxes .alert{
@@ -449,11 +452,13 @@ div#wbtd-current-action {
 }
 
 .reign-demos-progress-container{
-  float: left;
-  width: calc(100% - 530px);
-  background: #fff;
+/*float: left;*/
+  width: 50%;
+ /* background: #fff;*/
   padding: 10px;
   border-radius: 5px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 
