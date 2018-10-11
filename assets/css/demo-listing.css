@@ -462,6 +462,26 @@ div#wbtd-current-action {
 }
 
 
+.info-importer{
+  margin-top:50px; 
+}
+
+.info-impoter-heading{
+  background: #444;
+  padding: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info-impoter-content ul{
+  list-style: circle;
+  padding-left: 25px;
+  font-size: 14px;
+}
+.info-impoter-content strong{
+  font-weight: 700;
+}
 
 
 @media only screen and (max-width:480px){

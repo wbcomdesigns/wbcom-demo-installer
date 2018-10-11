@@ -180,16 +180,17 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 				echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
 				echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
 				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
-				echo '<div id="wbtd-current-action" style="display:none;">downloading<div>';
-				echo "<div>";
+				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
+				echo "</div>";
 				?>
 			</div>
+			
 
 			<div class="info-importer">
 				<div class="info-impoter-heading">Please note:</div>
 				<div class="info-impoter-content">
 					<ul>
-						<li>Demo Importer is suggested for <storng>Fresh Installation only</storng>, Please make sure you have <storng>full backup</storng> of site before importing demo data.</li>
+						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>, Please make sure you have <strong>full backup</strong> of site before importing demo data.</li>
 						<li>Don’t do the import twice since it will duplicate all your content.</li>
 						<li>Importing All the demo content will take some time so be patient.</li>
 						<li>Revolution Sliders are not imported in this advanced section. Activate the plugin and click Import Slider from Revolution Slider.</li>
