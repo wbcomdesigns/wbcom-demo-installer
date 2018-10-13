@@ -128,6 +128,10 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			delete_option( 'wbcom_theme_demo_import_data' );
 			delete_option( 'wbcom_theme_demo_req_plugins' );
 			include_once 'success.php';
+			/** to deal with GeoDirectory import issue */
+			if( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
+				geodir_tool_restore_cpt_from_taxonomies();
+			}
 			return;
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
