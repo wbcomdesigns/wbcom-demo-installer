@@ -682,17 +682,22 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
 			// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 			if( !isset( $_GET['target_url'] ) ) { return array(); }
-			$url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
-			$response = wp_remote_post( $url_to_request, array(
-				'method' => 'POST',
-				'timeout' => 45,
-				'headers' => array(),
-				'body' => array(
-					'theme_slug'	=> $_GET['theme_slug'],
-					'demo_slug'	=> $_GET['demo_slug'],
-					'plugins_list' => 'get_plugins_list',
-				)
-			) );
+			
+			// $url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
+			// $response = wp_remote_post( $url_to_request, array(
+			// 	'method' => 'POST',
+			// 	'timeout' => 45,
+			// 	'headers' => array(),
+			// 	'body' => array(
+			// 		'theme_slug'	=> $_GET['theme_slug'],
+			// 		'demo_slug'	=> $_GET['demo_slug'],
+			// 		'plugins_list' => 'get_plugins_list',
+			// 	)
+			// ) );
+
+			$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "plugins_json/" . $_GET['plugins_json_key'] . "/plugins.json";
+			$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+
 			if ( !is_wp_error( $response ) ) {
 				if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
 					$response = isset( $response['body'] ) ? $response['body'] : '';
