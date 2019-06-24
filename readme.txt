@@ -4,7 +4,7 @@ Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 4.9.6
-Stable tag: 1.0.8
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,9 @@ It will not work standalone and will need Wbcom Demo Exporter plugin at master s
 1. This screen shot description corresponds to screenshot-1.
 
 == Changelog ==
+
+= 1.1.0 =
+* Fixed undefined index issue on plugin listing page.
 
 = 1.0.8 =
 * Fixed undefined index issue on plugin listing page.
