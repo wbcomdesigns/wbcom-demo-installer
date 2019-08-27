@@ -53,9 +53,44 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
 	}
 
-	public function wbcom_read_theme_demo_package_file() {
+	public function wbcom_read_theme_demo_package_file() {		
+		$demo_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/demo-content.xml';
+		$widgets_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/widgets.json';
+		$customizer_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/customizer.dat';
+		
+		
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
+				if ( ! class_exists( '\WP_Importer' ) ) {
+					require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+				}
+				if ( ! class_exists( '\WP_Customize_Setting' ) ) {
+					require_once ABSPATH . 'wp-includes/class-wp-customize-setting.php';
+				}
+				
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/vendor/autoload.php';
+				
+				require_once  WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-widget-importer.php';
+				
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-importer.php';
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-option.php';
+				
+				// Get the logger object, so it can be used in the whole class.
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-logger.php';
+				$logger = Merlin_Logger::get_instance();
+				
+				/* Import Content XML file */
+				$importer = new ProteusThemes\WPContentImporter2\Importer( array( 'fetch_attachments' => true ), $logger);
+				$importer->import($demo_content);
+				
+				/* Import Widget */
+				$widget_importer = new Merlin_Widget_Importer();
+				$customizer_importer = new Merlin_Customizer_Importer();
+				
+				/* Import Customizer */
+				$widget_importer->import($widgets_content);
+				$customizer_importer->import($customizer_content);
+				/*
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
@@ -75,6 +110,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 						}
 					}
 				}
+				*/
 			}
 		}
 		wp_die();

@@ -183,6 +183,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 				echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
 				echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
 				echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
+				echo "<input type='hidden' id='theme_demo' value='$_GET[theme_demo]' />";
 				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . "</button>";
 				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
 				echo "</div>";
@@ -260,15 +261,16 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			}
 
 			$num_of_req_plugins_installed = 0;
-			$required_plugins_to_activate = 0;
+			$required_plugins_to_activate = 0;			
 			$demo_import_url = $this->get_demo_installer_page_url(
 				array(
 					'theme_slug' => $_GET['theme_slug'],
 					'demo_slug' => $_GET['demo_slug'],
+					'theme_demo' => $_GET['theme_demo'],
 					'target_url' => $_GET['target_url'],
 					'step' => 'demo_import',
 				) );
-			$plugins_list = get_option( 'wbcom_theme_demo_req_plugins', array() );
+			$plugins_list = get_option( 'wbcom_theme_demo_req_plugins', array() );			
 			?>
 			<div class="goto-install-demo-step">
 				<a href="<?php echo $demo_import_url; ?>" class="button button-primary"><?php _e( 'Go To Demo Installation', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
@@ -357,8 +359,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					}
 					if( !empty( $response ) && is_array( $response ) ) {
 						$motive_key = '';
-						foreach ( $response as $key => $value ) {
-							// print_r($value)
+						foreach ( $response as $key => $value ) {							
 							if( (  $key !== 0 ) && ( $motive_key !== $value['motive_key'] ) ) {
 								echo '</div>';
 							}
@@ -370,12 +371,13 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
 							$href = $this->get_demo_installer_page_url(
 								array(
-									'theme_slug' => $value['theme_slug'],
-									'demo_slug' => $value['demo_slug'],
-									'target_url' => $value['target_url'], 
-									'step' => 'plugins_manager',
+									'theme_slug' 	=> $value['theme_slug'],
+									'demo_slug' 	=> $value['demo_slug'],
+									'theme_demo' 	=> $value['plugins_json_key'],
+									'target_url' 	=> $value['target_url'], 
+									'step' 			=> 'plugins_manager',
 									'plugins_json_key' => $value['plugins_json_key'],
-								) );
+								) );							
 							?>
 							<div class='wbcom-demo-importer'>
 								<div class="container">

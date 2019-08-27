@@ -105,15 +105,19 @@ jQuery( document ).ready( function( $ ) {
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
 				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
 				target_url : thisRef.siblings( '#target_url' ).val(),
+				theme_demo : thisRef.siblings( '#theme_demo' ).val(),
 			},
 			success : function( response ) {
-				wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+				console.log(response);
+				/*wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
 				$( '#progress-bar-container' ).show();
 				wbcom_theme_demo_data = $.parseJSON( response );
 				total_requests = ( wbcom_theme_demo_data.database_tables.length + wbcom_theme_demo_data.upload_folders.length );
 				percentage_increment = ( 100 / total_requests );
 				_wbcom_read_theme_demo_json_files();
 				_wbcom_read_theme_demo_upload_folders();
+				*/
+				wbcom_demo_import_done();
 			}
 		});
 	}

@@ -21,6 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 
+define( 'WBCOM_THEME_DEMO_INSTALLER_DIR', plugin_dir_path(__FILE__) );
+define( 'WBCOM_THEME_DEMO_INSTALLER_URL', plugins_url('/', __FILE__) );
+
+
 /**
  * Main WBCOM_Theme_Demo_Installer Class.
  *
