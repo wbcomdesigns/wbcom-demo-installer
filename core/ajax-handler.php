@@ -57,6 +57,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		$demo_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/demo-content.xml';
 		$widgets_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/widgets.json';
 		$customizer_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/customizer.dat';
+		$revolution_slider = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/Slider.zip';
 		
 		
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
@@ -79,6 +80,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-logger.php';
 				$logger = Merlin_Logger::get_instance();
 				
+				
 				/* Import Content XML file */
 				$importer = new ProteusThemes\WPContentImporter2\Importer( array( 'fetch_attachments' => true ), $logger);
 				$importer->import($demo_content);
@@ -90,6 +92,13 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 				/* Import Customizer */
 				$widget_importer->import($widgets_content);
 				$customizer_importer->import($customizer_content);
+				
+				/* Revolution Slider */				
+				if ( class_exists( 'RevSlider', false ) && file_exists( $revolution_slider) ) {					
+					$importer = new RevSlider();
+					$response = $importer->importSliderFromPost( true, true, $revolution_slider );					
+				}
+				
 				/*
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
