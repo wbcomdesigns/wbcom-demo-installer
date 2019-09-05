@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.2.2" created="2019-08-30 09:15" -->
+	<!-- generator="WordPress/5.2.2" created="2019-09-05 08:42" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>My blog</title>
 	<link>https://try.wbcomdesigns.com/6</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Fri, 30 Aug 2019 09:15:47 +0000</pubDate>
+	<pubDate>Thu, 05 Sep 2019 08:42:45 +0000</pubDate>
 	<language>en</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://try.wbcomdesigns.com/6</wp:base_site_url>
@@ -148,7 +148,7 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Tabla]]></wp:term_name>
 	</wp:term>
-			<wp:term><wp:term_id>16</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[primary-menu]]></wp:term_slug><wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+			<wp:term><wp:term_id>16</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu]]></wp:term_slug><wp:term_name><![CDATA[Main Menu]]></wp:term_name>
 </wp:term>
 	<wp:term><wp:term_id>17</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[user-menu]]></wp:term_slug><wp:term_name><![CDATA[User Menu]]></wp:term_name>
 </wp:term>
@@ -176,7 +176,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -231,7 +231,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3293,7 +3293,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 							</item>
 					<item>
 		<title>1920x1274</title>
-		<link>https://try.wbcomdesigns.com/6/home-learnmate/1920x1274/</link>
+		<link>https://try.wbcomdesigns.com/6/home-2/1920x1274/</link>
 		<pubDate>Thu, 29 Aug 2019 12:13:41 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274.png</guid>
@@ -3324,7 +3324,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 							</item>
 					<item>
 		<title>300x300</title>
-		<link>https://try.wbcomdesigns.com/6/home-learnmate/300x300/</link>
+		<link>https://try.wbcomdesigns.com/6/home-2/300x300/</link>
 		<pubDate>Thu, 29 Aug 2019 12:14:38 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/300x300.png</guid>
@@ -3432,8 +3432,8 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title>Home</title>
-		<link>https://try.wbcomdesigns.com/6/home/</link>
+		<title>Home-2</title>
+		<link>https://try.wbcomdesigns.com/6/home-2-2/</link>
 		<pubDate>Tue, 05 Jun 2018 11:23:22 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://wpbp.in/learndash3/?page_id=35</guid>
@@ -3553,7 +3553,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_date_gmt><![CDATA[2018-06-05 11:23:22]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[home]]></wp:post_name>
+		<wp:post_name><![CDATA[home-2-2]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -3574,7 +3574,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:23:"stretched_view_no_title";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_yoast_wpseo_content_score]]></wp:meta_key>
@@ -3762,7 +3762,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/6/courses/]]></wp:meta_value>
@@ -3859,7 +3859,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3914,7 +3914,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3969,7 +3969,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
@@ -4024,7 +4024,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4079,7 +4079,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4134,7 +4134,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4189,7 +4189,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4244,7 +4244,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4299,7 +4299,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4354,7 +4354,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4409,7 +4409,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4649,7 +4649,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"118c5dee","elType":"section","settings":{"gap":"no","custom_height":{"unit":"px","size":80},"content_position":"middle","structure":"30","background_background":"classic","background_color":"#000000","margin":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true},"padding_tablet":{"unit":"px","top":"30","right":"20","bottom":"30","left":"20","isLinked":false},"padding_mobile":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":false},"height":"min-height"},"elements":[{"id":"f02c88e","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"0df136f","elType":"widget","settings":{"branding_title_color":"#ffffff","align":"left"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":false},{"id":"175f5249","elType":"column","settings":{"_column_size":33,"_inline_size":null,"_inline_size_mobile":35},"elements":[{"id":"7f99220f","elType":"widget","settings":{"align_items":"left","animation_text":"sink","toggle_align":"right","color_menu_item":"#ffffff","color_menu_item_hover":"#00e4ff","pointer_color_menu_item_hover":"#00e4ff","menu_typography_typography":"custom","menu_typography_font_size":{"unit":"px","size":16},"pointer_width":{"unit":"px","size":8},"color_dropdown_item":"#000000","background_color_dropdown_item":"#f2f2f2","color_dropdown_item_hover":"#00ce1b","background_color_dropdown_item_hover":"#ededed","dropdown_typography_typography":"custom","dropdown_typography_font_size":{"unit":"px","size":15},"toggle_color":"#ffffff","toggle_color_hover":"#00ce1b","toggle_size":{"unit":"px","size":25},"toggle_border_width":{"unit":"px","size":0},"toggle_border_radius":{"unit":"px","size":0},"menu_typography_font_weight":"400","padding_vertical_menu_item":{"unit":"px","size":40},"full_width":"stretch","dropdown_top_distance_tablet":{"unit":"px","size":45},"dropdown_top_distance_mobile":{"unit":"px","size":35},"menu":"primary-menu","indicator":"chevron","padding_horizontal_menu_item":{"unit":"px","size":10},"menu_space_between":{"unit":"px","size":5}},"elements":[],"widgetType":"nav-menu"}],"isInner":false},{"id":"ba0e6ee","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"82f4560","elType":"widget","settings":[],"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		<wp:meta_value><![CDATA[[{"id":"118c5dee","elType":"section","settings":{"gap":"no","custom_height":{"unit":"px","size":80},"content_position":"middle","structure":"30","background_background":"classic","background_color":"#000000","margin":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true},"padding_tablet":{"unit":"px","top":"30","right":"20","bottom":"30","left":"20","isLinked":false},"padding_mobile":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":false},"height":"min-height"},"elements":[{"id":"f02c88e","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"0df136f","elType":"widget","settings":{"branding_title_color":"#ffffff","align":"left"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":false},{"id":"175f5249","elType":"column","settings":{"_column_size":33,"_inline_size":null,"_inline_size_mobile":35},"elements":[{"id":"7f99220f","elType":"widget","settings":{"align_items":"left","animation_text":"sink","toggle_align":"right","color_menu_item":"#ffffff","color_menu_item_hover":"#00e4ff","pointer_color_menu_item_hover":"#00e4ff","menu_typography_typography":"custom","menu_typography_font_size":{"unit":"px","size":16},"pointer_width":{"unit":"px","size":8},"color_dropdown_item":"#000000","background_color_dropdown_item":"#f2f2f2","color_dropdown_item_hover":"#00ce1b","background_color_dropdown_item_hover":"#ededed","dropdown_typography_typography":"custom","dropdown_typography_font_size":{"unit":"px","size":15},"toggle_color":"#ffffff","toggle_color_hover":"#00ce1b","toggle_size":{"unit":"px","size":25},"toggle_border_width":{"unit":"px","size":0},"toggle_border_radius":{"unit":"px","size":0},"menu_typography_font_weight":"400","padding_vertical_menu_item":{"unit":"px","size":40},"full_width":"stretch","dropdown_top_distance_tablet":{"unit":"px","size":45},"dropdown_top_distance_mobile":{"unit":"px","size":35},"menu":"main-menu","indicator":"chevron","padding_horizontal_menu_item":{"unit":"px","size":10},"menu_space_between":{"unit":"px","size":5}},"elements":[],"widgetType":"nav-menu"}],"isInner":false},{"id":"ba0e6ee","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"82f4560","elType":"widget","settings":[],"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
@@ -5434,115 +5434,113 @@ Tenetur suscipit molestias dolores aut sint. Explicabo mollitia id et neque. Ver
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home learnmate</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/6/</link>
 		<pubDate>Mon, 02 Jul 2018 11:52:46 +0000</pubDate>
 		<dc:creator><![CDATA[wbcomteam]]></dc:creator>
 		<guid isPermaLink="false">https://wpbp.in/learndash3/?page_id=322</guid>
 		<description></description>
-		<content:encoded><![CDATA[<h2>Create And Sell<br>Beautiful Online Courses</h2>		
-		But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.		
-			<a href="#" role="button">
-						Read More
-					</a>
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-400x265.png 400w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h2>The Best Software For elearning</h2>		
-		<p>Quisque commodo risus eu velit efficitur sodales. Proin ac turpis elit. Aliquam eget odio aliquet, iaculis mi ac, egestas orci. Ut posuere molestie leo, non hendrerit sapien semper quis. Aliquam maximus ultrices urna, at consequat ligula gravida et. Aenean eu nisl in nisl suscipit condimentum sit amet ut eros. Integer molestie dui quis neque egestas vulputate. Aenean aliquet enim id tempus vulputate. Donec id tortor eu velit eleifend ultricies. Mauris eget tristique mi.</p>		
-			<h2>Choose Your Course​</h2>		
-		[ld_course_list col="3" num="3" posts_per_page="3"]		
-				<h3>
-					Distraction Free Reading
-				</h3>
-								<p>Provide content focused learning expericene to students.</p>
-				<h3>
-					Related Courses
-				</h3>
-								<p>Encourage your students to get enrolled in more courses that makes sense.</p>
-				<h3>
-					Course Coming Soon
-				</h3>
-								<p>Start preparing your student base before actual releasing the course.</p>
-				<h3>
-					Learndash Extra Widgets
-				</h3>
-								<p>Making Learndash awesome e-Learning capabilities come out with a spark.</p>
-				<h3>
-					Grid & List Layout
-				</h3>
-								<p>Visually appealing layout for your course stack that helps to increase conversions.</p>
-				<h3>
-					Course Review
-				</h3>
-								<p>Add credibility to your course by allowing students to share their views about it. </p>
-							Courses
-							Students
-							Subjects
-							Instructors
-			<h2>People say the nicest things</h2>		
-										<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300&#215;300" alt="300x300" />											
-			<h4>Jessica Welk</h4>		
-			<h5>Web Designer</h5>		
-		<p>I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>		
-										<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300&#215;300" alt="300x300" />											
-			<h4>Jessica Welk</h4>		
-			<h5>Web Designer</h5>		
-		<p>I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>		
-										<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300&#215;300" alt="300x300" />											
-			<h4>Jessica Welk</h4>		
-			<h5>Web Designer</h5>		
-		<p>I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>		
-			<h2>Choose Plan</h2>		
-		[pmpro_levels]		
-			<h2>Latest News</h2>		
-				<article>
+		<content:encoded><![CDATA[<h2>Create And Sell
+Beautiful Online Courses</h2>
+But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.
+<a href="#" role="button">
+Read More
+</a>
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-400x265.png 400w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/6/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<h2>The Best Software For elearning</h2>
+Quisque commodo risus eu velit efficitur sodales. Proin ac turpis elit. Aliquam eget odio aliquet, iaculis mi ac, egestas orci. Ut posuere molestie leo, non hendrerit sapien semper quis. Aliquam maximus ultrices urna, at consequat ligula gravida et. Aenean eu nisl in nisl suscipit condimentum sit amet ut eros. Integer molestie dui quis neque egestas vulputate. Aenean aliquet enim id tempus vulputate. Donec id tortor eu velit eleifend ultricies. Mauris eget tristique mi.
+<h2>Choose Your Course​</h2>
+[ld_course_list col="3" num="3" posts_per_page="3"]
+<h3>
+					Distraction Free Reading</h3>
+Provide content focused learning expericene to students.
+<h3>
+					Related Courses</h3>
+Encourage your students to get enrolled in more courses that makes sense.
+<h3>
+					Course Coming Soon</h3>
+Start preparing your student base before actual releasing the course.
+<h3>
+					Learndash Extra Widgets</h3>
+Making Learndash awesome e-Learning capabilities come out with a spark.
+<h3>
+					Grid &amp; List Layout</h3>
+Visually appealing layout for your course stack that helps to increase conversions.
+<h3>
+					Course Review</h3>
+Add credibility to your course by allowing students to share their views about it.
+
+Courses
+Students
+Subjects
+Instructors
+<h2>People say the nicest things</h2>
+<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300×300" alt="300x300">
+<h4>Jessica Welk</h4>
+<h5>Web Designer</h5>
+I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+
+<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300×300" alt="300x300">
+<h4>Jessica Welk</h4>
+<h5>Web Designer</h5>
+I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+
+<img src="https://try.wbcomdesigns.com/6/wp-content/uploads/elementor/thumbs/300x300-oczei8dqi39jxmd2pyrpfv7dgw8rz7gxmorv3ba3hc.png" title="300×300" alt="300x300">
+<h4>Jessica Welk</h4>
+<h5>Web Designer</h5>
+I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+<h2>Choose Plan</h2>
+[pmpro_levels]
+<h2>Latest News</h2>
+<article>
 				<a href="https://try.wbcomdesigns.com/6/2018/06/05/hello-world/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-300x200.jpg 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-768x512.jpg 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-600x400.jpg 600w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252.jpg 940w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Blog
-				<h3>
+<img width="300" height="200" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-300x200.jpg 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-768x512.jpg 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252-600x400.jpg 600w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-891252.jpg 940w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Blog
+<h3>
 			<a href="https://try.wbcomdesigns.com/6/2018/06/05/hello-world/">
-				Curabitur feugiat nisl augue aliquet			</a>
-		</h3>
-			Welcome to WordPress. This is your afirst post. Edit or delete it, then start writing!Maecenas facilisis urna sit amet eros...		
-					<a href="https://try.wbcomdesigns.com/6/2018/06/05/hello-world/">
-				Read More »			</a>
-			June 5, 2018		
-			1 Comment		
-		</article>
-				<article>
+Curabitur feugiat nisl augue aliquet			</a></h3>
+Welcome to WordPress. This is your afirst post. Edit or delete it, then start writing!Maecenas facilisis urna sit amet eros...
+<a href="https://try.wbcomdesigns.com/6/2018/06/05/hello-world/">
+Read More »			</a>
+June 5, 2018
+1 Comment
+</article>
+<article>
 				<a href="https://try.wbcomdesigns.com/6/2018/06/04/suscipit-dolores-officia-et-pariatur/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-300x200.jpg 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-768x512.jpg 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-600x400.jpg 600w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203.jpg 940w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Blog
-				<h3>
+<img width="300" height="200" src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-300x200.jpg 300w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-768x512.jpg 768w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203-600x400.jpg 600w, https://try.wbcomdesigns.com/6/wp-content/uploads/2018/06/pexels-photo-1028203.jpg 940w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Blog
+<h3>
 			<a href="https://try.wbcomdesigns.com/6/2018/06/04/suscipit-dolores-officia-et-pariatur/">
-				Suscipit dolores officia et pariatur			</a>
-		</h3>
-			Veniam ipsa eos id deserunt corporis. Laboriosam repellat saepe odit. Qui dolore quia quo sit. numquam sit temporibus ipsum repellat....		
-					<a href="https://try.wbcomdesigns.com/6/2018/06/04/suscipit-dolores-officia-et-pariatur/">
-				Read More »			</a>
-			June 4, 2018		
-			No Comments		
-		</article>
-				<article>
-				<h3>
+Suscipit dolores officia et pariatur			</a></h3>
+Veniam ipsa eos id deserunt corporis. Laboriosam repellat saepe odit. Qui dolore quia quo sit. numquam sit temporibus ipsum repellat....
+<a href="https://try.wbcomdesigns.com/6/2018/06/04/suscipit-dolores-officia-et-pariatur/">
+Read More »			</a>
+June 4, 2018
+No Comments
+</article>
+<article>
+<h3>
 			<a href="https://try.wbcomdesigns.com/6/2018/06/04/est-suscipit-eius-ipsam-consequatur-a/">
-				Est suscipit eius ipsam consequatur a			</a>
-		</h3>
-			Dicta et aut quia modi quo consectetur. Earum enim sit maxime sit ipsam. Fugit voluptates labore iusto assumenda ratione nobis...		
-					<a href="https://try.wbcomdesigns.com/6/2018/06/04/est-suscipit-eius-ipsam-consequatur-a/">
-				Read More »			</a>
-			June 4, 2018		
-			No Comments		
-		</article>
-				<figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo3-150x150.jpg" alt="dummy-logo3" /></figure><figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo2-150x150.jpg" alt="dummy-logo2" /></figure><figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo1-150x150.jpg" alt="dummy-logo1" /></figure><figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo5-150x150.jpg" alt="dummy-logo5" /></figure>]]></content:encoded>
+Est suscipit eius ipsam consequatur a			</a></h3>
+Dicta et aut quia modi quo consectetur. Earum enim sit maxime sit ipsam. Fugit voluptates labore iusto assumenda ratione nobis...
+<a href="https://try.wbcomdesigns.com/6/2018/06/04/est-suscipit-eius-ipsam-consequatur-a/">
+Read More »			</a>
+June 4, 2018
+No Comments
+</article>
+<figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo3-150x150.jpg" alt="dummy-logo3"></figure>
+<figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo2-150x150.jpg" alt="dummy-logo2"></figure>
+<figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo1-150x150.jpg" alt="dummy-logo1"></figure>
+<figure><img src="https://try.wbcomdesigns.com/6/wp-content/uploads/2018/07/dummy-logo5-150x150.jpg" alt="dummy-logo5"></figure>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>322</wp:post_id>
 		<wp:post_date><![CDATA[2018-07-02 11:52:46]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2018-07-02 11:52:46]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[home-learnmate]]></wp:post_name>
+		<wp:post_name><![CDATA[home-2]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -5583,7 +5581,7 @@ Tenetur suscipit molestias dolores aut sint. Explicabo mollitia id et neque. Ver
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2]]></wp:meta_value>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_elements_usage]]></wp:meta_key>

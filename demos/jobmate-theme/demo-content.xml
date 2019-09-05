@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.2.2" created="2019-08-30 10:03" -->
+	<!-- generator="WordPress/5.2.2" created="2019-09-05 08:57" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>My blog</title>
 	<link>https://try.wbcomdesigns.com/13</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Fri, 30 Aug 2019 10:03:24 +0000</pubDate>
+	<pubDate>Thu, 05 Sep 2019 08:57:31 +0000</pubDate>
 	<language>en</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://try.wbcomdesigns.com/13</wp:base_site_url>
@@ -478,7 +478,7 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Writing]]></wp:term_name>
 	</wp:term>
-			<wp:term><wp:term_id>8</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[primary-menu]]></wp:term_slug><wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+			<wp:term><wp:term_id>8</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu]]></wp:term_slug><wp:term_name><![CDATA[Main menu]]></wp:term_name>
 </wp:term>
 
 	<generator>https://wordpress.org/?v=5.2.2</generator>
@@ -1084,84 +1084,61 @@ To view {{requesting-user.name}}'s profile, visit: {{{profile.url}}}]]></excerpt
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Product Designer</title>
-		<link>https://try.wbcomdesigns.com/13/job/product-designer__trashed/</link>
-		<pubDate>Mon, 22 Oct 2018 10:54:11 +0000</pubDate>
+		<title>Home</title>
+		<link>https://try.wbcomdesigns.com/13/?p=17</link>
+		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?post_type=job_listing&#038;p=72</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=17</guid>
 		<description></description>
-		<content:encoded><![CDATA[Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur aliquet quam id dui posuere blandit. Nulla porttitor accumsan tincidunt.
-
-Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Donec sollicitudin molestie malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></content:encoded>
+		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>72</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-22 10:54:11]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-22 10:54:11]]></wp:post_date_gmt>
+		<wp:post_id>17</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-18 10:25:38]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[product-designer__trashed]]></wp:post_name>
-		<wp:status><![CDATA[trash]]></wp:status>
+		<wp:post_name><![CDATA[]]></wp:post_name>
+		<wp:status><![CDATA[draft]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>-1</wp:menu_order>
-		<wp:post_type><![CDATA[job_listing]]></wp:post_type>
+		<wp:menu_order>1</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="job_listing_type" nicename="full-time"><![CDATA[Full Time]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://www.youtube.com/watch?v=UStfduFEbVI&list=PL43tWMHxInRml1VfJAZaPnnLeJefssFjG&index=3]]></wp:meta_value>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_twitter]]></wp:meta_key>
-		<wp:meta_value><![CDATA[@Company]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_tagline]]></wp:meta_key>
-		<wp:meta_value><![CDATA[It's memorable]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[17]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_website]]></wp:meta_key>
-		<wp:meta_value><![CDATA[http://company.com/]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Vincom Group]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_application]]></wp:meta_key>
-		<wp:meta_value><![CDATA[vapvarun@gmail.com]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_job_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[New York, Ohio - United States]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_job_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2018-11-21]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/13/]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_time]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1540207032]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_desired_post_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[product-designer]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_filled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1539858338]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -2215,7 +2192,7 @@ Duis dignissim fermentum augue eget accumsan. Sed ornare, tellus eu imperdiet eu
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[test-alert]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:status><![CDATA[draft]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
 		<wp:post_type><![CDATA[job_alert]]></wp:post_type>
@@ -2615,64 +2592,6 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home</title>
-		<link>https://try.wbcomdesigns.com/13/?p=17</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=17</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>17</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:25:38]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[17]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/13/]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1539858338]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title></title>
 		<link>https://try.wbcomdesigns.com/13/19/</link>
 		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
@@ -2693,7 +2612,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2748,7 +2667,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2803,7 +2722,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2858,7 +2777,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2913,7 +2832,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2968,7 +2887,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3023,7 +2942,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
@@ -3078,7 +2997,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3133,7 +3052,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3188,7 +3107,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3243,7 +3162,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3298,7 +3217,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3353,7 +3272,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3408,7 +3327,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3463,7 +3382,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3576,7 +3495,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3631,7 +3550,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3643,6 +3562,61 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 		<wp:meta_value><![CDATA[139]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/13/165/</link>
+		<pubDate>Wed, 24 Oct 2018 12:16:01 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=165</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>165</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-24 12:16:01]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-24 12:16:01]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[165]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>26</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[132]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[157]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
@@ -3992,62 +3966,41 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/13/165/</link>
-		<pubDate>Wed, 24 Oct 2018 12:16:01 +0000</pubDate>
+		<title>My Alerts</title>
+		<link>https://try.wbcomdesigns.com/13/my-alerts/</link>
+		<pubDate>Thu, 18 Oct 2018 10:46:03 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=165</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?page_id=38</guid>
 		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
+		<content:encoded><![CDATA[[job_alerts]]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>165</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-24 12:16:01]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-24 12:16:01]]></wp:post_date_gmt>
+		<wp:post_id>38</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-18 10:46:03]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-18 10:46:03]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[165]]></wp:post_name>
+		<wp:post_name><![CDATA[my-alerts]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>26</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[132]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[157]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}}]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home</title>
+		<title>Home2</title>
 		<link>https://try.wbcomdesigns.com/13/home/</link>
 		<pubDate>Sat, 27 Oct 2018 04:59:59 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
@@ -4067,7 +4020,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4122,7 +4075,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -4177,7 +4130,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4232,7 +4185,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4287,7 +4240,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4342,7 +4295,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4397,7 +4350,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4452,7 +4405,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4507,7 +4460,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4606,40 +4559,6 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 			<wp:comment_user_id>0</wp:comment_user_id>
 							</wp:comment>
 					</item>
-					<item>
-		<title>My Alerts</title>
-		<link>https://try.wbcomdesigns.com/13/my-alerts/</link>
-		<pubDate>Thu, 18 Oct 2018 10:46:03 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?page_id=38</guid>
-		<description></description>
-		<content:encoded><![CDATA[[job_alerts]]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>38</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:46:03]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-18 10:46:03]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[my-alerts]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[default]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}}]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
 					<item>
 		<title>My Favorites</title>
 		<link>https://try.wbcomdesigns.com/13/my-favorites/</link>
@@ -5116,6 +5035,57 @@ But it seemed that, when on the wharf, Queequeg had not at all noticed what I no
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_astoundify_favorites_count]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>6 Ways Your Job is Losing You Future Earnings</title>
+		<link>https://try.wbcomdesigns.com/13/6-ways-your-job-is-losing-you-future-earnings/</link>
+		<pubDate>Fri, 26 Oct 2018 10:11:46 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=301</guid>
+		<description></description>
+		<content:encoded><![CDATA[Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe passing over the sleeper, from one to the other. Meanwhile, upon questioning him in his broken fashion, Queequeg gave me to understand that, in his land, owing to the absence of settees and sofas of all sorts, the king, chiefs, and great people generally, were in the custom of fattening some of the lower orders for ottomans.
+
+I was going to warn ye against — but never mind, never mind — it’s all one, all in the family too — sharp frost this morning, ain’t it? The cabin entrance was locked within; the hatches were all on, and lumbered with coils of rigging. Going forward to the forecastle, we found the slide of the scuttle open. Seeing a light, we went down, and found only an old rigger there, wrapped in a tattered pea-jacket. He was thrown at whole length upon two chests, his face downwards and inclosed in his folded arms. The profoundest slumber slept upon him.
+
+But it seemed that, when on the wharf, Queequeg had not at all noticed what I now alluded to; hence I would have thought myself to have been optically deceived in that matter, were it not for Elijah’s otherwise inexplicable question. But I beat the thing down; and again marking the sleeper, jocularly hinted to Queequeg that perhaps we had best sit up with the body; telling him to establish himself accordingly. He put his hand upon the sleeper’s rear, as though feeling if it was soft enough; and then, without more ado, sat quietly down there.]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>301</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-26 10:11:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-26 10:11:46]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[6-ways-your-job-is-losing-you-future-earnings]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[862]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_astoundify_favorites_count]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
@@ -6153,276 +6123,294 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home V5</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/13/</link>
 		<pubDate>Sat, 03 Nov 2018 09:43:24 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?page_id=728</guid>
 		<description></description>
-		<content:encoded><![CDATA[<h1>WE FOUND 2200+ JOBS FOR YOU</h1>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>[jobmate_job_search_filter form_layout="horizontal" background_color="rgba(221, 221, 221, 0.2)"]		
-			<h4>Job Career</h4>		
-		<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when.</p>		
-			<a href="#" role="button">
-						View All
-					</a>
-			<h4>Membership</h4>		
-		<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when.</p>		
-			<a href="#" role="button">
-						View All
-					</a>
-			<h4>Post A Vacancy</h4>		
-		<p>Far much that one rank beheld bluebird after outside ignobly allegedly more when.</p>		
-			<a href="#" role="button">
-						View All
-					</a>
-			<h2>Find Your Related Categories</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Accountancy</h5>		
-		<p>2 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Banking</h5>		
-		<p>5 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Digital & Creative</h5>		
-		<p>3 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Marketing & PR</h5>		
-		<p>4 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Charity & Voluntary</h5>		
-		<p>2 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Graduate</h5>		
-		<p>6 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>IT Contractor</h5>		
-		<p>8 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Estate Agency</h5>		
-		<p>2 jobs</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Legal jobs</h5>		
-		<p>1 job</p>		
-										<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px" />											
-			<h5>Leisure & Tourism</h5>		
-		<p>4 jobs</p>		
-			<a href="#" role="button">
-						View all jobs
-					</a>
-			<h2>Recommended From The Best</h2>		
-		Find Jobs, Resumes, Employment &amp; Career Opportunities		
-									<a href="">Jobs Listing</a>
-									<a href="">Resumes Listing</a>
-									Jobs Listing
-					<ul>
-				<li data-longitude="" data-latitude="">
+		<content:encoded><![CDATA[<h1>WE FOUND 2200+ JOBS FOR YOU</h1>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
+
+[jobmate_job_search_filter form_layout="horizontal" background_color="rgba(221, 221, 221, 0.2)"]
+<h4>Job Career</h4>
+Far much that one rank beheld bluebird after outside ignobly allegedly more when.
+
+<a href="#" role="button">
+View All
+</a>
+<h4>Membership</h4>
+Far much that one rank beheld bluebird after outside ignobly allegedly more when.
+
+<a href="#" role="button">
+View All
+</a>
+<h4>Post A Vacancy</h4>
+Far much that one rank beheld bluebird after outside ignobly allegedly more when.
+
+<a href="#" role="button">
+View All
+</a>
+<h2>Find Your Related Categories</h2>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Accountancy</h5>
+2 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Banking</h5>
+5 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Digital &amp; Creative</h5>
+3 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Marketing &amp; PR</h5>
+4 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Charity &amp; Voluntary</h5>
+2 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Graduate</h5>
+6 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>IT Contractor</h5>
+8 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Estate Agency</h5>
+2 jobs
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Legal jobs</h5>
+1 job
+
+<img width="300" height="300" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w" sizes="(max-width: 300px) 100vw, 300px">
+<h5>Leisure &amp; Tourism</h5>
+4 jobs
+
+<a href="#" role="button">
+View all jobs
+</a>
+<h2>Recommended From The Best</h2>
+Find Jobs, Resumes, Employment &amp; Career Opportunities
+<a href="">Jobs Listing</a>
+<a href="">Resumes Listing</a>
+Jobs Listing
+<ul>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/rockstar-games-new-york-3-motion-designer/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/11/partner-logo-4-150x122.png" alt="Rockstar Games" />			
-					<h3>Motion Designer</h3>
-						<strong>Rockstar Games</strong> 						Create Your Business&#039;s					
-					New York				
-				<ul>
-																															<li>Full Time</li>
-					<li><time datetime="2018-11-02">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li><li data-longitude="" data-latitude="">
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/11/partner-logo-4-150x122.png" alt="Rockstar Games">
+<h3>Motion Designer</h3>
+<strong>Rockstar Games</strong> 						Create Your Business's
+New York
+<ul>
+ 	<li>Full Time</li>
+ 	<li><time datetime="2018-11-02">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/rockstar-games-new-york-3-motion-designer/"></a><a href="https://try.wbcomdesigns.com/13/job/rockstar-games-new-york-3-motion-designer/">	</a></li>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/gigabyte-technology-co-ltd-hyde-park-london-4-senior-front-end-engineer/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/11/partner-logo-2-150x122.png" alt="Gigabyte Technology Co. Ltd" />			
-					<h3>Senior Front End Engineer</h3>
-						<strong>Gigabyte Technology Co. Ltd</strong> 						Create Your Business&#039;s					
-					Hyde Park London				
-				<ul>
-																															<li>Part Time</li>
-					<li><time datetime="2018-11-02">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li><li data-longitude="" data-latitude="">
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/11/partner-logo-2-150x122.png" alt="Gigabyte Technology Co. Ltd">
+<h3>Senior Front End Engineer</h3>
+<strong>Gigabyte Technology Co. Ltd</strong> 						Create Your Business's
+Hyde Park London
+<ul>
+ 	<li>Part Time</li>
+ 	<li><time datetime="2018-11-02">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/gigabyte-technology-co-ltd-hyde-park-london-4-senior-front-end-engineer/"></a><a href="https://try.wbcomdesigns.com/13/job/gigabyte-technology-co-ltd-hyde-park-london-4-senior-front-end-engineer/">	</a></li>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/cyberoam-san-francisco-5-digital-pr-manager/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/10/goodwaves-150x150.jpg" alt="Cyberoam" />			
-					<h3>Digital PR manager</h3>
-						<strong>Cyberoam</strong> 						Create Your Business&#039;s					
-					San Francisco				
-				<ul>
-																															<li>Temporary</li>
-					<li><time datetime="2018-10-23">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li><li data-longitude="" data-latitude="">
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/10/goodwaves-150x150.jpg" alt="Cyberoam">
+<h3>Digital PR manager</h3>
+<strong>Cyberoam</strong> 						Create Your Business's
+San Francisco
+<ul>
+ 	<li>Temporary</li>
+ 	<li><time datetime="2018-10-23">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/cyberoam-san-francisco-5-digital-pr-manager/"></a><a href="https://try.wbcomdesigns.com/13/job/cyberoam-san-francisco-5-digital-pr-manager/">	</a></li>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/themes-dojo-san-francisco-6-ui-ux-design/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/10/80-author.png" alt="Themes Digital" />			
-					<h3>UI/UX Design</h3>
-						<strong>Themes Digital</strong> 						Informational Technology					
-					San Francisco				
-				<ul>
-																															<li>Freelance</li>
-					<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li><li data-longitude="" data-latitude="">
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/company_logo/2018/10/80-author.png" alt="Themes Digital">
+<h3>UI/UX Design</h3>
+<strong>Themes Digital</strong> 						Informational Technology
+San Francisco
+<ul>
+ 	<li>Freelance</li>
+ 	<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/themes-dojo-san-francisco-6-ui-ux-design/"></a><a href="https://try.wbcomdesigns.com/13/job/themes-dojo-san-francisco-6-ui-ux-design/">	</a></li>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/airpower-technique-netherlands-arnhem-3-car-transporter/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/logo03-150x150.png" alt="Airpower Technique" />			
-					<h3>Car Transporter</h3>
-						<strong>Airpower Technique</strong> 						It’s original					
-					Netherlands, Arnhem				
-				<ul>
-																															<li>Full Time</li>
-					<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li><li data-longitude="" data-latitude="">
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/logo03-150x150.png" alt="Airpower Technique">
+<h3>Car Transporter</h3>
+<strong>Airpower Technique</strong> 						It’s original
+Netherlands, Arnhem
+<ul>
+ 	<li>Full Time</li>
+ 	<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/airpower-technique-netherlands-arnhem-3-car-transporter/"></a><a href="https://try.wbcomdesigns.com/13/job/airpower-technique-netherlands-arnhem-3-car-transporter/">	</a></li>
+ 	<li data-longitude="" data-latitude="">
 	<a href="https://try.wbcomdesigns.com/13/job/microsoft-1-shepherds-cottages-london-n10-3jn-uk-4-design-engineer-plumbing/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/logo02-150x150.png" alt="MicroSoft" />			
-					<h3>Design Engineer – Plumbing</h3>
-						<strong>MicroSoft</strong> 						It’s original					
-					Great Russell St, Bloomsbury, London WC1B 3DG, UK				
-				<ul>
-																															<li>Part Time</li>
-					<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
-									</ul>
-	</a>
-</li>					</ul>
-									Resumes Listing
-					<ul>
-													<li data-name="Diaz Nelson" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/logo02-150x150.png" alt="MicroSoft">
+<h3>Design Engineer – Plumbing</h3>
+<strong>MicroSoft</strong> 						It’s original
+Great Russell St, Bloomsbury, London WC1B 3DG, UK
+<ul>
+ 	<li>Part Time</li>
+ 	<li><time datetime="2018-10-22">Posted 10 months ago</time></li>
+</ul>
+</a><a href="https://try.wbcomdesigns.com/13/job/microsoft-1-shepherds-cottages-london-n10-3jn-uk-4-design-engineer-plumbing/"></a><a href="https://try.wbcomdesigns.com/13/job/microsoft-1-shepherds-cottages-london-n10-3jn-uk-4-design-engineer-plumbing/">	</a></li>
+</ul>
+Resumes Listing
+<ul>
+ 	<li data-name="Diaz Nelson" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/">
 	<a href="https://try.wbcomdesigns.com/13/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/diaz-150x150.jpg" alt="Photo" />			
-					<h3>Diaz Nelson</h3>
-						<strong>Senior News Presenter</strong> 					
-					San Francisco, USA				
-					<date>10 months ago</date>
-	</a>
-</li>													<li data-name="Wilson John" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/diaz-150x150.jpg" alt="Photo">
+<h3>Diaz Nelson</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/"></a><a href="https://try.wbcomdesigns.com/13/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/">						<strong>Senior News Presenter</strong>
+San Francisco, USA
+<date>10 months ago</date>
+</a></li>
+ 	<li data-name="Wilson John" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/">
 	<a href="https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/john-150x150.jpeg" alt="Photo" />			
-					<h3>Wilson John</h3>
-						<strong>Junior Broadcast Journalist</strong> 					
-					San Francisco				
-					<date>10 months ago</date>
-	</a>
-</li>													<li data-name="John Doe" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/john-150x150.jpeg" alt="Photo">
+<h3>Wilson John</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/"></a><a href="https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/">						<strong>Junior Broadcast Journalist</strong>
+San Francisco
+<date>10 months ago</date>
+</a></li>
+ 	<li data-name="John Doe" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/">
 	<a href="https://try.wbcomdesigns.com/13/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/pilor38-2wyj777fw264y6ljm4ri16-150x150.jpg" alt="Photo" />			
-					<h3>John Doe</h3>
-						<strong>Senior Professional Network Administrator</strong> 					
-					Chicago				
-					<date>10 months ago</date>
-	</a>
-</li>													<li data-name="Powell Ward" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/powell-wldmovnr-junior-business-consultant-new-york/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/pilor38-2wyj777fw264y6ljm4ri16-150x150.jpg" alt="Photo">
+<h3>John Doe</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/"></a><a href="https://try.wbcomdesigns.com/13/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/">						<strong>Senior Professional Network Administrator</strong>
+Chicago
+<date>10 months ago</date>
+</a></li>
+ 	<li data-name="Powell Ward" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/powell-wldmovnr-junior-business-consultant-new-york/">
 	<a href="https://try.wbcomdesigns.com/13/resume/powell-wldmovnr-junior-business-consultant-new-york/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Powell-150x150.jpg" alt="Photo" />			
-					<h3>Powell Ward</h3>
-						<strong>Junior Business Consultant</strong> 					
-					New York				
-					<date>10 months ago</date>
-	</a>
-</li>													<li data-name="Garcia Smith" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/garcia-3al952lq4q-expert-production-planner-clinton/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Powell-150x150.jpg" alt="Photo">
+<h3>Powell Ward</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/powell-wldmovnr-junior-business-consultant-new-york/"></a><a href="https://try.wbcomdesigns.com/13/resume/powell-wldmovnr-junior-business-consultant-new-york/">						<strong>Junior Business Consultant</strong>
+New York
+<date>10 months ago</date>
+</a></li>
+ 	<li data-name="Garcia Smith" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/garcia-3al952lq4q-expert-production-planner-clinton/">
 	<a href="https://try.wbcomdesigns.com/13/resume/garcia-3al952lq4q-expert-production-planner-clinton/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Garcia-150x150.jpg" alt="Photo" />			
-					<h3>Garcia Smith</h3>
-						<strong>Expert Production Planner</strong> 					
-					Clinton				
-					<date>10 months ago</date>
-	</a>
-</li>													<li data-name="Robert Perez" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/" >
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Garcia-150x150.jpg" alt="Photo">
+<h3>Garcia Smith</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/garcia-3al952lq4q-expert-production-planner-clinton/"></a><a href="https://try.wbcomdesigns.com/13/resume/garcia-3al952lq4q-expert-production-planner-clinton/">						<strong>Expert Production Planner</strong>
+Clinton
+<date>10 months ago</date>
+</a></li>
+ 	<li data-name="Robert Perez" data-coordinates="[]" data-url="https://try.wbcomdesigns.com/13/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/">
 	<a href="https://try.wbcomdesigns.com/13/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/">
-				<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Robert-150x150.jpg" alt="Photo" />			
-					<h3>Robert Perez</h3>
-						<strong>Middle Specialist in Transportation</strong> 					
-					San Francisco, USA				
-					<date>10 months ago</date>
-	</a>
-</li>						
-					</ul>
-			<h2>Jobs Listing Multiple Layout</h2>		
-		A better career is out there. We'll help you find it to use.		
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h2>Resumes Listing Multiple Layout</h2>		
-		A better career is out there. We'll help you find it to use.		
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-										<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h5>Nearly</h5>		
-				0
-				+
-							EMPLOYER registered
-			<h5>WE HAVE</h5>		
-				0
-				+
-							CANDIDATE
-			<h5>Nearly</h5>		
-				0
-				%
-							CLIENT WHO REHIRE
-			<h2>Our Blog</h2>		
-		A better career is out there. We'll help you find it to use.		
-				<article>
+<img src="https://try.wbcomdesigns.com/13/wp-content/uploads/job-manager-uploads/candidate_photo/2018/10/Robert-150x150.jpg" alt="Photo">
+<h3>Robert Perez</h3>
+</a><a href="https://try.wbcomdesigns.com/13/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/"></a><a href="https://try.wbcomdesigns.com/13/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/">						<strong>Middle Specialist in Transportation</strong>
+San Francisco, USA
+<date>10 months ago</date>
+</a></li>
+</ul>
+<h2>Jobs Listing Multiple Layout</h2>
+A better career is out there. We'll help you find it to use.
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<h2>Resumes Listing Multiple Layout</h2>
+A better career is out there. We'll help you find it to use.
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<img width="1024" height="679" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1024x679.png 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-300x199.png 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-768x510.png 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-800x531.png 800w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-1017x675.png 1017w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/1920x1274-452x300.png 452w" sizes="(max-width: 1024px) 100vw, 1024px">
+<h5>Nearly</h5>
+0
++
+EMPLOYER registered
+<h5>WE HAVE</h5>
+0
++
+CANDIDATE
+<h5>Nearly</h5>
+0
+%
+CLIENT WHO REHIRE
+<h2>Our Blog</h2>
+A better career is out there. We'll help you find it to use.
+
+<article>
 				<a href="https://try.wbcomdesigns.com/13/why-long-term-unemployment-isnt-as-bad-as-you-think/">
-			<img width="300" height="210" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-300x210.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-300x210.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-768x538.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-1024x717.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-964x675.jpg 964w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="210" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-300x210.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-300x210.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-768x538.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-1024x717.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/contact-banner-964x675.jpg 964w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/13/why-long-term-unemployment-isnt-as-bad-as-you-think/">
-				Why Long-Term Unemployment Isn’t As Bad As You Think			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-				<article>
+Why Long-Term Unemployment Isn’t As Bad As You Think			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<article>
 				<a href="https://try.wbcomdesigns.com/13/6-ways-your-job-is-losing-you-future-earnings/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-300x200.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-768x512.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-1024x683.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-1013x675.jpg 1013w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="200" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-300x200.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-768x512.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-1024x683.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/banner002-1013x675.jpg 1013w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/13/6-ways-your-job-is-losing-you-future-earnings/">
-				6 Ways Your Job is Losing You Future Earnings			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-				<article>
+6 Ways Your Job is Losing You Future Earnings			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<article>
 				<a href="https://try.wbcomdesigns.com/13/skills-training-gap-among-employees-revealed/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-300x200.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-768x512.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-1024x683.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-1013x675.jpg 1013w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="200" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-300x200.jpg 300w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-768x512.jpg 768w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-1024x683.jpg 1024w, https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/man-img-1013x675.jpg 1013w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/13/skills-training-gap-among-employees-revealed/">
-				Skills Training Gap Among Employees Revealed			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-				<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-1-150x122.png" alt="partner-logo-1" /></figure><figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-2-150x122.png" alt="partner-logo-2" /></figure><figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-3-150x122.png" alt="partner-logo-3" /></figure><figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-4-150x122.png" alt="partner-logo-4" /></figure><figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-5-150x122.png" alt="partner-logo-5" /></figure><figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-6-150x122.png" alt="partner-logo-6" /></figure>			
-			<h2>What Clients Say?</h2>		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit.		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>John Anderson</h4>		
-			<h6> - Branding Manager</h6>		
-		I have dealt with various recruitment portals but the kind of services Jobmate offers are outstanding. The portal is very user friendly and quick in responding to the user’s requirements.		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>Camille Gail</h4>		
-			<h6> - Branding Manager</h6>		
-		Jobmate is a great platform for talent sourcing, a wide range of profiles from all specialties is available, and the site is very much user friendly. The team is very helpful!		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>Richard Sanders</h4>		
-			<h6> - Branding Manager</h6>		
-		My experience with Jobmate has been incredible. They have a comprehensive database with a varied range of profiles spanning nationalities and professions.		
-			<h2>Got a question?</h2>		
-		Let us now about your issue and a Professional will reach you out.		
-			<a href="#" role="button">
-						Contact  Us
-					</a>]]></content:encoded>
+Skills Training Gap Among Employees Revealed			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-1-150x122.png" alt="partner-logo-1"></figure>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-2-150x122.png" alt="partner-logo-2"></figure>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-3-150x122.png" alt="partner-logo-3"></figure>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-4-150x122.png" alt="partner-logo-4"></figure>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-5-150x122.png" alt="partner-logo-5"></figure>
+<figure><img src="https://try.wbcomdesigns.com/13/wp-content/uploads/2018/10/partner-logo-6-150x122.png" alt="partner-logo-6"></figure>
+<h2>What Clients Say?</h2>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>John Anderson</h4>
+<h6> - Branding Manager</h6>
+I have dealt with various recruitment portals but the kind of services Jobmate offers are outstanding. The portal is very user friendly and quick in responding to the user’s requirements.
+<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>Camille Gail</h4>
+<h6> - Branding Manager</h6>
+Jobmate is a great platform for talent sourcing, a wide range of profiles from all specialties is available, and the site is very much user friendly. The team is very helpful!
+<img width="150" height="150" src="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png" alt="" srcset="https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-150x150.png 150w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300-100x100.png 100w, https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>Richard Sanders</h4>
+<h6> - Branding Manager</h6>
+My experience with Jobmate has been incredible. They have a comprehensive database with a varied range of profiles spanning nationalities and professions.
+<h2>Got a question?</h2>
+Let us now about your issue and a Professional will reach you out.
+<a href="#" role="button">
+Contact  Us
+</a>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>728</wp:post_id>
 		<wp:post_date><![CDATA[2018-11-03 09:43:24]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2018-11-03 09:43:24]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[home-v5]]></wp:post_name>
+		<wp:post_name><![CDATA[home]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -6768,54 +6756,105 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>6 Ways Your Job is Losing You Future Earnings</title>
-		<link>https://try.wbcomdesigns.com/13/6-ways-your-job-is-losing-you-future-earnings/</link>
-		<pubDate>Fri, 26 Oct 2018 10:11:46 +0000</pubDate>
+		<title>Wilson John</title>
+		<link>https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/</link>
+		<pubDate>Tue, 23 Oct 2018 10:44:36 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/?p=301</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/</guid>
 		<description></description>
-		<content:encoded><![CDATA[Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe passing over the sleeper, from one to the other. Meanwhile, upon questioning him in his broken fashion, Queequeg gave me to understand that, in his land, owing to the absence of settees and sofas of all sorts, the king, chiefs, and great people generally, were in the custom of fattening some of the lower orders for ottomans.
-
-I was going to warn ye against — but never mind, never mind — it’s all one, all in the family too — sharp frost this morning, ain’t it? The cabin entrance was locked within; the hatches were all on, and lumbered with coils of rigging. Going forward to the forecastle, we found the slide of the scuttle open. Seeing a light, we went down, and found only an old rigger there, wrapped in a tattered pea-jacket. He was thrown at whole length upon two chests, his face downwards and inclosed in his folded arms. The profoundest slumber slept upon him.
-
-But it seemed that, when on the wharf, Queequeg had not at all noticed what I now alluded to; hence I would have thought myself to have been optically deceived in that matter, were it not for Elijah’s otherwise inexplicable question. But I beat the thing down; and again marking the sleeper, jocularly hinted to Queequeg that perhaps we had best sit up with the body; telling him to establish himself accordingly. He put his hand upon the sleeper’s rear, as though feeling if it was soft enough; and then, without more ado, sat quietly down there.]]></content:encoded>
+		<content:encoded><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>301</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-26 10:11:46]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-26 10:11:46]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[open]]></wp:comment_status>
-		<wp:ping_status><![CDATA[open]]></wp:ping_status>
-		<wp:post_name><![CDATA[6-ways-your-job-is-losing-you-future-earnings]]></wp:post_name>
+		<wp:post_id>114</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-23 10:44:36]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-23 10:44:36]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[wilson-pooe0rrp-junior-broadcast-journalist-san-francisco]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_type><![CDATA[resume]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+										<category domain="resume_skill" nicename="journalism"><![CDATA[Journalism]]></category>
+		<category domain="resume_skill" nicename="mass-communication"><![CDATA[Mass Communication]]></category>
+		<category domain="resume_skill" nicename="persuasion"><![CDATA[Persuasion]]></category>
+		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
 						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[862]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[default]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:12:"TV 8 England";s:9:"job_title";s:20:"Broadcast Journalist";s:4:"date";s:9:"2008-2016";s:5:"notes";s:321:"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_astoundify_favorites_count]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:44:"International School of Journalism Cambridge";s:13:"qualification";s:45:"Bachelor in Journalism and Mass Communication";s:4:"date";s:9:"2002-2006";s:5:"notes";s:321:"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Journalism, Mass Communication, Persuasion, Psychology]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:2:{s:4:"name";s:13:"Wbcom Designs";s:3:"url";s:25:"https://wbcomdesigns.com/";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
+		<wp:meta_value><![CDATA[POoe*0R%rP]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Wilson John]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -7775,108 +7814,6 @@ Butte, MT 59701","text_color":"#ffffff","typography_typography":"custom","typogr
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Wilson John</title>
-		<link>https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/</link>
-		<pubDate>Tue, 23 Oct 2018 10:44:36 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/13/resume/wilson-pooe0rrp-junior-broadcast-journalist-san-francisco/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>114</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-23 10:44:36]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-23 10:44:36]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[wilson-pooe0rrp-junior-broadcast-journalist-san-francisco]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[resume]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="resume_skill" nicename="journalism"><![CDATA[Journalism]]></category>
-		<category domain="resume_skill" nicename="mass-communication"><![CDATA[Mass Communication]]></category>
-		<category domain="resume_skill" nicename="persuasion"><![CDATA[Persuasion]]></category>
-		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:12:"TV 8 England";s:9:"job_title";s:20:"Broadcast Journalist";s:4:"date";s:9:"2008-2016";s:5:"notes";s:321:"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:44:"International School of Journalism Cambridge";s:13:"qualification";s:45:"Bachelor in Journalism and Mass Communication";s:4:"date";s:9:"2002-2006";s:5:"notes";s:321:"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Journalism, Mass Communication, Persuasion, Psychology]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:2:{s:4:"name";s:13:"Wbcom Designs";s:3:"url";s:25:"https://wbcomdesigns.com/";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
-		<wp:meta_value><![CDATA[POoe*0R%rP]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Wilson John]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/13/wp-content/uploads/2019/08/300x300.png]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>

@@ -3755,7 +3755,7 @@ Click the help icon above to learn more.
 					</li>
 							</ul>
 						<nav id="site-navigation" role="navigation">
-				<ul id="primary-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
+				<ul id="main-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
 <li id="menu-item-2135"><a href="#">Community</a>
 <ul >
 	<li id="menu-item-2136"><a href="https://try.wbcomdesigns.com/1/activity/">Activity</a></li>
@@ -3889,7 +3889,7 @@ Click the help icon above to learn more.
 					</li>
 							</ul>
 						<!-- <style type="text/css">
-				.primary-menu > li > a,
+				.main-menu > li > a,
 				.header-right .search-wrap,
 				.rg-icon-wrap,
 				.elementor-branding,
@@ -3899,14 +3899,14 @@ Click the help icon above to learn more.
 				}
 				.header-right .rg-search-form-wrap,
 				.user-profile-menu,
-				.primary-menu .children, .primary-menu .sub-menu,
+				.main-menu .children, .main-menu .sub-menu,
 				.user-profile-menu,
 				.user-notifications .rg-dropdown, .user-notifications:hover .rg-dropdown {
 					top: 30px;
 				}
 			</style> -->
 			<nav id="site-navigation" role="navigation">
-				<ul id="primary-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
+				<ul id="main-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
 <li id="menu-item-2135"><a href="#">Community</a>
 <ul>
 	<li id="menu-item-2136"><a href="https://try.wbcomdesigns.com/1/activity/">Activity</a></li>
@@ -4042,7 +4042,7 @@ Click the help icon above to learn more.
 					</li>
 							</ul>
 						<!-- <style type="text/css">
-				.primary-menu > li > a,
+				.main-menu > li > a,
 				.header-right .search-wrap,
 				.rg-icon-wrap,
 				.elementor-branding,
@@ -4052,14 +4052,14 @@ Click the help icon above to learn more.
 				}
 				.header-right .rg-search-form-wrap,
 				.user-profile-menu,
-				.primary-menu .children, .primary-menu .sub-menu,
+				.main-menu .children, .main-menu .sub-menu,
 				.user-profile-menu,
 				.user-notifications .rg-dropdown, .user-notifications:hover .rg-dropdown {
 					top: 30px;
 				}
 			</style> -->
 			<nav id="site-navigation" role="navigation">
-				<ul id="primary-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
+				<ul id="main-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
 <li id="menu-item-2135"><a href="#">Community</a>
 <ul>
 	<li id="menu-item-2136"><a href="https://try.wbcomdesigns.com/1/activity/">Activity</a></li>
@@ -4192,7 +4192,7 @@ Click the help icon above to learn more.
 <li id="menu-item-70"><a href="https://try.wbcomdesigns.com/1/wp-login.php">Log In</a></li>
 </ul>		
 						<!-- <style type="text/css">
-				.primary-menu > li > a,
+				.main-menu > li > a,
 				.header-right .search-wrap,
 				.rg-icon-wrap,
 				.elementor-branding,
@@ -4202,14 +4202,14 @@ Click the help icon above to learn more.
 				}
 				.header-right .rg-search-form-wrap,
 				.user-profile-menu,
-				.primary-menu .children, .primary-menu .sub-menu,
+				.main-menu .children, .main-menu .sub-menu,
 				.user-profile-menu,
 				.user-notifications .rg-dropdown, .user-notifications:hover .rg-dropdown {
 					top: 30px;
 				}
 			</style> -->
 			<nav id="site-navigation" role="navigation">
-				<ul id="primary-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
+				<ul id="main-menu"><li id="menu-item-58"><a href="https://try.wbcomdesigns.com/1/">Home</a></li>
 <li id="menu-item-2135"><a href="#">Community</a>
 <ul>
 	<li id="menu-item-2136"><a href="https://try.wbcomdesigns.com/1/activity/">Activity</a></li>
@@ -9514,7 +9514,7 @@ There are many variations of passages of Lorem Ipsum available, but the majority
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Landing Page 3</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/1/</link>
 		<pubDate>Thu, 01 Nov 2018 10:38:11 +0000</pubDate>
 		<dc:creator><![CDATA[wbcomteam]]></dc:creator>

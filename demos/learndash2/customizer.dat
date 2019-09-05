@@ -3,7 +3,7 @@ a:4:{s:8:"template";s:11:"reign-theme";s:4:"mods";a:42:{i:0;s:0:"";s:18:"nav_men
 	display:none;
 }
 
-.primary-menu > li.current-menu-item a:before, .version-one .primary-menu > li.current-menu-item a:before, .version-two .primary-menu > li.current-menu-item a:before, .version-three .primary-menu > li.current-menu-item a:before{
+.main-menu > li.current-menu-item a:before, .version-one .main-menu > li.current-menu-item a:before, .version-two .main-menu > li.current-menu-item a:before, .version-three .main-menu > li.current-menu-item a:before{
 	  -webkit-transform: scaleX(1);
     -ms-transform: scaleX(1);
     transform: scaleX(1);

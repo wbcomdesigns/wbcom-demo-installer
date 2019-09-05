@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.2.2" created="2019-08-30 09:49" -->
+	<!-- generator="WordPress/5.2.2" created="2019-09-05 08:50" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>My blog</title>
 	<link>https://try.wbcomdesigns.com/10</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Fri, 30 Aug 2019 09:49:47 +0000</pubDate>
+	<pubDate>Thu, 05 Sep 2019 08:50:49 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://try.wbcomdesigns.com/10</wp:base_site_url>
@@ -290,7 +290,7 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[visible]]></wp:term_name>
 	</wp:term>
-			<wp:term><wp:term_id>30</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[primary-menu]]></wp:term_slug><wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+			<wp:term><wp:term_id>30</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu]]></wp:term_slug><wp:term_name><![CDATA[Main menu]]></wp:term_name>
 </wp:term>
 	<wp:term><wp:term_id>67</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[user-menu]]></wp:term_slug><wp:term_name><![CDATA[User Menu]]></wp:term_name>
 </wp:term>
@@ -1991,7 +1991,7 @@ If that's what you think how bout the other way around? How can you evaluate con
 							</item>
 					<item>
 		<title>slide-img-min</title>
-		<link>https://try.wbcomdesigns.com/10/landing-demo-1/slide-img-min/</link>
+		<link>https://try.wbcomdesigns.com/10/home/slide-img-min/</link>
 		<pubDate>Sat, 08 Sep 2018 06:34:13 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/slide-img-min.png</guid>
@@ -2022,7 +2022,7 @@ If that's what you think how bout the other way around? How can you evaluate con
 							</item>
 					<item>
 		<title>round-img-grudient</title>
-		<link>https://try.wbcomdesigns.com/10/landing-demo-1/round-img-grudient/</link>
+		<link>https://try.wbcomdesigns.com/10/home/round-img-grudient/</link>
 		<pubDate>Sat, 08 Sep 2018 12:06:31 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/round-img-grudient.png</guid>
@@ -2053,7 +2053,7 @@ If that's what you think how bout the other way around? How can you evaluate con
 							</item>
 					<item>
 		<title>round-img-grudien1</title>
-		<link>https://try.wbcomdesigns.com/10/landing-demo-1/round-img-grudien1/</link>
+		<link>https://try.wbcomdesigns.com/10/home/round-img-grudien1/</link>
 		<pubDate>Sat, 08 Sep 2018 12:09:47 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/round-img-grudien1.png</guid>
@@ -2282,7 +2282,7 @@ If that's what you think how bout the other way around? How can you evaluate con
 							</item>
 					<item>
 		<title>1920x1274</title>
-		<link>https://try.wbcomdesigns.com/10/landing-demo-1/1920x1274/</link>
+		<link>https://try.wbcomdesigns.com/10/home/1920x1274/</link>
 		<pubDate>Thu, 29 Aug 2019 12:54:59 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/wp-content/uploads/2019/08/1920x1274.png</guid>
@@ -2313,7 +2313,7 @@ If that's what you think how bout the other way around? How can you evaluate con
 							</item>
 					<item>
 		<title>300x300</title>
-		<link>https://try.wbcomdesigns.com/10/landing-demo-1/300x300/</link>
+		<link>https://try.wbcomdesigns.com/10/home/300x300/</link>
 		<pubDate>Thu, 29 Aug 2019 12:55:57 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/wp-content/uploads/2019/08/300x300.png</guid>
@@ -71756,7 +71756,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -71811,7 +71811,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -72206,7 +72206,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -72261,7 +72261,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -72316,7 +72316,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 		<wp:meta_value><![CDATA[#]]></wp:meta_value>
@@ -72371,7 +72371,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -72426,7 +72426,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -72461,37 +72461,38 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>My Courses</title>
-		<link>https://try.wbcomdesigns.com/10/?p=1816</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
+		<title>Single Assignment</title>
+		<link>https://try.wbcomdesigns.com/10/assignment/</link>
+		<pubDate>Wed, 26 Sep 2018 05:59:58 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1816</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1681</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1816</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-26 08:24:05]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
+		<wp:post_id>1681</wp:post_id>
+		<wp:post_date><![CDATA[2018-09-26 05:59:58]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-09-26 05:59:58]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
+		<wp:post_name><![CDATA[assignment]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
+		<wp:menu_order>10</wp:menu_order>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		<wp:meta_value><![CDATA[1678]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1816]]></wp:meta_value>
+		<wp:meta_value><![CDATA[1681]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
@@ -72511,45 +72512,42 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/my-courses/my-courses/]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1537950245]]></wp:meta_value>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/assignment/etiam-lesson-assignment/]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>My Memberships</title>
-		<link>https://try.wbcomdesigns.com/10/?p=1817</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
+		<title>Single Quiz</title>
+		<link>https://try.wbcomdesigns.com/10/quiz/</link>
+		<pubDate>Wed, 26 Sep 2018 06:04:15 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1817</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1682</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1817</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-26 08:24:37]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
+		<wp:post_id>1682</wp:post_id>
+		<wp:post_date><![CDATA[2018-09-26 06:04:15]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-09-26 06:04:15]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
+		<wp:post_name><![CDATA[quiz]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
+		<wp:menu_order>11</wp:menu_order>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1678]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1817]]></wp:meta_value>
+		<wp:meta_value><![CDATA[1682]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
@@ -72569,11 +72567,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/my-courses/my-memberships/]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1537950277]]></wp:meta_value>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/quiz/493-2/]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -72721,113 +72715,95 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title>Single Assignment</title>
-		<link>https://try.wbcomdesigns.com/10/assignment/</link>
-		<pubDate>Wed, 26 Sep 2018 05:59:58 +0000</pubDate>
+		<title>My Courses</title>
+		<link>https://try.wbcomdesigns.com/10/my-courses/</link>
+		<pubDate>Thu, 02 Aug 2018 08:29:49 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1681</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=7</guid>
 		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
+		<content:encoded><![CDATA[[lifterlms_my_account]]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1681</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-26 05:59:58]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-09-26 05:59:58]]></wp:post_date_gmt>
+		<wp:post_id>7</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-02 08:29:49]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-02 08:29:49]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[assignment]]></wp:post_name>
+		<wp:post_name><![CDATA[my-courses]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>10</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1678]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[default]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1681]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/assignment/etiam-lesson-assignment/]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:10:"full_width";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:3:"106";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Single Quiz</title>
-		<link>https://try.wbcomdesigns.com/10/quiz/</link>
-		<pubDate>Wed, 26 Sep 2018 06:04:15 +0000</pubDate>
+		<title>Student Directory</title>
+		<link>https://try.wbcomdesigns.com/10/directory/</link>
+		<pubDate>Sat, 18 Aug 2018 06:13:32 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1682</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/directory/</guid>
 		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
+		<content:encoded><![CDATA[[llms_sl_directory]]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1682</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-26 06:04:15]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-09-26 06:04:15]]></wp:post_date_gmt>
+		<wp:post_id>36</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-18 06:13:32]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-18 06:13:32]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[quiz]]></wp:post_name>
+		<wp:post_name><![CDATA[directory]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>11</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1678]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1682]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/10/quiz/493-2/]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -72851,7 +72827,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -72906,7 +72882,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -72961,7 +72937,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -73511,7 +73487,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -73566,7 +73542,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -73621,7 +73597,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -73656,27 +73632,48 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>My Courses</title>
-		<link>https://try.wbcomdesigns.com/10/my-courses/</link>
-		<pubDate>Thu, 02 Aug 2018 08:29:49 +0000</pubDate>
+		<title>Hello world!</title>
+		<link>https://try.wbcomdesigns.com/10/hello-world/</link>
+		<pubDate>Thu, 02 Aug 2018 02:59:56 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=7</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1</guid>
 		<description></description>
-		<content:encoded><![CDATA[[lifterlms_my_account]]]></content:encoded>
+		<content:encoded><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante porttitor enim egestas placerat in quis lorem. Aliquam ac rutrum urna. Phasellus consectetur luctus volutpat. Maecenas lorem orci, tempor a felis at, molestie malesuada ex. Duis commodo ipsum ante, elementum imperdiet lectus efficitur.]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>7</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-02 08:29:49]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-02 08:29:49]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[my-courses]]></wp:post_name>
+		<wp:post_id>1</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-02 02:59:56]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-02 02:59:56]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
+										<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
+		<wp:meta_value><![CDATA[<iframe src="https://player.vimeo.com/video/270507360?app_id=122963" width="500" height="281" frameborder="0" title="BuddyPress 3.0 - Nouveau template pack" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_time_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1534573139]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_encloseme]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_pingme]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[2297]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
@@ -73702,7 +73699,7 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:10:"full_width";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
@@ -73710,43 +73707,27 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:3:"106";}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
-							</item>
-					<item>
-		<title>Student Directory</title>
-		<link>https://try.wbcomdesigns.com/10/directory/</link>
-		<pubDate>Sat, 18 Aug 2018 06:13:32 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/directory/</guid>
-		<description></description>
-		<content:encoded><![CDATA[[llms_sl_directory]]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>36</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-18 06:13:32]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-18 06:13:32]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[directory]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
+							<wp:comment>
+			<wp:comment_id>1</wp:comment_id>
+			<wp:comment_author><![CDATA[Mr WordPress]]></wp:comment_author>
+			<wp:comment_author_email><![CDATA[]]></wp:comment_author_email>
+			<wp:comment_author_url>http://wordpress.org/</wp:comment_author_url>
+			<wp:comment_author_IP><![CDATA[]]></wp:comment_author_IP>
+			<wp:comment_date><![CDATA[2010-06-18 20:51:35]]></wp:comment_date>
+			<wp:comment_date_gmt><![CDATA[2010-06-18 20:51:35]]></wp:comment_date_gmt>
+			<wp:comment_content><![CDATA[Hi, this is a comment.<br />To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.]]></wp:comment_content>
+			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
+			<wp:comment_type><![CDATA[]]></wp:comment_type>
+			<wp:comment_parent>0</wp:comment_parent>
+			<wp:comment_user_id>0</wp:comment_user_id>
+							</wp:comment>
+					</item>
 					<item>
 		<title>Timeline</title>
 		<link>https://try.wbcomdesigns.com/10/timeline/</link>
@@ -73822,8 +73803,8 @@ Or else, an alternative route: set checkpoints, networks, processes, junctions b
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title>Home</title>
-		<link>https://try.wbcomdesigns.com/10/home/</link>
+		<title>Home-2</title>
+		<link>https://try.wbcomdesigns.com/10/home-2/</link>
 		<pubDate>Fri, 24 Aug 2018 10:07:25 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=89</guid>
@@ -73845,13 +73826,13 @@ The course is aimed at anyone who wants to create websites on their own, and pos
 <h2>ui/ux web master</h2>
 A strict teacher that has been teaching since the age of 16. Stella won't give you any slack, so you will have to do the very best work you've done in your life.
 
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Facebook
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Twitter
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Google-plus
 </a>
 <img src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg" sizes="(max-width: 162px) 100vw, 162px" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2-64x64.jpg 64w" alt="" width="162" height="165" />
@@ -73859,13 +73840,13 @@ Google-plus
 <h2>Computer Science</h2>
 Donald has a PHD in both Computer Science and Design. His beginner course is a must see for any aspiring web professional who want to learn from the best.
 
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Facebook
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Twitter
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Google-plus
 </a>
 <img src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg" sizes="(max-width: 162px) 100vw, 162px" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3-64x64.jpg 64w" alt="" width="162" height="165" />
@@ -73873,13 +73854,13 @@ Google-plus
 <h2>AI Expert</h2>
 If there's someone who can explain anything, Gaby is the one. She teaches you not just how to do something, but why to do it this way and not the other.
 
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Facebook
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Twitter
 </a>
-<a target="_blank" rel="noopener">
+<a target="_blank" rel="noopener noreferrer">
 Google-plus
 </a>
 <img src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/study-box_1.jpg" sizes="(max-width: 570px) 100vw, 570px" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/study-box_1.jpg 570w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/study-box_1-300x262.jpg 300w" alt="" width="570" height="498" />
@@ -73908,7 +73889,7 @@ Email: info@collage.com
 		<wp:post_date_gmt><![CDATA[2018-08-24 10:07:25]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[home]]></wp:post_name>
+		<wp:post_name><![CDATA[home-2]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -73953,7 +73934,7 @@ Email: info@collage.com
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:19:"full_width_no_title";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
@@ -74674,7 +74655,7 @@ Buy Now
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Landing Demo-1</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/10/</link>
 		<pubDate>Thu, 06 Sep 2018 13:52:59 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
@@ -74795,7 +74776,7 @@ Buy Now
 		<wp:post_date_gmt><![CDATA[2018-09-06 13:52:59]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[landing-demo-1]]></wp:post_name>
+		<wp:post_name><![CDATA[home]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -75492,46 +75473,40 @@ Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur a
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Hello world!</title>
-		<link>https://try.wbcomdesigns.com/10/hello-world/</link>
-		<pubDate>Thu, 02 Aug 2018 02:59:56 +0000</pubDate>
+		<title>Shortcode Courses</title>
+		<link>https://try.wbcomdesigns.com/10/shortcode-courses/</link>
+		<pubDate>Sat, 06 Oct 2018 10:18:02 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?p=1</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=2280</guid>
 		<description></description>
-		<content:encoded><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante porttitor enim egestas placerat in quis lorem. Aliquam ac rutrum urna. Phasellus consectetur luctus volutpat. Maecenas lorem orci, tempor a felis at, molestie malesuada ex. Duis commodo ipsum ante, elementum imperdiet lectus efficitur.]]></content:encoded>
+		<content:encoded><![CDATA[<h2>Slider with Courses</h2>		
+		[reign_lifterlms_courses posts_per_page="6" per_row="4" enable_slider="1"]		
+			<h2>All Courses</h2>		
+		[reign_lifterlms_courses posts_per_page="8" per_row="4" ]]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-02 02:59:56]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-02 02:59:56]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[open]]></wp:comment_status>
-		<wp:ping_status><![CDATA[open]]></wp:ping_status>
-		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
+		<wp:post_id>2280</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-06 10:18:02]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-06 10:18:02]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[shortcode-courses]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="blog"><![CDATA[Blog]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
-		<wp:meta_value><![CDATA[<iframe src="https://player.vimeo.com/video/270507360?app_id=122963" width="500" height="281" frameborder="0" title="BuddyPress 3.0 - Nouveau template pack" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>]]></wp:meta_value>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_time_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1534573139]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_encloseme]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_pingme]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2297]]></wp:meta_value>
+		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
@@ -75559,35 +75534,25 @@ Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur a
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:1:"0";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:10:"full_width";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"19cbd43","elType":"section","settings":{"margin":{"unit":"px","top":"40","right":0,"bottom":"40","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"50e2a7b","elType":"column","settings":{"_column_size":100},"elements":[{"id":"7601d9d","elType":"widget","settings":{"title":"Slider with Courses","title_color":"#000000"},"elements":[],"widgetType":"heading"},{"id":"5642595","elType":"widget","settings":{"shortcode":"[reign_lifterlms_courses posts_per_page=\"6\" per_row=\"4\" enable_slider=\"1\"]"},"elements":[],"widgetType":"shortcode"}],"isInner":false}],"isInner":false},{"id":"fe535fb","elType":"section","settings":{"margin":{"unit":"px","top":"40","right":0,"bottom":"40","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"4a7c0f9","elType":"column","settings":{"_column_size":100},"elements":[{"id":"a78ec83","elType":"widget","settings":{"title":"All Courses","title_color":"#000000"},"elements":[],"widgetType":"heading"},{"id":"fed5e03","elType":"widget","settings":{"shortcode":"[reign_lifterlms_courses posts_per_page=\"8\" per_row=\"4\" ]"},"elements":[],"widgetType":"shortcode"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
 		</wp:postmeta>
-							<wp:comment>
-			<wp:comment_id>1</wp:comment_id>
-			<wp:comment_author><![CDATA[Mr WordPress]]></wp:comment_author>
-			<wp:comment_author_email><![CDATA[]]></wp:comment_author_email>
-			<wp:comment_author_url>http://wordpress.org/</wp:comment_author_url>
-			<wp:comment_author_IP><![CDATA[]]></wp:comment_author_IP>
-			<wp:comment_date><![CDATA[2010-06-18 20:51:35]]></wp:comment_date>
-			<wp:comment_date_gmt><![CDATA[2010-06-18 20:51:35]]></wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[Hi, this is a comment.<br />To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.]]></wp:comment_content>
-			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
-			<wp:comment_type><![CDATA[]]></wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>0</wp:comment_user_id>
-							</wp:comment>
-					</item>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
 					<item>
 		<title>Header1534573252</title>
 		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header1534573252</link>
@@ -75891,6 +75856,210 @@ Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur a
 		</wp:postmeta>
 							</item>
 					<item>
+		<title>Header #5</title>
+		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-5</link>
+		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-5</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>64</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[header-5]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
+		<wp:meta_value><![CDATA[header]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"f59a90b","elType":"section","settings":{"layout":"full_width","background_background":"classic","background_color":"#2c2461"},"elements":[{"id":"03d512d","elType":"column","settings":{"_column_size":100},"elements":[{"id":"dce3c89","elType":"section","settings":{"structure":"40","gap":"no","background_background":"classic"},"elements":[{"id":"4fb571d","elType":"column","settings":{"_column_size":25,"_inline_size":32.832999999999998408384271897375583648681640625,"content_position":"center","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"22","isLinked":false}},"elements":[{"id":"b2dcf5d","elType":"widget","settings":{"branding_title_color":"#ffffff","title_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_family":"Lobster","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"600","title_typography_font_style":"normal","title_typography_letter_spacing":{"unit":"px","size":0}},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"c8e775c","elType":"column","settings":{"_column_size":25,"_inline_size":29.97200000000000130739863379858434200286865234375,"content_position":"center"},"elements":[{"id":"aa2e854","elType":"widget","settings":{"icon_list":[{"text":"1.555.555.5555","icon":"fa fa-phone","_id":"4a10fe3","link":{"url":"","is_external":"","nofollow":""}}],"icon_align":"right","icon_color":"#ffffff","icon_size":{"unit":"px","size":13},"text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"600","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"0","isLinked":false},"_border_border":"solid","_border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"_border_color":"#ffffff","hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"34ef55d","elType":"column","settings":{"_column_size":25,"_inline_size":16.83899999999999863575794734060764312744140625,"content_position":"center"},"elements":[{"id":"de5ba3a","elType":"widget","settings":{"icon_list":[{"text":"info@yourdomain.com","icon":"fa fa-envelope-o","_id":"ab8210f","link":{"url":"","is_external":"","nofollow":""}}],"icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"600","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"10","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"61aa470","elType":"column","settings":{"_column_size":25,"_inline_size":20.35600000000000164845914696343243122100830078125},"elements":[{"id":"e939e57","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","user_message_bell_enabled":"","notification_bell_enabled":"","icon_hover_color":"#2b333e"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"4a46d76","elType":"section","settings":{"layout":"full_width","background_background":"classic","background_color":"#2c2461","gap":"no","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"72c203b","elType":"column","settings":{"_column_size":100},"elements":[{"id":"4f85f9e","elType":"section","settings":{"gap":"no","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"15b0557","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"23ff270","elType":"widget","settings":{"menu_location":"32","menu_align":"left","menu_background":"","menu_background_hover":"","font_color":"#ffffff","font_color_hover":"#399dff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"600","typography_text_transform":"uppercase","typography_letter_spacing":{"unit":"px","size":0},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"20","left":"0","isLinked":false}},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
+		<wp:meta_value><![CDATA[demo4]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Header #4</title>
+		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-4</link>
+		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-4</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>65</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[header-4]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
+		<wp:meta_value><![CDATA[header]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"153b02c","elType":"section","settings":{"gap":"no","background_background":"classic","background_color":"#2c2461","layout":"full_width","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"20","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"475a8aa","elType":"column","settings":{"_column_size":100},"elements":[{"id":"48e77f4","elType":"section","settings":{"gap":"no","structure":"30"},"elements":[{"id":"02e0300","elType":"column","settings":{"_column_size":33,"_inline_size":46.22500000000000142108547152020037174224853515625,"content_position":"center","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false}},"elements":[{"id":"9acc482","elType":"widget","settings":{"branding_title_color":"#efefef","title_typography_typography":"custom","align":"left","title_typography_font_family":"Lobster","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"500","title_typography_font_style":"normal","title_typography_letter_spacing":{"unit":"px","size":0},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"20","isLinked":false}},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"152c3f2","elType":"column","settings":{"_column_size":33,"_inline_size":38.3059999999999973852027324028313159942626953125,"content_position":"center"},"elements":[{"id":"b98b2b9","elType":"widget","settings":{"icon_list":[{"text":"1.555.555.5555","icon":"fa fa-phone","_id":"c1aa672","link":{"url":"","is_external":"","nofollow":""}}],"icon_align":"right","icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_size":{"unit":"px","size":13},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"0","isLinked":false},"_border_border":"solid","_border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"_border_color":"#b7b7b7","_border_radius":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"ee10973","elType":"column","settings":{"_column_size":33,"_inline_size":15.464999999999999857891452847979962825775146484375,"content_position":"center"},"elements":[{"id":"14a6add","elType":"widget","settings":{"icon_list":[{"text":"info@yourdomain.com","icon":"fa fa-envelope-o","_id":"c1aa672","link":{"url":"","is_external":"","nofollow":""}}],"icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_align":"center","icon_size":{"unit":"px","size":13},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true}],"isInner":true},{"id":"227bcfe","elType":"section","settings":{"gap":"no","structure":"20","margin":{"unit":"px","top":"-20","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"feed17a","elType":"column","settings":{"_column_size":50,"_inline_size":60.03699999999999903366187936626374721527099609375,"content_position":"center"},"elements":[{"id":"404f809","elType":"widget","settings":{"menu_location":"32","menu_toggle_color":"#000000","menu_align":"left","menu_background":"","menu_background_hover":"","font_color":"#ffffff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"500","typography_text_transform":"uppercase","typography_font_style":"normal","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"font_color_hover":"#399dff"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true},{"id":"42cd358","elType":"column","settings":{"_column_size":50,"_inline_size":39.96300000000000096633812063373625278472900390625},"elements":[{"id":"2e2b443","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","icon_hover_color":"#399dff"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
+		<wp:meta_value><![CDATA[demo3]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Header #3</title>
+		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-3</link>
+		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-3</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>66</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[header-3]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
+		<wp:meta_value><![CDATA[header]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"6df9418","elType":"section","settings":{"layout":"full_width","gap":"no","background_background":"classic","background_color":"#2c2461","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f2f2f2","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"height":"min-height","custom_height":{"unit":"px","size":0},"background_color_stop":{"unit":"%","size":6},"background_color_b":"#00a9f2","background_gradient_type":"radial","background_gradient_position":"top left"},"elements":[{"id":"a778427","elType":"column","settings":{"_column_size":100},"elements":[{"id":"876c6f5","elType":"section","settings":{"gap":"no","custom_height_inner":{"unit":"px","size":173},"structure":"20"},"elements":[{"id":"b110be1","elType":"column","settings":{"_column_size":50,"_inline_size":22.743999999999999772626324556767940521240234375},"elements":[{"id":"d6287bb","elType":"widget","settings":{"align":"center","branding_title_color":"#ffffff","title_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"400","title_typography_line_height":{"unit":"em","size":4.0999999999999996447286321199499070644378662109375},"title_typography_letter_spacing":{"unit":"px","size":0},"title_typography_font_family":"Lobster"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"d5883de","elType":"column","settings":{"_column_size":50,"_inline_size":77.256000000000000227373675443232059478759765625,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"c2f52ab","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","icon_hover_color":"#399dff","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_background_background":"classic"},"elements":[],"widgetType":"wbcom-notification-area"},{"id":"c157d90","elType":"widget","settings":{"menu_location":"32","menu_background":"","menu_background_hover":"","font_color":"#ffffff","font_color_hover":"#399dff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"600","typography_text_transform":"uppercase","typography_font_style":"normal","typography_text_decoration":"none","submenu_background":"","submenu_background_hover":"","_margin":{"unit":"px","top":"-35","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_background_background":"classic"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
+		<wp:meta_value><![CDATA[demo-2]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Header #2</title>
+		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-2</link>
+		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-2</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>67</wp:post_id>
+		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[header-2]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_yoast_wpseo_content_score]]></wp:meta_key>
+		<wp:meta_value><![CDATA[30]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"221e6de","elType":"section","settings":{"content_position":"middle","background_background":"classic","gap":"no","layout":"full_width","css_classes":"elementor-header-2","background_color":"#2c2461"},"elements":[{"id":"5b8e865e","elType":"column","settings":{"_column_size":100},"elements":[{"id":"111af550","elType":"section","settings":{"gap":"no","background_background":"classic","background_overlay_color":"#000000","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"31713423","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"b0d89c1","elType":"widget","settings":{"align":"center","branding_title_color":"#ffffff","_background_background":"classic","_padding":{"unit":"px","top":"30","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_family":"Lobster"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true}],"isInner":true},{"id":"2a39ccfc","elType":"section","settings":{"gap":"no","structure":"20","background_background":"classic","border_color":"#cccccc","margin_mobile":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true}},"elements":[{"id":"2c324229","elType":"column","settings":{"_column_size":50,"_inline_size":64.034999999999996589394868351519107818603515625,"content_position":"center"},"elements":[{"id":"6cf055e6","elType":"widget","settings":{"menu_location":"19","menu_align":"left","menu_background":"rgba(255,255,255,0)","menu_background_hover":"rgba(234,234,234,0)","font_color":"#cccccc","font_color_hover":"#ffffff","submenu_background":"rgba(248,248,248,0)","submenu_background_hover":"rgba(234,234,234,0)","submenu_font_color":"#555555","submenu_font_color_hover":"#399dff","font_color_active":"#ffffff"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true},{"id":"cbec622","elType":"column","settings":{"_column_size":50,"_inline_size":35.965000000000003410605131648480892181396484375},"elements":[{"id":"7d82","elType":"widget","settings":{"woo_cart_icon_enabled":"yes"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
+		<wp:meta_value><![CDATA[header]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
+		<wp:meta_value><![CDATA[header-logoup-menu-notification]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title>Footer #2</title>
 		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-footer=footer-2</link>
 		<pubDate>Sat, 18 Aug 2018 06:20:53 +0000</pubDate>
@@ -76050,290 +76219,6 @@ Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur a
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>lifter lms demo</title>
-		<link>https://try.wbcomdesigns.com/10/lifter-lms-demo__trashed/</link>
-		<pubDate>Mon, 03 Sep 2018 05:04:55 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=621</guid>
-		<description></description>
-		<content:encoded><![CDATA[<h2>Forward.Thinking.</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet.</p>		
-			<a href="#" role="button">
-						Join Us
-					</a>
-			<h2>Latest Courses</h2>		
-		[lifterlms_courses]		
-			<h2>Our Services</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>		
-			<a href="#" role="button">
-						Learn More
-					</a>
-				0
-							Courses
-				0
-							Students
-				0
-							Lessons
-				0
-							Events
-			<h2>How We Work</h2>		
-			<h2>1</h2>		
-			<h2>Search Your Course</h2>		
-			<h2>2</h2>		
-			<h2>take a sample lesson</h2>		
-			<h2>3</h2>		
-			<h2>purchase the Course</h2>		
-										<img width="640" height="332" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/graduation-309661_640.png" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/graduation-309661_640.png 640w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/09/graduation-309661_640-300x156.png 300w" sizes="(max-width: 640px) 100vw, 640px" />											
-			<h2>We Offer</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>		
-			<h2>About Us</h2>		
-			<h2>Why We Are Better</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>		
-												Accordion #1					
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-												Accordion #2					
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-			<a href="#" role="button">
-						View Detail
-					</a>
-										<img width="1024" height="660" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/slider-education-1600x1032-1024x660.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/slider-education-1600x1032-1024x660.jpg 1024w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/slider-education-1600x1032-300x194.jpg 300w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/slider-education-1600x1032-768x495.jpg 768w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/slider-education-1600x1032.jpg 1600w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h2>Our Teachers</h2>		
-										<img width="162" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3-64x64.jpg 64w" sizes="(max-width: 162px) 100vw, 162px" />											
-			<h2>Jenny doe</h2>		
-		<p>Professor Of Mathematic.</p>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-										<img width="162" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2-64x64.jpg 64w" sizes="(max-width: 162px) 100vw, 162px" />											
-			<h2>Jenny doe</h2>		
-		<p>Professor Of Mathematic.</p>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-										<img width="166" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1.png" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1.png 166w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1-150x150.png 150w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1-64x64.png 64w" sizes="(max-width: 166px) 100vw, 166px" />											
-			<h2>Jenny doe</h2>		
-		<p>Professor Of Mathematic.</p>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-										<img width="162" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3-64x64.jpg 64w" sizes="(max-width: 162px) 100vw, 162px" />											
-			<h2>Jenny doe</h2>		
-		<p>Professor Of Mathematic.</p>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-		https://www.youtube.com/watch?v=9uOETcuFjbE		
-			<h2>Learn More About Us From Video</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>		
-			<a href="#" role="button">
-						Watch More
-					</a>
-			<h2>Testimonials</h2>		
-										<img width="166" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1.png" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1.png 166w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1-150x150.png 150w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacther1-64x64.png 64w" sizes="(max-width: 166px) 100vw, 166px" />											
-			<h2>John Doe</h2>		
-			<h2>Writer</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-										<img width="162" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher2-64x64.jpg 64w" sizes="(max-width: 162px) 100vw, 162px" />											
-			<h2>John Doe</h2>		
-			<h2>Writer</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-										<img width="162" height="165" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3.jpg 162w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/teacher3-64x64.jpg 64w" sizes="(max-width: 162px) 100vw, 162px" />											
-			<h2>John Doe</h2>		
-			<h2>Writer</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-							<a href="" target="_blank">
-					Facebook
-				</a>
-							<a href="" target="_blank">
-					Twitter
-				</a>
-							<a href="" target="_blank">
-					Google-plus
-				</a>
-			<h2>Community Life</h2>		
-			<h2>EVENTS</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-			<h2>BLOGS</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-			<h2>PUBLISHERS</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>		
-			<h2>Latest News</h2>		
-				<article>
-				<a href="https://try.wbcomdesigns.com/10/aenean-finibus/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-2-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-2-300x200.jpg 300w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-2-768x512.jpg 768w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-2-1024x682.jpg 1024w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
-			<a href="https://try.wbcomdesigns.com/10/aenean-finibus/">
-				Aenean finibus			</a>
-		</h3>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante porttitor enim egestas placerat in quis lorem. Aliquam ac...		
-			September 3, 2018		
-			No Comments		
-		</article>
-				<article>
-				<a href="https://try.wbcomdesigns.com/10/donec-venenatis/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/learn-languages-online-courses-lingoda-1d2bee3e4d2c91c00bc4cb18463ec8e9-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/learn-languages-online-courses-lingoda-1d2bee3e4d2c91c00bc4cb18463ec8e9-300x200.jpg 300w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/learn-languages-online-courses-lingoda-1d2bee3e4d2c91c00bc4cb18463ec8e9-768x512.jpg 768w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/learn-languages-online-courses-lingoda-1d2bee3e4d2c91c00bc4cb18463ec8e9-1024x683.jpg 1024w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
-			<a href="https://try.wbcomdesigns.com/10/donec-venenatis/">
-				Donec venenatis			</a>
-		</h3>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante porttitor enim egestas placerat in quis lorem. Aliquam ac...		
-			September 3, 2018		
-			No Comments		
-		</article>
-				<article>
-				<a href="https://try.wbcomdesigns.com/10/hello-world/">
-			<img width="300" height="200" src="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-1-300x200.jpg" alt="" srcset="https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-1-300x200.jpg 300w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-1-768x512.jpg 768w, https://try.wbcomdesigns.com/10/wp-content/uploads/2018/08/Online-courses-1-1024x682.jpg 1024w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
-			<a href="https://try.wbcomdesigns.com/10/hello-world/">
-				Hello world!			</a>
-		</h3>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante porttitor enim egestas placerat in quis lorem. Aliquam ac...		
-			August 2, 2018		
-			1 Comment		
-		</article>]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>621</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-03 05:04:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-09-03 05:04:55]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[lifter-lms-demo__trashed]]></wp:post_name>
-		<wp:status><![CDATA[trash]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[default]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:23:"stretched_view_no_title";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"60b3226","elType":"section","settings":{"height":"min-height","custom_height":{"unit":"px","size":500},"structure":"20","background_background":"classic","background_image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/learn-languages-online-courses-lingoda-1d2bee3e4d2c91c00bc4cb18463ec8e9.jpg","id":423},"background_position":"center center","background_repeat":"no-repeat","background_size":"cover"},"elements":[{"id":"219fcb6","elType":"column","settings":{"_column_size":50,"_inline_size":50},"elements":[],"isInner":false},{"id":"8028159","elType":"column","settings":{"_column_size":50,"_inline_size":50},"elements":[{"id":"6779024","elType":"widget","settings":{"title":"Forward.Thinking.","align":"center","title_color":"#f37c66","typography_typography":"custom","typography_font_size":{"unit":"px","size":40},"typography_font_weight":"300","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_background_background":"classic","_background_color":"rgba(255,255,255,0.79)","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"6ed77a1","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet.<\/p>","align":"right","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20}},"elements":[],"widgetType":"text-editor"},{"id":"82140e5","elType":"widget","settings":{"text":"Join Us","align":"right","icon":"fa fa-angle-double-right","icon_align":"right","background_color":"#f37c66","border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20}},"elements":[],"widgetType":"button"}],"isInner":false}],"isInner":false},{"id":"9b633d7","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"163cf60","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"0b9e7df","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"d8e669a","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"e6a0255","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"c1d1bfd","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"87afee3","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"475868d","elType":"section","settings":{"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false},"border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3"},"elements":[{"id":"82621a4","elType":"column","settings":{"_column_size":100},"elements":[{"id":"2e81f4b","elType":"widget","settings":{"title":"Latest Courses","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"},{"id":"544c04d","elType":"widget","settings":{"shortcode":"[lifterlms_courses]","_margin":{"unit":"px","top":"30","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_animation":"fadeInUp"},"elements":[],"widgetType":"shortcode"}],"isInner":false}],"isInner":false},{"id":"694209f","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"c2d6e1b","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"594f3d1","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"7b7fb26","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"8f05594","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"3c7ff52","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"0f3ab58","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"fafd645","elType":"section","settings":{"content_position":"top","structure":"20","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"a2c5480","elType":"column","settings":{"_column_size":50,"_inline_size":50.125,"content_position":"top","animation":"fadeInLeft"},"elements":[{"id":"1012c3c","elType":"section","settings":{"structure":"40","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false}},"elements":[{"id":"b5e64e7","elType":"column","settings":{"_column_size":25,"_inline_size":25,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"53f391f","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-pie-chart","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"a1f5af6","elType":"column","settings":{"_column_size":25,"_inline_size":25.007999999999999118927007657475769519805908203125,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"49234ed","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-medkit","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"5cd8603","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"c3901ab","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-cutlery","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"ecdc71f","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"d3d6955","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-desktop","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true}],"isInner":true},{"id":"91efefe","elType":"section","settings":{"structure":"40","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false}},"elements":[{"id":"da0fd5c","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"4ba5520","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-hospital-o","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"659231b","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"fea814b","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-code","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"babf2f9","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"de35582","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-delicious","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true},{"id":"5191857","elType":"column","settings":{"_column_size":25,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[{"id":"81a9b1f","elType":"widget","settings":{"primary_color":"#18bb7c","size":{"unit":"px","size":40},"_padding":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"_border_border":"solid","_border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"_border_color":"#18bb7c","_border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"icon":"fa fa-comments","hover_animation":"grow"},"elements":[],"widgetType":"icon"}],"isInner":true}],"isInner":true}],"isInner":false},{"id":"ac43dcf","elType":"column","settings":{"_column_size":50,"_inline_size":49.875,"content_position":"top","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"25","right":"25","bottom":"25","left":"30","isLinked":false},"animation":"fadeInRight"},"elements":[{"id":"d3f5dfd","elType":"widget","settings":{"title":"Our Services","align":"left","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"9a876bf","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","typography_typography":"custom","typography_font_family":"Muli"},"elements":[],"widgetType":"text-editor"},{"id":"67cdccd","elType":"widget","settings":{"text":"Learn More","align":"right","icon":"fa fa-angle-right","icon_align":"right","typography_typography":"custom","typography_font_size":{"unit":"px","size":13},"button_text_color":"#000000","background_color":"rgba(24,187,124,0)","border_border":"solid","border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"border_color":"#18bb7c","border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"text_padding":{"unit":"px","top":"10","right":"15","bottom":"10","left":"15","isLinked":false},"typography_font_family":"Muli","hover_color":"#ffffff","button_background_hover_color":"#18bb7c"},"elements":[],"widgetType":"button"}],"isInner":false}],"isInner":false},{"id":"363103c","elType":"section","settings":{"background_background":"classic","background_color":"#f37c66","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"ebfd7f4","elType":"column","settings":{"_column_size":100},"elements":[{"id":"bf75193","elType":"section","settings":{"structure":"40"},"elements":[{"id":"18b225c","elType":"column","settings":{"_column_size":25,"_inline_size":null,"space_between_widgets":10,"animation":"fadeInUp"},"elements":[{"id":"fe12e46","elType":"widget","settings":{"icon":"fa fa-book","primary_color":"#ffffff","hover_animation":"shrink"},"elements":[],"widgetType":"icon"},{"id":"6ce832b","elType":"widget","settings":{"ending_number":106,"title":"Courses","number_color":"#ffffff","typography_number_typography":"custom","typography_number_font_size":{"unit":"px","size":40},"typography_number_font_weight":"400","title_color":"#ffffff","typography_title_typography":"custom","typography_title_font_size":{"unit":"px","size":14},"typography_number_font_family":"Zilla Slab","typography_title_font_family":"Muli"},"elements":[],"widgetType":"counter"}],"isInner":true},{"id":"4e98c62","elType":"column","settings":{"_column_size":25,"_inline_size":null,"space_between_widgets":10,"animation":"fadeInUp","animation_delay":50},"elements":[{"id":"3ac8c30","elType":"widget","settings":{"icon":"fa fa-users","primary_color":"#ffffff","hover_animation":"shrink"},"elements":[],"widgetType":"icon"},{"id":"04e1d5e","elType":"widget","settings":{"ending_number":1434,"title":"Students","number_color":"#ffffff","typography_number_typography":"custom","typography_number_font_size":{"unit":"px","size":40},"typography_number_font_weight":"400","title_color":"#ffffff","typography_title_typography":"custom","typography_title_font_size":{"unit":"px","size":14},"typography_number_font_family":"Zilla Slab","typography_title_font_family":"Muli"},"elements":[],"widgetType":"counter"}],"isInner":true},{"id":"ad71c70","elType":"column","settings":{"_column_size":25,"_inline_size":null,"space_between_widgets":10,"animation":"fadeInUp","animation_delay":100},"elements":[{"id":"79f428b","elType":"widget","settings":{"icon":"fa fa-pencil","primary_color":"#ffffff","hover_animation":"shrink"},"elements":[],"widgetType":"icon"},{"id":"3a84e93","elType":"widget","settings":{"ending_number":12,"title":"Lessons","number_color":"#ffffff","typography_number_typography":"custom","typography_number_font_size":{"unit":"px","size":40},"typography_number_font_weight":"400","title_color":"#ffffff","typography_title_typography":"custom","typography_title_font_size":{"unit":"px","size":14},"typography_number_font_family":"Zilla Slab","typography_title_font_family":"Muli"},"elements":[],"widgetType":"counter"}],"isInner":true},{"id":"8057530","elType":"column","settings":{"_column_size":25,"_inline_size":null,"space_between_widgets":10,"animation":"fadeInUp","animation_delay":150},"elements":[{"id":"c034d80","elType":"widget","settings":{"icon":"fa fa-calendar","primary_color":"#ffffff","hover_animation":"shrink"},"elements":[],"widgetType":"icon"},{"id":"b9c6071","elType":"widget","settings":{"ending_number":36,"title":"Events","number_color":"#ffffff","typography_number_typography":"custom","typography_number_font_size":{"unit":"px","size":40},"typography_number_font_weight":"400","title_color":"#ffffff","typography_title_typography":"custom","typography_title_font_size":{"unit":"px","size":14},"typography_number_font_family":"Zilla Slab","typography_title_font_family":"Muli"},"elements":[],"widgetType":"counter"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"8550bb2","elType":"section","settings":{"background_background":"classic","background_color":"#f3f3f3","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"70","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"950d318","elType":"column","settings":{"_column_size":100},"elements":[{"id":"96ec4e0","elType":"widget","settings":{"title":"How We Work","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"}],"isInner":false}],"isInner":false},{"id":"a02d622","elType":"section","settings":{"structure":"30","background_background":"classic","background_color":"#f3f3f3","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"70","left":"0","isLinked":false}},"elements":[{"id":"cf594ef","elType":"column","settings":{"_column_size":33,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp"},"elements":[{"id":"2dbf679","elType":"section","settings":{"content_width":{"unit":"px","size":80},"background_background":"classic","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"z_index":1},"elements":[{"id":"9ab04a1","elType":"column","settings":{"_column_size":100,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"1dd915e","elType":"widget","settings":{"title":"1","align":"center","title_color":"#ffffff","_padding":{"unit":"px","top":"25","right":"25","bottom":"25","left":"25","isLinked":true},"_background_background":"classic","_background_color":"#f37c66","_border_radius":{"unit":"%","top":"50","right":"50","bottom":"50","left":"50","isLinked":true}},"elements":[],"widgetType":"heading"}],"isInner":true}],"isInner":true},{"id":"8facf98","elType":"section","settings":{"background_background":"classic","background_color":"#ffffff","border_border":"solid","border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"border_color":"#d3d3d3","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true},"box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"-40","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"15","bottom":"15","left":"15","isLinked":false},"z_index":0},"elements":[{"id":"d65a5ab","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"da1570c","elType":"widget","settings":{"title":"Search Your Course","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"typography_font_weight":"500","typography_text_transform":"capitalize"},"elements":[],"widgetType":"heading"},{"id":"6022c4d","elType":"widget","settings":{"icon":"fa fa-search","primary_color":"#444444","size":{"unit":"px","size":50}},"elements":[],"widgetType":"icon"}],"isInner":true}],"isInner":true}],"isInner":false},{"id":"f30e004","elType":"column","settings":{"_column_size":33,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":100},"elements":[{"id":"ca0d953","elType":"section","settings":{"content_width":{"unit":"px","size":80},"margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"z_index":1},"elements":[{"id":"ff3561b","elType":"column","settings":{"_column_size":100,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"a0572e9","elType":"widget","settings":{"title":"2","align":"center","title_color":"#ffffff","_padding":{"unit":"px","top":"25","right":"25","bottom":"25","left":"25","isLinked":true},"_background_background":"classic","_background_color":"#f9cb8f","_border_radius":{"unit":"%","top":"50","right":"50","bottom":"50","left":"50","isLinked":true}},"elements":[],"widgetType":"heading"}],"isInner":true}],"isInner":true},{"id":"481b2d6","elType":"section","settings":{"background_background":"classic","background_color":"#ffffff","border_border":"solid","border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"border_color":"#d3d3d3","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true},"box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"-40","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"15","bottom":"15","left":"15","isLinked":false},"z_index":0},"elements":[{"id":"6d144ed","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"4a1b223","elType":"widget","settings":{"title":"take a sample lesson","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"typography_font_weight":"500","typography_text_transform":"capitalize"},"elements":[],"widgetType":"heading"},{"id":"f1f1234","elType":"widget","settings":{"icon":"fa fa-book","primary_color":"#444444","size":{"unit":"px","size":50}},"elements":[],"widgetType":"icon"}],"isInner":true}],"isInner":true}],"isInner":false},{"id":"322fd11","elType":"column","settings":{"_column_size":33,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":200},"elements":[{"id":"ae0aa9a","elType":"section","settings":{"content_width":{"unit":"px","size":80},"margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"z_index":1},"elements":[{"id":"03fe7c5","elType":"column","settings":{"_column_size":100,"_inline_size":null,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"85915d5","elType":"widget","settings":{"title":"3","align":"center","title_color":"#ffffff","_padding":{"unit":"px","top":"25","right":"25","bottom":"25","left":"25","isLinked":true},"_background_background":"classic","_background_color":"#18bb7c","_border_radius":{"unit":"%","top":"50","right":"50","bottom":"50","left":"50","isLinked":true}},"elements":[],"widgetType":"heading"}],"isInner":true}],"isInner":true},{"id":"4895f6d","elType":"section","settings":{"background_background":"classic","background_color":"#ffffff","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true},"box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"-40","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"15","bottom":"15","left":"15","isLinked":false},"z_index":0},"elements":[{"id":"7bd44b5","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"c04ee07","elType":"widget","settings":{"title":"purchase the Course","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"typography_font_weight":"500","typography_text_transform":"capitalize"},"elements":[],"widgetType":"heading"},{"id":"39b461a","elType":"widget","settings":{"icon":"fa fa-money","primary_color":"#444444","size":{"unit":"px","size":50}},"elements":[],"widgetType":"icon"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"94f7d6d","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"f63df85","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"f37df1f","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"a5a238f","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"b108248","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"8b501a5","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"9674359","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"bdb6ee2","elType":"section","settings":{"content_position":"middle","structure":"20","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false},"border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3"},"elements":[{"id":"60504f4","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","animation":"fadeInLeft"},"elements":[{"id":"4656c16","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/09\/graduation-309661_640.png","id":670},"image_size":"full","width":{"unit":"%","size":100},"space":{"unit":"%","size":100},"css_filters_css_filter":"custom","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"40","right":"40","bottom":"40","left":"40","isLinked":true}},"elements":[],"widgetType":"image"}],"isInner":false},{"id":"344dbce","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","animation":"fadeInRight"},"elements":[{"id":"58b6c74","elType":"widget","settings":{"title":"We Offer","align":"left","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"fd81456","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20},"typography_line_height":{"unit":"em","size":1.5}},"elements":[],"widgetType":"text-editor"},{"id":"a43e71a","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.<\/p>","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20},"typography_line_height":{"unit":"em","size":1.5}},"elements":[],"widgetType":"text-editor"}],"isInner":false}],"isInner":false},{"id":"73874e0","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"b088dc5","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"340b0a1","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"f02e710","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"ce041d9","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"bf2eb95","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"24d16cd","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"b82e8fe","elType":"section","settings":{"margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false},"border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3"},"elements":[{"id":"2ea1f36","elType":"column","settings":{"_column_size":100},"elements":[{"id":"b4cecc5","elType":"widget","settings":{"title":"About Us","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"},{"id":"75cb9a6","elType":"section","settings":{"structure":"20"},"elements":[{"id":"243d357","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","animation":"fadeInLeft"},"elements":[{"id":"4f8a7df","elType":"widget","settings":{"title":"Why We Are Better","align":"left","title_color":"#000000","typography_typography":"custom","typography_font_size":{"unit":"px","size":22},"typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"f27f856","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.<\/p>","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20},"typography_line_height":{"unit":"em","size":1.5}},"elements":[],"widgetType":"text-editor"},{"id":"47e6fa2","elType":"widget","settings":{"tabs":[{"tab_title":"Accordion #1","tab_content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.","_id":"5c867eb"},{"tab_title":"Accordion #2","tab_content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.","_id":"2a2a0a2"}],"border_color":"#d3d3d3","title_color":"#686868","tab_active_color":"#18bb7c","title_typography_typography":"custom","title_typography_font_family":"Zilla Slab","title_typography_font_size":{"unit":"px","size":21},"content_typography_typography":"custom","content_typography_font_family":"Muli","content_typography_font_size":{"unit":"px","size":16}},"elements":[],"widgetType":"accordion"},{"id":"dc4cab9","elType":"widget","settings":{"text":"View Detail","align":"left","icon":"fa fa-angle-right","icon_align":"right","typography_typography":"custom","typography_font_size":{"unit":"px","size":13},"button_text_color":"#000000","background_color":"rgba(24,187,124,0)","border_border":"solid","border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"border_color":"#18bb7c","border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"text_padding":{"unit":"px","top":"10","right":"15","bottom":"10","left":"15","isLinked":false},"typography_font_family":"Muli","hover_color":"#ffffff","button_background_hover_color":"#18bb7c"},"elements":[],"widgetType":"button"}],"isInner":true},{"id":"7cbec25","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","animation":"fadeInRight"},"elements":[{"id":"ab95379","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/slider-education-1600x1032.jpg","id":567},"image_border_radius":{"unit":"px","top":"4","right":"4","bottom":"4","left":"4","isLinked":true},"image_box_shadow_box_shadow_type":"yes","image_box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":2,"spread":0,"color":"rgba(0,0,0,0.5)"}},"elements":[],"widgetType":"image"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"fff49d9","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"9f816df","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"9322215","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"f4fe8e2","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"fe610e4","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"fb4ab0c","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"ddb8e22","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"06d8992","elType":"section","settings":{"margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"06b14bd","elType":"column","settings":{"_column_size":100},"elements":[{"id":"6cd7931","elType":"widget","settings":{"title":"Our Teachers","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"}],"isInner":false}],"isInner":false},{"id":"d24e7db","elType":"section","settings":{"structure":"20","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"margin":{"unit":"px","top":"20","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"2f3bdcb","elType":"column","settings":{"_column_size":50,"_inline_size":null,"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":true}},"elements":[{"id":"103a78d","elType":"section","settings":{"structure":"20","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp"},"elements":[{"id":"5f8af5e","elType":"column","settings":{"_column_size":50,"_inline_size":40,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":false},"background_background":"classic","background_position":"center center","background_repeat":"no-repeat","background_size":"cover"},"elements":[{"id":"e0bb267","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacher3.jpg","id":95},"image_size":"full","width":{"unit":"%","size":100},"image_border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":true},"space":{"unit":"%","size":100}},"elements":[],"widgetType":"image"}],"isInner":true},{"id":"e10c602","elType":"column","settings":{"_column_size":50,"_inline_size":60,"content_position":"center","space_between_widgets":5,"background_background":"classic","background_color":"#f37c66","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"15","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[{"id":"c87baa4","elType":"widget","settings":{"title":"Jenny doe","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"600"},"elements":[],"widgetType":"heading"},{"id":"8cfcf68","elType":"widget","settings":{"editor":"<p>Professor Of Mathematic.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":12}},"elements":[],"widgetType":"text-editor"},{"id":"402d7c6","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#ffffff","width":{"unit":"%","size":15},"align":"center","gap":{"unit":"px","size":5}},"elements":[],"widgetType":"divider"},{"id":"dea884c","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_line_height":{"unit":"em","size":1.3000000000000000444089209850062616169452667236328125},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"deae37b","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"9da821e","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"22ae070","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"c68d62f","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_size":{"unit":"px","size":20},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true}],"isInner":true},{"id":"530a2b9","elType":"section","settings":{"structure":"20","margin":{"unit":"px","top":"20","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":200},"elements":[{"id":"2604c3d","elType":"column","settings":{"_column_size":50,"_inline_size":40,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":false}},"elements":[{"id":"c9e0443","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacher2.jpg","id":94},"image_size":"full","width":{"unit":"%","size":100},"image_border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":true},"space":{"unit":"%","size":100}},"elements":[],"widgetType":"image"}],"isInner":true},{"id":"aae9a67","elType":"column","settings":{"_column_size":50,"_inline_size":60,"content_position":"center","space_between_widgets":5,"background_background":"classic","background_color":"#18bb7c","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"15","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[{"id":"8f39d39","elType":"widget","settings":{"title":"Jenny doe","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"600"},"elements":[],"widgetType":"heading"},{"id":"aaef545","elType":"widget","settings":{"editor":"<p>Professor Of Mathematic.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":12}},"elements":[],"widgetType":"text-editor"},{"id":"015afa0","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#ffffff","width":{"unit":"%","size":15},"align":"center","gap":{"unit":"px","size":5}},"elements":[],"widgetType":"divider"},{"id":"2eaa8aa","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_line_height":{"unit":"em","size":1.3000000000000000444089209850062616169452667236328125},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"2b492da","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"9da821e","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"22ae070","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"c68d62f","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_size":{"unit":"px","size":20},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true}],"isInner":true}],"isInner":false},{"id":"a042824","elType":"column","settings":{"_column_size":50,"_inline_size":null,"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":true}},"elements":[{"id":"855e627","elType":"section","settings":{"structure":"20","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":100},"elements":[{"id":"f2eaefc","elType":"column","settings":{"_column_size":50,"_inline_size":40,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":false}},"elements":[{"id":"5ad3621","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacther1.png","id":93},"image_size":"full","width":{"unit":"%","size":100},"image_border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":true},"space":{"unit":"%","size":100}},"elements":[],"widgetType":"image"}],"isInner":true},{"id":"4bea064","elType":"column","settings":{"_column_size":50,"_inline_size":60,"content_position":"center","space_between_widgets":5,"background_background":"classic","background_color":"#f9cb8f","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"15","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[{"id":"3d83fd1","elType":"widget","settings":{"title":"Jenny doe","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"600"},"elements":[],"widgetType":"heading"},{"id":"5315c4e","elType":"widget","settings":{"editor":"<p>Professor Of Mathematic.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":12}},"elements":[],"widgetType":"text-editor"},{"id":"a838e65","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#ffffff","width":{"unit":"%","size":15},"align":"center","gap":{"unit":"px","size":5}},"elements":[],"widgetType":"divider"},{"id":"cd8ee9d","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_line_height":{"unit":"em","size":1.3000000000000000444089209850062616169452667236328125},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"5cf987b","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"9da821e","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"22ae070","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"c68d62f","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_size":{"unit":"px","size":20},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true}],"isInner":true},{"id":"6f1f568","elType":"section","settings":{"structure":"20","margin":{"unit":"px","top":"20","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":300},"elements":[{"id":"86c0d50","elType":"column","settings":{"_column_size":50,"_inline_size":40,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":false}},"elements":[{"id":"cc9a495","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacher3.jpg","id":95},"image_size":"full","width":{"unit":"%","size":100},"image_border_radius":{"unit":"%","top":"","right":"","bottom":"","left":"","isLinked":true},"space":{"unit":"%","size":100}},"elements":[],"widgetType":"image"}],"isInner":true},{"id":"c57f314","elType":"column","settings":{"_column_size":50,"_inline_size":60,"content_position":"center","space_between_widgets":5,"background_background":"classic","background_color":"#5f5f5f","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"15","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[{"id":"aef9675","elType":"widget","settings":{"title":"Jenny doe","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"600"},"elements":[],"widgetType":"heading"},{"id":"c3468ff","elType":"widget","settings":{"editor":"<p>Professor Of Mathematic.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":12}},"elements":[],"widgetType":"text-editor"},{"id":"dfb05f2","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#ffffff","width":{"unit":"%","size":15},"align":"center","gap":{"unit":"px","size":5}},"elements":[],"widgetType":"divider"},{"id":"1b1b037","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_line_height":{"unit":"em","size":1.3000000000000000444089209850062616169452667236328125},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"ed0d586","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"9da821e","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"22ae070","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"c68d62f","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_size":{"unit":"px","size":20},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"ad73ae2","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"6622bf9","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"765f66a","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"df09251","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"d50d4ae","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"7f7e6b4","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"33b982a","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"2d4ad2b","elType":"section","settings":{"structure":"20","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"4ae8401","elType":"column","settings":{"_column_size":50,"_inline_size":50,"content_position":"center","background_background":"classic","animation":"fadeInLeft"},"elements":[{"id":"87ae3dc","elType":"widget","settings":{"youtube_url":"https:\/\/www.youtube.com\/watch?v=9uOETcuFjbE","vimeo_url":"https:\/\/vimeo.com\/235215203","dailymotion_url":"https:\/\/www.dailymotion.com\/video\/x6koazf"},"elements":[],"widgetType":"video"}],"isInner":false},{"id":"6d26131","elType":"column","settings":{"_column_size":50,"_inline_size":50,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":true},"animation":"fadeInRight"},"elements":[{"id":"3f9e2cf","elType":"widget","settings":{"title":"Learn More About Us From Video","align":"left","title_color":"#000000","typography_typography":"custom","typography_font_size":{"unit":"px","size":25},"typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"14e1de4","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/p>","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20},"typography_line_height":{"unit":"em","size":1.5}},"elements":[],"widgetType":"text-editor"},{"id":"eaf3e02","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.<\/p>","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":20},"typography_line_height":{"unit":"em","size":1.5}},"elements":[],"widgetType":"text-editor"},{"id":"9ae4b3b","elType":"widget","settings":{"text":"Watch More","align":"right","icon":"fa fa-angle-right","icon_align":"right","typography_typography":"custom","typography_font_size":{"unit":"px","size":13},"button_text_color":"#000000","background_color":"rgba(24,187,124,0)","border_border":"solid","border_width":{"unit":"px","top":"2","right":"2","bottom":"2","left":"2","isLinked":true},"border_color":"#18bb7c","border_radius":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false},"text_padding":{"unit":"px","top":"10","right":"15","bottom":"10","left":"15","isLinked":false},"typography_font_family":"Muli","hover_color":"#ffffff","button_background_hover_color":"#18bb7c"},"elements":[],"widgetType":"button"}],"isInner":false}],"isInner":false},{"id":"d7520bb","elType":"section","settings":{"background_background":"classic","background_color":"#18bb7c","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"425cb7b","elType":"column","settings":{"_column_size":100},"elements":[{"id":"3743c90","elType":"widget","settings":{"title":"Testimonials","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"},{"id":"7c998a5","elType":"section","settings":{"structure":"30","margin":{"unit":"px","top":"40","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"ef3410a","elType":"column","settings":{"_column_size":33,"_inline_size":null,"space_between_widgets":0,"background_background":"classic","background_color":"#ffffff","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"margin_mobile":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"padding":{"unit":"px","top":"25","right":"0","bottom":"25","left":"0","isLinked":false},"animation":"fadeInUp"},"elements":[{"id":"3bb061e","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacther1.png","id":93},"image_size":"full","space":{"unit":"%","size":60},"image_border_radius":{"unit":"%","top":"100","right":"100","bottom":"100","left":"100","isLinked":true}},"elements":[],"widgetType":"image"},{"id":"2d18333","elType":"widget","settings":{"title":"John Doe","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"e393b93","elType":"widget","settings":{"title":"Writer","align":"center","title_color":"#f37c66","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"500","_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"987578b","elType":"widget","settings":{"color":"#b6baba","width":{"unit":"%","size":40},"align":"center"},"elements":[],"widgetType":"divider"},{"id":"f06a121","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_line_height":{"unit":"em","size":1.600000000000000088817841970012523233890533447265625},"_margin":{"unit":"px","top":"15","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"fe45fa1","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"f316be7","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"0367a6a","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"cd7044b","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"#f37c66","icon_secondary_color":"#ffffff","icon_size":{"unit":"px","size":18},"icon_spacing":{"unit":"px","size":15},"_margin":{"unit":"px","top":"20","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true},{"id":"bcf3ed5","elType":"column","settings":{"_column_size":33,"_inline_size":null,"space_between_widgets":0,"background_background":"classic","background_color":"#ffffff","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"margin_mobile":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"padding":{"unit":"px","top":"25","right":"0","bottom":"25","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":100},"elements":[{"id":"c3ca2af","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacher2.jpg","id":94},"image_size":"full","space":{"unit":"%","size":60},"image_border_radius":{"unit":"%","top":"100","right":"100","bottom":"100","left":"100","isLinked":true}},"elements":[],"widgetType":"image"},{"id":"4d6b92d","elType":"widget","settings":{"title":"John Doe","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"10fd24a","elType":"widget","settings":{"title":"Writer","align":"center","title_color":"#f9cb8f","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"500","_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"3498346","elType":"widget","settings":{"color":"#b6baba","width":{"unit":"%","size":40},"align":"center"},"elements":[],"widgetType":"divider"},{"id":"3214d38","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_line_height":{"unit":"em","size":1.600000000000000088817841970012523233890533447265625},"_margin":{"unit":"px","top":"15","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"33da198","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"f316be7","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"0367a6a","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"cd7044b","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"#f9cb8f","icon_secondary_color":"#ffffff","icon_size":{"unit":"px","size":18},"icon_spacing":{"unit":"px","size":15},"_margin":{"unit":"px","top":"20","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true},{"id":"51f1db9","elType":"column","settings":{"_column_size":33,"_inline_size":null,"space_between_widgets":0,"background_background":"classic","background_color":"#ffffff","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":3,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"margin_mobile":{"unit":"px","top":"10","right":"10","bottom":"10","left":"10","isLinked":true},"padding":{"unit":"px","top":"25","right":"0","bottom":"25","left":"0","isLinked":false},"animation":"fadeInUp","animation_delay":200},"elements":[{"id":"969e60d","elType":"widget","settings":{"image":{"url":"https:\/\/lifterlms.wpbp.in\/wp-content\/uploads\/2018\/08\/teacher3.jpg","id":95},"image_size":"full","space":{"unit":"%","size":60},"image_border_radius":{"unit":"%","top":"100","right":"100","bottom":"100","left":"100","isLinked":true}},"elements":[],"widgetType":"image"},{"id":"8d811ce","elType":"widget","settings":{"title":"John Doe","align":"center","title_color":"#474545","typography_typography":"custom","typography_font_family":"Zilla Slab","typography_font_size":{"unit":"px","size":22},"_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"9ca4dac","elType":"widget","settings":{"title":"Writer","align":"center","title_color":"#18bb7c","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"500","_margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"heading"},{"id":"81663b6","elType":"widget","settings":{"color":"#b6baba","width":{"unit":"%","size":40},"align":"center"},"elements":[],"widgetType":"divider"},{"id":"86d90a3","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_line_height":{"unit":"em","size":1.600000000000000088817841970012523233890533447265625},"_margin":{"unit":"px","top":"15","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"20","bottom":"0","left":"20","isLinked":false}},"elements":[],"widgetType":"text-editor"},{"id":"41e10f0","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"f316be7","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"0367a6a","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-google-plus","_id":"cd7044b","link":{"url":"","is_external":"true","nofollow":""}}],"shape":"circle","icon_color":"custom","icon_primary_color":"#18bb7c","icon_secondary_color":"#ffffff","icon_size":{"unit":"px","size":18},"icon_spacing":{"unit":"px","size":15},"_margin":{"unit":"px","top":"20","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"f1c0b55","elType":"section","settings":{"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false},"border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f3f3f3","border_radius":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false}},"elements":[{"id":"d743061","elType":"column","settings":{"_column_size":100},"elements":[{"id":"f8a52c1","elType":"widget","settings":{"title":"Community Life","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"},{"id":"123e1fa","elType":"section","settings":{"structure":"30","margin":{"unit":"px","top":"40","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"2d87996","elType":"column","settings":{"_column_size":33,"_inline_size":null,"border_border":"solid","border_width":{"unit":"px","top":"2","right":"0","bottom":"0","left":"0","isLinked":false},"border_color":"#f37c66","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":2,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":false},"animation":"fadeInUp"},"elements":[{"id":"4125dd7","elType":"widget","settings":{"title":"EVENTS","align":"center","title_color":"#f37c66","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"76a96b3","elType":"widget","settings":{"icon":"fa fa-calendar","view":"stacked","primary_color":"#f37c66"},"elements":[],"widgetType":"icon"},{"id":"991d6bf","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":35},"align":"center","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"},{"id":"cfec2b9","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli"},"elements":[],"widgetType":"text-editor"}],"isInner":true},{"id":"f1b832f","elType":"column","settings":{"_column_size":33,"_inline_size":null,"border_border":"solid","border_width":{"unit":"px","top":"2","right":"0","bottom":"0","left":"0","isLinked":false},"border_color":"#f9cb8f","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":2,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":true},"animation":"fadeInUp","animation_delay":50},"elements":[{"id":"6cde4c5","elType":"widget","settings":{"title":"BLOGS","align":"center","title_color":"#f9cb8f","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"febd40a","elType":"widget","settings":{"icon":"fa fa-pencil","view":"stacked","primary_color":"#f9cb8f"},"elements":[],"widgetType":"icon"},{"id":"66dcb64","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","width":{"unit":"%","size":35},"align":"center","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"},{"id":"b3568e9","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli"},"elements":[],"widgetType":"text-editor"}],"isInner":true},{"id":"04b4c21","elType":"column","settings":{"_column_size":33,"_inline_size":null,"border_border":"solid","border_width":{"unit":"px","top":"2","right":"0","bottom":"0","left":"0","isLinked":false},"border_color":"#18bb7c","border_radius":{"unit":"px","top":"5","right":"5","bottom":"5","left":"5","isLinked":true},"box_shadow_box_shadow_type":"yes","box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":2,"spread":0,"color":"rgba(0,0,0,0.5)"},"margin":{"unit":"px","top":"0","right":"10","bottom":"0","left":"10","isLinked":false},"padding":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":true},"animation":"fadeInUp","animation_delay":100},"elements":[{"id":"1246f6b","elType":"widget","settings":{"title":"PUBLISHERS","align":"center","title_color":"#18bb7c","typography_typography":"custom","typography_font_size":{"unit":"px","size":16},"typography_font_weight":"400","typography_font_family":"Zilla Slab"},"elements":[],"widgetType":"heading"},{"id":"176b082","elType":"widget","settings":{"icon":"fa fa-book","view":"stacked","primary_color":"#18bb7c"},"elements":[],"widgetType":"icon"},{"id":"664af87","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":35},"align":"center","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"},{"id":"3d5b191","elType":"widget","settings":{"editor":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.<\/p>","align":"center","typography_typography":"custom","typography_font_family":"Muli"},"elements":[],"widgetType":"text-editor"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"2629ec1","elType":"section","settings":{"gap":"no","structure":"30","margin":{"unit":"px","top":"-3","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[{"id":"82656bf","elType":"column","settings":{"_column_size":33,"_inline_size":47.98899999999999721467247582040727138519287109375,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"53e08a9","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f37c66","width":{"unit":"%","size":8},"align":"right","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"bb6f1c0","elType":"column","settings":{"_column_size":33,"_inline_size":4.0220000000000002415845301584340631961822509765625},"elements":[{"id":"94fce9c","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#f9cb8f","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false},{"id":"d932b31","elType":"column","settings":{"_column_size":33,"_inline_size":47.9849999999999994315658113919198513031005859375},"elements":[{"id":"1caad1c","elType":"widget","settings":{"weight":{"unit":"px","size":2},"color":"#18bb7c","width":{"unit":"%","size":8},"align":"left","gap":{"unit":"px","size":2}},"elements":[],"widgetType":"divider"}],"isInner":false}],"isInner":false},{"id":"03faa6d","elType":"section","settings":{"margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"50","right":"0","bottom":"50","left":"0","isLinked":false}},"elements":[{"id":"874c5b5","elType":"column","settings":{"_column_size":100},"elements":[{"id":"52348d7","elType":"widget","settings":{"title":"Latest News","align":"center","title_color":"#000000","typography_typography":"custom","typography_font_weight":"400","typography_font_family":"Zilla Slab","_animation":"fadeInLeft"},"elements":[],"widgetType":"heading"},{"id":"1387a19","elType":"widget","settings":{"_skin":"wbcom-cards","wbcom_classic_meta_separator":"\/\/\/","wbcom_classic_read_more_text":"Read More \u00bb","wbcom_cards_meta_separator":"\u2022","wbcom_cards_show_read_more":"","wbcom_cards_read_more_text":"Read More \u00bb","wbcom_cards_show_avatar":"","pagination_page_limit":"5","pagination_prev_label":"&laquo; Previous","pagination_next_label":"Next &raquo;","_margin":{"unit":"px","top":"40","right":"0","bottom":"0","left":"0","isLinked":false},"_animation":"fadeInUp"},"elements":[],"widgetType":"posts"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_f547c62b05824be493b1305d35655728]]></wp:meta_key>
-		<wp:meta_value><![CDATA[<iframe width="500" height="281" src="https://www.youtube.com/embed/9uOETcuFjbE?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_time_f547c62b05824be493b1305d35655728]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1535957201]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_time]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1536732756]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_desired_post_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[lifter-lms-demo]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -76534,102 +76419,6 @@ Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur a
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Landing Page New 2</title>
-		<link>https://try.wbcomdesigns.com/10/landing-page-new-2__trashed/</link>
-		<pubDate>Mon, 10 Sep 2018 09:54:33 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=1430</guid>
-		<description></description>
-		<content:encoded><![CDATA[<h2>Heading</h2>		
-			<h2>Add Your Heading Text Here</h2>		
-		Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</br>
-Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.		
-			<a href="#" role="button">
-						Explore more courses
-					</a>]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1430</wp:post_id>
-		<wp:post_date><![CDATA[2018-09-10 09:54:33]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-09-10 09:54:33]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[landing-page-new-2__trashed]]></wp:post_name>
-		<wp:status><![CDATA[trash]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[default]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:19:"full_width_no_title";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"e5f87b2","elType":"section","settings":{"stretch_section":"section-stretched","height":"full","background_background":"classic","background_color":"#433a8f","shape_divider_bottom":"clouds","shape_divider_bottom_height":{"unit":"px","size":227},"shape_divider_bottom_negative":"yes","shape_divider_bottom_above_content":"yes","margin":{"unit":"px","top":"-150","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"em","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"z_index":100},"elements":[{"id":"d96567f","elType":"column","settings":{"_column_size":100},"elements":[{"id":"3af3284","elType":"widget","settings":{"title":"Heading","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"600","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"71ba6e5","elType":"widget","settings":{"title":"Add Your Heading Text Here","align":"center","title_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":34},"typography_font_weight":"500"},"elements":[],"widgetType":"heading"},{"id":"6960490","elType":"widget","settings":{"editor":"Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<\/br>\n\nUt elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"},{"id":"3020a08","elType":"widget","settings":{"text":"Explore more courses","align":"center","size":"md","typography_typography":"custom","typography_font_size":{"unit":"px","size":13},"typography_font_weight":"600","typography_text_transform":"uppercase","button_text_color":"#ffffff","background_color":"#ff655b","button_box_shadow_box_shadow_type":"yes","button_box_shadow_box_shadow":{"horizontal":0,"vertical":0,"blur":10,"spread":0,"color":"rgba(0,32,178,0.62)"},"text_padding":{"unit":"px","top":"10","right":"30","bottom":"10","left":"30","isLinked":false}},"elements":[],"widgetType":"button"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_time]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1536732713]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_desired_post_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[landing-page-new-2]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -76851,87 +76640,6 @@ Keep up the terrific works guys I've included you guys to  blogroll.]]></wp:comm
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Shortcode Courses</title>
-		<link>https://try.wbcomdesigns.com/10/shortcode-courses/</link>
-		<pubDate>Sat, 06 Oct 2018 10:18:02 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?page_id=2280</guid>
-		<description></description>
-		<content:encoded><![CDATA[<h2>Slider with Courses</h2>		
-		[reign_lifterlms_courses posts_per_page="6" per_row="4" enable_slider="1"]		
-			<h2>All Courses</h2>		
-		[reign_lifterlms_courses posts_per_page="8" per_row="4" ]]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>2280</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-06 10:18:02]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-06 10:18:02]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[shortcode-courses]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[page]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_is_restricted]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_restricted_levels]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[default]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_wbcom_metabox_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{s:6:"layout";a:3:{s:11:"site_layout";s:10:"full_width";s:15:"primary_sidebar";s:1:"0";s:17:"secondary_sidebar";s:1:"0";}s:13:"header_footer";a:3:{s:16:"elementor_topbar";s:1:"0";s:16:"elementor_header";s:1:"0";s:16:"elementor_footer";s:1:"0";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"19cbd43","elType":"section","settings":{"margin":{"unit":"px","top":"40","right":0,"bottom":"40","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"50e2a7b","elType":"column","settings":{"_column_size":100},"elements":[{"id":"7601d9d","elType":"widget","settings":{"title":"Slider with Courses","title_color":"#000000"},"elements":[],"widgetType":"heading"},{"id":"5642595","elType":"widget","settings":{"shortcode":"[reign_lifterlms_courses posts_per_page=\"6\" per_row=\"4\" enable_slider=\"1\"]"},"elements":[],"widgetType":"shortcode"}],"isInner":false}],"isInner":false},{"id":"fe535fb","elType":"section","settings":{"margin":{"unit":"px","top":"40","right":0,"bottom":"40","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"4a7c0f9","elType":"column","settings":{"_column_size":100},"elements":[{"id":"a78ec83","elType":"widget","settings":{"title":"All Courses","title_color":"#000000"},"elements":[],"widgetType":"heading"},{"id":"fed5e03","elType":"widget","settings":{"shortcode":"[reign_lifterlms_courses posts_per_page=\"8\" per_row=\"4\" ]"},"elements":[],"widgetType":"shortcode"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title>Getting Started</title>
 		<link>https://try.wbcomdesigns.com/10/?post_type=section&#038;p=11</link>
 		<pubDate>Wed, 30 May 2018 19:28:03 +0000</pubDate>
@@ -77049,210 +76757,6 @@ Keep up the terrific works guys I've included you guys to  blogroll.]]></wp:comm
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_llms_order]]></wp:meta_key>
 		<wp:meta_value><![CDATA[4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Header #5</title>
-		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-5</link>
-		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-5</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>64</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[header-5]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
-		<wp:meta_value><![CDATA[header]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"f59a90b","elType":"section","settings":{"layout":"full_width","background_background":"classic","background_color":"#2c2461"},"elements":[{"id":"03d512d","elType":"column","settings":{"_column_size":100},"elements":[{"id":"dce3c89","elType":"section","settings":{"structure":"40","gap":"no","background_background":"classic"},"elements":[{"id":"4fb571d","elType":"column","settings":{"_column_size":25,"_inline_size":32.832999999999998408384271897375583648681640625,"content_position":"center","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"22","isLinked":false}},"elements":[{"id":"b2dcf5d","elType":"widget","settings":{"branding_title_color":"#ffffff","title_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_family":"Lobster","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"600","title_typography_font_style":"normal","title_typography_letter_spacing":{"unit":"px","size":0}},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"c8e775c","elType":"column","settings":{"_column_size":25,"_inline_size":29.97200000000000130739863379858434200286865234375,"content_position":"center"},"elements":[{"id":"aa2e854","elType":"widget","settings":{"icon_list":[{"text":"1.555.555.5555","icon":"fa fa-phone","_id":"4a10fe3","link":{"url":"","is_external":"","nofollow":""}}],"icon_align":"right","icon_color":"#ffffff","icon_size":{"unit":"px","size":13},"text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"600","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"0","isLinked":false},"_border_border":"solid","_border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"_border_color":"#ffffff","hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"34ef55d","elType":"column","settings":{"_column_size":25,"_inline_size":16.83899999999999863575794734060764312744140625,"content_position":"center"},"elements":[{"id":"de5ba3a","elType":"widget","settings":{"icon_list":[{"text":"info@yourdomain.com","icon":"fa fa-envelope-o","_id":"ab8210f","link":{"url":"","is_external":"","nofollow":""}}],"icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"600","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"10","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"61aa470","elType":"column","settings":{"_column_size":25,"_inline_size":20.35600000000000164845914696343243122100830078125},"elements":[{"id":"e939e57","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","user_message_bell_enabled":"","notification_bell_enabled":"","icon_hover_color":"#2b333e"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"4a46d76","elType":"section","settings":{"layout":"full_width","background_background":"classic","background_color":"#2c2461","gap":"no","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"72c203b","elType":"column","settings":{"_column_size":100},"elements":[{"id":"4f85f9e","elType":"section","settings":{"gap":"no","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"15b0557","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"23ff270","elType":"widget","settings":{"menu_location":"32","menu_align":"left","menu_background":"","menu_background_hover":"","font_color":"#ffffff","font_color_hover":"#399dff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"600","typography_text_transform":"uppercase","typography_letter_spacing":{"unit":"px","size":0},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"20","left":"0","isLinked":false}},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[demo4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Header #4</title>
-		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-4</link>
-		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-4</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>65</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[header-4]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
-		<wp:meta_value><![CDATA[header]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"153b02c","elType":"section","settings":{"gap":"no","background_background":"classic","background_color":"#2c2461","layout":"full_width","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"20","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"475a8aa","elType":"column","settings":{"_column_size":100},"elements":[{"id":"48e77f4","elType":"section","settings":{"gap":"no","structure":"30"},"elements":[{"id":"02e0300","elType":"column","settings":{"_column_size":33,"_inline_size":46.22500000000000142108547152020037174224853515625,"content_position":"center","margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"10","right":"0","bottom":"10","left":"0","isLinked":false}},"elements":[{"id":"9acc482","elType":"widget","settings":{"branding_title_color":"#efefef","title_typography_typography":"custom","align":"left","title_typography_font_family":"Lobster","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"500","title_typography_font_style":"normal","title_typography_letter_spacing":{"unit":"px","size":0},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"20","isLinked":false}},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"152c3f2","elType":"column","settings":{"_column_size":33,"_inline_size":38.3059999999999973852027324028313159942626953125,"content_position":"center"},"elements":[{"id":"b98b2b9","elType":"widget","settings":{"icon_list":[{"text":"1.555.555.5555","icon":"fa fa-phone","_id":"c1aa672","link":{"url":"","is_external":"","nofollow":""}}],"icon_align":"right","icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_size":{"unit":"px","size":13},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"10","bottom":"0","left":"0","isLinked":false},"_border_border":"solid","_border_width":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"_border_color":"#b7b7b7","_border_radius":{"unit":"px","top":"0","right":"1","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"ee10973","elType":"column","settings":{"_column_size":33,"_inline_size":15.464999999999999857891452847979962825775146484375,"content_position":"center"},"elements":[{"id":"14a6add","elType":"widget","settings":{"icon_list":[{"text":"info@yourdomain.com","icon":"fa fa-envelope-o","_id":"c1aa672","link":{"url":"","is_external":"","nofollow":""}}],"icon_color":"#ffffff","text_color":"#ffffff","icon_typography_typography":"custom","icon_typography_font_family":"Open Sans","icon_typography_font_size":{"unit":"px","size":13},"icon_align":"center","icon_size":{"unit":"px","size":13},"_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"hide_mobile":"hidden-phone"},"elements":[],"widgetType":"icon-list"}],"isInner":true}],"isInner":true},{"id":"227bcfe","elType":"section","settings":{"gap":"no","structure":"20","margin":{"unit":"px","top":"-20","right":0,"bottom":"0","left":0,"isLinked":false}},"elements":[{"id":"feed17a","elType":"column","settings":{"_column_size":50,"_inline_size":60.03699999999999903366187936626374721527099609375,"content_position":"center"},"elements":[{"id":"404f809","elType":"widget","settings":{"menu_location":"32","menu_toggle_color":"#000000","menu_align":"left","menu_background":"","menu_background_hover":"","font_color":"#ffffff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"500","typography_text_transform":"uppercase","typography_font_style":"normal","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"font_color_hover":"#399dff"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true},{"id":"42cd358","elType":"column","settings":{"_column_size":50,"_inline_size":39.96300000000000096633812063373625278472900390625},"elements":[{"id":"2e2b443","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","icon_hover_color":"#399dff"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[demo3]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Header #3</title>
-		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-3</link>
-		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-3</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>66</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[header-3]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
-		<wp:meta_value><![CDATA[header]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"6df9418","elType":"section","settings":{"layout":"full_width","gap":"no","background_background":"classic","background_color":"#2c2461","border_border":"solid","border_width":{"unit":"px","top":"0","right":"0","bottom":"1","left":"0","isLinked":false},"border_color":"#f2f2f2","border_radius":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"height":"min-height","custom_height":{"unit":"px","size":0},"background_color_stop":{"unit":"%","size":6},"background_color_b":"#00a9f2","background_gradient_type":"radial","background_gradient_position":"top left"},"elements":[{"id":"a778427","elType":"column","settings":{"_column_size":100},"elements":[{"id":"876c6f5","elType":"section","settings":{"gap":"no","custom_height_inner":{"unit":"px","size":173},"structure":"20"},"elements":[{"id":"b110be1","elType":"column","settings":{"_column_size":50,"_inline_size":22.743999999999999772626324556767940521240234375},"elements":[{"id":"d6287bb","elType":"widget","settings":{"align":"center","branding_title_color":"#ffffff","title_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_size":{"unit":"px","size":40},"title_typography_font_weight":"400","title_typography_line_height":{"unit":"em","size":4.0999999999999996447286321199499070644378662109375},"title_typography_letter_spacing":{"unit":"px","size":0},"title_typography_font_family":"Lobster"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true},{"id":"d5883de","elType":"column","settings":{"_column_size":50,"_inline_size":77.256000000000000227373675443232059478759765625,"margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"c2f52ab","elType":"widget","settings":{"woo_cart_icon_enabled":"yes","icon_hover_color":"#399dff","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_background_background":"classic"},"elements":[],"widgetType":"wbcom-notification-area"},{"id":"c157d90","elType":"widget","settings":{"menu_location":"32","menu_background":"","menu_background_hover":"","font_color":"#ffffff","font_color_hover":"#399dff","typography_typography":"custom","typography_font_family":"Open Sans","typography_font_size":{"unit":"px","size":0},"typography_font_weight":"600","typography_text_transform":"uppercase","typography_font_style":"normal","typography_text_decoration":"none","submenu_background":"","submenu_background_hover":"","_margin":{"unit":"px","top":"-35","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"%","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_background_background":"classic"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[demo-2]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Header #2</title>
-		<link>https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-2</link>
-		<pubDate>Sat, 18 Aug 2018 06:20:52 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/10/?reign-elemtr-header=header-2</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>67</wp:post_id>
-		<wp:post_date><![CDATA[2018-08-18 06:20:52]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-08-18 06:20:52]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[header-2]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-header]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_yoast_wpseo_content_score]]></wp:meta_key>
-		<wp:meta_value><![CDATA[30]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"221e6de","elType":"section","settings":{"content_position":"middle","background_background":"classic","gap":"no","layout":"full_width","css_classes":"elementor-header-2","background_color":"#2c2461"},"elements":[{"id":"5b8e865e","elType":"column","settings":{"_column_size":100},"elements":[{"id":"111af550","elType":"section","settings":{"gap":"no","background_background":"classic","background_overlay_color":"#000000","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[{"id":"31713423","elType":"column","settings":{"_column_size":100,"_inline_size":null},"elements":[{"id":"b0d89c1","elType":"widget","settings":{"align":"center","branding_title_color":"#ffffff","_background_background":"classic","_padding":{"unit":"px","top":"30","right":"0","bottom":"0","left":"0","isLinked":false},"title_typography_typography":"custom","title_typography_font_family":"Lobster"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":true}],"isInner":true},{"id":"2a39ccfc","elType":"section","settings":{"gap":"no","structure":"20","background_background":"classic","border_color":"#cccccc","margin_mobile":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true}},"elements":[{"id":"2c324229","elType":"column","settings":{"_column_size":50,"_inline_size":64.034999999999996589394868351519107818603515625,"content_position":"center"},"elements":[{"id":"6cf055e6","elType":"widget","settings":{"menu_location":"19","menu_align":"left","menu_background":"rgba(255,255,255,0)","menu_background_hover":"rgba(234,234,234,0)","font_color":"#cccccc","font_color_hover":"#ffffff","submenu_background":"rgba(248,248,248,0)","submenu_background_hover":"rgba(234,234,234,0)","submenu_font_color":"#555555","submenu_font_color_hover":"#399dff","font_color_active":"#ffffff"},"elements":[],"widgetType":"wbcom-nav-menu"}],"isInner":true},{"id":"cbec622","elType":"column","settings":{"_column_size":50,"_inline_size":35.965000000000003410605131648480892181396484375},"elements":[{"id":"7d82","elType":"widget","settings":{"woo_cart_icon_enabled":"yes"},"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[reign_ele_header_topbar]]></wp:meta_key>
-		<wp:meta_value><![CDATA[header]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[header-logoup-menu-notification]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>

@@ -99,6 +99,43 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					$response = $importer->importSliderFromPost( true, true, $revolution_slider );					
 				}
 				
+				/* 
+				 * Set Default Pages				 
+				 */				
+				update_option('show_on_front', 'page');				
+				$home_page = 'Home';
+				if( !empty($home_page) ){
+					$home_page = get_page_by_title( $home_page );
+					if( isset($home_page) && $home_page->ID ) {
+						update_option('page_on_front', $home_page->ID); // Front Page
+					}
+				}				
+				// Blog Page				
+				$blog_page = 'Blog';
+				if( !empty($blog_page) ){
+					$blog_page = get_page_by_title($blog_page);
+					if( isset($blog_page) && $blog_page->ID ) {
+						update_option('page_for_posts', $blog_page->ID); // Posts Page
+					}
+				}
+				
+				/*
+				 * Assign Import Menus
+				 */
+				// Set imported menus to registered theme locations
+				
+				$locations = get_theme_mod( 'nav_menu_locations' ); // registered menu locations in theme
+				$registered_menus = wp_get_nav_menus(); // registered menus				
+				// Assign Menu Name to Registered menus as array keys
+				foreach( $registered_menus as $menu ) {
+					
+					if ( $menu->slug == 'main-menu' && strtolower($menu->name) == strtolower('Main Menu') ) {
+						$locations['menu-1'] = $menu->term_id;
+						$locations['shiftnav'] = $menu->term_id;
+					}
+				}
+				set_theme_mod( 'nav_menu_locations', $locations ); // set menus to locations
+				
 				/*
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';

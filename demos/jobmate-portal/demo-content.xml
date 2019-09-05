@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.2.2" created="2019-08-30 10:08" -->
+	<!-- generator="WordPress/5.2.2" created="2019-09-05 08:59" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>My blog</title>
 	<link>https://try.wbcomdesigns.com/15</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Fri, 30 Aug 2019 10:08:53 +0000</pubDate>
+	<pubDate>Thu, 05 Sep 2019 08:59:54 +0000</pubDate>
 	<language>en</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://try.wbcomdesigns.com/15</wp:base_site_url>
@@ -477,7 +477,7 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Writing]]></wp:term_name>
 	</wp:term>
-			<wp:term><wp:term_id>8</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[primary-menu]]></wp:term_slug><wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+			<wp:term><wp:term_id>8</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu]]></wp:term_slug><wp:term_name><![CDATA[Main menu]]></wp:term_name>
 </wp:term>
 
 	<generator>https://wordpress.org/?v=5.2.2</generator>
@@ -898,7 +898,7 @@ Go to the discussion to reply or catch up on the conversation: {{{message.url}}}
 							</item>
 					<item>
 		<title>reign-img-2</title>
-		<link>https://try.wbcomdesigns.com/15/home-v3/reign-img-2/</link>
+		<link>https://try.wbcomdesigns.com/15/home/reign-img-2/</link>
 		<pubDate>Fri, 30 Aug 2019 06:28:13 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg</guid>
@@ -1083,41 +1083,42 @@ Go to the discussion to reply or catch up on the conversation: {{{message.url}}}
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home</title>
-		<link>https://try.wbcomdesigns.com/15/?p=17</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/19/</link>
+		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=17</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=19</guid>
 		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
+		<content:encoded><![CDATA[ ]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>17</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:25:38]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
+		<wp:post_id>19</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
+		<wp:post_name><![CDATA[19]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
+		<wp:menu_order>11</wp:menu_order>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		<wp:meta_value><![CDATA[23]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[17]]></wp:meta_value>
+		<wp:meta_value><![CDATA[10]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
@@ -1133,92 +1134,117 @@ Go to the discussion to reply or catch up on the conversation: {{{message.url}}}
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1539858338]]></wp:meta_value>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Product Designer</title>
-		<link>https://try.wbcomdesigns.com/15/job/product-designer__trashed/</link>
-		<pubDate>Mon, 22 Oct 2018 10:54:11 +0000</pubDate>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/20/</link>
+		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?post_type=job_listing&#038;p=72</guid>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=20</guid>
 		<description></description>
-		<content:encoded><![CDATA[Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur aliquet quam id dui posuere blandit. Nulla porttitor accumsan tincidunt.
-
-Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Donec sollicitudin molestie malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></content:encoded>
+		<content:encoded><![CDATA[ ]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>72</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-22 10:54:11]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-22 10:54:11]]></wp:post_date_gmt>
+		<wp:post_id>20</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[product-designer__trashed]]></wp:post_name>
-		<wp:status><![CDATA[trash]]></wp:status>
+		<wp:post_name><![CDATA[20]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>-1</wp:menu_order>
-		<wp:post_type><![CDATA[job_listing]]></wp:post_type>
+		<wp:menu_order>8</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="job_listing_type" nicename="full-time"><![CDATA[Full Time]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://www.youtube.com/watch?v=UStfduFEbVI&list=PL43tWMHxInRml1VfJAZaPnnLeJefssFjG&index=3]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_twitter]]></wp:meta_key>
-		<wp:meta_value><![CDATA[@Company]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[21]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_tagline]]></wp:meta_key>
-		<wp:meta_value><![CDATA[It's memorable]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[6]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_website]]></wp:meta_key>
-		<wp:meta_value><![CDATA[http://company.com/]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_company_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Vincom Group]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_application]]></wp:meta_key>
-		<wp:meta_value><![CDATA[vapvarun@gmail.com]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_job_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[New York, Ohio - United States]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_job_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2018-11-21]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/21/</link>
+		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=21</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>21</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[21]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>6</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_trash_meta_time]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1540207032]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[7]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_desired_post_slug]]></wp:meta_key>
-		<wp:meta_value><![CDATA[product-designer]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_filled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -2292,7 +2318,7 @@ Duis dignissim fermentum augue eget accumsan. Sed ornare, tellus eu imperdiet eu
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[test-alert]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:status><![CDATA[draft]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
 		<wp:post_type><![CDATA[job_alert]]></wp:post_type>
@@ -2317,64 +2343,6 @@ Duis dignissim fermentum augue eget accumsan. Sed ornare, tellus eu imperdiet eu
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[send_count]]></wp:meta_key>
 		<wp:meta_value><![CDATA[3]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Community</title>
-		<link>https://try.wbcomdesigns.com/15/?p=138</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=138</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>138</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-24 11:04:39]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[138]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[#]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1540379079]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -2632,171 +2600,6 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 							</item>
 					<item>
 		<title></title>
-		<link>https://try.wbcomdesigns.com/15/19/</link>
-		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=19</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>19</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[19]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>11</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[23]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[10]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/20/</link>
-		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=20</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>20</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[20]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>8</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[21]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/21/</link>
-		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=21</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>21</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-18 10:26:09]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-18 10:26:09]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[21]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>6</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[7]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
 		<link>https://try.wbcomdesigns.com/15/22/</link>
 		<pubDate>Thu, 18 Oct 2018 10:26:09 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
@@ -2816,7 +2619,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2871,7 +2674,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2926,7 +2729,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -2981,7 +2784,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
@@ -3036,7 +2839,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3091,7 +2894,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3146,7 +2949,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3201,7 +3004,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3256,7 +3059,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3311,7 +3114,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3366,7 +3169,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3421,7 +3224,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3476,7 +3279,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3531,7 +3334,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3586,7 +3389,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -3621,64 +3424,6 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		</wp:postmeta>
 							</item>
 					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/?p=348</link>
-		<pubDate>Mon, 30 Nov -0001 00:00:00 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=348</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>348</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-26 13:26:23]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[0000-00-00 00:00:00]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[]]></wp:post_name>
-		<wp:status><![CDATA[draft]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>1</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[169]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_orphaned]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1540560383]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/15/home/</link>
 		<pubDate>Sat, 27 Oct 2018 04:59:59 +0000</pubDate>
@@ -3699,7 +3444,7 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -3731,6 +3476,226 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Basic</title>
+		<link>https://try.wbcomdesigns.com/15/basic-2/</link>
+		<pubDate>Sat, 27 Oct 2018 07:24:05 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=406</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>406</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-27 07:24:05]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-27 07:24:05]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[basic-2]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>13</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[131]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[406]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/407/</link>
+		<pubDate>Sat, 27 Oct 2018 07:24:05 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=407</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>407</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-27 07:24:05]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-27 07:24:05]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[407]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>14</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[406]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[391]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/410/</link>
+		<pubDate>Sat, 27 Oct 2018 07:26:29 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=410</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>410</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-27 07:26:29]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-27 07:26:29]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[410]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>15</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[406]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[408]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/423/</link>
+		<pubDate>Sat, 27 Oct 2018 08:00:37 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=423</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>423</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-27 08:00:37]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-27 08:00:37]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[423]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>16</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[406]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[412]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -4058,495 +4023,6 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title>Basic</title>
-		<link>https://try.wbcomdesigns.com/15/basic-2/</link>
-		<pubDate>Sat, 27 Oct 2018 07:24:05 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=406</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>406</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-27 07:24:05]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-27 07:24:05]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[basic-2]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>13</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[131]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[406]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[#]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/407/</link>
-		<pubDate>Sat, 27 Oct 2018 07:24:05 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=407</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>407</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-27 07:24:05]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-27 07:24:05]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[407]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>14</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[406]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[391]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/410/</link>
-		<pubDate>Sat, 27 Oct 2018 07:26:29 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=410</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>410</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-27 07:26:29]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-27 07:26:29]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[410]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>15</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[406]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[408]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/423/</link>
-		<pubDate>Sat, 27 Oct 2018 08:00:37 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=423</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>423</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-27 08:00:37]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-27 08:00:37]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[423]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>16</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[406]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[412]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/506/</link>
-		<pubDate>Mon, 29 Oct 2018 11:21:29 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=506</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>506</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-29 11:21:29]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-29 11:21:29]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[506]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>2</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[352]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[445]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/826/</link>
-		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=826</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>826</wp:post_id>
-		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[826]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>5</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[352]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[728]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/827/</link>
-		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=827</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>827</wp:post_id>
-		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[827]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>4</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[352]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[624]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title></title>
-		<link>https://try.wbcomdesigns.com/15/828/</link>
-		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=828</guid>
-		<description></description>
-		<content:encoded><![CDATA[ ]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>828</wp:post_id>
-		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[828]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>3</wp:menu_order>
-		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
-		<wp:meta_value><![CDATA[352]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[507]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
-		<wp:meta_value><![CDATA[page]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Hello world!</title>
-		<link>https://try.wbcomdesigns.com/15/hello-world/</link>
-		<pubDate>Wed, 17 Oct 2018 06:00:58 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=1</guid>
-		<description></description>
-		<content:encoded><![CDATA[Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-17 06:00:58]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-17 06:00:58]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[open]]></wp:comment_status>
-		<wp:ping_status><![CDATA[open]]></wp:ping_status>
-		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[post]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_astoundify_favorites_count]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
-		<wp:meta_value><![CDATA[<iframe src="https://player.vimeo.com/video/270507360?app_id=122963" width="500" height="281" frameborder="0" title="BuddyPress 3.0 - Nouveau template pack" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_oembed_time_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1540629655]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:comment>
-			<wp:comment_id>1</wp:comment_id>
-			<wp:comment_author><![CDATA[Mr WordPress]]></wp:comment_author>
-			<wp:comment_author_email><![CDATA[]]></wp:comment_author_email>
-			<wp:comment_author_url>http://wordpress.org/</wp:comment_author_url>
-			<wp:comment_author_IP><![CDATA[]]></wp:comment_author_IP>
-			<wp:comment_date><![CDATA[2010-06-18 20:51:35]]></wp:comment_date>
-			<wp:comment_date_gmt><![CDATA[2010-06-18 20:51:35]]></wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[Hi, this is a comment.<br />To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.]]></wp:comment_content>
-			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
-			<wp:comment_type><![CDATA[]]></wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>0</wp:comment_user_id>
-							</wp:comment>
-					</item>
-					<item>
 		<title>Contact Us</title>
 		<link>https://try.wbcomdesigns.com/15/contact-us/</link>
 		<pubDate>Wed, 24 Oct 2018 11:03:32 +0000</pubDate>
@@ -4804,6 +4280,275 @@ To request membership again, visit: {{{group.url}}}]]></excerpt:encoded>
 		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/506/</link>
+		<pubDate>Mon, 29 Oct 2018 11:21:29 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=506</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>506</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-29 11:21:29]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-29 11:21:29]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[506]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>2</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[352]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[445]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/826/</link>
+		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=826</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>826</wp:post_id>
+		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[826]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>5</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[352]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[728]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/827/</link>
+		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=827</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>827</wp:post_id>
+		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[827]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>4</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[352]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[624]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title></title>
+		<link>https://try.wbcomdesigns.com/15/828/</link>
+		<pubDate>Mon, 05 Nov 2018 06:25:26 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=828</guid>
+		<description></description>
+		<content:encoded><![CDATA[ ]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>828</wp:post_id>
+		<wp:post_date><![CDATA[2018-11-05 06:25:26]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-11-05 06:25:26]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[828]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>3</wp:menu_order>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main menu]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
+		<wp:meta_value><![CDATA[352]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[507]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
+		<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Hello world!</title>
+		<link>https://try.wbcomdesigns.com/15/hello-world/</link>
+		<pubDate>Wed, 17 Oct 2018 06:00:58 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?p=1</guid>
+		<description></description>
+		<content:encoded><![CDATA[Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-17 06:00:58]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-17 06:00:58]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[hello-world]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_astoundify_favorites_count]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
+		<wp:meta_value><![CDATA[<iframe src="https://player.vimeo.com/video/270507360?app_id=122963" width="500" height="281" frameborder="0" title="BuddyPress 3.0 - Nouveau template pack" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_time_aabaa607d7681118299fc476e131673f]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1540629655]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:comment>
+			<wp:comment_id>1</wp:comment_id>
+			<wp:comment_author><![CDATA[Mr WordPress]]></wp:comment_author>
+			<wp:comment_author_email><![CDATA[]]></wp:comment_author_email>
+			<wp:comment_author_url>http://wordpress.org/</wp:comment_author_url>
+			<wp:comment_author_IP><![CDATA[]]></wp:comment_author_IP>
+			<wp:comment_date><![CDATA[2010-06-18 20:51:35]]></wp:comment_date>
+			<wp:comment_date_gmt><![CDATA[2010-06-18 20:51:35]]></wp:comment_date_gmt>
+			<wp:comment_content><![CDATA[Hi, this is a comment.<br />To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.]]></wp:comment_content>
+			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
+			<wp:comment_type><![CDATA[]]></wp:comment_type>
+			<wp:comment_parent>0</wp:comment_parent>
+			<wp:comment_user_id>0</wp:comment_user_id>
+							</wp:comment>
+					</item>
 					<item>
 		<title>Landing Page #1</title>
 		<link>https://try.wbcomdesigns.com/15/landing-page-1/</link>
@@ -5122,6 +4867,194 @@ But it seemed that, when on the wharf, Queequeg had not at all noticed what I no
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Reign Footer #4</title>
+		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-4</link>
+		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-4</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>314</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[reign-footer-4]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"bd7282f","elType":"section","settings":{"stretch_section":"section-stretched","structure":"50","background_background":"classic","background_color":"#3b5998","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.73)","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"1b6008b3","elType":"column","settings":{"_column_size":20,"_inline_size":18.1580000000000012505552149377763271331787109375,"heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.75)"},"elements":[{"id":"f554db6","elType":"widget","settings":{"title":"Contact us","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"4f50078c","elType":"widget","settings":{"editor":"Work with us 
+info@yourdomain.com","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false},{"id":"3181e51c","elType":"column","settings":{"_column_size":20,"_inline_size":22.894999999999999573674358543939888477325439453125},"elements":[{"id":"3569b2d4","elType":"widget","settings":{"title":"Visit Us","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"2a10cb70","elType":"widget","settings":{"editor":"8004 SE. Selby Drive 
+Butte, MT 59701","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"},{"id":"895cd4c","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"ded9639","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"507bc35","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","_id":"84067a1","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"0acd879"}],"shape":"circle","align":"left","icon_color":"custom","icon_primary_color":"#ffffff","icon_secondary_color":"#3b5998","icon_size":{"unit":"px","size":13},"icon_padding":{"unit":"em","size":0.6999999999999999555910790149937383830547332763671875},"icon_spacing":{"unit":"px","size":10}},"elements":[],"widgetType":"social-icons"}],"isInner":false},{"id":"7a334d9","elType":"column","settings":{"_column_size":20,"_inline_size":20.263000000000001676880856393836438655853271484375},"elements":[{"id":"45cb7342","elType":"widget","settings":{"title":"Compnay","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"7d8301bd","elType":"widget","settings":{"icon_list":[{"text":"Terms & Conditions","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Privacy Policy","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Project Protection","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false},{"id":"435807f1","elType":"column","settings":{"_column_size":20,"_inline_size":18.5090000000000003410605131648480892181396484375},"elements":[{"id":"5d158497","elType":"widget","settings":{"title":"About","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"54f5652d","elType":"widget","settings":{"icon_list":[{"text":"Company Terms","icon":"","_id":"0e948a1","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Fashion Designer","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Press Kit","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Store","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false},{"id":"5deeccd9","elType":"column","settings":{"_column_size":20,"_inline_size":20.175000000000000710542735760100185871124267578125},"elements":[{"id":"29dd309d","elType":"widget","settings":{"title":"Resources","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"1f66057a","elType":"widget","settings":{"icon_list":[{"text":"Blog","icon":"","_id":"0e948a1","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Advertisement","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false}],"isInner":false},{"id":"6e53c751","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#375699","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.73)"},"elements":[{"id":"1a83c551","elType":"column","settings":{"_column_size":100},"elements":[{"id":"4364ac84","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Reign Footer #3</title>
+		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-3</link>
+		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-3</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>315</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[reign-footer-3]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"2519dc53","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#3b5998","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.68)","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"2c790c89","elType":"column","settings":{"_column_size":100},"elements":[{"id":"7002a1b4","elType":"widget","settings":{"icon_list":[{"text":"Home","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"About us","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Services","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":50},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","view":"inline","space_between_mobile":{"unit":"px","size":10},"icon_align":"center","icon_align_mobile":"center","icon_size":{"unit":"px","size":6},"icon_size_mobile":{"unit":"px","size":6},"text_indent":{"unit":"px","size":10},"icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"700","icon_typography_text_transform":"uppercase"},"elements":[],"widgetType":"icon-list"},{"id":"207f0463","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"c24f841","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"bd99729","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","link":{"url":"","is_external":"true","nofollow":""},"_id":"d201bfc"},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"e0c8a42"}],"icon_color":"custom","icon_primary_color":"#ffffff","icon_secondary_color":"#3b5998","icon_size":{"unit":"px","size":18},"icon_padding":{"unit":"em","size":0.59999999999999997779553950749686919152736663818359375},"icon_spacing":{"unit":"px","size":15},"_margin":{"unit":"px","top":"30","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"},{"id":"1d2cc86e","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Reign Footer #2</title>
+		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-2</link>
+		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-2</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>316</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[reign-footer-2]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
+		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
+		<wp:meta_value><![CDATA[[{"id":"6a4b6aaa","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#3b5998","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"50343f77","elType":"column","settings":{"_column_size":100},"elements":[{"id":"5e8fa771","elType":"section","settings":{"gap":"no","content_position":"top","structure":"50"},"elements":[{"id":"32d83240","elType":"column","settings":{"_column_size":20,"_inline_size":null},"elements":[{"id":"34b9ff73","elType":"widget","settings":{"title":"Resources","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"27ea6e3","elType":"widget","settings":{"icon_list":[{"text":"About Us","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Press","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Blog","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Partner sign in","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Affiliate program","icon":"","_id":"c507f02","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"201be85e","elType":"column","settings":{"_column_size":20,"_inline_size":null},"elements":[{"id":"f11e22b","elType":"widget","settings":{"title":"COMPANY","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"1b0f8259","elType":"widget","settings":{"icon_list":[{"text":"Our Story","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Terms of Services","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Privacy Policy","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Return Policy","icon":"","_id":"65d5830","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"d79ecc8","elType":"column","settings":{"_column_size":20,"_inline_size":18.83899999999999863575794734060764312744140625},"elements":[{"id":"3a4ab2ec","elType":"widget","settings":{"title":"Support","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"165318b1","elType":"widget","settings":{"icon_list":[{"text":"How it work","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Email Us","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Live Chat","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"206818fb","elType":"column","settings":{"_column_size":20,"_inline_size":8.0359999999999995878852132591418921947479248046875},"elements":[],"isInner":true},{"id":"2c3cc7ae","elType":"column","settings":{"_column_size":20,"_inline_size":33.125},"elements":[{"id":"f8815ba","elType":"widget","settings":{"branding_title_color":"#ffffff","title_typography_typography":"custom","title_typography_font_family":"Lobster Two","title_typography_font_size":{"unit":"px","size":36}},"elements":[],"widgetType":"wbcom-branding"},{"id":"130b1268","elType":"widget","settings":{"editor":"Duis et consectetur nulla. In nisl urna, varius non quam sed, lacinia ornare erat. Nullam non nibh eget mi bibendum dapibus. Duis venenatis ultrices porttitor. Quisque lectus dui, tincidunt ut eleifend sit amet, rhoncus ac magna. Fusce cursus metus sit amet eros aliquam dictum. ","align":"left","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":14},"typography_font_weight":"400","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"text-editor"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"1c95f4e2","elType":"section","settings":{"stretch_section":"section-stretched","content_position":"middle","structure":"20","background_background":"classic","background_color":"#3b5998","border_border":"solid","border_width":{"unit":"px","top":"1","right":"0","bottom":"0","left":"0","isLinked":false},"border_color":"rgba(255,255,255,0.18)","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.64)","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true}},"elements":[{"id":"650867dc","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","space_between_widgets":0},"elements":[{"id":"b0fb295","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13},"align_mobile":"center"},"elements":[],"widgetType":"text-editor"}],"isInner":false},{"id":"5807455b","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","space_between_widgets":0,"margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true}},"elements":[{"id":"93238e8","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"4b1d885","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"e66dfc6","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","link":{"url":"","is_external":"true","nofollow":""},"_id":"8af8c20"},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"c725efd"},{"social":"fa fa-wordpress","link":{"url":"","is_external":"true","nofollow":""},"_id":"3ed26cf"},{"social":"fa fa-github","link":{"url":"","is_external":"true","nofollow":""},"_id":"b44559a"}],"shape":"circle","align":"right","align_mobile":"center","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_secondary_color":"#ffffff","icon_size":{"unit":"px","size":16},"icon_padding":{"unit":"em","size":0.5},"icon_spacing":{"unit":"px","size":5},"hover_primary_color":"#ffffff","hover_secondary_color":"#3b5998"},"elements":[],"widgetType":"social-icons"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -5606,168 +5539,185 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home V3</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/15/</link>
 		<pubDate>Mon, 29 Oct 2018 11:23:18 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
 		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?page_id=507</guid>
 		<description></description>
-		<content:encoded><![CDATA[<h1>A user friendly Job portal</h1>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>		
-										<img width="1024" height="768" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-1024x768.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h2>HOW IT WORKS</h2>		
-		<p>Find Jobs, Employment &amp; Career Opportunities</p>		
-				<h3>
-					Register an account
-				</h3>
-								<p>Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-				<h3>
-					Specify & search your job
-				</h3>
-								<p>Browse profiles, reviews, and proposals then interview top candidates. Hire a favorite and begin your project.</p>
-				<h3>
-					Apply for job
-				</h3>
-								<p>Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.</p>
-			<h2>RECOMMEND JOBS</h2>		
-		<p>Find Jobs, Employment &amp; Career Opportunities</p>[jobmate_job_listing job_list_layout="job-list-default-view" per_page="6"]		
-			<a href="#" role="button">
-						Browse Now
-					</a>
-				0
-				+
-							Job Posted
-				0
-				+
-							Job Filled
-				0
-				+
-							Companies
-				0
-				+
-							Members
-			<h2>RECOMMEND RESUME</h2>		
-		<p>Find Resume, Employment &amp; Career Opportunities</p>[jobmate_resume_listing resume_list_layout="resume-list-default-view" per_page="6"]		
-			<a href="#" role="button">
-						Browse Now
-					</a>
-			<h2>Join Thousands of Companies That Rely on Jobmate</h2>		
-		<p>Jobmate offers a way to completely optimize your entire recruiting process. Find better candidates, conduct more focused interviews, and make data-driven hiring decisions.</p>		
-			<a href="#" role="button">
-						Contact  Us
-					</a>
-			<h2>Find Your Related Categories</h2>		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Accountancy</h5>		
-		<p>2 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Banking</h5>		
-		<p>5 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Digital & Creative</h5>		
-		<p>3 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Marketing & PR</h5>		
-		<p>4 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Charity & Voluntary</h5>		
-		<p>2 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Graduate</h5>		
-		<p>6 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>IT Contractor</h5>		
-		<p>8 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Estate Agency</h5>		
-		<p>2 jobs</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Legal jobs</h5>		
-		<p>1 job</p>		
-										<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign" />											
-			<h5>Leisure & Tourism</h5>		
-		<p>4 jobs</p>		
-			<a href="#" role="button">
-						View all jobs
-					</a>
-										<img width="1024" height="768" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-1024x768.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 1024px) 100vw, 1024px" />											
-			<h2>Fully Responsive & Compatible with All Devices</h2>		
-		Design of Jobmate Theme is dedicated mobile design that looks perfect on all devices it has best responsive sliders that works smooth on mobile and tablets		
-			<h2>OUR TESTIMONIALS</h2>		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit.		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>John Anderson</h4>		
-			<h6> - Branding Manager</h6>		
-		I have dealt with various recruitment portals but the kind of services Jobmate offers are outstanding. The portal is very user friendly and quick in responding to the user’s requirements.		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>Camille Gail</h4>		
-			<h6> - Branding Manager</h6>		
-		Jobmate is a great platform for talent sourcing, a wide range of profiles from all specialties is available, and the site is very much user friendly. The team is very helpful!		
-										<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px" />											
-			<h4>Richard Sanders</h4>		
-			<h6> - Branding Manager</h6>		
-		My experience with Jobmate has been incredible. They have a comprehensive database with a varied range of profiles spanning nationalities and professions.		
-			<h2>GOT A QUESTION?</h2>		
-		Let us now about your issue and a Professional will reach you out.		
-			<a href="#" role="button">
-						Contact  Us
-					</a>
-			<h2>CAREER ADVICE</h2>		
-		A better career is out there. We'll help you find it to use.		
-				<article>
+		<content:encoded><![CDATA[<h1>A user friendly Job portal</h1>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
+
+<img width="1024" height="768" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-1024x768.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 1024px) 100vw, 1024px">
+<h2>HOW IT WORKS</h2>
+Find Jobs, Employment &amp; Career Opportunities
+<h3>
+					Register an account</h3>
+Post a job to tell us about your project. We'll quickly match you with the right freelancers.
+<h3>
+					Specify &amp; search your job</h3>
+Browse profiles, reviews, and proposals then interview top candidates. Hire a favorite and begin your project.
+<h3>
+					Apply for job</h3>
+Use the Upwork platform to chat, share files, and collaborate from your desktop or on the go.
+<h2>RECOMMEND JOBS</h2>
+Find Jobs, Employment &amp; Career Opportunities
+
+[jobmate_job_listing job_list_layout="job-list-default-view" per_page="6"]
+<a href="#" role="button">
+Browse Now
+</a>
+0
++
+Job Posted
+0
++
+Job Filled
+0
++
+Companies
+0
++
+Members
+<h2>RECOMMEND RESUME</h2>
+Find Resume, Employment &amp; Career Opportunities
+
+[jobmate_resume_listing resume_list_layout="resume-list-default-view" per_page="6"]
+<a href="#" role="button">
+Browse Now
+</a>
+<h2>Join Thousands of Companies That Rely on Jobmate</h2>
+Jobmate offers a way to completely optimize your entire recruiting process. Find better candidates, conduct more focused interviews, and make data-driven hiring decisions.
+
+<a href="#" role="button">
+Contact  Us
+</a>
+<h2>Find Your Related Categories</h2>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Accountancy</h5>
+2 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Banking</h5>
+5 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Digital &amp; Creative</h5>
+3 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Marketing &amp; PR</h5>
+4 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Charity &amp; Voluntary</h5>
+2 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Graduate</h5>
+6 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>IT Contractor</h5>
+8 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Estate Agency</h5>
+2 jobs
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Legal jobs</h5>
+1 job
+
+<img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9ciedmz69qpheyaxmqs86m9nb6yb5zb3nj98.jpg" title="wo-reign" alt="wo-reign">
+<h5>Leisure &amp; Tourism</h5>
+4 jobs
+
+<a href="#" role="button">
+View all jobs
+</a>
+<img width="1024" height="768" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-1024x768.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 1024px) 100vw, 1024px">
+<h2>Fully Responsive &amp; Compatible with All Devices</h2>
+Design of Jobmate Theme is dedicated mobile design that looks perfect on all devices it has best responsive sliders that works smooth on mobile and tablets
+<h2>OUR TESTIMONIALS</h2>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>John Anderson</h4>
+<h6> - Branding Manager</h6>
+I have dealt with various recruitment portals but the kind of services Jobmate offers are outstanding. The portal is very user friendly and quick in responding to the user’s requirements.
+<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>Camille Gail</h4>
+<h6> - Branding Manager</h6>
+Jobmate is a great platform for talent sourcing, a wide range of profiles from all specialties is available, and the site is very much user friendly. The team is very helpful!
+<img width="150" height="150" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign-150x150.jpg 150w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg 300w" sizes="(max-width: 150px) 100vw, 150px">
+<h4>Richard Sanders</h4>
+<h6> - Branding Manager</h6>
+My experience with Jobmate has been incredible. They have a comprehensive database with a varied range of profiles spanning nationalities and professions.
+<h2>GOT A QUESTION?</h2>
+Let us now about your issue and a Professional will reach you out.
+<a href="#" role="button">
+Contact  Us
+</a>
+<h2>CAREER ADVICE</h2>
+A better career is out there. We'll help you find it to use.
+
+<article>
 				<a href="https://try.wbcomdesigns.com/15/why-long-term-unemployment-isnt-as-bad-as-you-think/">
-			<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/15/why-long-term-unemployment-isnt-as-bad-as-you-think/">
-				Why Long-Term Unemployment Isn’t As Bad As You Think			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-				<article>
+Why Long-Term Unemployment Isn’t As Bad As You Think			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<article>
 				<a href="https://try.wbcomdesigns.com/15/6-ways-your-job-is-losing-you-future-earnings/">
-			<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/15/6-ways-your-job-is-losing-you-future-earnings/">
-				6 Ways Your Job is Losing You Future Earnings			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-				<article>
+6 Ways Your Job is Losing You Future Earnings			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<article>
 				<a href="https://try.wbcomdesigns.com/15/skills-training-gap-among-employees-revealed/">
-			<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px" />
-		</a>
-				Uncategorized
-				<h3>
+<img width="300" height="225" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-1024x768.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img-400x300.jpg 400w, https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/reign-img.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px">
+</a>
+Uncategorized
+<h3>
 			<a href="https://try.wbcomdesigns.com/15/skills-training-gap-among-employees-revealed/">
-				Skills Training Gap Among Employees Revealed			</a>
-		</h3>
-			Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...		
-			October 26, 2018		
-		</article>
-			<h2>COMPANIES WE'VE HELPED</h2>		
-		<p>Some of the companies we've helped recruit excellent applicants over the years.</p>		
-				<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9e3esflzjb3zv0iqalqx7j91ig05mv9yqy94.jpg" alt="wo-reign" /></figure><figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0rbyks5jzs7pm5sdh64hy8v78d39enrarnvn4kx4.jpg" alt="wo-reign" /></figure><figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-1-od0rbzimce12jbksmvvsozppgl3qayie3ff5cx36qw.jpg" alt="wo-reign" /></figure><figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-2-od0rc1eaq23n6ji2bwp1tz8mncugqcpuroq4bh0eeg.jpg" alt="wo-reign" /></figure><figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-3-od0rc47tak7i5ddyvfwxjgj0figkdg11s2okraw7vs.jpg" alt="wo-reign" /></figure><figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-4-od0rc71bv2bd479vez4t8xte7o2o0jc8sgn174s1d4.jpg" alt="wo-reign" /></figure>			
-			<h3>Create Resume Free</h3>		
-			<h2>WE WILL HELP YOU REACH OUT TO EMPLOYERS</h2>		
-		Lorem ipsum dolor sit amsssasasaset, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolfdfore magna abo.		
-			<a href="#" role="button">
-						Register with us
-					</a>
-										<img width="768" height="576" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 768px) 100vw, 768px" />]]></content:encoded>
+Skills Training Gap Among Employees Revealed			</a></h3>
+Queequeg removed himself to just beyond the head of the sleeper, and lighted his tomahawk pipe. We kept the pipe...
+October 26, 2018
+</article>
+<h2>COMPANIES WE'VE HELPED</h2>
+Some of the companies we've helped recruit excellent applicants over the years.
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0prk9e3esflzjb3zv0iqalqx7j91ig05mv9yqy94.jpg" alt="wo-reign"></figure>
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-od0rbyks5jzs7pm5sdh64hy8v78d39enrarnvn4kx4.jpg" alt="wo-reign"></figure>
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-1-od0rbzimce12jbksmvvsozppgl3qayie3ff5cx36qw.jpg" alt="wo-reign"></figure>
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-2-od0rc1eaq23n6ji2bwp1tz8mncugqcpuroq4bh0eeg.jpg" alt="wo-reign"></figure>
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-3-od0rc47tak7i5ddyvfwxjgj0figkdg11s2okraw7vs.jpg" alt="wo-reign"></figure>
+<figure><img src="https://try.wbcomdesigns.com/15/wp-content/uploads/elementor/thumbs/wo-reign-4-od0rc71bv2bd479vez4t8xte7o2o0jc8sgn174s1d4.jpg" alt="wo-reign"></figure>
+<h3>Create Resume Free</h3>
+<h2>WE WILL HELP YOU REACH OUT TO EMPLOYERS</h2>
+Lorem ipsum dolor sit amsssasasaset, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolfdfore magna abo.
+<a href="#" role="button">
+Register with us
+</a>
+<img width="768" height="576" src="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg" alt="" srcset="https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-768x576.jpg 768w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-300x225.jpg 300w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2.jpg 1024w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-900x675.jpg 900w, https://try.wbcomdesigns.com/15/wp-content/uploads/2019/08/reign-img-2-400x300.jpg 400w" sizes="(max-width: 768px) 100vw, 768px">]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>507</wp:post_id>
 		<wp:post_date><![CDATA[2018-10-29 11:23:18]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2018-10-29 11:23:18]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[home-v3]]></wp:post_name>
+		<wp:post_name><![CDATA[home]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
@@ -6488,6 +6438,36 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
+		<title>Login Designer</title>
+		<link>https://try.wbcomdesigns.com/15/login-designer/</link>
+		<pubDate>Wed, 04 Sep 2019 13:01:00 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/login-designer/</guid>
+		<description></description>
+		<content:encoded><![CDATA[This page is used by <a href="https://logindesigner.com">Login Designer</a> to preview the login forms in the Customizer. Please don't delete this page. Thanks!]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>881</wp:post_id>
+		<wp:post_date><![CDATA[2019-09-04 13:01:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2019-09-04 13:01:00]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[login-designer]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
+		<wp:meta_value><![CDATA[template-login-designer.php]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[inline_featured_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title>John Doe</title>
 		<link>https://try.wbcomdesigns.com/15/resume/john-akbwkb6ko-senior-professional-network-administrator-chicago/</link>
 		<pubDate>Mon, 22 Oct 2018 13:19:31 +0000</pubDate>
@@ -6989,6 +6969,314 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
+		<title>Cooper Aniston</title>
+		<link>https://try.wbcomdesigns.com/15/resume/cooper-iehgcj0-middle-sales-manager-usa/</link>
+		<pubDate>Tue, 23 Oct 2018 11:07:58 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/cooper-iehgcj0-middle-sales-manager-usa/</guid>
+		<description></description>
+		<content:encoded><![CDATA[Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>118</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-23 11:07:58]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-23 11:07:58]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[cooper-iehgcj0-middle-sales-manager-usa]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[resume]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="resume_skill" nicename="communication"><![CDATA[Communication]]></category>
+		<category domain="resume_skill" nicename="marketing"><![CDATA[Marketing]]></category>
+		<category domain="resume_skill" nicename="project-management"><![CDATA[Project Management]]></category>
+		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:14:"Nestle Ukraine";s:9:"job_title";s:11:"Sales Agent";s:4:"date";s:9:"2009-2015";s:5:"notes";s:342:"Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:39:"Institute of Economic Studies of Odessa";s:13:"qualification";s:28:"Bachelor in Economic Studies";s:4:"date";s:9:"2007-2014";s:5:"notes";s:342:"Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Marketing, Project Management, Communication, Psychology]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Cooper Aniston]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
+		<wp:meta_value><![CDATA[^I%eHgcJ*0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Diaz Nelson</title>
+		<link>https://try.wbcomdesigns.com/15/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/</link>
+		<pubDate>Tue, 23 Oct 2018 11:42:04 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/</guid>
+		<description></description>
+		<content:encoded><![CDATA[Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>119</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-23 11:42:04]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-23 11:42:04]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[resume]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="resume_skill" nicename="journalism"><![CDATA[Journalism]]></category>
+		<category domain="resume_skill" nicename="persuasive-communication"><![CDATA[Persuasive Communication]]></category>
+		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
+		<category domain="resume_skill" nicename="public-relations"><![CDATA[Public Relations]]></category>
+		<category domain="resume_skill" nicename="time-management"><![CDATA[Time Management]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:2:{i:0;a:4:{s:8:"location";s:28:"School of Journalism Dresden";s:13:"qualification";s:45:"Bachelor in Journalism and Mass Communication";s:4:"date";s:9:"2004-2008";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}i:1;a:4:{s:8:"location";s:32:"University of Journalism Hamburg";s:13:"qualification";s:43:"Master in Journalism and Mass Communication";s:4:"date";s:9:"2009-2012";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Journalism, Time Management, Persuasive Communication, Psychology, Public Relations]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
+		<wp:meta_value><![CDATA[MP$F#gB5cT]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Diaz Nelson]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:14:"BBC Look North";s:9:"job_title";s:23:"Community Correspondent";s:4:"date";s:9:"2014-2016";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title>Robert Perez</title>
+		<link>https://try.wbcomdesigns.com/15/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/</link>
+		<pubDate>Tue, 23 Oct 2018 12:27:41 +0000</pubDate>
+		<dc:creator><![CDATA[vapvarun]]></dc:creator>
+		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/</guid>
+		<description></description>
+		<content:encoded><![CDATA[Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>120</wp:post_id>
+		<wp:post_date><![CDATA[2018-10-23 12:27:41]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2018-10-23 12:27:41]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[resume]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="resume_skill" nicename="finance"><![CDATA[Finance]]></category>
+		<category domain="resume_skill" nicename="logistics"><![CDATA[Logistics]]></category>
+		<category domain="resume_skill" nicename="marketing"><![CDATA[Marketing]]></category>
+		<category domain="resume_skill" nicename="production-planning"><![CDATA[Production Planning]]></category>
+		<category domain="resume_skill" nicename="risks-management"><![CDATA[Risks Management]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Logistics, Risks Management, Production Planning, Marketing, Finance]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
+		<wp:meta_value><![CDATA[$k88#7jZlC]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Robert Perez]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:24:"College of Economy Essen";s:13:"qualification";s:35:"Bachelor in Marketing and Logistics";s:4:"date";s:9:"2000-2005";s:5:"notes";s:232:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:25:"Schnell Logistics Company";s:9:"job_title";s:20:"Transportation Agent";s:4:"date";s:9:"2006-2011";s:5:"notes";s:232:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";}}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title>Reign Topbar #2</title>
 		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-header=reign-topbar-2</link>
 		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
@@ -7451,194 +7739,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a auctor urna
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Reign Footer #4</title>
-		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-4</link>
-		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-4</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>314</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[reign-footer-4]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"bd7282f","elType":"section","settings":{"stretch_section":"section-stretched","structure":"50","background_background":"classic","background_color":"#3b5998","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.73)","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"1b6008b3","elType":"column","settings":{"_column_size":20,"_inline_size":18.1580000000000012505552149377763271331787109375,"heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.75)"},"elements":[{"id":"f554db6","elType":"widget","settings":{"title":"Contact us","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"4f50078c","elType":"widget","settings":{"editor":"Work with us 
-info@yourdomain.com","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false},{"id":"3181e51c","elType":"column","settings":{"_column_size":20,"_inline_size":22.894999999999999573674358543939888477325439453125},"elements":[{"id":"3569b2d4","elType":"widget","settings":{"title":"Visit Us","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"2a10cb70","elType":"widget","settings":{"editor":"8004 SE. Selby Drive 
-Butte, MT 59701","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"},{"id":"895cd4c","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"ded9639","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"507bc35","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","_id":"84067a1","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"0acd879"}],"shape":"circle","align":"left","icon_color":"custom","icon_primary_color":"#ffffff","icon_secondary_color":"#3b5998","icon_size":{"unit":"px","size":13},"icon_padding":{"unit":"em","size":0.6999999999999999555910790149937383830547332763671875},"icon_spacing":{"unit":"px","size":10}},"elements":[],"widgetType":"social-icons"}],"isInner":false},{"id":"7a334d9","elType":"column","settings":{"_column_size":20,"_inline_size":20.263000000000001676880856393836438655853271484375},"elements":[{"id":"45cb7342","elType":"widget","settings":{"title":"Compnay","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"7d8301bd","elType":"widget","settings":{"icon_list":[{"text":"Terms & Conditions","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Privacy Policy","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Project Protection","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false},{"id":"435807f1","elType":"column","settings":{"_column_size":20,"_inline_size":18.5090000000000003410605131648480892181396484375},"elements":[{"id":"5d158497","elType":"widget","settings":{"title":"About","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"54f5652d","elType":"widget","settings":{"icon_list":[{"text":"Company Terms","icon":"","_id":"0e948a1","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Fashion Designer","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Press Kit","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Store","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false},{"id":"5deeccd9","elType":"column","settings":{"_column_size":20,"_inline_size":20.175000000000000710542735760100185871124267578125},"elements":[{"id":"29dd309d","elType":"widget","settings":{"title":"Resources","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"1f66057a","elType":"widget","settings":{"icon_list":[{"text":"Blog","icon":"","_id":"0e948a1","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Advertisement","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":5},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli"},"elements":[],"widgetType":"icon-list"}],"isInner":false}],"isInner":false},{"id":"6e53c751","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#375699","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.73)"},"elements":[{"id":"1a83c551","elType":"column","settings":{"_column_size":100},"elements":[{"id":"4364ac84","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Reign Footer #3</title>
-		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-3</link>
-		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-3</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>315</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[reign-footer-3]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"2519dc53","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#3b5998","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.68)","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"2c790c89","elType":"column","settings":{"_column_size":100},"elements":[{"id":"7002a1b4","elType":"widget","settings":{"icon_list":[{"text":"Home","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"About us","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Services","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":50},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","view":"inline","space_between_mobile":{"unit":"px","size":10},"icon_align":"center","icon_align_mobile":"center","icon_size":{"unit":"px","size":6},"icon_size_mobile":{"unit":"px","size":6},"text_indent":{"unit":"px","size":10},"icon_typography_font_size":{"unit":"px","size":13},"icon_typography_font_weight":"700","icon_typography_text_transform":"uppercase"},"elements":[],"widgetType":"icon-list"},{"id":"207f0463","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"c24f841","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"bd99729","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","link":{"url":"","is_external":"true","nofollow":""},"_id":"d201bfc"},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"e0c8a42"}],"icon_color":"custom","icon_primary_color":"#ffffff","icon_secondary_color":"#3b5998","icon_size":{"unit":"px","size":18},"icon_padding":{"unit":"em","size":0.59999999999999997779553950749686919152736663818359375},"icon_spacing":{"unit":"px","size":15},"_margin":{"unit":"px","top":"30","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"social-icons"},{"id":"1d2cc86e","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","align":"center","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13}},"elements":[],"widgetType":"text-editor"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Reign Footer #2</title>
-		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-2</link>
-		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-2</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>316</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-26 10:17:41]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-26 10:17:41]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[reign-footer-2]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[reign-elemtr-footer]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
-		<wp:meta_value><![CDATA[elementor_canvas]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_reviews_enabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_display_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_num_reviews]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_llms_multiple_reviews_disabled]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_edit_mode]]></wp:meta_key>
-		<wp:meta_value><![CDATA[builder]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_template_type]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"6a4b6aaa","elType":"section","settings":{"stretch_section":"section-stretched","background_background":"classic","background_color":"#3b5998","padding":{"unit":"px","top":"40","right":"0","bottom":"40","left":"0","isLinked":false}},"elements":[{"id":"50343f77","elType":"column","settings":{"_column_size":100},"elements":[{"id":"5e8fa771","elType":"section","settings":{"gap":"no","content_position":"top","structure":"50"},"elements":[{"id":"32d83240","elType":"column","settings":{"_column_size":20,"_inline_size":null},"elements":[{"id":"34b9ff73","elType":"widget","settings":{"title":"Resources","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"27ea6e3","elType":"widget","settings":{"icon_list":[{"text":"About Us","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Press","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Blog","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Partner sign in","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Affiliate program","icon":"","_id":"c507f02","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"201be85e","elType":"column","settings":{"_column_size":20,"_inline_size":null},"elements":[{"id":"f11e22b","elType":"widget","settings":{"title":"COMPANY","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"1b0f8259","elType":"widget","settings":{"icon_list":[{"text":"Our Story","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Contact","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Terms of Services","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Privacy Policy","icon":"","_id":"fc93a18","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Return Policy","icon":"","_id":"65d5830","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"d79ecc8","elType":"column","settings":{"_column_size":20,"_inline_size":18.83899999999999863575794734060764312744140625},"elements":[{"id":"3a4ab2ec","elType":"widget","settings":{"title":"Support","header_size":"h4","title_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":15},"typography_font_weight":"700","typography_text_transform":"uppercase"},"elements":[],"widgetType":"heading"},{"id":"165318b1","elType":"widget","settings":{"icon_list":[{"text":"How it work","icon":"","_id":"c03b83f","link":{"url":"#","is_external":"","nofollow":""}},{"text":"FAQ","icon":"","_id":"d00739b","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Email Us","icon":"","_id":"39becc4","link":{"url":"#","is_external":"","nofollow":""}},{"text":"Live Chat","icon":"","_id":"e8c5b21","link":{"url":"#","is_external":"","nofollow":""}}],"space_between":{"unit":"px","size":4},"icon_color":"#ffffff","text_color":"#ffffff","text_color_hover":"rgba(255,255,255,0.79)","icon_typography_typography":"custom","icon_typography_font_family":"Muli","_margin_mobile":{"unit":"px","top":"0","right":"0","bottom":"30","left":"0","isLinked":false}},"elements":[],"widgetType":"icon-list"}],"isInner":true},{"id":"206818fb","elType":"column","settings":{"_column_size":20,"_inline_size":8.0359999999999995878852132591418921947479248046875},"elements":[],"isInner":true},{"id":"2c3cc7ae","elType":"column","settings":{"_column_size":20,"_inline_size":33.125},"elements":[{"id":"f8815ba","elType":"widget","settings":{"branding_title_color":"#ffffff","title_typography_typography":"custom","title_typography_font_family":"Lobster Two","title_typography_font_size":{"unit":"px","size":36}},"elements":[],"widgetType":"wbcom-branding"},{"id":"130b1268","elType":"widget","settings":{"editor":"Duis et consectetur nulla. In nisl urna, varius non quam sed, lacinia ornare erat. Nullam non nibh eget mi bibendum dapibus. Duis venenatis ultrices porttitor. Quisque lectus dui, tincidunt ut eleifend sit amet, rhoncus ac magna. Fusce cursus metus sit amet eros aliquam dictum. ","align":"left","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":14},"typography_font_weight":"400","_margin":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false},"_padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":false}},"elements":[],"widgetType":"text-editor"}],"isInner":true}],"isInner":true}],"isInner":false}],"isInner":false},{"id":"1c95f4e2","elType":"section","settings":{"stretch_section":"section-stretched","content_position":"middle","structure":"20","background_background":"classic","background_color":"#3b5998","border_border":"solid","border_width":{"unit":"px","top":"1","right":"0","bottom":"0","left":"0","isLinked":false},"border_color":"rgba(255,255,255,0.18)","heading_color":"#ffffff","color_text":"#ffffff","color_link":"#ffffff","color_link_hover":"rgba(255,255,255,0.64)","margin":{"unit":"px","top":"0","right":0,"bottom":"0","left":0,"isLinked":true},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true}},"elements":[{"id":"650867dc","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","space_between_widgets":0},"elements":[{"id":"b0fb295","elType":"widget","settings":{"editor":"© 2018 Wbcom Designs. All Rights Reserved.","text_color":"#ffffff","typography_typography":"custom","typography_font_family":"Muli","typography_font_size":{"unit":"px","size":13},"align_mobile":"center"},"elements":[],"widgetType":"text-editor"}],"isInner":false},{"id":"5807455b","elType":"column","settings":{"_column_size":50,"_inline_size":null,"content_position":"center","space_between_widgets":0,"margin":{"unit":"px","top":"10","right":"0","bottom":"0","left":"0","isLinked":false},"padding":{"unit":"px","top":"0","right":"0","bottom":"0","left":"0","isLinked":true}},"elements":[{"id":"93238e8","elType":"widget","settings":{"social_icon_list":[{"social":"fa fa-facebook","_id":"4b1d885","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-twitter","_id":"e66dfc6","link":{"url":"","is_external":"true","nofollow":""}},{"social":"fa fa-instagram","link":{"url":"","is_external":"true","nofollow":""},"_id":"8af8c20"},{"social":"fa fa-pinterest","link":{"url":"","is_external":"true","nofollow":""},"_id":"c725efd"},{"social":"fa fa-wordpress","link":{"url":"","is_external":"true","nofollow":""},"_id":"3ed26cf"},{"social":"fa fa-github","link":{"url":"","is_external":"true","nofollow":""},"_id":"b44559a"}],"shape":"circle","align":"right","align_mobile":"center","icon_color":"custom","icon_primary_color":"rgba(255,255,255,0)","icon_secondary_color":"#ffffff","icon_size":{"unit":"px","size":16},"icon_padding":{"unit":"em","size":0.5},"icon_spacing":{"unit":"px","size":5},"hover_primary_color":"#ffffff","hover_secondary_color":"#3b5998"},"elements":[],"widgetType":"social-icons"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title>Reign Footer #1</title>
 		<link>https://try.wbcomdesigns.com/15/?reign-elemtr-footer=reign-footer-1</link>
 		<pubDate>Fri, 26 Oct 2018 10:17:41 +0000</pubDate>
@@ -7894,314 +7994,6 @@ Butte, MT 59701","text_color":"#ffffff","typography_typography":"custom","typogr
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0.4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Cooper Aniston</title>
-		<link>https://try.wbcomdesigns.com/15/resume/cooper-iehgcj0-middle-sales-manager-usa/</link>
-		<pubDate>Tue, 23 Oct 2018 11:07:58 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/cooper-iehgcj0-middle-sales-manager-usa/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>118</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-23 11:07:58]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-23 11:07:58]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[cooper-iehgcj0-middle-sales-manager-usa]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[resume]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="resume_skill" nicename="communication"><![CDATA[Communication]]></category>
-		<category domain="resume_skill" nicename="marketing"><![CDATA[Marketing]]></category>
-		<category domain="resume_skill" nicename="project-management"><![CDATA[Project Management]]></category>
-		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:14:"Nestle Ukraine";s:9:"job_title";s:11:"Sales Agent";s:4:"date";s:9:"2009-2015";s:5:"notes";s:342:"Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:39:"Institute of Economic Studies of Odessa";s:13:"qualification";s:28:"Bachelor in Economic Studies";s:4:"date";s:9:"2007-2014";s:5:"notes";s:342:"Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Marketing, Project Management, Communication, Psychology]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Cooper Aniston]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
-		<wp:meta_value><![CDATA[^I%eHgcJ*0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Diaz Nelson</title>
-		<link>https://try.wbcomdesigns.com/15/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/</link>
-		<pubDate>Tue, 23 Oct 2018 11:42:04 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>119</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-23 11:42:04]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-23 11:42:04]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[diaz-mpfgb5ct-senior-news-presenter-san-francisco-usa]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[resume]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="resume_skill" nicename="journalism"><![CDATA[Journalism]]></category>
-		<category domain="resume_skill" nicename="persuasive-communication"><![CDATA[Persuasive Communication]]></category>
-		<category domain="resume_skill" nicename="psychology"><![CDATA[Psychology]]></category>
-		<category domain="resume_skill" nicename="public-relations"><![CDATA[Public Relations]]></category>
-		<category domain="resume_skill" nicename="time-management"><![CDATA[Time Management]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:2:{i:0;a:4:{s:8:"location";s:28:"School of Journalism Dresden";s:13:"qualification";s:45:"Bachelor in Journalism and Mass Communication";s:4:"date";s:9:"2004-2008";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}i:1;a:4:{s:8:"location";s:32:"University of Journalism Hamburg";s:13:"qualification";s:43:"Master in Journalism and Mass Communication";s:4:"date";s:9:"2009-2012";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Journalism, Time Management, Persuasive Communication, Psychology, Public Relations]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
-		<wp:meta_value><![CDATA[MP$F#gB5cT]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Diaz Nelson]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:14:"BBC Look North";s:9:"job_title";s:23:"Community Correspondent";s:4:"date";s:9:"2014-2016";s:5:"notes";s:208:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title>Robert Perez</title>
-		<link>https://try.wbcomdesigns.com/15/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/</link>
-		<pubDate>Tue, 23 Oct 2018 12:27:41 +0000</pubDate>
-		<dc:creator><![CDATA[vapvarun]]></dc:creator>
-		<guid isPermaLink="false">https://try.wbcomdesigns.com/15/resume/robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa/</guid>
-		<description></description>
-		<content:encoded><![CDATA[Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>120</wp:post_id>
-		<wp:post_date><![CDATA[2018-10-23 12:27:41]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2018-10-23 12:27:41]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[robert-k887jzlc-middle-specialist-in-transportation-san-francisco-usa]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[resume]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="resume_skill" nicename="finance"><![CDATA[Finance]]></category>
-		<category domain="resume_skill" nicename="logistics"><![CDATA[Logistics]]></category>
-		<category domain="resume_skill" nicename="marketing"><![CDATA[Marketing]]></category>
-		<category domain="resume_skill" nicename="production-planning"><![CDATA[Production Planning]]></category>
-		<category domain="resume_skill" nicename="risks-management"><![CDATA[Risks Management]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_skills]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Logistics, Risks Management, Production Planning, Marketing, Finance]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_content]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_video]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_title]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_location]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_photo]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/15/wp-content/uploads/2018/10/wo-reign.jpg]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_featured]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_name_prefix]]></wp:meta_key>
-		<wp:meta_value><![CDATA[$k88#7jZlC]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_public_submission]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_applying_for_job_id]]></wp:meta_key>
-		<wp:meta_value><![CDATA[0]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Robert Perez]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_email]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_submission_finalized]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_expires]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_resume_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_links]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:0:{}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_education]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"location";s:24:"College of Economy Essen";s:13:"qualification";s:35:"Bachelor in Marketing and Logistics";s:4:"date";s:9:"2000-2005";s:5:"notes";s:232:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_candidate_experience]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:1:{i:0;a:4:{s:8:"employer";s:25:"Schnell Logistics Company";s:9:"job_title";s:20:"Transportation Agent";s:4:"date";s:9:"2006-2011";s:5:"notes";s:232:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";}}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>

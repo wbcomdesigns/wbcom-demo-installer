@@ -198,7 +198,7 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Technology]]></wp:term_name>
 	</wp:term>
-			<wp:term><wp:term_id>16</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[primary-menu]]></wp:term_slug><wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+			<wp:term><wp:term_id>16</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main-menu]]></wp:term_slug><wp:term_name><![CDATA[Main Menu]]></wp:term_name>
 </wp:term>
 	<wp:term><wp:term_id>17</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[user-menu]]></wp:term_slug><wp:term_name><![CDATA[User Menu]]></wp:term_name>
 </wp:term>
@@ -2339,7 +2339,7 @@ The most critical part of Tabla playing is explained in detailed and made it ea
 	display:none;
 }
 
-.primary-menu > li.current-menu-item a:before, .version-one .primary-menu > li.current-menu-item a:before, .version-two .primary-menu > li.current-menu-item a:before, .version-three .primary-menu > li.current-menu-item a:before{
+.main-menu > li.current-menu-item a:before, .version-one .main-menu > li.current-menu-item a:before, .version-two .main-menu > li.current-menu-item a:before, .version-three .main-menu > li.current-menu-item a:before{
 	  -webkit-transform: scaleX(1);
     -ms-transform: scaleX(1);
     transform: scaleX(1);
@@ -2953,7 +2953,7 @@ Topics include:
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -4991,7 +4991,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 		<wp:meta_value><![CDATA[https://try.wbcomdesigns.com/5/courses/]]></wp:meta_value>
@@ -5036,7 +5036,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 				Learnmate			</a>		
 					<p>A Learndash Theme</p>
 						<style type="text/css">
-				#site-navigation-1529322704 .primary-menu > li > a,
+				#site-navigation-1529322704 .main-menu > li > a,
 				#site-navigation-1529322704 .header-right .search-wrap,
 				#site-navigation-1529322704 .rg-icon-wrap,
 				#site-navigation-1529322704 .elementor-branding,
@@ -5046,14 +5046,14 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 				}
 				/*.header-right .rg-search-form-wrap,
 				.user-profile-menu,
-				.primary-menu .children, .primary-menu .sub-menu,
+				.main-menu .children, .main-menu .sub-menu,
 				.user-profile-menu,
 				.user-notifications .rg-dropdown, .user-notifications:hover .rg-dropdown {
 					top: px;
 				}*/
 			</style>
 			<nav id="site-navigation-1529322704" role="navigation">
-				<ul id="primary-menu"><li id="menu-item-38"><a href="https://try.wbcomdesigns.com/5/">Home</a></li>
+				<ul id="main-menu"><li id="menu-item-38"><a href="https://try.wbcomdesigns.com/5/">Home</a></li>
 <li id="menu-item-158"><a href="https://try.wbcomdesigns.com/5/courses/">Courses</a></li>
 <li id="menu-item-295"><a href="https://try.wbcomdesigns.com/5/my-profile/">My Profile</a></li>
 <li id="menu-item-39"><a href="https://try.wbcomdesigns.com/5/activity/">Activity</a></li>
@@ -5140,7 +5140,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5195,7 +5195,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5250,7 +5250,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5305,7 +5305,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5360,7 +5360,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5415,7 +5415,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -5470,7 +5470,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
@@ -5525,7 +5525,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -5580,7 +5580,7 @@ Switzerland: <a href="#" style="color:#1565c0">Niki</a>
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -6018,7 +6018,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title>Home</title>
+		<title>Home2</title>
 		<link>https://try.wbcomdesigns.com/5/home/</link>
 		<pubDate>Tue, 05 Jun 2018 11:23:22 +0000</pubDate>
 		<dc:creator><![CDATA[vapvarun]]></dc:creator>
@@ -6406,7 +6406,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		</wp:postmeta>
 							</item>
 					<item>
-		<title>Home demo</title>
+		<title>Home</title>
 		<link>https://try.wbcomdesigns.com/5/</link>
 		<pubDate>Mon, 25 Jun 2018 09:13:47 +0000</pubDate>
 		<dc:creator><![CDATA[wbcomteam]]></dc:creator>
@@ -6614,7 +6614,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 		<wp:meta_value><![CDATA[]]></wp:meta_value>
@@ -6669,7 +6669,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -6724,7 +6724,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -6779,7 +6779,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -6834,7 +6834,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -6889,7 +6889,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 		<wp:meta_value><![CDATA[489]]></wp:meta_value>
@@ -6944,7 +6944,7 @@ As a new WordPress user, you should go to <a href="https://try.wbcomdesigns.com/
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+										<category domain="nav_menu" nicename="main-menu"><![CDATA[Main Menu]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 		<wp:meta_value><![CDATA[custom]]></wp:meta_value>
@@ -7182,7 +7182,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_data]]></wp:meta_key>
-		<wp:meta_value><![CDATA[[{"id":"118c5dee","elType":"section","settings":{"gap":"no","custom_height":{"unit":"px","size":80},"content_position":"middle","structure":"30","background_background":"classic","background_color":"#000000","margin":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true},"padding_tablet":{"unit":"px","top":"30","right":"20","bottom":"30","left":"20","isLinked":false},"padding_mobile":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":false},"height":"min-height"},"elements":[{"id":"f02c88e","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"0df136f","elType":"widget","settings":{"branding_title_color":"#ffffff","align":"left"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":false},{"id":"175f5249","elType":"column","settings":{"_column_size":33,"_inline_size":null,"_inline_size_mobile":35},"elements":[{"id":"7f99220f","elType":"widget","settings":{"align_items":"left","animation_text":"sink","toggle_align":"right","color_menu_item":"#ffffff","color_menu_item_hover":"#00e4ff","pointer_color_menu_item_hover":"#00e4ff","menu_typography_typography":"custom","menu_typography_font_size":{"unit":"px","size":16},"pointer_width":{"unit":"px","size":8},"color_dropdown_item":"#000000","background_color_dropdown_item":"#f2f2f2","color_dropdown_item_hover":"#00ce1b","background_color_dropdown_item_hover":"#ededed","dropdown_typography_typography":"custom","dropdown_typography_font_size":{"unit":"px","size":15},"toggle_color":"#ffffff","toggle_color_hover":"#00ce1b","toggle_size":{"unit":"px","size":25},"toggle_border_width":{"unit":"px","size":0},"toggle_border_radius":{"unit":"px","size":0},"menu_typography_font_weight":"400","padding_vertical_menu_item":{"unit":"px","size":40},"full_width":"stretch","dropdown_top_distance_tablet":{"unit":"px","size":45},"dropdown_top_distance_mobile":{"unit":"px","size":35},"menu":"primary-menu","indicator":"chevron","padding_horizontal_menu_item":{"unit":"px","size":10},"menu_space_between":{"unit":"px","size":5}},"elements":[],"widgetType":"nav-menu"}],"isInner":false},{"id":"ba0e6ee","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"82f4560","elType":"widget","settings":[],"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
+		<wp:meta_value><![CDATA[[{"id":"118c5dee","elType":"section","settings":{"gap":"no","custom_height":{"unit":"px","size":80},"content_position":"middle","structure":"30","background_background":"classic","background_color":"#000000","margin":{"unit":"px","top":"","right":0,"bottom":"","left":0,"isLinked":true},"padding_tablet":{"unit":"px","top":"30","right":"20","bottom":"30","left":"20","isLinked":false},"padding_mobile":{"unit":"px","top":"20","right":"20","bottom":"20","left":"20","isLinked":false},"height":"min-height"},"elements":[{"id":"f02c88e","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"0df136f","elType":"widget","settings":{"branding_title_color":"#ffffff","align":"left"},"elements":[],"widgetType":"wbcom-branding"}],"isInner":false},{"id":"175f5249","elType":"column","settings":{"_column_size":33,"_inline_size":null,"_inline_size_mobile":35},"elements":[{"id":"7f99220f","elType":"widget","settings":{"align_items":"left","animation_text":"sink","toggle_align":"right","color_menu_item":"#ffffff","color_menu_item_hover":"#00e4ff","pointer_color_menu_item_hover":"#00e4ff","menu_typography_typography":"custom","menu_typography_font_size":{"unit":"px","size":16},"pointer_width":{"unit":"px","size":8},"color_dropdown_item":"#000000","background_color_dropdown_item":"#f2f2f2","color_dropdown_item_hover":"#00ce1b","background_color_dropdown_item_hover":"#ededed","dropdown_typography_typography":"custom","dropdown_typography_font_size":{"unit":"px","size":15},"toggle_color":"#ffffff","toggle_color_hover":"#00ce1b","toggle_size":{"unit":"px","size":25},"toggle_border_width":{"unit":"px","size":0},"toggle_border_radius":{"unit":"px","size":0},"menu_typography_font_weight":"400","padding_vertical_menu_item":{"unit":"px","size":40},"full_width":"stretch","dropdown_top_distance_tablet":{"unit":"px","size":45},"dropdown_top_distance_mobile":{"unit":"px","size":35},"menu":"main-menu","indicator":"chevron","padding_horizontal_menu_item":{"unit":"px","size":10},"menu_space_between":{"unit":"px","size":5}},"elements":[],"widgetType":"nav-menu"}],"isInner":false},{"id":"ba0e6ee","elType":"column","settings":{"_column_size":33,"_inline_size":null},"elements":[{"id":"82f4560","elType":"widget","settings":[],"elements":[],"widgetType":"wbcom-notification-area"}],"isInner":false}],"isInner":false}]]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_elementor_version]]></wp:meta_key>
