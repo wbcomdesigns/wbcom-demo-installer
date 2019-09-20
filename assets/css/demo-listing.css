@@ -23,8 +23,8 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .demo-content-wrap {
-    clear: both;
-  /*  display: -webkit-box;
+    /*clear: both;
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
