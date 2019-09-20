@@ -242,11 +242,11 @@ jQuery( document ).ready( function( $ ) {
 
 });
 
-$(function () {	
+jQuery(function () {	
 		var filterList = {
 			init: function () {
 				// MixItUp js
-				$('#demos_import_filter').mixItUp({
+				jQuery('#demos_import_filter').mixItUp({
   				selectors: {
     			  target: '.import_filter',
     			  filter: '.demo_filter'	
