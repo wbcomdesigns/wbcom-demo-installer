@@ -122,6 +122,18 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		?>
 
 		<div class="reign-demos-wrapper reign-importer-section">
+			
+			<div id="demos_import_filter">
+
+				<ul id="demo_filter" class="clearfix">
+					<li><span class="demo_filter active" data-filter=".buddypress, .learndash, .dokan, .lifterlms, .wp-job-manager">All</span></li>
+					<li><span class="demo_filter" data-filter=".buddypress">BuddyPress</span></li>
+					<li><span class="demo_filter" data-filter=".learndash">LearnDash</span></li>
+					<li><span class="demo_filter" data-filter=".dokan">Dokan</span></li>
+					<li><span class="demo_filter" data-filter=".lifterlms">LifterLMS</span></li>
+					<li><span class="demo_filter" data-filter=".wp-job-manager">Job Manager</span></li>
+				</ul>
+
 		<?php
 		
 		if( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
@@ -365,7 +377,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 							}
 							if( $motive_key !== $value['motive_key'] ) {
 								$motive_key = $value['motive_key'];
-								echo '<h4 class="demo-name">'.$value['motive_name'].'</h4>';
+								// echo '<h4 class="demo-name">'.$value['motive_name'].'</h4>';
 								echo '<div class="demo-content-wrap">';
 							}
 							$preview_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
@@ -379,7 +391,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 									'plugins_json_key' => $value['plugins_json_key'],
 								) );							
 							?>
-							<div class='wbcom-demo-importer'>
+							<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
 								<div class="container">
 									<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
 									<div class="demo-title">
@@ -407,6 +419,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		}
 		echo '</div>';
 		echo '</div>';
+		echo '</div>';
 
 		echo '</div>';
 	}
@@ -430,6 +443,14 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			$ver		=	time(),
 			$in_footer	=	true
 		);
+		wp_register_script(
+			$handle		=	'wbcom_theme_demo_installer_js_filter',
+			$src		=	WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/jquery.mixitup.min.js',
+			$deps		=	array( 'jquery' ),
+			$ver		=	time(),
+			$in_footer	=	true
+		);
+
 		wp_localize_script(
 			'wbcom_theme_demo_installer_js',
 			'wbcom_theme_demo_installer_params',
@@ -440,6 +461,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			)
 		);
 		wp_enqueue_script( 'wbcom_theme_demo_installer_js' );
+		wp_enqueue_script( 'wbcom_theme_demo_installer_js_filter' );
 
 		wp_register_style(
 			$handle		=	'wbcom-demo-listing-css',

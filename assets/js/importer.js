@@ -241,3 +241,22 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 });
+
+$(function () {	
+		var filterList = {
+			init: function () {
+				// MixItUp js
+				$('#demos_import_filter').mixItUp({
+  				selectors: {
+    			  target: '.import_filter',
+    			  filter: '.demo_filter'	
+    		  	},
+	    		load: {
+	      		  filter: '.buddypress'  
+	      		}     
+				});								
+		}
+	};
+	// Run the show!
+	filterList.init();		
+});	

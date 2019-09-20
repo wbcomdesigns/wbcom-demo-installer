@@ -24,11 +24,11 @@ body.demo_listing_loading .demo_listing_modal {
 
 .demo-content-wrap {
     clear: both;
-    display: -webkit-box;
+  /*  display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    flex-wrap: wrap;*/
 }
 
 .demo-listing-wrap .tab .tablinks {
@@ -48,7 +48,7 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .demo-listing-wrap .tab {
-    margin: 20px 0px;
+    margin: 20px 0px 0;
     float: left;
     width: 100%;
     background-color: #444;
@@ -375,6 +375,7 @@ div#wbtd-current-action {
 
 .demo-content-wrap .wbcom-demo-importer {
     width: 25%;
+    float: left;
 }
 
 .demo-content-wrap .wbcom-demo-importer .container {
@@ -416,6 +417,8 @@ div#wbtd-current-action {
     overflow: hidden;
     clear: both;
     display: block;
+    padding-top:50px; 
+    background: #fff;
 }
 
 .demo-name {
@@ -511,8 +514,9 @@ div#wbtd-current-action {
 
 @media screen and (min-width: 992px) and (max-width:1366px) {
 
-    .demo-content-wrap .wbcom-demo-importer {
+    .wbcom-demo-importer {
         width: 33.33%;
+        float: left;
     }
 
     .wbcom-req-plugin-card {
@@ -542,3 +546,41 @@ div#wbtd-current-action {
 [dir='rtl'] .goto-install-demo-step {
     text-align: left;
 }
+
+
+#demos_import_filter .import_filter{
+    display: none;
+}
+
+#demo_filter {
+    margin: 0px 0 20px 20px;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px #efeeee solid;
+    border-radius: 3px;
+}
+#demo_filter li {
+    float: left;
+    margin:0px;
+}
+#demo_filter li span {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 15px;
+    /* font-weight: 600; */
+    letter-spacing: 1px;
+}
+#demo_filter li span.active{
+    background: #389dfe;
+    color: #fff;
+}
+
+
+
