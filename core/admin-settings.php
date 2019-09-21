@@ -351,12 +351,14 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			
 			echo '<div id="demos_import_filter">
 					<ul id="demo_filter" class="clearfix">
-						<li><span class="demo_filter active" data-filter=".buddypress, .learndash, .dokan, .lifterlms, .wp-job-manager">All</span></li>
+						<li><span class="demo_filter active" data-filter=".buddypress, .learndash, .dokan, .lifterlms, .wp-job-manager, .peepso, .geodirectory">All</span></li>
 						<li><span class="demo_filter" data-filter=".buddypress">BuddyPress</span></li>
 						<li><span class="demo_filter" data-filter=".learndash">LearnDash</span></li>
 						<li><span class="demo_filter" data-filter=".dokan">Dokan</span></li>
 						<li><span class="demo_filter" data-filter=".lifterlms">LifterLMS</span></li>
-						<li><span class="demo_filter" data-filter=".wp-job-manager">Job Manager</span></li>
+						<li><span class="demo_filter" data-filter=".wp-job-manager">JobManager</span></li>
+						<li><span class="demo_filter" data-filter=".peepso">PeepSo</span></li>
+						<li><span class="demo_filter" data-filter=".geodirectory">GeoDirectory</span></li>
 					</ul>';
 
 			if ( is_wp_error( $response ) ) {
