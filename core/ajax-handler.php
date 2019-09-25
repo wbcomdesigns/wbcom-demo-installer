@@ -53,9 +53,90 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
 	}
 
-	public function wbcom_read_theme_demo_package_file() {
+	public function wbcom_read_theme_demo_package_file() {		
+		$demo_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/demo-content.xml';
+		$widgets_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/widgets.json';
+		$customizer_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/customizer.dat';
+		$revolution_slider = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/Slider.zip';
+		
+		
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
+				if ( ! class_exists( '\WP_Importer' ) ) {
+					require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+				}
+				if ( ! class_exists( '\WP_Customize_Setting' ) ) {
+					require_once ABSPATH . 'wp-includes/class-wp-customize-setting.php';
+				}
+				
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/vendor/autoload.php';
+				
+				require_once  WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-widget-importer.php';
+				
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-importer.php';
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-option.php';
+				
+				// Get the logger object, so it can be used in the whole class.
+				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-logger.php';
+				$logger = Merlin_Logger::get_instance();
+				
+				
+				/* Import Content XML file */
+				$importer = new ProteusThemes\WPContentImporter2\Importer( array( 'fetch_attachments' => true ), $logger);
+				$importer->import($demo_content);
+				
+				/* Import Widget */
+				$widget_importer = new Merlin_Widget_Importer();
+				$customizer_importer = new Merlin_Customizer_Importer();
+				
+				/* Import Customizer */
+				$widget_importer->import($widgets_content);
+				$customizer_importer->import($customizer_content);
+				
+				/* Revolution Slider */				
+				if ( class_exists( 'RevSlider', false ) && file_exists( $revolution_slider) ) {					
+					$importer = new RevSlider();
+					$response = $importer->importSliderFromPost( true, true, $revolution_slider );					
+				}
+				
+				/* 
+				 * Set Default Pages				 
+				 */				
+				update_option('show_on_front', 'page');				
+				$home_page = 'Home';
+				if( !empty($home_page) ){
+					$home_page = get_page_by_title( $home_page );
+					if( isset($home_page) && $home_page->ID ) {
+						update_option('page_on_front', $home_page->ID); // Front Page
+					}
+				}				
+				// Blog Page				
+				$blog_page = 'Blog';
+				if( !empty($blog_page) ){
+					$blog_page = get_page_by_title($blog_page);
+					if( isset($blog_page) && $blog_page->ID ) {
+						update_option('page_for_posts', $blog_page->ID); // Posts Page
+					}
+				}
+				
+				/*
+				 * Assign Import Menus
+				 */
+				// Set imported menus to registered theme locations
+				
+				$locations = get_theme_mod( 'nav_menu_locations' ); // registered menu locations in theme
+				$registered_menus = wp_get_nav_menus(); // registered menus				
+				// Assign Menu Name to Registered menus as array keys
+				foreach( $registered_menus as $menu ) {
+					
+					if ( $menu->slug == 'main-menu' && strtolower($menu->name) == strtolower('Main Menu') ) {
+						$locations['menu-1'] = $menu->term_id;
+						$locations['shiftnav'] = $menu->term_id;
+					}
+				}
+				set_theme_mod( 'nav_menu_locations', $locations ); // set menus to locations
+				
+				/*
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
@@ -75,6 +156,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 						}
 					}
 				}
+				*/
 			}
 		}
 		wp_die();

@@ -21,6 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 
+define( 'WBCOM_THEME_DEMO_INSTALLER_DIR', plugin_dir_path(__FILE__) );
+define( 'WBCOM_THEME_DEMO_INSTALLER_URL', plugins_url('/', __FILE__) );
+
+
 /**
  * Main WBCOM_Theme_Demo_Installer Class.
  *
@@ -35,7 +39,7 @@ class WBCOM_Theme_Demo_Installer {
 	 * @var string
 	 */
 	public $version = '1.1.0';
-	
+
 	/**
 	 * The single instance of the class.
 	 *
@@ -44,7 +48,7 @@ class WBCOM_Theme_Demo_Installer {
 	 */
 	protected static $_instance = null;
 
-	
+
 	/**
 	 * Main WBCOM_Theme_Demo_Installer Instance.
 	 *
@@ -62,7 +66,7 @@ class WBCOM_Theme_Demo_Installer {
 		return self::$_instance;
 	}
 
-	
+
 	/**
 	 * WBCOM_Theme_Demo_Installer Constructor.
 	 */
@@ -99,7 +103,7 @@ class WBCOM_Theme_Demo_Installer {
 		$this->define( 'WBCOM_Theme_Demo_Installer_TEXT_DOMAIN', 'wbcom-theme-demo-installer' );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-		$this->define( 'WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST', 'http://demos.wbcomdesigns.com/exporter/' );
+		$this->define( 'WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST', 'https://demos.wbcomdesigns.com/exporter/' );
 	}
 
 	/**
