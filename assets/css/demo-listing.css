@@ -62,7 +62,7 @@ body.demo_listing_loading .demo_listing_modal {
 .wbcom-req-plugin-card {
     float: left;
     width: 25%;
-    padding: 20px;
+    padding: 15px;
     overflow: hidden;
     box-sizing: border-box;
     text-align: center;
@@ -100,11 +100,12 @@ body.demo_listing_loading .demo_listing_modal {
     -moz-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
     -o-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
 }
-.plugin-container:hover{
-    -webkit-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
-    -moz-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
-    -o-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
-    box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+
+.plugin-container:hover {
+    -webkit-box-shadow: 0 0 10px rgba(33,33,33,.2);
+    -moz-box-shadow: 0 0 10px rgba(33,33,33,.2);
+    -o-box-shadow: 0 0 10px rgba(33,33,33,.2);
+    box-shadow: 0 0 10px rgba(33,33,33,.2);
     -webkit-transform: translate(0, -5px);
     -moz-transform: translate(0, -5px);
     -ms-transform: translate(0, -5px);
@@ -315,6 +316,11 @@ div.wbcom-demo-importer .alert {
     100% { transform: rotate(360deg); }
 }
 
+.wrap.wbcom-demo-importer {
+    width: 100%;
+    margin: 0;
+}
+
 .wbcom-demo-importer .wbcom-button {
     text-decoration: none;
     background-color: #ff746b;
@@ -417,8 +423,16 @@ div#wbtd-current-action {
     overflow: hidden;
     clear: both;
     display: block;
-    padding-top:50px; 
+    padding-top:50px;
     background: #fff;
+}
+
+.reign-demos-wrapper.reign-importer-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .demo-name {
@@ -459,6 +473,7 @@ div#wbtd-current-action {
 }
 
 .info-importer {
+    width: 100%;
     margin-top:50px;
 }
 
@@ -480,16 +495,6 @@ div#wbtd-current-action {
     font-weight: 600;
 }
 
-@media only screen and (max-width:480px) {
-
-    .demo-content-wrap .wbcom-demo-importer {
-        width: 100%;
-    }
-    .wbcom-req-plugin-card {
-        width: 100%;
-    }
-}
-
 @media only screen and (max-width:768px) {
 
     .demo-content-wrap .wbcom-demo-importer {
@@ -497,7 +502,19 @@ div#wbtd-current-action {
     }
 
     .wbcom-req-plugin-card {
-        width: 50%;
+        width: 100%;
+    }
+
+    .wbcom-demo-importer .reign-demos-alertboxes {
+        float: left;
+        margin: 0;
+        width: 100%;
+    }
+
+    .reign-demos-progress-container {
+        width: 100%;
+        padding: 0;
+        float: right;
     }
 }
 
@@ -508,7 +525,7 @@ div#wbtd-current-action {
     }
 
     .wbcom-req-plugin-card  {
-        width: 33.33%;
+        width: 50%;
     }
 }
 
