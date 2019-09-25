@@ -422,7 +422,6 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
-		echo '</div>';
 	}
 
 	public function admin_enqueue_scripts() {
