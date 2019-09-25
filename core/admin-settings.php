@@ -314,7 +314,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 							if( $plugin_status['status_text'] != 'Active' ) {
 								?>
 								<a class="button button-primary" target="_blank" href="<?php echo $plugin['external_url']; ?>"><?php _e( 'Purchase plugin here', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
-								<a class="plugin-action-button button" target="_blank" href="plugin-install.php"><?php _e( 'Upload Plugin Manually', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+								<a class="plugin-action-button button" href="plugin-install.php"><?php _e( 'Upload Plugin Manually', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
 								<?php
 							}
 							else {
