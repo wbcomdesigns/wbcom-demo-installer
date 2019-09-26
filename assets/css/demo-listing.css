@@ -59,7 +59,7 @@ body.demo_listing_loading .demo_listing_modal {
     background-color: #1388e1;
 }
 
-.wbcom-req-plugin-card {
+.reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
     float: left;
     width: 25%;
     padding: 15px;
@@ -67,7 +67,13 @@ body.demo_listing_loading .demo_listing_modal {
     box-sizing: border-box;
     text-align: center;
     position: relative;
+    box-shadow: none !important;
+    border: none !important;
+    display: block !important;
+    flex: auto !important;
+    margin: 0 !important;
 }
+
 /*.wbcom-req-plugin-card:nth-child(3n+1){
   clear: both;
 }
