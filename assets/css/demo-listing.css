@@ -387,6 +387,7 @@ div#wbtd-current-action {
 
 .demo-content-wrap .wbcom-demo-importer {
     width: 25%;
+    min-height: 430px;
     float: left;
 }
 
@@ -501,10 +502,17 @@ div#wbtd-current-action {
     font-weight: 600;
 }
 
+@media screen and (max-width: 1266px) {
+    .demo-content-wrap .wbcom-demo-importer {
+        width: 50%;
+    }
+}
+
 @media only screen and (max-width:768px) {
 
     .demo-content-wrap .wbcom-demo-importer {
-        width: 50%;
+        width: 100%;
+        min-height: 100%;
     }
 
     .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
@@ -525,11 +533,6 @@ div#wbtd-current-action {
 }
 
 @media screen and (min-width: 768px) and (max-width:991px) {
-
-    .demo-content-wrap .wbcom-demo-importer {
-        width: 33.33%;
-    }
-
     .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card  {
         width: 50% !important;
     }
@@ -545,10 +548,6 @@ div#wbtd-current-action {
     .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
         width: 33.33% !important;
     }
-
-    /*.wbcom-req-plugin-card:nth-child(4n+1){
-      clear:both;
-    }*/
 }
 
 @media screen and (min-width: 1367px) and (max-width:1920) {
