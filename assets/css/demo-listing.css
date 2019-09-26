@@ -507,8 +507,8 @@ div#wbtd-current-action {
         width: 50%;
     }
 
-    .wbcom-req-plugin-card {
-        width: 100%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
+        width: 100% !important;
     }
 
     .wbcom-demo-importer .reign-demos-alertboxes {
@@ -530,8 +530,8 @@ div#wbtd-current-action {
         width: 33.33%;
     }
 
-    .wbcom-req-plugin-card  {
-        width: 50%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card  {
+        width: 50% !important;
     }
 }
 
@@ -542,8 +542,8 @@ div#wbtd-current-action {
         float: left;
     }
 
-    .wbcom-req-plugin-card {
-        width: 33.33%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
+        width: 33.33% !important;
     }
 
     /*.wbcom-req-plugin-card:nth-child(4n+1){
