@@ -22,14 +22,14 @@ body.demo_listing_loading .demo_listing_modal {
     padding: 0px 15px;
 }
 
-.demo-content-wrap {
+/*.demo-content-wrap {
     clear: both;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-}
+}*/
 
 .demo-listing-wrap .tab .tablinks {
     border: none;
@@ -48,7 +48,7 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .demo-listing-wrap .tab {
-    margin: 20px 0px;
+    margin: 20px 0px 0;
     float: left;
     width: 100%;
     background-color: #444;
@@ -60,13 +60,18 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .wbcom-req-plugin-card {
-    float: left;
+   float: left;
     width: 25%;
-    padding: 20px;
-    overflow: hidden;
+    padding: 15px;
+  /*  overflow: hidden;*/
     box-sizing: border-box;
     text-align: center;
     position: relative;
+    box-shadow: none !important;
+    border: none !important;
+    display: block !important;
+    flex: auto !important;
+    margin: 0 !important;
 }
 /*.wbcom-req-plugin-card:nth-child(3n+1){
   clear: both;
@@ -315,6 +320,11 @@ div.wbcom-demo-importer .alert {
     100% { transform: rotate(360deg); }
 }
 
+.wrap.wbcom-demo-importer {
+    width: 100%;
+    margin: 0;
+}
+
 .wbcom-demo-importer .wbcom-button {
     text-decoration: none;
     background-color: #ff746b;
@@ -375,6 +385,8 @@ div#wbtd-current-action {
 
 .demo-content-wrap .wbcom-demo-importer {
     width: 25%;
+    min-height: 430px;
+    float: left;
 }
 
 .demo-content-wrap .wbcom-demo-importer .container {
@@ -416,6 +428,16 @@ div#wbtd-current-action {
     overflow: hidden;
     clear: both;
     display: block;
+    padding-top:50px;
+    background: #fff;
+}
+
+.reign-demos-wrapper.reign-importer-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .demo-name {
@@ -456,6 +478,7 @@ div#wbtd-current-action {
 }
 
 .info-importer {
+    width: 100%;
     margin-top:50px;
 }
 
@@ -477,51 +500,52 @@ div#wbtd-current-action {
     font-weight: 600;
 }
 
-@media only screen and (max-width:480px) {
-
+@media screen and (max-width: 1266px) {
     .demo-content-wrap .wbcom-demo-importer {
-        width: 100%;
-    }
-    .wbcom-req-plugin-card {
-        width: 100%;
+        width: 50%;
     }
 }
 
 @media only screen and (max-width:768px) {
 
     .demo-content-wrap .wbcom-demo-importer {
-        width: 50%;
+        width: 100%;
+        min-height: 100%;
     }
 
-    .wbcom-req-plugin-card {
-        width: 50%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
+        width: 100% !important;
+    }
+
+    .wbcom-demo-importer .reign-demos-alertboxes {
+        float: left;
+        margin: 0;
+        width: 100%;
+    }
+
+    .reign-demos-progress-container {
+        width: 100%;
+        padding: 0;
+        float: right;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width:991px) {
-
-    .demo-content-wrap .wbcom-demo-importer {
-        width: 33.33%;
-    }
-
-    .wbcom-req-plugin-card  {
-        width: 33.33%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card  {
+        width: 50% !important;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width:1366px) {
 
-    .demo-content-wrap .wbcom-demo-importer {
+    .wbcom-demo-importer {
         width: 33.33%;
+        float: left;
     }
 
-    .wbcom-req-plugin-card {
-        width: 33.33%;
+    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
+        width: 33.33% !important;
     }
-
-    /*.wbcom-req-plugin-card:nth-child(4n+1){
-      clear:both;
-    }*/
 }
 
 @media screen and (min-width: 1367px) and (max-width:1920) {
@@ -541,4 +565,39 @@ div#wbtd-current-action {
 
 [dir='rtl'] .goto-install-demo-step {
     text-align: left;
+}
+
+
+#demos_import_filter .import_filter{
+    display: none;
+}
+
+#demo_filter {
+    margin: 0px 0 20px 20px;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px #efeeee solid;
+    border-radius: 3px;
+}
+#demo_filter li {
+    float: left;
+    margin:0px;
+}
+#demo_filter li span {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 15px;
+    /* font-weight: 600; */
+    letter-spacing: 1px;
+}
+#demo_filter li span.active{
+    background: #389dfe;
+    color: #fff;
 }
