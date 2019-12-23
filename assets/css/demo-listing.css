@@ -23,12 +23,12 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .demo-content-wrap {
-    /*clear: both;
+    clear: both;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;*/
+    flex-wrap: wrap;
 }
 
 .demo-listing-wrap .tab .tablinks {
@@ -48,7 +48,7 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .demo-listing-wrap .tab {
-    margin: 20px 0px 0;
+    margin: 20px 0px;
     float: left;
     width: 100%;
     background-color: #444;
@@ -59,21 +59,15 @@ body.demo_listing_loading .demo_listing_modal {
     background-color: #1388e1;
 }
 
-.reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
+.wbcom-req-plugin-card {
     float: left;
     width: 25%;
-    padding: 15px;
+    padding: 20px;
     overflow: hidden;
     box-sizing: border-box;
     text-align: center;
     position: relative;
-    box-shadow: none !important;
-    border: none !important;
-    display: block !important;
-    flex: auto !important;
-    margin: 0 !important;
 }
-
 /*.wbcom-req-plugin-card:nth-child(3n+1){
   clear: both;
 }
@@ -106,12 +100,11 @@ body.demo_listing_loading .demo_listing_modal {
     -moz-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
     -o-box-shadow: 0.563px 1.863px 3px 0px rgba(103, 103, 103, 0.08);
 }
-
-.plugin-container:hover {
-    -webkit-box-shadow: 0 0 10px rgba(33,33,33,.2);
-    -moz-box-shadow: 0 0 10px rgba(33,33,33,.2);
-    -o-box-shadow: 0 0 10px rgba(33,33,33,.2);
-    box-shadow: 0 0 10px rgba(33,33,33,.2);
+.plugin-container:hover{
+    -webkit-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    -o-box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 1.563px 8.863px 30px 0px rgba(0, 0, 0, 0.13);
     -webkit-transform: translate(0, -5px);
     -moz-transform: translate(0, -5px);
     -ms-transform: translate(0, -5px);
@@ -322,11 +315,6 @@ div.wbcom-demo-importer .alert {
     100% { transform: rotate(360deg); }
 }
 
-.wrap.wbcom-demo-importer {
-    width: 100%;
-    margin: 0;
-}
-
 .wbcom-demo-importer .wbcom-button {
     text-decoration: none;
     background-color: #ff746b;
@@ -387,8 +375,6 @@ div#wbtd-current-action {
 
 .demo-content-wrap .wbcom-demo-importer {
     width: 25%;
-    min-height: 430px;
-    float: left;
 }
 
 .demo-content-wrap .wbcom-demo-importer .container {
@@ -430,16 +416,6 @@ div#wbtd-current-action {
     overflow: hidden;
     clear: both;
     display: block;
-    padding-top:50px;
-    background: #fff;
-}
-
-.reign-demos-wrapper.reign-importer-section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
 }
 
 .demo-name {
@@ -480,7 +456,6 @@ div#wbtd-current-action {
 }
 
 .info-importer {
-    width: 100%;
     margin-top:50px;
 }
 
@@ -502,52 +477,51 @@ div#wbtd-current-action {
     font-weight: 600;
 }
 
-@media screen and (max-width: 1266px) {
+@media only screen and (max-width:480px) {
+
     .demo-content-wrap .wbcom-demo-importer {
-        width: 50%;
+        width: 100%;
+    }
+    .wbcom-req-plugin-card {
+        width: 100%;
     }
 }
 
 @media only screen and (max-width:768px) {
 
     .demo-content-wrap .wbcom-demo-importer {
-        width: 100%;
-        min-height: 100%;
+        width: 50%;
     }
 
-    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
-        width: 100% !important;
-    }
-
-    .wbcom-demo-importer .reign-demos-alertboxes {
-        float: left;
-        margin: 0;
-        width: 100%;
-    }
-
-    .reign-demos-progress-container {
-        width: 100%;
-        padding: 0;
-        float: right;
+    .wbcom-req-plugin-card {
+        width: 50%;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width:991px) {
-    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card  {
-        width: 50% !important;
+
+    .demo-content-wrap .wbcom-demo-importer {
+        width: 33.33%;
+    }
+
+    .wbcom-req-plugin-card  {
+        width: 33.33%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width:1366px) {
 
-    .wbcom-demo-importer {
+    .demo-content-wrap .wbcom-demo-importer {
         width: 33.33%;
-        float: left;
     }
 
-    .reign-demos-wrapper.reign-importer-section .wbcom-req-plugin-card {
-        width: 33.33% !important;
+    .wbcom-req-plugin-card {
+        width: 33.33%;
     }
+
+    /*.wbcom-req-plugin-card:nth-child(4n+1){
+      clear:both;
+    }*/
 }
 
 @media screen and (min-width: 1367px) and (max-width:1920) {
@@ -568,41 +542,3 @@ div#wbtd-current-action {
 [dir='rtl'] .goto-install-demo-step {
     text-align: left;
 }
-
-
-#demos_import_filter .import_filter{
-    display: none;
-}
-
-#demo_filter {
-    margin: 0px 0 20px 20px;
-    padding: 0;
-    list-style: none;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    background: #f7f7f7;
-    border: 1px #efeeee solid;
-    border-radius: 3px;
-}
-#demo_filter li {
-    float: left;
-    margin:0px;
-}
-#demo_filter li span {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #666;
-    cursor: pointer;
-    font-size: 15px;
-    /* font-weight: 600; */
-    letter-spacing: 1px;
-}
-#demo_filter li span.active{
-    background: #389dfe;
-    color: #fff;
-}
-
-
-
