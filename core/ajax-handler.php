@@ -10,7 +10,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
  * @version	1.0.0
  */
 class WBCOM_Demo_Importer_Ajax_Handler {
-	
+
 	/**
 	 * The single instance of the class.
 	 *
@@ -18,7 +18,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
-	
+
 	/**
 	 * Main WBCOM_Demo_Importer_Ajax_Handler Instance.
 	 *
@@ -36,7 +36,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		return self::$_instance;
 	}
 
-	
+
 	/**
 	 * WBCOM_Demo_Importer_Ajax_Handler Constructor.
 	 */
@@ -136,7 +136,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 		$retrieved_data = '';
 		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-		
+
 		if ( !is_wp_error( $response ) ) {
 			if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
 				$response = isset( $response['body'] ) ? $response['body'] : '';
@@ -146,7 +146,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 		}
 
-		
+
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
@@ -262,10 +262,10 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					// 'widget_tag_cloud',
 					// 'widget_nav_menu',
 					// 'widget_custom_html',
-					'reign_options',
+					//'reign_options',
 					'cron',
 					'theme_mods_twentyseventeen',
-					'theme_mods_reign-theme',
+					//'theme_mods_reign-theme',
 					'_transient_is_multi_author',
 					'_transient_twentyseventeen_categories',
 				);
@@ -289,7 +289,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					else if( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
 						continue;
 					}
-					
+
 					/** user table strcuture mismatch fix **/
 					if( isset( $value['spam'] ) ) {
 						unset( $value['spam'] );
@@ -305,7 +305,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 			else {
 				$table_name = $wpdb->prefix . $table_name;
-				
+
 				$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
 				if( !isset( $wbcom_theme_demo_import_data[ $table_name.'_done' ] ) ) {
 					$sql = "DELETE FROM " . $table_name;
@@ -313,7 +313,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					$wbcom_theme_demo_import_data[ $table_name.'_done' ] = 'yes';
 					update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
 				}
-				
+
 				foreach ( $retrieved_data as $key => $value ) {
 					$wpdb->insert( $table_name, $value );
 				}
