@@ -3,7 +3,7 @@
  * Plugin Name: Wbcom Theme Demo Installer
  * Plugin URI: https://wbcomdesigns.com/
  * Description: Wbcom Theme Demo Installer
- * Version: 1.1.0
+ * Version: 2.0.0
  * Author: Wbcom Designs
  * Author URI: https://wbcomdesigns.com/
  * Requires at least: 4.0
@@ -34,8 +34,8 @@ class WBCOM_Theme_Demo_Installer {
 	 *
 	 * @var string
 	 */
-	public $version = '1.1.0';
-	
+	public $version = '2.0.0';
+
 	/**
 	 * The single instance of the class.
 	 *
@@ -44,7 +44,7 @@ class WBCOM_Theme_Demo_Installer {
 	 */
 	protected static $_instance = null;
 
-	
+
 	/**
 	 * Main WBCOM_Theme_Demo_Installer Instance.
 	 *
@@ -62,7 +62,7 @@ class WBCOM_Theme_Demo_Installer {
 		return self::$_instance;
 	}
 
-	
+
 	/**
 	 * WBCOM_Theme_Demo_Installer Constructor.
 	 */
