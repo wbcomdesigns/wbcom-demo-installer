@@ -10,7 +10,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
  * @version	1.0.0
  */
 class WBCOM_Demo_Importer_Ajax_Handler {
-	
+
 	/**
 	 * The single instance of the class.
 	 *
@@ -18,7 +18,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
-	
+
 	/**
 	 * Main WBCOM_Demo_Importer_Ajax_Handler Instance.
 	 *
@@ -36,7 +36,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		return self::$_instance;
 	}
 
-	
+
 	/**
 	 * WBCOM_Demo_Importer_Ajax_Handler Constructor.
 	 */
@@ -53,90 +53,9 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 		add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
 	}
 
-	public function wbcom_read_theme_demo_package_file() {		
-		$demo_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/demo-content.xml';
-		$widgets_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/widgets.json';
-		$customizer_content = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/customizer.dat';
-		$revolution_slider = WBCOM_THEME_DEMO_INSTALLER_DIR. 'demos/' . $_POST['theme_demo'] . '/Slider.zip';
-		
-		
+	public function wbcom_read_theme_demo_package_file() {
 		if( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
 			if( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
-				if ( ! class_exists( '\WP_Importer' ) ) {
-					require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
-				}
-				if ( ! class_exists( '\WP_Customize_Setting' ) ) {
-					require_once ABSPATH . 'wp-includes/class-wp-customize-setting.php';
-				}
-				
-				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/vendor/autoload.php';
-				
-				require_once  WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-widget-importer.php';
-				
-				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-importer.php';
-				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-customizer-option.php';
-				
-				// Get the logger object, so it can be used in the whole class.
-				require_once WBCOM_THEME_DEMO_INSTALLER_DIR . 'includes/class-merlin-logger.php';
-				$logger = Merlin_Logger::get_instance();
-				
-				
-				/* Import Content XML file */
-				$importer = new ProteusThemes\WPContentImporter2\Importer( array( 'fetch_attachments' => true ), $logger);
-				$importer->import($demo_content);
-				
-				/* Import Widget */
-				$widget_importer = new Merlin_Widget_Importer();
-				$customizer_importer = new Merlin_Customizer_Importer();
-				
-				/* Import Customizer */
-				$widget_importer->import($widgets_content);
-				$customizer_importer->import($customizer_content);
-				
-				/* Revolution Slider */				
-				if ( class_exists( 'RevSlider', false ) && file_exists( $revolution_slider) ) {					
-					$importer = new RevSlider();
-					$response = $importer->importSliderFromPost( true, true, $revolution_slider );					
-				}
-				
-				/* 
-				 * Set Default Pages				 
-				 */				
-				update_option('show_on_front', 'page');				
-				$home_page = 'Home';
-				if( !empty($home_page) ){
-					$home_page = get_page_by_title( $home_page );
-					if( isset($home_page) && $home_page->ID ) {
-						update_option('page_on_front', $home_page->ID); // Front Page
-					}
-				}				
-				// Blog Page				
-				$blog_page = 'Blog';
-				if( !empty($blog_page) ){
-					$blog_page = get_page_by_title($blog_page);
-					if( isset($blog_page) && $blog_page->ID ) {
-						update_option('page_for_posts', $blog_page->ID); // Posts Page
-					}
-				}
-				
-				/*
-				 * Assign Import Menus
-				 */
-				// Set imported menus to registered theme locations
-				
-				$locations = get_theme_mod( 'nav_menu_locations' ); // registered menu locations in theme
-				$registered_menus = wp_get_nav_menus(); // registered menus				
-				// Assign Menu Name to Registered menus as array keys
-				foreach( $registered_menus as $menu ) {
-					
-					if ( $menu->slug == 'main-menu' && strtolower($menu->name) == strtolower('Main Menu') ) {
-						$locations['menu-1'] = $menu->term_id;
-						$locations['shiftnav'] = $menu->term_id;
-					}
-				}
-				set_theme_mod( 'nav_menu_locations', $locations ); // set menus to locations
-				
-				/*
 				// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
 				$url_to_request = $_POST['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
 				$response = wp_remote_post( $url_to_request, array(
@@ -156,7 +75,6 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 						}
 					}
 				}
-				*/
 			}
 		}
 		wp_die();
@@ -218,7 +136,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 	public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 		$retrieved_data = '';
 		$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-		
+
 		if ( !is_wp_error( $response ) ) {
 			if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
 				$response = isset( $response['body'] ) ? $response['body'] : '';
@@ -228,7 +146,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 		}
 
-		
+
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
 
@@ -344,10 +262,10 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					// 'widget_tag_cloud',
 					// 'widget_nav_menu',
 					// 'widget_custom_html',
-					'reign_options',
+					//'reign_options',
 					'cron',
 					'theme_mods_twentyseventeen',
-					'theme_mods_reign-theme',
+					//'theme_mods_reign-theme',
 					'_transient_is_multi_author',
 					'_transient_twentyseventeen_categories',
 				);
@@ -371,7 +289,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					else if( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
 						continue;
 					}
-					
+
 					/** user table strcuture mismatch fix **/
 					if( isset( $value['spam'] ) ) {
 						unset( $value['spam'] );
@@ -387,7 +305,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 			}
 			else {
 				$table_name = $wpdb->prefix . $table_name;
-				
+
 				$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
 				if( !isset( $wbcom_theme_demo_import_data[ $table_name.'_done' ] ) ) {
 					$sql = "DELETE FROM " . $table_name;
@@ -395,7 +313,7 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 					$wbcom_theme_demo_import_data[ $table_name.'_done' ] = 'yes';
 					update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
 				}
-				
+
 				foreach ( $retrieved_data as $key => $value ) {
 					$wpdb->insert( $table_name, $value );
 				}

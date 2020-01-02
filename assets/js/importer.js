@@ -74,10 +74,10 @@ jQuery( document ).ready( function( $ ) {
 
 	var wbcom_theme_demo_data = '';
     var thisRef = '';
-    
+
     var wbcom_tdd_database_tables_count = '';
     var wbcom_tdd_database_tables_done = 0;
-    
+
     var wbcom_tdd_upload_folders_count = '';
     var wbcom_tdd_upload_folders_done = 0;
 
@@ -96,7 +96,7 @@ jQuery( document ).ready( function( $ ) {
     });
 
     function _wbcom_read_theme_demo_package_file() {
-    	wbcom_tdd_show_current_activity( 'Reading Package File ...' );
+    	wbcom_tdd_show_current_activity( 'Reading Files ...' );
     	$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
@@ -105,19 +105,15 @@ jQuery( document ).ready( function( $ ) {
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
 				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
 				target_url : thisRef.siblings( '#target_url' ).val(),
-				theme_demo : thisRef.siblings( '#theme_demo' ).val(),
 			},
 			success : function( response ) {
-				console.log(response);
-				/*wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+				wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
 				$( '#progress-bar-container' ).show();
 				wbcom_theme_demo_data = $.parseJSON( response );
 				total_requests = ( wbcom_theme_demo_data.database_tables.length + wbcom_theme_demo_data.upload_folders.length );
 				percentage_increment = ( 100 / total_requests );
 				_wbcom_read_theme_demo_json_files();
 				_wbcom_read_theme_demo_upload_folders();
-				*/
-				wbcom_demo_import_done();
 			}
 		});
 	}
@@ -145,7 +141,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function _wbcom_get_theme_demo_data( url_to_request, action_for ) {
-		wbcom_tdd_show_current_activity( 'Reading '+url_to_request+' ...' );
+		wbcom_tdd_show_current_activity( 'Reading Files ...' );
 		$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
@@ -223,7 +219,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function wbcom_demo_import_done() {
-		setTimeout( function() { 
+		setTimeout( function() {
 			window.location = wbcom_theme_demo_installer_params.success_url;
 		},
 		2000
@@ -242,21 +238,21 @@ jQuery( document ).ready( function( $ ) {
 
 });
 
-jQuery(function () {	
+jQuery(function () {
 		var filterList = {
 			init: function () {
 				// MixItUp js
 				jQuery('#demos_import_filter').mixItUp({
   				selectors: {
     			  target: '.import_filter',
-    			  filter: '.demo_filter'	
+    			  filter: '.demo_filter'
     		  	},
 	    		load: {
-	      		  filter: '.buddypress'  
-	      		}     
-				});								
+	      		  filter: '.buddypress'
+	      		}
+				});
 		}
 	};
 	// Run the show!
-	filterList.init();		
-});	
+	filterList.init();
+});
