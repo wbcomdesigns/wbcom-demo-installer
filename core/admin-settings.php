@@ -155,8 +155,8 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					if( !empty( $response ) && is_array( $response ) ) {
 						$motive_key = '';
 						foreach ( $response as $key => $value ) {
-							$preview_url = isset( $value['preview_url'] ) ? $value['preview_url'] : '';
-							if( $target_url != $preview_url ) {
+							$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';							
+							if( $target_url == $demo_target_url ) {
 								$target_demo_info = $value;
 								break;
 							}
