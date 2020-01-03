@@ -4,7 +4,7 @@ Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 5.3.2
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,9 @@ It will not work standalone and will need Wbcom Demo Exporter plugin at master s
 1. This screen shot description corresponds to screenshot-1.
 
 == Changelog ==
+
+= 2.2.0 =
+* Fix: updated Screenshot images for corresponding demos.
 
 = 2.1.0 =
 * Fix: Improved Demo Install Flow
