@@ -30,7 +30,7 @@ It will not work standalone and will need Wbcom Demo Exporter plugin at master s
 
 == Changelog ==
 
-= 2.2.0 =
+= 2.3.0 =
 * Fix: updated theme_mod to match all values for customizer
 
 = 2.2.0 =
