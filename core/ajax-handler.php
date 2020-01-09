@@ -148,7 +148,9 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 
 
 		if( !empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
-			$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
+			if ($table_name != 'options') {
+				$retrieved_data = array_map( function( $value ) { return str_replace( '{{*home_url}}', home_url(), $value ); }, $retrieved_data );
+			}
 
 			if( $table_name == 'theme_mods' ) {
 				foreach ( $retrieved_data as $key => $value ) {
@@ -273,6 +275,13 @@ class WBCOM_Demo_Importer_Ajax_Handler {
 				foreach ( $retrieved_data as $key => $value ) {
 					if( !in_array( $value['option_name'], $default_options_keys ) ) {
 						$option_value = maybe_unserialize( $value['option_value'] );
+						if( is_array($option_value)) {
+							foreach( $option_value as $op_key=>$op_value ) {
+								if ( is_string($op_value) ) {
+									$option_value[$op_key] = str_replace( '{{*home_url}}', get_site_url(), $op_value);
+								}
+							}
+						}
 						update_option( $value['option_name'], $option_value, $value['autoload'] );
 					}
 				}
