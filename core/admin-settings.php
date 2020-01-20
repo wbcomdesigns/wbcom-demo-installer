@@ -155,7 +155,7 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 					if( !empty( $response ) && is_array( $response ) ) {
 						$motive_key = '';
 						foreach ( $response as $key => $value ) {
-							$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';							
+							$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
 							if( $target_url == $demo_target_url ) {
 								$target_demo_info = $value;
 								break;
@@ -195,10 +195,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 				<div class="info-impoter-content">
 					<ul>
 						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>, Please make sure you have <strong>full backup</strong> of site before importing demo data.</li>
-						<li>Don’t do the import twice since it will duplicate all your content.</li>
+
 						<li>Importing All the demo content will take some time so be patient.</li>
-						<li>Revolution Sliders are not imported in this advanced section. Activate the plugin and click Import Slider from Revolution Slider.</li>
-						<p>Exported sliders can be found in the package downloaded inside the Demo content folder</p>
+<li>Seem's Hard ?? We offer free demo installation services, please submit details at <a href="https://brndle.com/downloads/free-theme-installation-service/"> Free Theme Installation</a> </li>
 					</ul>
 				</div>
 			</div>
@@ -206,42 +205,6 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 			<?php
 		}
 		else if( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
-
-			// if( empty( get_option( 'wbcom_theme_demo_req_plugins', array() ) ) ) {
-			// 	// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
-
-			// 	// $url_to_request = $_GET['target_url'] . 'wp-admin/?wbcom_theme_demo_listing=yes';
-
-			// 	// $response = wp_remote_post( $url_to_request, array(
-			// 	// 	'method' => 'POST',
-			// 	// 	'timeout' => 120,
-			// 	// 	'headers' => array(),
-			// 	// 	'sslverify'   => false,
-			// 	// 	'body' => array(
-			// 	// 		'theme_slug'	=> $_GET['theme_slug'],
-			// 	// 		'demo_slug'	=> $_GET['demo_slug'],
-			// 	// 		// 'target_url' => $_GET['target_url'],
-			// 	// 		'plugins_list' => 'get_plugins_list',
-			// 	// 	)
-			// 	// ) );
-
-
-			// 	$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "plugins_json/" . $_GET['plugins_json_key'] . "/plugins.json";
-			// 	$retrieved_data = '';
-			// 	$response = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
-
-			// 	if ( !is_wp_error( $response ) ) {
-			// 		if ( isset( $response['response']['code'] ) &&  ( $response['response']['code'] == 200 ) ) {
-			// 			$response = isset( $response['body'] ) ? $response['body'] : '';
-			// 			if( !empty( $response ) ) {
-			// 				$response = json_decode( $response, true );
-			// 			}
-			// 			if( !empty( $response ) && is_array( $response ) ) {
-			// 				update_option( 'wbcom_theme_demo_req_plugins', $response );
-			// 			}
-			// 		}
-			// 	}
-			// }
 
 			$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . "plugins_json/" . $_GET['plugins_json_key'] . "/plugins.json";
 			$retrieved_data = '';
