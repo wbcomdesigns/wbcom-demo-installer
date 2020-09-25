@@ -315,8 +315,9 @@ class WBCOM_TDI_ADMIN_SETTINGS {
 						<li><span class="demo_filter" data-filter=".learndash">LearnDash</span></li>
 						<li><span class="demo_filter" data-filter=".dokan">Dokan</span></li>
 						<li><span class="demo_filter" data-filter=".lifterlms">LifterLMS</span></li>
-						<li><span class="demo_filter" data-filter=".wp-job-manager">JobManager</span></li>
 						<li><span class="demo_filter" data-filter=".peepso">PeepSo</span></li>
+						<li><span class="demo_filter" data-filter=".wc-vendor">WC Vendors</span></li>
+						<li><span class="demo_filter" data-filter=".wp-job-manager">JobManager</span></li>
 						<li><span class="demo_filter" data-filter=".geodirectory">GeoDirectory</span></li>
 					</ul>';
 
