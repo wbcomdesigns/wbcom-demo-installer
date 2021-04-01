@@ -174,18 +174,18 @@ body.demo_listing_loading .demo_listing_modal {
 }
 
 .success-msg {
-    width: 400px;
+    max-width: 600px;
     margin: 20px auto;
     padding: 20px 55px 40px;
     background-color: #fff;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     text-align: center;
-    box-shadow: 0px 5px 13px #c5c5c5;
+    /* box-shadow: 0px 5px 13px #c5c5c5; */
 }
 
 .success-msg h2 {
-    font-size: 28px;
-    color: #5db70c;
+    font-size: 32px;
+    color: #1d76da;
 }
 
 .success-msg p {
@@ -804,4 +804,24 @@ div#wbtd-current-action {
     padding: 10px;
     border-radius: 100px;
     border: 1px #f0f0f1 solid;
+}
+
+.reign-demos-wrapper .success-msg .button {
+    text-decoration: none;
+    background: #1d76da;
+    box-shadow: 0 2px 0px 0px #0958b1;
+    color: #ffffff;
+    padding: 12px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all .5s;
+    min-width: 140px;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    float: none;
+    height: auto;
+    line-height: normal;
 }
