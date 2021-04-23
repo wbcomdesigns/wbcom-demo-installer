@@ -3,8 +3,8 @@ Contributors: wbcomdesigns
 Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
-Tested up to: 5.5.3
-Stable tag: 2.5.0
+Tested up to: 5.7.1
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,8 @@ It will not work standalone and will need Wbcom Demo Exporter plugin at master s
 1. This screen shot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.6.0 =
+* Update: added new demos
 
 = 2.5.0 =
 * Fixed: admin notice to change email
