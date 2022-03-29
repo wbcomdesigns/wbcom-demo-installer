@@ -192,7 +192,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>, Please make sure you have <strong>full backup</strong> of site before importing demo data.</li>
 
 						<li>Importing All the demo content will take some time so be patient.</li>
-<li>Seem's Hard ?? We offer free demo installation services, please submit details at <a href="https://brndle.com/downloads/free-theme-installation-service/"> Free Theme Installation</a> </li>
+						<!-- <li>Seem's Hard ?? We offer free demo installation services, please submit details at <a href="https://brndle.com/downloads/free-theme-installation-service/"> Free Theme Installation</a> </li> -->
 					</ul>
 				</div>
 			</div>
