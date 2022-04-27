@@ -278,6 +278,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						// 'theme_mods_reign-theme',
 						'_transient_is_multi_author',
 						'_transient_twentyseventeen_categories',
+						'_worker_public_key',
 					);
 
 					foreach ( $retrieved_data as $key => $value ) {
