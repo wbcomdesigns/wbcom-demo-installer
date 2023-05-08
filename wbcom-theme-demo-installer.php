@@ -34,7 +34,7 @@ class WBCOM_Theme_Demo_Installer {
 	 *
 	 * @var string
 	 */
-	public $version = '2.7.0';
+	public $version = '2.8.0';
 
 	/**
 	 * The single instance of the class.
