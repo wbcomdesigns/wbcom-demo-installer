@@ -703,7 +703,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			// )
 			// ) );
 
-			$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . 'plugins_json/' . $_GET['plugins_json_key'] . '/plugins.json';
+			$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'plugins_json/' . $_GET['plugins_json_key'] . '/plugins.json';
 			$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
 
 			if ( ! is_wp_error( $response ) ) {

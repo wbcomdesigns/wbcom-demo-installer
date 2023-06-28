@@ -136,7 +136,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$target_demo_info = array();
 
 				$current_url           = $this->get_demo_installer_page_url();
-				$parent_url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . 'package' . '-' . $theme_info['Name'] . '.json';
+				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';				
 				$retrieved_data        = '';
 				$response              = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
 				if ( is_wp_error( $response ) ) {
@@ -200,7 +200,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				<?php
 			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
 
-				$url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . 'plugins_json/' . $_GET['plugins_json_key'] . '/plugins.json';
+				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
 				$retrieved_data = '';
 				$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
 
@@ -260,7 +260,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					<div class="plugin-container">
 						<div class="plugin-importer-sec">
 							<ul>
-								<li class="importer-plugin-thumb"><img src="<?php echo $plugin['plugin_thumb']; ?>" alt="plugin-thumb" class="pluign_image"></li>
+								<li class="importer-plugin-thumb"><img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'plugin-thumb/'. $plugin['plugin_thumb']; ?>" alt="plugin-thumb" class="pluign_image"></li>
 								<li class="plugin-name"><?php echo $plugin['name']; ?></li>
 								<li class="plugin-status"><span class="<?php echo $already_active_class; ?>"><?php echo $plugin_status['status_text']; ?></span></li>
 								<li class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></li>
@@ -305,9 +305,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 				$current_url = $this->get_demo_installer_page_url();
 
-				$parent_url_to_request = WBCOM_Theme_Demo_Installer_PARENT_URL_TO_REQUEST . 'package' . '-' . $theme_info['Name'] . '.json';
-				$retrieved_data        = '';
-				$response              = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
+				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
+				$retrieved_data = '';
+				$response       = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
 
 				echo '<div id="demos_import_filter">
 					<ul id="demo_filter" class="clearfix">
@@ -360,7 +360,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 								?>
 							<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
 								<div class="container">
-									<img src="<?php echo $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
+									<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
 									<div class="demo-title">
 										<h2><?php echo $value['demo_name']; ?></h2>
 										<form method="get" action="<?php echo $current_url; ?>">

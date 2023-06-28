@@ -1,0 +1,35 @@
+[
+    {
+        "plugin_thumb": "elementor-logo.jpg",
+        "name": "Elementor",
+        "slug": "elementor",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+    },
+    {
+        "plugin_thumb": "wbcom-logo.jpg",
+        "name": "Wbcom Essential",
+        "slug": "wbcom-essential",
+        "required": true,
+        "version": "2.6.0",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
+        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
+    },
+    {
+        "plugin_thumb": "peepso-logo.jpg",
+        "name": "PeepSo – User Profile and Social Networking Plugin",
+        "slug": "peepso-core",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "PeepSo is a super-light, free, user profile and social network plugin for WordPress that allows you to quickly and effortlessly add a social network or an online community."
+    }
+]

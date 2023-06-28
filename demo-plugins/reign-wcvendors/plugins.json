@@ -1,0 +1,91 @@
+[
+    {
+        "plugin_thumb": "elementor-logo.jpg",
+        "name": "Elementor",
+        "slug": "elementor",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+    },
+    {
+        "plugin_thumb": "wbcom-logo.jpg",
+        "name": "Wbcom Essential",
+        "slug": "wbcom-essential",
+        "required": true,
+        "version": "2.5.0",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.5.0/wbcom-essential.zip",
+        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
+    },
+	{
+        "plugin_thumb": "woocommerce-logo.jpg",
+        "name": "WooCommerce",
+        "slug": "woocommerce",
+        "required": true,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
+    },
+    {
+        "plugin_thumb": "wc-vendors-logo.jpg",
+        "name": "WC Vendors Marketplace",
+        "slug": "wc-vendors",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "WC Vendors Marketplace is the best way to create your multi-vendor marketplace and earn money from every sale."
+    },
+    {
+        "plugin_thumb": "wbcom-logo.jpg",
+        "is_paid": "yes",
+        "name": "Reign WC Vendors Addon",
+        "slug": "reign-wc-vendor-addon",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://wbcomdesigns.com/downloads/reign-wcvendors-addon/",
+        "description": "Reign WC vendors Addon provides seemless integration of WC vendor with Reign theme."
+    },
+    {
+        "plugin_thumb": "wc-vendors-logo.jpg",
+        "is_paid": "yes",
+        "name": "WC Vendors Pro",
+        "slug": "wc-vendors-pro",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://www.wcvendors.com/product/wc-vendors-pro/",
+        "description": "The WC Vendors Pro plugin"
+    },
+    {
+        "plugin_thumb": "bp-logo.jpg",
+        "name": "Buddypress",
+        "slug": "buddypress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+    },
+    {
+        "plugin_thumb": "rt-media-logo.jpg",
+        "name": "rtMedia for WordPress, BuddyPress and bbPress",
+        "slug": "buddypress-media",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
+    }
+]
