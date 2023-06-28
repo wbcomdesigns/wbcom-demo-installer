@@ -1024,10 +1024,24 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 					if ( true === $GLOBALS['wp_filesystem']->move( $from_path, $to_path ) ) {
 						return trailingslashit( $to_path );
 					} else {
-						return new WP_Error( 'rename_failed', esc_html__( 'The remote plugin package does not contain a folder with the desired slug and renaming did not work.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
+						return new WP_Error(
+							'rename_failed',
+							esc_html__( 'The remote plugin package does not contain a folder with the desired slug and renaming did not work.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ),
+							array(
+								'found'    => $subdir_name,
+								'expected' => $desired_slug,
+							)
+						);
 					}
 				} elseif ( empty( $subdir_name ) ) {
-					return new WP_Error( 'packaged_wrong', esc_html__( 'The remote plugin package consists of more than one file, but the files are not packaged in a folder.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
+					return new WP_Error(
+						'packaged_wrong',
+						esc_html__( 'The remote plugin package consists of more than one file, but the files are not packaged in a folder.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ),
+						array(
+							'found'    => $subdir_name,
+							'expected' => $desired_slug,
+						)
+					);
 				}
 			}
 
@@ -1648,7 +1662,13 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 					require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 				}
 
-				$response = plugins_api( 'plugin_information', array( 'slug' => $slug, 'fields' => array( 'sections' => false ) ) );
+				$response = plugins_api(
+					'plugin_information',
+					array(
+						'slug'   => $slug,
+						'fields' => array( 'sections' => false ),
+					)
+				);
 
 				$api[ $slug ] = false;
 
@@ -1762,7 +1782,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 				}
 				$url = add_query_arg(
 					array(
-						'page' => urlencode( $this->menu )
+						'page' => urlencode( $this->menu ),
 					),
 					self_admin_url( $parent )
 				);
@@ -1773,16 +1793,16 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		}
 
 		public function get_wbcom_demo_installer_url() {
-			$url = '';
-			$admin_url = admin_url();
-			$admin_url .= 'admin.php';
+			$url                          = '';
+			$admin_url                    = admin_url();
+			$admin_url                   .= 'admin.php';
 			$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
-			if( isset( $wbcom_theme_demo_import_data['theme_slug'] ) && isset( $wbcom_theme_demo_import_data['demo_slug'] ) ) {
+			if ( isset( $wbcom_theme_demo_import_data['theme_slug'] ) && isset( $wbcom_theme_demo_import_data['demo_slug'] ) ) {
 				$url = add_query_arg(
 					array(
-						'page' => urlencode( 'wbcom-theme-demo-installer' ),
+						'page'       => urlencode( 'wbcom-theme-demo-installer' ),
 						'theme_slug' => $wbcom_theme_demo_import_data['theme_slug'],
-						'demo_slug' => $wbcom_theme_demo_import_data['demo_slug'],
+						'demo_slug'  => $wbcom_theme_demo_import_data['demo_slug'],
 					),
 					$admin_url
 				);
@@ -1839,7 +1859,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 */
 		public function is_plugin_installed( $slug ) {
 			$installed_plugins = $this->get_plugins(); // Retrieve a list of all installed plugins (WP cached).
-
+			
 			return ( ! empty( $installed_plugins[ $this->plugins[ $slug ]['file_path'] ] ) );
 		}
 
@@ -2643,7 +2663,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
 		 */
 		public function no_items() {
 			$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
-			if( isset( $wbcom_theme_demo_import_data['plugins'] ) ) {
+			if ( isset( $wbcom_theme_demo_import_data['plugins'] ) ) {
 				unset( $wbcom_theme_demo_import_data['plugins'] );
 				$wbcom_theme_demo_import_data['plugins_installed'] = 'OK';
 				update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
@@ -3183,7 +3203,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 		// Get TGMPA class instance.
 		$tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
 
-		if ( ( isset( $_GET['page'] ) && $tgmpa_instance->menu === $_GET['page'] ) || ( isset( $_GET['page'] ) && 'wbcom-theme-demo-installer' === $_GET['page'] )) {
+		if ( ( isset( $_GET['page'] ) && $tgmpa_instance->menu === $_GET['page'] ) || ( isset( $_GET['page'] ) && 'wbcom-theme-demo-installer' === $_GET['page'] ) ) {
 			if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
 				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			}
@@ -3432,12 +3452,16 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 						 *     @type array  $packages Array of plugin, theme, or core packages to update.
 						 * }
 						 */
-						do_action( 'upgrader_process_complete', $this, array(
-							'action'  => 'install', // [TGMPA + ] adjusted.
-							'type'    => 'plugin',
-							'bulk'    => true,
-							'plugins' => $plugins,
-						) );
+						do_action(
+							'upgrader_process_complete',
+							$this,
+							array(
+								'action'  => 'install', // [TGMPA + ] adjusted.
+								'type'    => 'plugin',
+								'bulk'    => true,
+								'plugins' => $plugins,
+							)
+						);
 
 						$this->skin->bulk_footer();
 

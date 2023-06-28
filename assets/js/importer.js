@@ -22,7 +22,8 @@ jQuery( document ).ready( function( $ ) {
 			data : {
 				action : 'wbcom_manage_plugin_installation',
 				plugin_action : thisRef.siblings( 'input.plugin-action').val(),
-				plugin_slug : thisRef.siblings( 'input.plugin-slug').val()
+				plugin_slug : thisRef.siblings( 'input.plugin-slug').val(),
+				demo : thisRef.siblings( 'input.demo-name').val(),
 			},
 			success : function( response ) {
 				_hide_plugin_installer_loader();
