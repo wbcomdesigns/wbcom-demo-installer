@@ -166,7 +166,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				echo "<div class='wrap wbcom-demo-importer'>";
 				?>
 			<div class="reign-demos-alertboxes">
-				<img src="<?php echo $target_demo_info['screenshot']; ?>" style="width:100%;" />
+				<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $target_demo_info['screenshot']; ?>" style="width:100%;" />
 			</div>
 			<div class="reign-demos-progress-container">
 				<div id="progress-bar-container" style="display: none;">
@@ -226,6 +226,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						'step'       => 'demo_import',
 					)
 				);
+				
 				$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
 				?>
 			<div class="goto-install-demo-step">
@@ -266,6 +267,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 								<li class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></li>
 								<li class="plugin-description"><?php echo $plugin['description']; ?></li>
 								<li class="importer-button">
+								<input type="hidden" class="demo-name" name="demo-name" value="<?php echo $_GET['plugins_json_key']; ?>">
 								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo $plugin['slug']; ?>">
 								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo $plugin_status['action']; ?>">
 									<?php
