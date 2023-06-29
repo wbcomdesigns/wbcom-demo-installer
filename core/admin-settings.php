@@ -104,7 +104,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		<div class="theme-info">
 			<h1><?php echo $theme_info['Name']; ?></h1>
 		</div>
-
+		<div class="wbcom-reign-demo-import">
 			<?php
 			if ( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
 				$this->show_step_header( 'success' );
@@ -229,9 +229,11 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				
 				$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
 				?>
+
 			<div class="goto-install-demo-step">
 				<a href="<?php echo $demo_import_url; ?>" class="button button-primary"><?php _e( 'Go To Demo Installation', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
 			</div>
+			<div class="wbcom-req-plugin-list-item">	
 				<?php
 				foreach ( $plugins_list as $key => $plugin ) {
 					$plugin_status = instantiate_wbcom_demo_importer_plugins_manager()->get_plugin_status( $plugin['slug'] );
@@ -256,7 +258,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						$already_active_class = 'already-active';
 					}
 					?>
-
+					
 				<div class="wbcom-req-plugin-card">
 					<div class="plugin-container">
 						<div class="plugin-importer-sec">
@@ -292,11 +294,12 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 							</ul>
 
 						</div>
-					</div>
-				</div>
+					</div>				
+			</div>
 					<?php
 				}
 				?>
+			</div>	
 			<div class="demo_listing_modal"></div>
 			<input type="hidden" id="required_plugins_to_activate" name="required_plugins_to_activate" value="<?php echo $required_plugins_to_activate; ?>">
 			<input type="hidden" id="num_of_req_plugins_installed" name="num_of_req_plugins_installed" value="<?php echo $num_of_req_plugins_installed; ?>">
@@ -387,7 +390,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			}
 			echo '</div>';
 			echo '</div>';
-
+			echo '</div>';
 			echo '</div>';
 		}
 
