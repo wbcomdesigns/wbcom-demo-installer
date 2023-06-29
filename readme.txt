@@ -4,31 +4,33 @@ Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 6.2.0
-Stable tag: 2.8.0
+Stable tag: 2.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-It's will be used to import demo content for the theme from source file.
+This function will allow you to import the demo content for the theme from a source file.
 
 == Description ==
 
-It's will be used to import demo content for the theme from source file.
+This will be utilized to import the demo content for the theme from a source file.
 
 == Installation ==
 
-For development purpose only, not for live sites.
+For development purposes only, not for live sites.
 
 == Frequently Asked Questions ==
 
-= From which location it will get the demo content ? =
+= From which location it will get the demo content? =
 
-It will not work standalone and will need Wbcom Demo Exporter plugin at master site.
+It will not work standalone and will need the Wbcom Demo Exporter plugin at the master site.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.
+1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.9.0 =
+* Fix: Updated JSON files for demo imports
 = 2.6.0 =
 * Fix: Language update
 
