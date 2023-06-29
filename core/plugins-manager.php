@@ -124,7 +124,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$demo                  = ! empty( $_POST['demo'] ) ? $_POST['demo'] : false;
 		$_get_required_plugins = array();
 		$url_to_request        = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $demo . '/plugins.json';
-		$response              = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+		$response              = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 		if ( ! is_wp_error( $response ) ) {
 			if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
@@ -700,7 +700,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === $_GET['step'] ) {
 
 			$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
-			$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 			if ( ! is_wp_error( $response ) ) {
 				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {

@@ -138,7 +138,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 		public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 			$retrieved_data = '';
-			$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 			if ( ! is_wp_error( $response ) ) {
 				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
@@ -343,7 +343,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			$parentFolderName = array_values( $parentFolderName );
 			$parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
 
-			$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 			$retrieved_data = array();
 			if ( ! is_wp_error( $response ) ) {
 				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {

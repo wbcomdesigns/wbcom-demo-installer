@@ -136,9 +136,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$target_demo_info = array();
 
 				$current_url           = $this->get_demo_installer_page_url();
-				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';				
+				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
 				$retrieved_data        = '';
-				$response              = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
+				$response              = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 				if ( is_wp_error( $response ) ) {
 					$error_message = $response->get_error_message();
 					echo "Something went wrong: $error_message";
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
 				$retrieved_data = '';
-				$response       = wp_remote_get( $url_to_request, array( 'timeout' => 120 ) );
+				$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 				if ( ! is_wp_error( $response ) ) {
 					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
@@ -226,7 +226,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						'step'       => 'demo_import',
 					)
 				);
-				
+
 				$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
 				?>
 			<div class="goto-install-demo-step">
@@ -309,7 +309,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
 				$retrieved_data = '';
-				$response       = wp_remote_get( $parent_url_to_request, array( 'timeout' => 120 ) );
+				$response       = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 				echo '<div id="demos_import_filter">
 					<ul id="demo_filter" class="clearfix">
