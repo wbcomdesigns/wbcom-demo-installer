@@ -1,16 +1,5 @@
 [
     {
-        "plugin_thumb": "wbcom-logo.jpg",
-        "name": "Wbcom Essential",
-        "slug": "wbcom-essential",
-        "required": true,
-        "version": "2.6.0",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
-        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
-    },
-    {
         "plugin_thumb": "elementor-logo.jpg",
         "name": "Elementor",
         "slug": "elementor",

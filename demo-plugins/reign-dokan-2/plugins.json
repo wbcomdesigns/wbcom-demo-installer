@@ -22,17 +22,6 @@
         "description": "Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before."
     },
     {
-        "plugin_thumb": "wbcom-logo.jpg",
-        "name": "Wbcom Essential",
-        "slug": "wbcom-essential",
-        "required": true,
-        "version": "2.6.0",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
-        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
-    },
-    {
         "plugin_thumb": "dokan-logo.jpg",
         "name": "Dokan Multivendor Marketplace",
         "slug": "dokan-lite",
