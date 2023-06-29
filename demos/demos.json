@@ -1,6 +1,6 @@
-[   
+[
     {
-        "screenshot": "reign-buddypress.jpg",
+        "screenshot": "reign-buddypress.jpeg",
         "demo_name": "Reign BuddyPress",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -12,7 +12,7 @@
         "plugins_json_key": "reign-buddypress-default"
     },
     {
-        "screenshot": "reign-bb-platform.jpg",
+        "screenshot": "reign-bb-platform.jpeg",
         "demo_name": "Reign BuddyBoss Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -24,7 +24,7 @@
         "plugins_json_key": "reign-buddyboss-default"
     },
     {
-        "screenshot": "reign-buddypress-dark-mode.jpg",
+        "screenshot": "reign-buddypress-dark-mode.jpeg",
         "demo_name": "Reign BuddyPress Dark",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -36,7 +36,7 @@
         "plugins_json_key": "reign-buddypress-default"
     },
     {
-        "screenshot": "reign-buddyboss-dark-mode.jpg",
+        "screenshot": "reign-buddyboss-dark-mode.jpeg",
         "demo_name": "Reign BuddyBoss Platform Dark",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -48,7 +48,7 @@
         "plugins_json_key": "reign-buddyboss-default"
     },
     {
-        "screenshot": "reign-buddypress-community.jpg",
+        "screenshot": "reign-buddypress-community.jpeg",
         "demo_name": "Reign BuddyPress Community",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -60,7 +60,7 @@
         "plugins_json_key": "reign-demo1"
     },
     {
-        "screenshot": "reign-buddyboss-community.jpg",
+        "screenshot": "reign-buddyboss-community.jpeg",
         "demo_name": "Reign BuddyBoss Community",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -72,7 +72,7 @@
         "plugins_json_key": "reign-buddyboss"
     },
     {
-        "screenshot": "reign-buddypress-dating.jpg",
+        "screenshot": "reign-buddypress-dating.jpeg",
         "demo_name": "Reign BuddyPress Dating",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -84,7 +84,7 @@
         "plugins_json_key": "reign-demo2"
     },
     {
-        "screenshot": "learnmate-learndash-university-woo.jpg",
+        "screenshot": "learnmate-learndash-university-woo.jpeg",
         "demo_name": "LearnMate LearnDash Woo",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -96,7 +96,7 @@
         "plugins_json_key": "learndash"
     },
     {
-        "screenshot": "learnmate-learndash-online-education.jpg",
+        "screenshot": "learnmate-learndash-online-education.jpeg",
         "demo_name": "LearnMate LearnDash EDD",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -108,7 +108,7 @@
         "plugins_json_key": "learndash2"
     },
     {
-        "screenshot": "learnmate-learndash-social-learning.jpg",
+        "screenshot": "learnmate-learndash-social-learning.jpeg",
         "demo_name": "LearnMate LearnDash BuddyPress",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -120,7 +120,7 @@
         "plugins_json_key": "learndash3"
     },
     {
-        "screenshot": "learnmate-learndash-online-teaching.jpg",
+        "screenshot": "learnmate-learndash-online-teaching.jpeg",
         "demo_name": "LearnMate LearnDash Teaching",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -132,7 +132,7 @@
         "plugins_json_key": "online-teaching"
     },
     {
-        "screenshot": "learnmate-learndash-beginner-school.jpg",
+        "screenshot": "learnmate-learndash-beginner-school.jpeg",
         "demo_name": "LearnMate LearnDash Beginners School",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -144,7 +144,7 @@
         "plugins_json_key": "beginners-school"
     },
     {
-        "screenshot": "learnmate-lifterlms.jpg",
+        "screenshot": "learnmate-lifterlms.jpeg",
         "demo_name": "Reign LifterLMS BuddyBoss Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -156,7 +156,7 @@
         "plugins_json_key": "reign-lifterlms"
     },
     {
-        "screenshot": "learnmate-lifterlms-online-courses.jpg",
+        "screenshot": "learnmate-lifterlms-online-courses.jpeg",
         "demo_name": "LifterLMS Online Courses",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -168,7 +168,7 @@
         "plugins_json_key": "reign-lifterlms-2"
     },
     {
-        "screenshot": "storemate-dokan-woocommerce.jpg",
+        "screenshot": "storemate-dokan-woocommerce.jpeg",
         "demo_name": "StoreMate Dokan",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -180,7 +180,7 @@
         "plugins_json_key": "reign-dokan"
     },
     {
-        "screenshot": "storemate-dokan-shop.jpg",
+        "screenshot": "storemate-dokan-shop.jpeg",
         "demo_name": "StoreMate Dokan Shop",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -192,7 +192,7 @@
         "plugins_json_key": "reign-dokan-2"
     },
     {
-        "screenshot": "storemate-reign-multivendor.jpg",
+        "screenshot": "storemate-reign-multivendor.jpeg",
         "demo_name": "StoreMate Dokan Multivendor",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -204,7 +204,7 @@
         "plugins_json_key": "reign-dokan-3"
     },
     {
-        "screenshot": "storemate-interior-decorators.jpg",
+        "screenshot": "storemate-interior-decorators.jpeg",
         "demo_name": "StoreMate Dokan Interior Decorators",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -216,7 +216,7 @@
         "plugins_json_key": "reign-dokan-4"
     },
     {
-        "screenshot": "jobmate-job-portal.jpg",
+        "screenshot": "jobmate-job-portal.jpeg",
         "demo_name": "Jobmate Portal",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -228,7 +228,7 @@
         "plugins_json_key": "jobmate-free"
     },
     {
-        "screenshot": "jobmate-job-resume.jpg",
+        "screenshot": "jobmate-job-resume.jpeg",
         "demo_name": "Jobmate Resume",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -240,7 +240,7 @@
         "plugins_json_key": "jobmate-resume"
     },
     {
-        "screenshot": "reign-geolocation-directory.jpg",
+        "screenshot": "reign-geolocation-directory.jpeg",
         "demo_name": "Reign Business Directory",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -252,7 +252,7 @@
         "plugins_json_key": "reign-listing"
     },
     {
-        "screenshot": "storemate-wc-vendor.jpg",
+        "screenshot": "storemate-wc-vendor.jpeg",
         "demo_name": "Fashion WC Vendors",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -264,7 +264,7 @@
         "plugins_json_key": "reign-wcvendors"
     },
     {
-        "screenshot": "storemate-wc-vendor-2.jpg",
+        "screenshot": "storemate-wc-vendor-2.jpeg",
         "demo_name": "Storemate BB Platform WC Vendors",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -276,7 +276,7 @@
         "plugins_json_key": "reign-wcvendors-2"
     },
     {
-        "screenshot": "storemate-wcfm.jpg",
+        "screenshot": "storemate-wcfm.jpeg",
         "demo_name": "StoreMate WCFM",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -288,7 +288,7 @@
         "plugins_json_key": "reign-wcfm"
     },
     {
-        "screenshot": "learnmate-tutor-lms.jpg",
+        "screenshot": "learnmate-tutor-lms.jpeg",
         "demo_name": "LearnMate Tutor LMS",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -300,7 +300,7 @@
         "plugins_json_key": "reign-tutor-lms"
     },
     {
-        "screenshot": "learnmate-sensei-lms.jpg",
+        "screenshot": "learnmate-sensei-lms.jpeg",
         "demo_name": "LearnMate Sensei LMS",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -310,10 +310,10 @@
         "motive_key": "buddypress sensei",
         "motive_name": "LearnMate Sensei LMS",
         "plugins_json_key": "reign-sensei-lms"
-    },    
+    },
 
     {
-        "screenshot": "peepso-default.jpg",
+        "screenshot": "peepso-default.jpeg",
         "demo_name": "PeepSo Community",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -325,7 +325,7 @@
         "plugins_json_key": "peepso-community"
     },
     {
-        "screenshot": "peepso-dokan.jpg",
+        "screenshot": "peepso-dokan.jpeg",
         "demo_name": "PeepSo Dokan Multivendor",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -337,7 +337,7 @@
         "plugins_json_key": "peepso-dokan-multivendor"
     },
     {
-        "screenshot": "peepso-geolocation-directory.jpg",
+        "screenshot": "peepso-geolocation-directory.jpeg",
         "demo_name": "PeepSo Geolocation Directory",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -349,7 +349,7 @@
         "plugins_json_key": "peepso-geolocation-directory"
     },
     {
-        "screenshot": "peepso-lifterlms.jpg",
+        "screenshot": "peepso-lifterlms.jpeg",
         "demo_name": "PeepSo LifterLMS",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -361,7 +361,7 @@
         "plugins_json_key": "peepso-lifterlms"
     },
     {
-        "screenshot": "peepso-sensei.jpg",
+        "screenshot": "peepso-sensei.jpeg",
         "demo_name": "PeepSo Sensei",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -373,7 +373,7 @@
         "plugins_json_key": "peepso-sensei"
     },
     {
-        "screenshot": "peepso-learndash.jpg",
+        "screenshot": "peepso-learndash.jpeg",
         "demo_name": "PeepSo LearnDash",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -385,7 +385,7 @@
         "plugins_json_key": "peepso-social-learning"
     },
     {
-        "screenshot": "peepso-tutorlms.jpg",
+        "screenshot": "peepso-tutorlms.jpeg",
         "demo_name": "PeepSo TutorLMS",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -397,7 +397,7 @@
         "plugins_json_key": "peepso-tutorlms"
     },
     {
-        "screenshot": "peepso-wcfm.jpg",
+        "screenshot": "peepso-wcfm.jpeg",
         "demo_name": "PeepSo WCFM",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -409,7 +409,7 @@
         "plugins_json_key": "peepso-wcfm"
     },
     {
-        "screenshot": "peepso-wc-vendors.jpg",
+        "screenshot": "peepso-wc-vendors.jpeg",
         "demo_name": "PeepSo WC Vendors",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -421,7 +421,7 @@
         "plugins_json_key": "peepso-wc-vendors"
     },
     {
-        "screenshot": "reign-dokan-bb-platform.jpg",
+        "screenshot": "reign-dokan-bb-platform.jpeg",
         "demo_name": "Reign Dokan BB Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -433,7 +433,7 @@
         "plugins_json_key": "reign-dokan-bb-platform"
     },
     {
-        "screenshot": "reign-bb-platform-tutorlms.jpg",
+        "screenshot": "reign-bb-platform-tutorlms.jpeg",
         "demo_name":  "Reign Tutor LMS BB Platform",
         "theme_slug": "reign",
         "demo_slug":  "theme_demo",
@@ -445,7 +445,7 @@
         "plugins_json_key": "reign-bb-platform-tutorlms"
     },
     {
-        "screenshot": "reign-bb-platform-sensei.jpg",
+        "screenshot": "reign-bb-platform-sensei.jpeg",
         "demo_name": "Reign Sensei BB Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -457,7 +457,7 @@
         "plugins_json_key": "reign-bb-platform-sensei"
     },
     {
-        "screenshot": "reign-bb-platform-learndash.jpg",
+        "screenshot": "reign-bb-platform-learndash.jpeg",
         "demo_name": "Reign LearnDash BB Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -469,7 +469,7 @@
         "plugins_json_key": "reign-bb-platform-learndash"
     },
     {
-        "screenshot": "reign-wcfm-bb-platform.jpg",
+        "screenshot": "reign-wcfm-bb-platform.jpeg",
         "demo_name": "Reign WCFM BB Platform",
         "theme_slug": "reign",
         "demo_slug": "theme_demo",
@@ -480,5 +480,5 @@
         "motive_name": "Reign WCFM BB Platform",
         "plugins_json_key": "reign-wcfm-bb-platform"
     }
-    
+
 ]
