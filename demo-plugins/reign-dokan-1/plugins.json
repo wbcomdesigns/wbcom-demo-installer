@@ -18,7 +18,7 @@
         "version": "2.6.0",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.6.0/wbcom-essential.zip",
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
@@ -67,25 +67,14 @@
         "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
-        "plugin_thumb": "bp-logo.jpg",
-        "name": "Buddypress",
-        "slug": "buddypress",
-        "required": false,
+        "plugin_thumb": "woolentor-addons.png",
+        "name": "ShopLentor",
+        "slug": "woolentor-addons",
+        "required": true,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "",
-        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
-    },
-    {
-        "plugin_thumb": "rt-media-logo.jpg",
-        "name": "rtMedia for WordPress, BuddyPress and bbPress",
-        "slug": "buddypress-media",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
+        "description": "An all-in-one WooCommerce solution to create a beautiful WooCommerce store."
     }
 ]

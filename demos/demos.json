@@ -168,6 +168,18 @@
         "plugins_json_key": "reign-lifterlms-2"
     },
     {
+        "screenshot": "reign-storemate-dokan.jpg",
+        "demo_name": "Reign Storemate Dokan",
+        "theme_slug": "reign",
+        "demo_slug": "theme_demo",
+        "target_url": "https:\/\/installer.wbcomdesigns.com\/storemate-dokan\/",
+        "preview_url": "https:\/\/installer.wbcomdesigns.com\/storemate-dokan\/",
+        "created_on": "25-07-2023",
+        "motive_key": "dokan",
+        "motive_name": "StoreMate Dokan",
+        "plugins_json_key": "reign-dokan-1"
+    },
+    {
         "screenshot": "storemate-dokan-woocommerce.jpeg",
         "demo_name": "StoreMate Dokan",
         "theme_slug": "reign",
@@ -178,7 +190,7 @@
         "motive_key": "dokan buddypress",
         "motive_name": "StoreMate Dokan",
         "plugins_json_key": "reign-dokan"
-    },
+    },    
     {
         "screenshot": "storemate-dokan-shop.jpeg",
         "demo_name": "StoreMate Dokan Shop",
@@ -250,6 +262,18 @@
         "motive_key": "geodirectory buddypress",
         "motive_name": "Reign BuddyPress",
         "plugins_json_key": "reign-listing"
+    },
+    {
+        "screenshot": "storemate-wc-vendors.jpg",
+        "demo_name": "Storemate WC Vendors",
+        "theme_slug": "reign",
+        "demo_slug": "theme_demo",
+        "target_url": "https:\/\/installer.wbcomdesigns.com\/storemate-wc-vendors\/",
+        "preview_url": "https:\/\/installer.wbcomdesigns.com\/storemate-wc-vendors\/",
+        "created_on": "25-07-2023",
+        "motive_key": "wc-vendor",
+        "motive_name": "Storemate WC Vendors",
+        "plugins_json_key": "reign-wcvendors-1"
     },
     {
         "screenshot": "storemate-wc-vendor.jpeg",

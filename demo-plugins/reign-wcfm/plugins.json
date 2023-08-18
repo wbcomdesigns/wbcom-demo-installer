@@ -77,6 +77,17 @@
         "description": "Reign WCFM Addon provides seemless integration of WCFM with Reign theme."
     },
     {
+        "plugin_thumb": "mega-menu-logo.jpg",
+        "name": "Max Mega Menu",
+        "slug": "megamenu",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "Max Mega Menu will automatically convert your existing menu into a mega menu. You can then add any WordPress widget to your menu, restyle your menu using the theme editor and change the menu behaviour using the built in settings."
+    },
+    {
         "plugin_thumb": "bp-logo.jpg",
         "name": "Buddypress",
         "slug": "buddypress",
