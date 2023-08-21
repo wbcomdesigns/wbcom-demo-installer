@@ -64,5 +64,15 @@
         "force_deactivation": false,
         "external_url": "",
         "description": "This plugin is designed for premium content sites, clubs/associations, subscription products, newsletters and more!"
+    },
+    {
+        "plugin_thumb": "the-events.gif",
+        "name": "The Events Calendar",
+        "slug": "the-events-calendar",
+        "required": false,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "Easily create and manage an events calendar on your WordPress site with The Events Calendar free plugin."
     }
 ]
