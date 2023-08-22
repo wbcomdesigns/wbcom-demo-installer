@@ -276,18 +276,6 @@
         "plugins_json_key": "reign-wcvendors-1"
     },
     {
-        "screenshot": "storemate-wc-vendor.jpeg",
-        "demo_name": "Fashion WC Vendors",
-        "theme_slug": "reign",
-        "demo_slug": "theme_demo",
-        "target_url": "https:\/\/installer.wbcomdesigns.com\/storemate-wc-vendors\/",
-        "preview_url": "https:\/\/installer.wbcomdesigns.com\/storemate-wc-vendors\/",
-        "created_on": "21-09-2019",
-        "motive_key": "wc-vendor ",
-        "motive_name": "Fashion WC Vendors",
-        "plugins_json_key": "reign-wcvendors"
-    },
-    {
         "screenshot": "storemate-wc-vendor-2.jpeg",
         "demo_name": "Storemate BB Platform WC Vendors",
         "theme_slug": "reign",
