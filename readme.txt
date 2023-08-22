@@ -29,6 +29,11 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.9.1 =
+* Added: Plugin update checker
+* Added: Added new demo JSON file
+* Added: Added The Events Calendar plugin in Reign community
+
 = 2.9.0 =
 * Fix: Updated JSON files for demo imports
 = 2.6.0 =
