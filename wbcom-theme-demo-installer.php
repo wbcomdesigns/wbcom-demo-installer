@@ -138,11 +138,13 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 		}
 
 		public function installer_update_checker() {
-			$myUpdateChecker = PucFactory::buildUpdateChecker(
-				'https://demos.wbcomdesigns.com/exporter/free-plugins/wbcom-demo-installer.json',
-				__FILE__,
-				'wbcom-demo-installer'
-			);
+			if( class_exists( 'PucFactory' ) ){
+				$myUpdateChecker = PucFactory::buildUpdateChecker(
+					'https://demos.wbcomdesigns.com/exporter/free-plugins/wbcom-demo-installer.json',
+					__FILE__,
+					'wbcom-demo-installer'
+				);
+			}
 		}
 
 	}
