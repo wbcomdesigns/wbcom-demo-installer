@@ -67,6 +67,17 @@
         "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
+        "plugin_thumb": "mega-menu-logo.jpg",
+        "name": "Max Mega Menu",
+        "slug": "megamenu",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "Max Mega Menu will automatically convert your existing menu into a mega menu."
+    },
+    {
         "plugin_thumb": "bp-logo.jpg",
         "name": "Buddypress",
         "slug": "buddypress",
