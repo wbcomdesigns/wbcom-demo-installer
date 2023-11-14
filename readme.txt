@@ -3,8 +3,8 @@ Contributors: wbcomdesigns
 Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
-Tested up to: 6.2.0
-Stable tag: 2.9.2
+Tested up to: 6.4.1
+Stable tag: 2.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,9 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.9.3 =
+* Updated: Demo screenshot and image format
+
 = 2.9.2 =
 * Fix: Fixed update checker class fatal error
 * Add: Added mega max menu plugin
