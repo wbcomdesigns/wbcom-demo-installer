@@ -29,6 +29,9 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.9.4 =
+* Add: Added BP Profile search plugin in Reign Dating demo
+
 = 2.9.3 =
 * Updated: Demo screenshot and image format
 
