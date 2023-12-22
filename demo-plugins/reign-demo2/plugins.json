@@ -33,6 +33,17 @@
         "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
+        "plugin_thumb": "bp-search.svg",
+        "name": "BP Profile Search",
+        "slug": "bp-profile-search",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "BP Profile Search is a member search and member directories plugin for BuddyPress."
+    },
+    {
         "plugin_thumb": "rt-media-logo.jpg",
         "name": "rtMedia for WordPress, BuddyPress and bbPress",
         "slug": "buddypress-media",
