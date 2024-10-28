@@ -30,7 +30,7 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 
 == Changelog ==
 = 2.9.5 =
-* Add: Update Demo screenshot
+* Update: Update Demo screenshot
 
 = 2.9.4 =
 * Add: Added BP Profile search plugin in Reign Dating demo
