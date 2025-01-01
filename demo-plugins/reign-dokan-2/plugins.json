@@ -22,6 +22,16 @@
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
+        "plugin_thumb": "woocommerce-logo.jpg",
+        "name": "WooCommerce",
+        "slug": "woocommerce",
+        "required": true,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
+    },
+    {
         "plugin_thumb": "dokan-logo.jpg",
         "name": "Dokan Multivendor Marketplace",
         "slug": "dokan-lite",
@@ -55,16 +65,6 @@
         "force_deactivation": false,
         "external_url": "https://wedevs.com/dokan/",
         "description": "An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs."
-    },
-    {
-        "plugin_thumb": "woocommerce-logo.jpg",
-        "name": "WooCommerce",
-        "slug": "woocommerce",
-        "required": true,
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
         "plugin_thumb": "mega-menu-logo.jpg",

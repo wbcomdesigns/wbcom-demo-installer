@@ -24,13 +24,23 @@
     {
         "plugin_thumb": "peepso-logo.jpg",
         "name": "PeepSo – User Profile and Social Networking Plugin",
-        "slug": "peepso-core",
+        "slug": "peepso",
         "required": true,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "",
+        "external_url": "https://www.peepso.com/get-free-peepso/?peepso-download",
         "description": "PeepSo is a super-light, free, user profile and social network plugin for WordPress that allows you to quickly and effortlessly add a social network or an online community."
+    },
+    {
+        "plugin_thumb": "woocommerce-logo.jpg",
+        "name": "WooCommerce",
+        "slug": "woocommerce",
+        "required": true,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
         "plugin_thumb": "wc-vendors-logo.jpg",
@@ -66,16 +76,6 @@
         "force_deactivation": false,
         "external_url": "https://wbcomdesigns.com/downloads/reign-wcvendors-addon/",
         "description": "Reign WC vendors Addon provides seemless integration of WC vendor with Reign theme."
-    },
-    {
-        "plugin_thumb": "woocommerce-logo.jpg",
-        "name": "WooCommerce",
-        "slug": "woocommerce",
-        "required": true,
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
         "plugin_thumb": "peepso-logo.jpg",

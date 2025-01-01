@@ -24,12 +24,12 @@
     {
         "plugin_thumb": "peepso-logo.jpg",
         "name": "PeepSo – User Profile and Social Networking Plugin",
-        "slug": "peepso-core",
+        "slug": "peepso",
         "required": true,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "",
+        "external_url": "https://www.peepso.com/get-free-peepso/?peepso-download",
         "description": "PeepSo is a super-light, free, user profile and social network plugin for WordPress that allows you to quickly and effortlessly add a social network or an online community."
     },
     {
