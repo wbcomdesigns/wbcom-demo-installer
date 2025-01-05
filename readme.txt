@@ -3,8 +3,8 @@ Contributors: wbcomdesigns
 Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
-Tested up to: 6.4.1
-Stable tag: 2.9.4
+Tested up to: 6.7.2
+Stable tag: 2.9.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ This will be utilized to import the demo content for the theme from a source fil
 
 == Installation ==
 
-For development purposes only, not for live sites.
+It is for development purposes only, not for live sites.
 
 == Frequently Asked Questions ==
 
@@ -29,6 +29,9 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+= 2.9.6 =
+* Fix peepso demo installer issue
+
 = 2.9.5 =
 * Update: Update Demo screenshot
 
