@@ -7,7 +7,7 @@
  * Author: Wbcom Designs
  * Author URI: https://wbcomdesigns.com/
  * Requires at least: 4.0
- * Tested up to: 6.4.1
+ * Tested up to: 6.7.2
  *
  * Text Domain: wbcom-theme-demo-installer
  * Domain Path: /i18n/languages/
