@@ -18,7 +18,7 @@
         "version": "3.5.0",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.3/wbcom-essential.zip",
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
@@ -29,7 +29,7 @@
         "version": "1.5.7.3",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/buddyboss-platform/1.5.7.3/buddyboss-platform.zip",
+        "external_url": "https://github.com/buddyboss/buddyboss-platform/archive/refs/tags/2.7.70.zip",
         "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
