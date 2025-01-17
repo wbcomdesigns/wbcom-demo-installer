@@ -49,7 +49,7 @@
         "is_paid": "yes",
         "name": "Reign Learndash Addon",
         "slug": "reign-learndash-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,

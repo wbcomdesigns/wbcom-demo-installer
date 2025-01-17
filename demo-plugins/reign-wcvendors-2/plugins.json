@@ -47,7 +47,7 @@
         "is_paid": "yes",
         "name": "Reign WC Vendors Addon",
         "slug": "reign-wc-vendor-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
@@ -67,25 +67,14 @@
         "description": "The WC Vendors Pro plugin"
     },
     {
-        "plugin_thumb": "mega-menu-logo.jpg",
-        "name": "Max Mega Menu",
-        "slug": "megamenu",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "Max Mega Menu will automatically convert your existing menu or menus into a mega menu."
-    },
-   {
-       "plugin_thumb": "bb-logo.jpg",
-        "name": "BuddyBoss Platform",
-        "slug": "buddyboss-platform",
-        "required": true,
-        "version": "1.5.7.3",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/buddyboss-platform/1.5.7.3/buddyboss-platform.zip",
-        "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+        "plugin_thumb": "bb-logo.jpg",
+         "name": "BuddyBoss Platform",
+         "slug": "buddyboss-platform",
+         "required": true,
+         "version": "1.5.7.3",
+         "force_activation": false,
+         "force_deactivation": false,
+         "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/buddyboss-platform/1.5.7.3/buddyboss-platform.zip",
+         "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     }
 ]

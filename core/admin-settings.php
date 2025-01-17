@@ -311,22 +311,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$retrieved_data = '';
 				$response       = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
-				echo '<div id="demos_import_filter">
-					<ul id="demo_filter" class="clearfix">
-						<li><span class="demo_filter active" data-filter=".buddypress, .buddyboss, .learndash, .dokan, .lifterlms, .wp-job-manager, .peepso, .wc-vendor, .wcfm, .tutorlms, .sensei, .geodirectory">All</span></li>
-						<li><span class="demo_filter" data-filter=".buddypress">BuddyPress</span></li>
-						<li><span class="demo_filter" data-filter=".buddyboss">BuddyBoss</span></li>
-						<li><span class="demo_filter" data-filter=".learndash">LearnDash</span></li>
-						<li><span class="demo_filter" data-filter=".dokan">Dokan</span></li>
-						<li><span class="demo_filter" data-filter=".lifterlms">LifterLMS</span></li>
-						<li><span class="demo_filter" data-filter=".peepso">PeepSo</span></li>
-						<li><span class="demo_filter" data-filter=".wc-vendor">WC Vendors</span></li>
-						<li><span class="demo_filter" data-filter=".wcfm">WCFM</span></li>
-						<li><span class="demo_filter" data-filter=".tutorlms">TutorLMS</span></li>
-						<li><span class="demo_filter" data-filter=".sensei">Sensei</span></li>
-						<li><span class="demo_filter" data-filter=".wp-job-manager">JobManager</span></li>
-						<li><span class="demo_filter" data-filter=".geodirectory">GeoDirectory</span></li>
-					</ul>';
+				echo '<div id="demos_import_filter">';
 
 				if ( is_wp_error( $response ) ) {
 					$error_message = $response->get_error_message();
@@ -340,7 +325,6 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						if ( ! empty( $response ) && is_array( $response ) ) {
 							$motive_key = '';
 							foreach ( $response as $key => $value ) {
-								// print_r($value)
 								if ( ( $key !== 0 ) && ( $motive_key !== $value['motive_key'] ) ) {
 									echo '</div>';
 								}
@@ -360,20 +344,20 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 									)
 								);
 								?>
-							<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
-								<div class="container">
-									<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-									<div class="demo-title">
-										<h2><?php echo $value['demo_name']; ?></h2>
-										<form method="get" action="<?php echo $current_url; ?>">
-											<div class="middle">
-												<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
-												<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
-											</div>
-										</form>
+								<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
+									<div class="container">
+										<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
+										<div class="demo-title">
+											<h2><?php echo $value['demo_name']; ?></h2>
+											<form method="get" action="<?php echo $current_url; ?>">
+												<div class="middle">
+													<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
+													<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
-							</div>
 								<?php
 								if ( ( $key === ( count( $response ) - 1 ) ) ) {
 									echo '</div>';

@@ -47,7 +47,7 @@
         "is_paid": "yes",
         "name": "Reign Dokan Addon",
         "slug": "reign-dokan-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
@@ -65,16 +65,5 @@
         "force_deactivation": false,
         "external_url": "https://wedevs.com/dokan/",
         "description": "An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs."
-    },
-    {
-        "plugin_thumb": "woolentor-addons.png",
-        "name": "ShopLentor",
-        "slug": "woolentor-addons",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "An all-in-one WooCommerce solution to create a beautiful WooCommerce store."
     }
 ]

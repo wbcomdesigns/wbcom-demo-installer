@@ -48,7 +48,7 @@
         "plugin_thumb": "bb-logo.jpg",
         "name": "BuddyBoss Platform",
         "slug": "buddyboss-platform",
-        "required": true,
+        "required": false,
         "version": "1.5.7.3",
         "force_activation": false,
         "force_deactivation": false,

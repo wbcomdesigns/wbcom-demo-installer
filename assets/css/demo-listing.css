@@ -668,52 +668,9 @@ div#wbtd-current-action {
     text-align: left;
 }
 
-
-#demos_import_filter .import_filter {
-    display: none;
-}
-
-
 #demos_import_filter {
     width: 100%;
 }
-
-#demo_filter {
-    margin: 20px 0 20px 0px;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: #f7f7f7;
-    border: 0px #efeeee solid;
-    border-radius: 0px;
-}
-
-#demo_filter li {
-    float: left;
-    margin: 0px;
-}
-
-#demo_filter li span {
-    display: block;
-    padding: 14px 20px;
-    text-decoration: none;
-    color: #666;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-#demo_filter li span:hover,
-#demo_filter li span.active {
-    background: #1d76da;
-    color: #fff;
-}
-
 
 .plugin-importer-sec ul {
     margin: 0px;
