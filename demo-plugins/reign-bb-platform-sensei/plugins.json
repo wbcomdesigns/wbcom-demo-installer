@@ -48,7 +48,7 @@
         "is_paid": "yes",
         "name": "Reign Sensei Addon",
         "slug": "reign-sensei-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,

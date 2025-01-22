@@ -49,7 +49,7 @@
         "is_paid": "yes",
         "name": "Reign Geodirectory Addon",
         "slug": "reign-geodirectory",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,

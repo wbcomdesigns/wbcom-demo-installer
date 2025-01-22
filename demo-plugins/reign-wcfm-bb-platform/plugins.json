@@ -69,7 +69,7 @@
         "is_paid": "yes",
         "name": "Reign WCFM Addon",
         "slug": "reign-wcfm-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
