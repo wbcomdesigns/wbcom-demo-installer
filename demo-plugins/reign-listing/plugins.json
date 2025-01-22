@@ -57,14 +57,14 @@
         "description": "Reign Geodirectory Addon works as a bridge for GeoDirectory and BuddyPress plugins."
     },
     {
-        "plugin_thumb": "bp-logo.jpg",
-        "name": "Buddypress",
-        "slug": "buddypress",
-        "required": true,
-        "version": "",
+        "plugin_thumb": "bb-logo.jpg",
+        "name": "BuddyBoss Platform",
+        "slug": "buddyboss-platform",
+        "required": false,
+        "version": "2.7.70",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "",
-        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+        "external_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.7.70/buddyboss-platform-plugin.zip",
+        "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     }
 ]
