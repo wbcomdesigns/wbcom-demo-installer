@@ -66,16 +66,5 @@
         "force_deactivation": false,
         "external_url": "",
         "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
-    },
-    {
-        "plugin_thumb": "rt-media-logo.jpg",
-        "name": "rtMedia for WordPress, BuddyPress and bbPress",
-        "slug": "buddypress-media",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
     }
 ]
