@@ -1,7 +1,7 @@
 <?php
 /**
- * AJAX handler for Reign Demo Installer - Improved & Working Version
- * Combines reliable processing with modern optimizations
+ * AJAX handler for Reign Demo Installer - FIXED VERSION
+ * Properly handles path structure like the old working system
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					'user_id' => get_current_user_id()
 				), 2 * HOUR_IN_SECONDS );
 
-				$this->log( "Created temp folder: {$folder_id}" );
+				$this->debug_log( "Created temp folder: {$folder_id}" );
 
 				wp_send_json_success( array( 
 					'folder_id' => $folder_id,
@@ -137,13 +137,13 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				) );
 
 			} catch ( Exception $e ) {
-				$this->log( "Temp folder creation failed: {$e->getMessage()}", 'error' );
+				$this->debug_log( "Temp folder creation failed: {$e->getMessage()}", 'error' );
 				wp_send_json_error( array( 'message' => 'Failed to create temp folder' ) );
 			}
 		}
 
 		/**
-		 * Get demo manifest.
+		 * Get demo manifest with path-aware processing.
 		 */
 		public function get_demo_manifest() {
 			if ( ! $this->validate_request() ) return;
@@ -166,7 +166,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				$response = wp_remote_post( $manifest_url, array(
 					'method' => 'POST',
 					'timeout' => 60,
-					'sslverify' => false, // For demo server compatibility
+					'sslverify' => false,
 					'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION,
 					'body' => array(
 						'theme_slug' => $theme_slug,
@@ -183,13 +183,14 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					wp_send_json_error( array( 'message' => 'Invalid demo data received' ) );
 				}
 
-				$files = $this->prepare_file_list( $demo_data );
+				// FIXED: Prepare file list with path preservation matching old system
+				$files = $this->prepare_file_list_with_paths( $demo_data );
 
 				if ( empty( $files ) ) {
 					wp_send_json_error( array( 'message' => 'No demo files found' ) );
 				}
 
-				$this->log( "Demo manifest prepared: " . count( $files ) . " files for {$demo_slug}" );
+				$this->debug_log( "Demo manifest prepared: " . count( $files ) . " files for {$demo_slug}" );
 
 				wp_send_json_success( array( 
 					'files' => $files,
@@ -197,9 +198,78 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				) );
 
 			} catch ( Exception $e ) {
-				$this->log( "Manifest preparation failed: {$e->getMessage()}", 'error' );
+				$this->debug_log( "Manifest preparation failed: {$e->getMessage()}", 'error' );
 				wp_send_json_error( array( 'message' => 'Failed to get demo manifest' ) );
 			}
+		}
+
+		/**
+		 * FIXED: Enhanced file list preparation with path information matching old system.
+		 */
+		private function prepare_file_list_with_paths( $demo_data ) {
+			$files = array();
+			
+			// Add database tables
+			if ( isset( $demo_data['database_tables'] ) && is_array( $demo_data['database_tables'] ) ) {
+				foreach ( $demo_data['database_tables'] as $url ) {
+					$files[] = array(
+						'name' => basename( $url ),
+						'url' => $url,
+						'type' => 'database_table',
+						'action_for' => 'database_tables',
+						'path_info' => null // Database files don't need path preservation
+					);
+				}
+			}
+
+			// FIXED: Add upload folders WITH proper path preservation like old system
+			if ( isset( $demo_data['upload_folders'] ) && is_array( $demo_data['upload_folders'] ) ) {
+				foreach ( $demo_data['upload_folders'] as $url ) {
+					$path_info = $this->extract_path_info_from_url( $url );
+					
+					$files[] = array(
+						'name' => basename( $url ),
+						'url' => $url,
+						'type' => 'upload_folder',
+						'action_for' => 'upload_folders',
+						'path_info' => $path_info // CRITICAL: Preserve path information
+					);
+				}
+			}
+
+			return $files;
+		}
+
+		/**
+		 * FIXED: Extract path information from URL matching old clone_uploads_folder logic.
+		 */
+		private function extract_path_info_from_url( $url ) {
+			// Replicate the old logic: $parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
+			$url_parts = explode( '/', $url );
+			$url_parts = array_filter( $url_parts ); // Remove empty elements
+			$url_parts = array_values( $url_parts ); // Reindex
+			
+			$filename = end( $url_parts ); // Last element is filename
+			$parent_folder = isset( $url_parts[ count( $url_parts ) - 2 ] ) ? $url_parts[ count( $url_parts ) - 2 ] : '';
+			
+			// Extract the path after 'theme_demo'
+			$demo_index = array_search( 'theme_demo', $url_parts );
+			$relative_path = '';
+			
+			if ( $demo_index !== false && $demo_index < count( $url_parts ) - 1 ) {
+				// Get everything after 'theme_demo' but before the filename
+				$relative_parts = array_slice( $url_parts, $demo_index + 1, -1 );
+				$relative_path = implode( '/', $relative_parts );
+			}
+			
+			$this->debug_log( "Extracted path info for {$filename}: parent={$parent_folder}, relative={$relative_path}" );
+			
+			return array(
+				'parent_folder' => $parent_folder,
+				'relative_path' => $relative_path,
+				'full_path' => dirname( implode( '/', $url_parts ) ),
+				'filename' => $filename
+			);
 		}
 
 		/**
@@ -239,7 +309,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					wp_send_json_error( array( 'message' => 'Failed to save file' ) );
 				}
 
-				$this->log( "Downloaded: {$file_name} (" . size_format( strlen( $file_content ) ) . ")" );
+				$this->debug_log( "Downloaded: {$file_name} (" . size_format( strlen( $file_content ) ) . ")" );
 
 				wp_send_json_success( array( 
 					'file_name' => $file_name,
@@ -248,13 +318,13 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				) );
 
 			} catch ( Exception $e ) {
-				$this->log( "Download failed: {$e->getMessage()}", 'error' );
+				$this->debug_log( "Download failed: {$e->getMessage()}", 'error' );
 				wp_send_json_error( array( 'message' => 'Download failed' ) );
 			}
 		}
 
 		/**
-		 * IMPROVED: Process file with better error handling and recovery.
+		 * FIXED: Process file with better error handling and path awareness.
 		 */
 		public function process_local_demo_file() {
 			if ( ! $this->validate_request() ) return;
@@ -264,6 +334,17 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				$file_name = $this->get_param( 'file_name', 'filename' );
 				$action_for = $this->get_param( 'action_for' );
 				$file_criticality = $this->get_param( 'file_criticality', 'string', 'optional' );
+				
+				// FIXED: Get path info from request
+				$path_info_json = $this->get_param( 'path_info', 'string', '' );
+				$path_info = null;
+				
+				if ( ! empty( $path_info_json ) ) {
+					$path_info = json_decode( $path_info_json, true );
+					if ( json_last_error() !== JSON_ERROR_NONE ) {
+						$path_info = null;
+					}
+				}
 
 				$folder_info = get_transient( 'reign_temp_folder_' . $temp_folder_id );
 				if ( ! $folder_info || $folder_info['user_id'] !== get_current_user_id() ) {
@@ -276,19 +357,18 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					wp_send_json_error( array( 'message' => 'File not found in temp folder' ) );
 				}
 
-				// Set up environment
+				// Set up environment with better resource management
 				$this->prepare_processing_environment();
 
-				// Process based on type with improved error handling
-				$result = $this->process_file_by_type( $file_path, $action_for, $file_criticality );
+				// FIXED: Process with path info
+				$result = $this->process_file_by_type_with_path( $file_path, $action_for, $file_criticality, $path_info );
 
 				if ( is_wp_error( $result ) ) {
-					// Handle errors based on criticality
 					if ( $file_criticality === 'critical' ) {
 						wp_send_json_error( array( 'message' => $result->get_error_message() ) );
 					} else {
 						// For non-critical files, log and continue
-						$this->log( "Non-critical file processing failed: {$file_name} - {$result->get_error_message()}", 'warning' );
+						$this->debug_log( "Non-critical file processing failed: {$file_name} - {$result->get_error_message()}", 'warning' );
 						$this->stats['skipped']++;
 						wp_send_json_success( array( 
 							'file_name' => $file_name,
@@ -301,7 +381,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				}
 
 				$this->stats['processed']++;
-				$this->log( "Processed: {$file_name}" );
+				$this->debug_log( "Processed: {$file_name}" );
 
 				wp_send_json_success( array( 
 					'file_name' => $file_name,
@@ -311,9 +391,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 
 			} catch ( Exception $e ) {
 				$this->stats['errors']++;
-				$this->log( "Processing exception: {$e->getMessage()}", 'error' );
+				$this->debug_log( "Processing exception: {$e->getMessage()}", 'error' );
 				
-				// Check if it's a critical file
 				$file_criticality = $this->get_param( 'file_criticality', 'string', 'optional' );
 				if ( $file_criticality !== 'critical' ) {
 					wp_send_json_success( array( 
@@ -329,16 +408,17 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * IMPROVED: Process file by type with better error handling.
+		 * FIXED: Enhanced file processing with path awareness.
 		 */
-		private function process_file_by_type( $file_path, $action_for, $criticality ) {
+		private function process_file_by_type_with_path( $file_path, $action_for, $criticality, $path_info ) {
 			try {
 				switch ( $action_for ) {
 					case 'database_tables':
 						return $this->process_database_file( $file_path, $criticality );
 						
 					case 'upload_folders':
-						return $this->process_upload_file( $file_path, $criticality );
+						// FIXED: Pass path info to upload processing
+						return $this->process_upload_file( $file_path, $criticality, $path_info );
 						
 					default:
 						return new WP_Error( 'invalid_type', 'Unknown file type: ' . $action_for );
@@ -349,7 +429,115 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * IMPROVED: Process database file with better error handling.
+		 * FIXED: Process upload file with path awareness matching old clone_uploads_folder.
+		 */
+		private function process_upload_file( $file_path, $criticality, $path_info = null ) {
+			$file_content = file_get_contents( $file_path );
+			if ( $file_content === false ) {
+				return new WP_Error( 'read_error', 'Cannot read upload file' );
+			}
+
+			$upload_dir = wp_upload_dir();
+			$temp_zip = $upload_dir['basedir'] . '/wbcom-theme-demo-' . time() . '.zip';
+
+			// Save content to temporary zip
+			if ( file_put_contents( $temp_zip, $file_content ) === false ) {
+				return new WP_Error( 'write_error', 'Cannot write temporary zip file' );
+			}
+
+			try {
+				// FIXED: Determine extraction path based on path_info like old system
+				$extract_path = $this->determine_extraction_path_like_old_system( $upload_dir['basedir'], $path_info );
+				
+				// Ensure the extraction directory exists
+				if ( ! is_dir( $extract_path ) ) {
+					if ( ! wp_mkdir_p( $extract_path ) ) {
+						throw new Exception( "Cannot create directory: {$extract_path}" );
+					}
+				}
+				
+				// FIXED: Extract using ZipArchive like old system
+				$extraction_result = $this->extract_zip_like_old_system( $temp_zip, $extract_path );
+				
+				if ( is_wp_error( $extraction_result ) ) {
+					if ( $criticality !== 'critical' ) {
+						$this->debug_log( "Non-critical ZIP extraction failed, continuing: " . $extraction_result->get_error_message() );
+						return true;
+					}
+					throw new Exception( $extraction_result->get_error_message() );
+				}
+
+				// Log successful extraction with path info
+				$relative_path = $path_info ? ( $path_info['relative_path'] ?: $path_info['parent_folder'] ) : 'root';
+				$this->debug_log( "Successfully extracted: " . basename( $file_path ) . " to {$relative_path}" );
+				
+				return true;
+
+			} catch ( Exception $e ) {
+				$error_msg = "ZIP extraction failed: {$e->getMessage()}";
+				$this->debug_log( $error_msg, 'error' );
+				
+				if ( $criticality !== 'critical' ) {
+					$this->debug_log( "Continuing despite non-critical ZIP failure: " . basename( $file_path ) );
+					return true;
+				}
+				
+				return new WP_Error( 'extract_error', $error_msg );
+			} finally {
+				// Clean up temp file
+				if ( file_exists( $temp_zip ) ) {
+					wp_delete_file( $temp_zip );
+				}
+			}
+		}
+
+		/**
+		 * FIXED: Determine proper extraction path like old clone_uploads_folder method.
+		 */
+		private function determine_extraction_path_like_old_system( $base_upload_dir, $path_info ) {
+			if ( ! $path_info || empty( $path_info['parent_folder'] ) ) {
+				return trailingslashit( $base_upload_dir );
+			}
+			
+			// FIXED: Use parent_folder like old system: $upload['basedir'] . '/' . $parentFolderName . '/'
+			$extraction_path = trailingslashit( $base_upload_dir ) . trailingslashit( $path_info['parent_folder'] );
+			
+			$this->debug_log( "Extraction path (old system style): {$extraction_path} from parent folder: {$path_info['parent_folder']}" );
+			
+			return $extraction_path;
+		}
+
+		/**
+		 * FIXED: Extract ZIP file like old system using ZipArchive.
+		 */
+		private function extract_zip_like_old_system( $zip_file, $extract_path ) {
+			if ( ! class_exists( 'ZipArchive' ) ) {
+				return new WP_Error( 'ziparchive_missing', 'ZipArchive not available' );
+			}
+
+			$zip = new ZipArchive();
+			$result = $zip->open( $zip_file );
+			
+			if ( $result !== true ) {
+				return new WP_Error( 'ziparchive_open_failed', "Cannot open ZIP: error {$result}" );
+			}
+
+			// FIXED: Extract exactly like old system: $zip->extractTo( $extract_path );
+			if ( ! $zip->extractTo( $extract_path ) ) {
+				$zip->close();
+				return new WP_Error( 'extraction_failed', 'ZipArchive extraction failed' );
+			}
+
+			$total_files = $zip->numFiles;
+			$zip->close();
+			
+			$this->debug_log( "ZIP extracted successfully: {$total_files} files to {$extract_path}" );
+			
+			return array( 'extracted_files' => $total_files, 'total_files' => $total_files );
+		}
+
+		/**
+		 * FIXED: Process database file with improved error handling.
 		 */
 		private function process_database_file( $file_path, $criticality ) {
 			$file_content = file_get_contents( $file_path );
@@ -376,7 +564,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * IMPROVED: Import table data with better error handling.
+		 * Import table data with better error handling.
 		 */
 		private function import_table_data( $table_name, $data, $criticality ) {
 			try {
@@ -409,12 +597,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				set_theme_mod( $key, $value );
 				$count++;
 			}
-			$this->log( "Imported {$count} theme mods" );
+			$this->debug_log( "Imported {$count} theme mods" );
 			return true;
 		}
 
 		/**
-		 * IMPROVED: Import options with better filtering.
+		 * Import options with better filtering.
 		 */
 		private function import_options( $data, $criticality ) {
 			$skip_options = array(
@@ -439,12 +627,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				}
 			}
 
-			$this->log( "Imported {$imported} options" );
+			$this->debug_log( "Imported {$imported} options" );
 			return true;
 		}
 
 		/**
-		 * IMPROVED: Import user data with admin protection.
+		 * Import user data with admin protection.
 		 */
 		private function import_user_data( $table_name, $data, $criticality ) {
 			global $wpdb;
@@ -480,7 +668,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				}
 			}
 
-			$this->log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
+			$this->debug_log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
 			
 			// Restore admin user after user table imports
 			if ( in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
@@ -491,7 +679,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * IMPROVED: Import regular table with error tolerance.
+		 * Import regular table with error tolerance.
 		 */
 		private function import_regular_table( $table_name, $data, $criticality ) {
 			global $wpdb;
@@ -503,7 +691,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				if ( $criticality === 'critical' ) {
 					return new WP_Error( 'table_missing', "Critical table {$table_full_name} does not exist" );
 				} else {
-					$this->log( "Table {$table_full_name} does not exist, skipping", 'warning' );
+					$this->debug_log( "Table {$table_full_name} does not exist, skipping", 'warning' );
 					return true; // Skip non-critical missing tables
 				}
 			}
@@ -536,57 +724,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				}
 			}
 
-			$this->log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
+			$this->debug_log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
 			return true;
-		}
-
-		/**
-		 * IMPROVED: Process upload file with better error handling.
-		 */
-		private function process_upload_file( $file_path, $criticality ) {
-			if ( ! class_exists( 'ZipArchive' ) ) {
-				return new WP_Error( 'zip_missing', 'ZipArchive class not available' );
-			}
-
-			$file_content = file_get_contents( $file_path );
-			if ( $file_content === false ) {
-				return new WP_Error( 'read_error', 'Cannot read upload file' );
-			}
-
-			$upload_dir = wp_upload_dir();
-			$temp_zip = $upload_dir['basedir'] . '/temp_upload_' . time() . '.zip';
-
-			// Save content to temporary zip
-			if ( file_put_contents( $temp_zip, $file_content ) === false ) {
-				return new WP_Error( 'write_error', 'Cannot write temporary zip file' );
-			}
-
-			try {
-				$zip = new ZipArchive();
-				$result = $zip->open( $temp_zip );
-				
-				if ( $result !== true ) {
-					throw new Exception( "Cannot open zip file: error code {$result}" );
-				}
-
-				$extract_path = $upload_dir['basedir'] . '/';
-				if ( ! $zip->extractTo( $extract_path ) ) {
-					throw new Exception( 'Failed to extract zip file' );
-				}
-
-				$zip->close();
-				$this->log( "Extracted upload file: " . basename( $file_path ) );
-				
-				return true;
-
-			} catch ( Exception $e ) {
-				return new WP_Error( 'extract_error', $e->getMessage() );
-			} finally {
-				// Clean up temp file
-				if ( file_exists( $temp_zip ) ) {
-					unlink( $temp_zip );
-				}
-			}
 		}
 
 		/**
@@ -628,19 +767,19 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				if ( $folder_info && isset( $folder_info['path'] ) ) {
 					$this->delete_directory_recursive( $folder_info['path'] );
 					delete_transient( 'reign_temp_folder_' . $temp_folder_id );
-					$this->log( "Cleaned up temp folder: {$temp_folder_id}" );
+					$this->debug_log( "Cleaned up temp folder: {$temp_folder_id}" );
 				}
 
 				wp_send_json_success( array( 'message' => 'Cleanup completed' ) );
 
 			} catch ( Exception $e ) {
-				$this->log( "Cleanup error: {$e->getMessage()}", 'error' );
+				$this->debug_log( "Cleanup error: {$e->getMessage()}", 'error' );
 				wp_send_json_success( array( 'message' => 'Cleanup completed with warnings' ) );
 			}
 		}
 
 		/**
-		 * LEGACY: Plugin management.
+		 * Plugin management.
 		 */
 		public function manage_plugin_installation() {
 			try {
@@ -671,19 +810,16 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * LEGACY: Original demo data handler.
+		 * Legacy compatibility methods.
 		 */
 		public function legacy_get_theme_demo_data() {
-			// Keep original implementation for backward compatibility
-			// Implementation details omitted for brevity but would include
-			// the original clone_database_table, clone_uploads_folder methods
+			// Redirect to new batch system
+			wp_send_json_error( array( 'message' => 'Please use the new batch import system' ) );
 		}
 
-		/**
-		 * LEGACY: Original package file reader.
-		 */
 		public function legacy_read_theme_demo_package_file() {
-			// Keep original implementation for backward compatibility
+			// Handle legacy manifest requests
+			$this->get_demo_manifest();
 		}
 
 		// HELPER METHODS
@@ -725,47 +861,19 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * Prepare file list from demo data.
-		 */
-		private function prepare_file_list( $demo_data ) {
-			$files = array();
-			
-			// Add database tables
-			if ( isset( $demo_data['database_tables'] ) && is_array( $demo_data['database_tables'] ) ) {
-				foreach ( $demo_data['database_tables'] as $url ) {
-					$files[] = array(
-						'name' => basename( $url ),
-						'url' => $url,
-						'type' => 'database_table',
-						'action_for' => 'database_tables'
-					);
-				}
-			}
-
-			// Add upload folders
-			if ( isset( $demo_data['upload_folders'] ) && is_array( $demo_data['upload_folders'] ) ) {
-				foreach ( $demo_data['upload_folders'] as $url ) {
-					$files[] = array(
-						'name' => basename( $url ),
-						'url' => $url,
-						'type' => 'upload_folder',
-						'action_for' => 'upload_folders'
-					);
-				}
-			}
-
-			return $files;
-		}
-
-		/**
-		 * Download file with retry logic.
+		 * FIXED: Download file with retry logic and better error handling.
 		 */
 		private function download_with_retry( $url, $max_attempts = 3 ) {
 			for ( $attempt = 1; $attempt <= $max_attempts; $attempt++ ) {
 				$response = wp_remote_get( $url, array(
 					'timeout' => 120,
 					'sslverify' => false,
-					'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION,
+					'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+					'headers' => array(
+						'Accept' => 'application/zip,*/*',
+						'Cache-Control' => 'no-cache',
+					),
+					'redirection' => 10,
 				) );
 
 				if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
@@ -776,8 +884,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				}
 
 				if ( $attempt < $max_attempts ) {
-					$this->log( "Download attempt {$attempt} failed for {$url}, retrying..." );
-					sleep( 1 ); // Brief pause before retry
+					$this->debug_log( "Download attempt {$attempt} failed for {$url}, retrying..." );
+					sleep( 2 );
 				}
 			}
 
@@ -785,14 +893,24 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * Prepare processing environment.
+		 * FIXED: Prepare processing environment with better resource management.
 		 */
 		private function prepare_processing_environment() {
-			// Set memory and time limits
-			ini_set( 'memory_limit', '512M' );
-			set_time_limit( 300 );
-
-			// Backup admin user
+			// More aggressive resource settings
+			@ini_set( 'memory_limit', '1024M' );
+			@ini_set( 'max_execution_time', 0 );
+			@ini_set( 'max_input_time', 3600 );
+			@ini_set( 'post_max_size', '256M' );
+			@ini_set( 'upload_max_filesize', '256M' );
+			
+			// Disable output buffering
+			if ( ob_get_level() ) {
+				ob_end_clean();
+			}
+			
+			// Prevent WordPress from timing out
+			add_filter( 'http_request_timeout', function() { return 300; } );
+			
 			$this->backup_admin_user();
 		}
 
@@ -852,7 +970,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 * Clean user row data.
 		 */
 		private function clean_user_row( $row ) {
-			// Remove fields that might not exist
 			$invalid_fields = array( 'spam', 'deleted' );
 			foreach ( $invalid_fields as $field ) {
 				unset( $row[ $field ] );
@@ -922,11 +1039,16 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * Enhanced logging.
+		 * Debug logging - only when WP_DEBUG is enabled.
 		 */
-		private function log( $message, $level = 'info' ) {
-			if ( $this->logger ) {
-				$this->logger->log( $message, $level );
+		private function debug_log( $message, $level = 'info' ) {
+			// Only log when debugging is enabled
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+				if ( $this->logger ) {
+					$this->logger->log( $message, $level );
+				} else {
+					error_log( "[Reign Demo Installer] [{$level}] {$message}" );
+				}
 			}
 		}
 	}
