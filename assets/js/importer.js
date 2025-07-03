@@ -155,8 +155,8 @@ jQuery(document).ready(function($) {
 });
 
 /*
-* Demo Importer Manager Code - COMPLETE VERSION
-* Preserves admin login session during demo import with modern confirmation dialog
+* Demo Importer Manager Code - ENHANCED VERSION
+* Fixed to prevent "Leave site?" popup and ensure smooth redirect to success page
 */
 jQuery(document).ready(function($) {
     'use strict';
@@ -164,6 +164,7 @@ jQuery(document).ready(function($) {
     var reignThemeDemoData = '';
     var thisRef = '';
     var importStartTime = 0;
+    var importInProgress = false; // Track import state
 
     // Progress tracking variables
     var reignTddDatabaseTablesCount = '';
@@ -177,9 +178,6 @@ jQuery(document).ready(function($) {
     var percentageIncrement = 0;
     var currentPercentageProgress = 0;
 
-    // Store admin user info before import
-    var adminUserPreserved = false;
-
     // Demo import button click handler
     $(document).on('click', 'div.wbcom-demo-importer button#wbcom_get_theme_demo_data', function(event) {
         event.preventDefault();
@@ -190,6 +188,9 @@ jQuery(document).ready(function($) {
         // Show modern confirmation dialog
         _showModernConfirmDialog().then(function(confirmed) {
             if (confirmed) {
+                // Set import in progress flag
+                importInProgress = true;
+                
                 // Disable button and show loading
                 thisRef.prop('disabled', true).text('Importing...');
                 thisRef.siblings('div.loader').show();
@@ -303,7 +304,7 @@ jQuery(document).ready(function($) {
             demo_slug: thisRef.siblings('#demo_slug').val(),
             target_url: thisRef.siblings('#target_url').val(),
             nonce: thisRef.siblings('#demo_nonce').val() || reignDemoInstaller.nonce,
-            preserve_admin: true // Flag to preserve admin user
+            preserve_admin: true
         };
 
         $.ajax({
@@ -386,7 +387,7 @@ jQuery(document).ready(function($) {
             url_to_request: urlToRequest,
             action_for: actionFor,
             nonce: reignDemoInstaller.nonce,
-            preserve_admin: true // Flag to preserve admin user
+            preserve_admin: true
         };
 
         $.ajax({
@@ -490,49 +491,42 @@ jQuery(document).ready(function($) {
     }
 
     /**
-     * Demo import completed
+     * Demo import completed - FIXED to prevent leave site popup
      */
     function _reignDemoImportDone() {
         var importDuration = (Date.now() - importStartTime) / 1000;
         
-        _reignTddShowCurrentActivity('Import completed successfully! You remain logged in as admin. Redirecting...');
+        _reignTddShowCurrentActivity('Import completed successfully! Redirecting to success page...');
+        
+        // CRITICAL FIX: Clear import in progress flag and remove beforeunload handler
+        importInProgress = false;
+        
+        // Remove any existing beforeunload handlers
+        $(window).off('beforeunload.reign-import');
+        window.onbeforeunload = null;
         
         // Log success
         console.log('Demo import completed in ' + importDuration + ' seconds');
         console.log('Admin session preserved successfully');
         
-        // Add a small delay to show the final message
+        // Add a small delay to show the final message, then redirect without popup
         setTimeout(function() {
-            // Force a final session refresh before redirect
-            _refreshAdminSession(function() {
-                window.location = reignDemoInstaller.successUrl;
-            });
-        }, 3000);
-    }
-
-    /**
-     * Refresh admin session before redirect
-     */
-    function _refreshAdminSession(callback) {
-        $.ajax({
-            url: reignDemoInstaller.ajaxUrl,
-            type: 'POST',
-            data: {
-                action: 'wp_ajax_heartbeat',
-                _nonce: reignDemoInstaller.nonce
-            },
-            timeout: 10000,
-            complete: function() {
-                // Continue regardless of response
-                if (callback) callback();
-            }
-        });
+            // Ensure no beforeunload handler is active
+            $(window).off('beforeunload');
+            window.onbeforeunload = null;
+            
+            // Force redirect without triggering beforeunload
+            window.location.replace(reignDemoInstaller.successUrl);
+        }, 2000);
     }
 
     /**
      * Show import error
      */
     function _reignShowImportError(message) {
+        // Clear import in progress flag on error
+        importInProgress = false;
+        
         thisRef.prop('disabled', false).text('Install Demo');
         thisRef.siblings('div.loader').hide();
         
@@ -564,19 +558,36 @@ jQuery(document).ready(function($) {
         console.log('Reign Demo Installer: ' + message);
     }
 
-    // Handle page unload during import
-    $(window).on('beforeunload', function() {
-        if (thisRef && thisRef.prop('disabled')) {
-            return 'Demo import is in progress. Leaving this page will cancel the import and you may lose your admin session.';
+    /**
+     * ENHANCED: Handle page unload during import - FIXED
+     */
+    $(window).on('beforeunload.reign-import', function(e) {
+        // Only show warning if import is actually in progress
+        if (importInProgress && thisRef && thisRef.prop('disabled')) {
+            var message = 'Demo import is in progress. Leaving this page will cancel the import and you may lose your admin session.';
+            e.returnValue = message; // For older browsers
+            return message;
         }
+        
+        // If import is complete or not started, allow navigation without warning
+        return undefined;
     });
+
+    /**
+     * Clean up event handlers when import completes
+     */
+    function cleanupEventHandlers() {
+        $(window).off('beforeunload.reign-import');
+        window.onbeforeunload = null;
+        importInProgress = false;
+    }
 
     // Monitor admin session during import
     var sessionCheckInterval;
     
     function startSessionMonitoring() {
         sessionCheckInterval = setInterval(function() {
-            if (thisRef && thisRef.prop('disabled')) {
+            if (importInProgress && thisRef && thisRef.prop('disabled')) {
                 // Check session every 30 seconds during import
                 $.ajax({
                     url: reignDemoInstaller.ajaxUrl,
@@ -593,6 +604,7 @@ jQuery(document).ready(function($) {
             } else {
                 // Stop monitoring when import is done
                 clearInterval(sessionCheckInterval);
+                cleanupEventHandlers();
             }
         }, 30000);
     }

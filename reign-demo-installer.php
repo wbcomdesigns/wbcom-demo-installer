@@ -20,15 +20,15 @@
 
 // Prevent direct access
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
-// EMERGENCY FIX - Force load pluggable functions
-if ( ! function_exists( 'wp_get_current_user' ) ) {
-    require_once( ABSPATH . 'wp-includes/pluggable.php' );
+// Emergency fix for missing pluggable functions
+if ( ! function_exists( 'wp_get_current_user' ) && file_exists( ABSPATH . 'wp-includes/pluggable.php' ) ) {
+	require_once ABSPATH . 'wp-includes/pluggable.php';
 }
 
-// Check if Reign theme is active
+// Only proceed if Reign theme is active or in admin
 if ( get_template() !== 'reign' && ! is_admin() ) {
 	return;
 }
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 	 * @class Reign_Demo_Installer
 	 * @version 3.0.0
 	 */
-	class Reign_Demo_Installer {
+	final class Reign_Demo_Installer {
 
 		/**
 		 * Plugin version.
@@ -54,14 +54,25 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		 * The single instance of the class.
 		 *
 		 * @var Reign_Demo_Installer
-		 * @since 3.0.0
 		 */
 		protected static $_instance = null;
 
 		/**
-		 * Main Reign_Demo_Installer Instance.
+		 * Service container.
 		 *
-		 * Ensures only one instance of Reign_Demo_Installer is loaded or can be loaded.
+		 * @var array
+		 */
+		private $services = array();
+
+		/**
+		 * Plugin initialization status.
+		 *
+		 * @var bool
+		 */
+		private $initialized = false;
+
+		/**
+		 * Main Reign_Demo_Installer Instance.
 		 *
 		 * @since 3.0.0
 		 * @static
@@ -75,13 +86,36 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		}
 
 		/**
+		 * Cloning is forbidden.
+		 */
+		public function __clone() {
+			_doing_it_wrong( __FUNCTION__, 'Cloning is forbidden.', '3.0.0' );
+		}
+
+		/**
+		 * Unserializing instances of this class is forbidden.
+		 */
+		public function __wakeup() {
+			_doing_it_wrong( __FUNCTION__, 'Unserializing instances is forbidden.', '3.0.0' );
+		}
+
+		/**
 		 * Reign_Demo_Installer Constructor.
 		 */
 		public function __construct() {
+			if ( $this->initialized ) {
+				return;
+			}
+
 			$this->define_constants();
-			$this->check_requirements();
+			
+			if ( ! $this->check_requirements() ) {
+				return;
+			}
+
 			$this->includes();
-			add_action( 'plugins_loaded', array( $this, 'init_hooks' ) );
+			$this->init_hooks();
+			$this->initialized = true;
 
 			do_action( 'reign_demo_installer_loaded' );
 		}
@@ -90,37 +124,96 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		 * Check plugin requirements.
 		 * 
 		 * @since 3.0.0
+		 * @return bool
 		 */
 		private function check_requirements() {
+			$requirements_met = true;
+
 			// Check PHP version
 			if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
 				add_action( 'admin_notices', array( $this, 'php_version_notice' ) );
-				return;
+				$requirements_met = false;
 			}
 
 			// Check WordPress version
 			if ( version_compare( get_bloginfo( 'version' ), '5.0', '<' ) ) {
 				add_action( 'admin_notices', array( $this, 'wp_version_notice' ) );
-				return;
+				$requirements_met = false;
 			}
+
+			// Check for required PHP extensions
+			$required_extensions = array( 'curl', 'zip', 'json', 'xml' );
+			foreach ( $required_extensions as $extension ) {
+				if ( ! extension_loaded( $extension ) ) {
+					add_action( 'admin_notices', function() use ( $extension ) {
+						$this->extension_notice( $extension );
+					});
+					$requirements_met = false;
+				}
+			}
+
+			return $requirements_met;
 		}
 
 		/**
 		 * Display PHP version notice.
 		 */
 		public function php_version_notice() {
-			echo '<div class="notice notice-error"><p>';
-			echo esc_html__( 'Reign Demo Installer requires PHP 7.4 or higher. Please update your PHP version.', 'reign-demo-installer' );
-			echo '</p></div>';
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong><?php esc_html_e( 'Reign Demo Installer', 'reign-demo-installer' ); ?>:</strong>
+					<?php
+					printf(
+						esc_html__( 'PHP version %s or higher is required. Current version: %s. Please update your PHP version.', 'reign-demo-installer' ),
+						'<code>7.4</code>',
+						'<code>' . PHP_VERSION . '</code>'
+					);
+					?>
+				</p>
+			</div>
+			<?php
 		}
 
 		/**
 		 * Display WordPress version notice.
 		 */
 		public function wp_version_notice() {
-			echo '<div class="notice notice-error"><p>';
-			echo esc_html__( 'Reign Demo Installer requires WordPress 5.0 or higher. Please update your WordPress version.', 'reign-demo-installer' );
-			echo '</p></div>';
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong><?php esc_html_e( 'Reign Demo Installer', 'reign-demo-installer' ); ?>:</strong>
+					<?php
+					printf(
+						esc_html__( 'WordPress version %s or higher is required. Current version: %s. Please update WordPress.', 'reign-demo-installer' ),
+						'<code>5.0</code>',
+						'<code>' . get_bloginfo( 'version' ) . '</code>'
+					);
+					?>
+				</p>
+			</div>
+			<?php
+		}
+
+		/**
+		 * Display extension missing notice.
+		 *
+		 * @param string $extension Extension name
+		 */
+		public function extension_notice( $extension ) {
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong><?php esc_html_e( 'Reign Demo Installer', 'reign-demo-installer' ); ?>:</strong>
+					<?php
+					printf(
+						esc_html__( 'Required PHP extension "%s" is missing. Please contact your hosting provider.', 'reign-demo-installer' ),
+						esc_html( strtoupper( $extension ) )
+					);
+					?>
+				</p>
+			</div>
+			<?php
 		}
 
 		/**
@@ -129,18 +222,53 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		 * @since 3.0.0
 		 */
 		public function init_hooks() {
+			add_action( 'plugins_loaded', array( $this, 'on_plugins_loaded' ) );
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 			add_filter( 'plugin_action_links_' . REIGN_DEMO_INSTALLER_PLUGIN_BASENAME, array( $this, 'alter_plugin_action_links' ) );
 			
-			// Security: Only allow installation for administrators
-			if ( ! function_exists( 'current_user_can' ) || ( ! current_user_can( 'manage_options' ) && is_admin() ) ) {
+			// Admin only hooks
+			if ( is_admin() ) {
+				add_action( 'admin_init', array( $this, 'admin_init' ) );
+			}
+		}
+
+		/**
+		 * When WP has loaded all plugins, trigger the `reign_demo_installer_init` hook.
+		 */
+		public function on_plugins_loaded() {
+			do_action( 'reign_demo_installer_init' );
+		}
+
+		/**
+		 * Admin initialization.
+		 */
+		public function admin_init() {
+			// Only allow installation for administrators
+			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
 
-			// Initialize update checker if in admin
-			if ( is_admin() ) {
-				add_action( 'wp_loaded', array( $this, 'init_update_checker' ) );
-			}
+			// Initialize services for admin users
+			$this->init_services();
+		}
+
+		/**
+		 * Initialize services.
+		 */
+		private function init_services() {
+			$this->services['security'] = Reign_Demo_Installer_Security::instance();
+			$this->services['logger'] = new Reign_Demo_Installer_Logger();
+			$this->services['environment'] = new Reign_Demo_Installer_Environment();
+		}
+
+		/**
+		 * Get service instance.
+		 *
+		 * @param string $service Service name
+		 * @return mixed|null
+		 */
+		public function get_service( $service ) {
+			return isset( $this->services[ $service ] ) ? $this->services[ $service ] : null;
 		}
 
 		/**
@@ -149,10 +277,13 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		 * @param array $plugin_links
 		 * @return array
 		 */
-		function alter_plugin_action_links( $plugin_links ) {
-			if ( function_exists( 'current_user_can' ) && current_user_can( 'manage_options' ) ) {
-				$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=reign-demo-installer' ) ) . '">' . 
-								esc_html__( 'Import Demos', 'reign-demo-installer' ) . '</a>';
+		public function alter_plugin_action_links( $plugin_links ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				$settings_link = sprintf(
+					'<a href="%s">%s</a>',
+					esc_url( admin_url( 'admin.php?page=reign-demo-installer' ) ),
+					esc_html__( 'Import Demos', 'reign-demo-installer' )
+				);
 				array_unshift( $plugin_links, $settings_link );
 			}
 			return $plugin_links;
@@ -173,15 +304,15 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 			
 			// Security constants
 			$this->define( 'REIGN_DEMO_INSTALLER_NONCE_KEY', 'reign_demo_installer_nonce' );
-			$this->define( 'REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME', 300 ); // 5 minutes
+			$this->define( 'REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME', 300 );
 			$this->define( 'REIGN_DEMO_INSTALLER_MEMORY_LIMIT', '512M' );
 		}
 
 		/**
 		 * Define constant if not already set.
 		 *
-		 * @param string $name
-		 * @param string|bool $value
+		 * @param string $name Constant name
+		 * @param string|bool $value Constant value
 		 */
 		private function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
@@ -190,49 +321,46 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		}
 
 		/**
-		 * Include required core files used in admin and on the frontend.
+		 * Include required core files.
 		 */
 		public function includes() {
-			// Core includes
-			include_once 'core/class-reign-demo-installer-logger.php';
-			include_once 'core/class-reign-demo-installer-security.php';
-			include_once 'core/class-reign-demo-installer-environment.php';
-			
-			// Admin Guardian - CRITICAL for preserving admin user during import
-			include_once 'core/class-reign-demo-installer-admin-guardian.php';
-			
-			// Admin includes
+			$includes = array(
+				'core/class-reign-demo-installer-logger.php',
+				'core/class-reign-demo-installer-security.php',
+				'core/class-reign-demo-installer-environment.php',
+			);
+
+			// Admin-only includes
 			if ( is_admin() ) {
-				include_once 'core/admin-settings.php';
-				include_once 'core/ajax-handler.php';
-				include_once 'core/plugins-manager.php';
-				include_once 'core/prerequisites-checks.php';
+				$admin_includes = array(
+					'core/class-reign-demo-installer-admin-guardian.php',
+					'core/admin-settings.php',
+					'core/ajax-handler.php',
+					'core/plugins-manager.php',
+					'core/prerequisites-checks.php',
+				);
+				$includes = array_merge( $includes, $admin_includes );
 			}
 
-			// Legacy compatibility (to be phased out)
-			$this->load_legacy_compatibility();
-		}
-
-		/**
-		 * Load legacy compatibility functions.
-		 * 
-		 * @deprecated 3.0.0 Use new class structure instead
-		 */
-		private function load_legacy_compatibility() {
-			// Map old function names to new classes for backward compatibility
-			if ( ! function_exists( 'instantiate_wbcom_demo_importer_plugins_manager' ) ) {
-				function instantiate_wbcom_demo_importer_plugins_manager() {
-					return Reign_Demo_Installer_Plugins_Manager::instance();
+			foreach ( $includes as $file ) {
+				$file_path = REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH . $file;
+				if ( file_exists( $file_path ) ) {
+					require_once $file_path;
 				}
 			}
+
+			// Load backward compatibility last
+			$this->load_backward_compatibility();
 		}
 
 		/**
-		 * Initialize update checker.
+		 * Load backward compatibility functions.
 		 */
-		public function init_update_checker() {
-			// This would be implemented if you have an update server
-			// For now, we'll skip this as it's not production critical
+		private function load_backward_compatibility() {
+			$compatibility_file = REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH . 'core/compatibility-functions.php';
+			if ( file_exists( $compatibility_file ) ) {
+				require_once $compatibility_file;
+			}
 		}
 
 		/**
@@ -274,8 +402,8 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		/**
 		 * Get plugin data.
 		 * 
-		 * @param string $key
-		 * @return string
+		 * @param string $key Optional specific key to retrieve
+		 * @return string|array
 		 */
 		public function get_plugin_data( $key = '' ) {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
@@ -294,13 +422,31 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 		/**
 		 * Log messages for debugging.
 		 * 
-		 * @param string $message
-		 * @param string $level
+		 * @param string $message Log message
+		 * @param string $level Log level
 		 */
 		public static function log( $message, $level = 'info' ) {
 			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
 				Reign_Demo_Installer_Logger::log( $message, $level );
 			}
+		}
+
+		/**
+		 * Get plugin version.
+		 *
+		 * @return string
+		 */
+		public function get_version() {
+			return $this->version;
+		}
+
+		/**
+		 * Check if plugin is properly initialized.
+		 *
+		 * @return bool
+		 */
+		public function is_initialized() {
+			return $this->initialized;
 		}
 	}
 
@@ -309,8 +455,6 @@ endif;
 /**
  * Main instance of Reign_Demo_Installer.
  *
- * Returns the main instance of Reign_Demo_Installer to prevent the need to use globals.
- *
  * @since 3.0.0
  * @return Reign_Demo_Installer
  */
@@ -318,10 +462,5 @@ function reign_demo_installer() {
 	return Reign_Demo_Installer::instance();
 }
 
-// Initialize the plugin
-add_action( 'plugins_loaded', 'reign_demo_installer' );
-
 // Global for backwards compatibility.
-add_action( 'plugins_loaded', function() {
-	$GLOBALS['reign_demo_installer'] = reign_demo_installer();
-} );
+$GLOBALS['reign_demo_installer'] = reign_demo_installer();

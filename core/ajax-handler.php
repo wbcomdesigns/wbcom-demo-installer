@@ -1,6 +1,6 @@
 <?php
 /**
- * AJAX handler for Reign Demo Installer - FIXED VERSION
+ * AJAX handler for Reign Demo Installer - Enhanced Version
  * Preserves current admin user and prevents role downgrade
  *
  * @package Reign_Demo_Installer
@@ -26,7 +26,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 * The single instance of the class.
 		 *
 		 * @var Reign_Demo_Installer_Ajax_Handler
-		 * @since 3.0.0
 		 */
 		protected static $_instance = null;
 
@@ -38,11 +37,25 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		private $security;
 
 		/**
+		 * Logger instance.
+		 *
+		 * @var Reign_Demo_Installer_Logger
+		 */
+		private $logger;
+
+		/**
 		 * Current admin user data to preserve.
 		 *
 		 * @var array
 		 */
 		private $current_admin_user = null;
+
+		/**
+		 * Import session data.
+		 *
+		 * @var array
+		 */
+		private $import_session = array();
 
 		/**
 		 * Main instance.
@@ -63,14 +76,187 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 */
 		public function __construct() {
 			$this->security = Reign_Demo_Installer_Security::instance();
+			$this->logger = class_exists( 'Reign_Demo_Installer_Logger' ) ? new Reign_Demo_Installer_Logger() : null;
 			$this->init_hooks();
+		}
+
+		/**
+		 * Hook into actions and filters.
+		 *
+		 * @since 3.0.0
+		 */
+		private function init_hooks() {
+			// New AJAX actions
+			add_action( 'wp_ajax_reign_get_theme_demo_data', array( $this, 'get_theme_demo_data' ) );
+			add_action( 'wp_ajax_reign_read_theme_demo_package_file', array( $this, 'read_theme_demo_package_file' ) );
+			add_action( 'wp_ajax_reign_manage_plugin_installation', array( $this, 'manage_plugin_installation' ) );
+
+			// Backward compatibility
+			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'get_theme_demo_data' ) );
+			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'read_theme_demo_package_file' ) );
+			add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'manage_plugin_installation' ) );
+		}
+
+		/**
+		 * Handle plugin installation/activation.
+		 */
+		public function manage_plugin_installation() {
+			try {
+				// Security checks are handled by the Security class pre-hook
+				
+				$plugin_action = $this->security->get_request_param( 'plugin_action', 'string' );
+				$plugin_slug = $this->security->get_request_param( 'plugin_slug', 'slug' );
+				$demo = $this->security->get_request_param( 'demo', 'slug' );
+
+				if ( ! $plugin_action || ! $plugin_slug || ! $demo ) {
+					wp_send_json_error( array( 
+						'message' => __( 'Missing required parameters.', 'reign-demo-installer' ) 
+					) );
+				}
+
+				$this->log_info( "Plugin action requested: {$plugin_action} for {$plugin_slug}" );
+
+				// Get plugins manager instance
+				$plugins_manager = $this->get_plugins_manager();
+				if ( ! $plugins_manager ) {
+					wp_send_json_error( array( 
+						'message' => __( 'Plugins manager not available.', 'reign-demo-installer' ) 
+					) );
+				}
+
+				// Handle plugin action
+				$result = $this->handle_plugin_action( $plugins_manager, $plugin_action, $plugin_slug, $demo );
+				
+				if ( is_wp_error( $result ) ) {
+					$this->log_error( "Plugin action failed: {$result->get_error_message()}" );
+					wp_send_json_error( array( 'message' => $result->get_error_message() ) );
+				}
+
+				$this->log_info( "Plugin action completed successfully: {$plugin_action} for {$plugin_slug}" );
+				wp_send_json_success( $result );
+
+			} catch ( Exception $e ) {
+				$this->log_error( "Plugin action exception: {$e->getMessage()}" );
+				wp_send_json_error( array( 
+					'message' => __( 'An error occurred during plugin operation.', 'reign-demo-installer' ) 
+				) );
+			}
+		}
+
+		/**
+		 * Read theme demo package file.
+		 */
+		public function read_theme_demo_package_file() {
+			try {
+				// Get and validate parameters
+				$theme_slug = $this->security->get_request_param( 'theme_slug', 'slug' );
+				$demo_slug = $this->security->get_request_param( 'demo_slug', 'slug' );
+				$target_url = $this->security->get_request_param( 'target_url', 'url' );
+
+				if ( ! $theme_slug || ! $demo_slug || ! $target_url ) {
+					wp_die( 
+						esc_html__( 'Missing required parameters.', 'reign-demo-installer' ), 
+						'', 
+						array( 'response' => 400 ) 
+					);
+				}
+
+				// Validate target URL
+				if ( ! $this->security->validate_url_domain( $target_url ) ) {
+					$this->log_error( "Invalid target URL attempted: {$target_url}" );
+					wp_die( 
+						esc_html__( 'Invalid target URL.', 'reign-demo-installer' ), 
+						'', 
+						array( 'response' => 400 ) 
+					);
+				}
+
+				// Preserve admin user
+				$this->preserve_current_admin_user();
+
+				// Log import start
+				$this->log_import_start( $demo_slug, array(
+					'theme_slug' => $theme_slug,
+					'target_url' => $target_url,
+					'admin_user' => $this->current_admin_user ? $this->current_admin_user['user_login'] : 'unknown'
+				) );
+
+				// Set import limits
+				$this->set_import_limits();
+
+				// Fetch demo package
+				$demo_data = $this->fetch_demo_package( $target_url, $theme_slug, $demo_slug );
+				
+				if ( is_wp_error( $demo_data ) ) {
+					wp_die( $demo_data->get_error_message(), '', array( 'response' => 500 ) );
+				}
+
+				echo $demo_data;
+
+			} catch ( Exception $e ) {
+				$this->log_error( "Demo package read exception: {$e->getMessage()}" );
+				wp_die( 
+					esc_html__( 'An error occurred while reading demo package.', 'reign-demo-installer' ), 
+					'', 
+					array( 'response' => 500 ) 
+				);
+			}
+
+			wp_die();
+		}
+
+		/**
+		 * Get theme demo data.
+		 */
+		public function get_theme_demo_data() {
+			try {
+				$action_for = $this->security->get_request_param( 'action_for', 'string' );
+				$url_to_request = $this->security->get_request_param( 'url_to_request', 'url' );
+
+				if ( ! $action_for || ! $url_to_request ) {
+					wp_die( 
+						esc_html__( 'Missing required parameters.', 'reign-demo-installer' ), 
+						'', 
+						array( 'response' => 400 ) 
+					);
+				}
+
+				// Validate URL
+				if ( ! $this->security->validate_url_domain( $url_to_request ) ) {
+					$this->log_error( "Invalid URL attempted: {$url_to_request}" );
+					wp_die( 
+						esc_html__( 'Invalid URL.', 'reign-demo-installer' ), 
+						'', 
+						array( 'response' => 400 ) 
+					);
+				}
+
+				// Set import limits
+				$this->set_import_limits();
+
+				// Handle different data types
+				$result = $this->handle_demo_data_import( $action_for, $url_to_request );
+				
+				if ( is_wp_error( $result ) ) {
+					wp_die( $result->get_error_message(), '', array( 'response' => 500 ) );
+				}
+
+			} catch ( Exception $e ) {
+				$this->log_error( "Demo data import exception: {$e->getMessage()}" );
+				wp_die( 
+					esc_html__( 'An error occurred during import.', 'reign-demo-installer' ), 
+					'', 
+					array( 'response' => 500 ) 
+				);
+			}
+
+			wp_die();
 		}
 
 		/**
 		 * Preserve current admin user data.
 		 */
 		private function preserve_current_admin_user() {
-			// Only preserve once per import session
 			if ( $this->current_admin_user !== null || ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
@@ -81,7 +267,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				'ID' => $current_user->ID,
 				'user_login' => $current_user->user_login,
 				'user_email' => $current_user->user_email,
-				'user_pass' => $current_user->user_pass, // Keep encrypted password
+				'user_pass' => $current_user->user_pass,
 				'user_nicename' => $current_user->user_nicename,
 				'user_url' => $current_user->user_url,
 				'user_registered' => $current_user->user_registered,
@@ -90,242 +276,55 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				'display_name' => $current_user->display_name,
 				'roles' => $current_user->roles,
 				'capabilities' => $current_user->allcaps,
-				'meta' => get_user_meta( $current_user->ID )
+				'meta' => get_user_meta( $current_user->ID ),
+				'preserved_at' => current_time( 'mysql' )
 			);
 			
-			Reign_Demo_Installer_Logger::info( 'Current admin user preserved: ' . $current_user->user_login );
+			$this->log_info( "Admin user preserved: {$current_user->user_login}" );
 		}
 
 		/**
-		 * Hook into actions and filters.
+		 * Handle plugin action.
 		 *
-		 * @since 3.0.0
+		 * @param object $plugins_manager Plugins manager instance
+		 * @param string $action Plugin action
+		 * @param string $slug Plugin slug
+		 * @param string $demo Demo name
+		 * @return array|WP_Error
 		 */
-		private function init_hooks() {
-			// New AJAX actions (with proper naming)
-			add_action( 'wp_ajax_reign_get_theme_demo_data', array( $this, 'get_theme_demo_data' ) );
-			add_action( 'wp_ajax_reign_read_theme_demo_package_file', array( $this, 'read_theme_demo_package_file' ) );
-			add_action( 'wp_ajax_reign_manage_plugin_installation', array( $this, 'manage_plugin_installation' ) );
-
-			// Backward compatibility - keep old action names
-			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'wbcom_get_theme_demo_data' ) );
-			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
-			add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'wbcom_manage_plugin_installation' ) );
-		}
-
-		/**
-		 * Handle plugin installation/activation.
-		 */
-		public function manage_plugin_installation() {
-			$this->wbcom_manage_plugin_installation();
-		}
-
-		/**
-		 * Read theme demo package file.
-		 */
-		public function read_theme_demo_package_file() {
-			$this->wbcom_read_theme_demo_package_file();
-		}
-
-		/**
-		 * Get theme demo data.
-		 */
-		public function get_theme_demo_data() {
-			$this->wbcom_get_theme_demo_data();
-		}
-
-		/**
-		 * Legacy: Read theme demo package file.
-		 */
-		public function wbcom_read_theme_demo_package_file() {
-			// Security checks
-			if ( ! $this->verify_ajax_request() ) {
-				wp_die( esc_html__( 'Security check failed.', 'reign-demo-installer' ), '', array( 'response' => 403 ) );
-			}
-
-			// Preserve admin user only once at the start of import
-			$this->preserve_current_admin_user();
-
-			// Get and validate parameters
-			$theme_slug = $this->security->get_request_param( 'theme_slug', 'slug' );
-			$demo_slug = $this->security->get_request_param( 'demo_slug', 'slug' );
-			$target_url = $this->security->get_request_param( 'target_url', 'url' );
-
-			if ( ! $theme_slug || ! $demo_slug || ! $target_url ) {
-				wp_die( esc_html__( 'Missing required parameters.', 'reign-demo-installer' ), '', array( 'response' => 400 ) );
-			}
-
-			// Validate target URL domain
-			if ( ! $this->security->validate_url_domain( $target_url ) ) {
-				Reign_Demo_Installer_Logger::error( 'Invalid target URL attempted: ' . $target_url );
-				wp_die( esc_html__( 'Invalid target URL.', 'reign-demo-installer' ), '', array( 'response' => 400 ) );
-			}
-
-			// Log import start
-			Reign_Demo_Installer_Logger::log_import_start( $demo_slug, array(
-				'theme_slug' => $theme_slug,
-				'target_url' => $target_url,
-				'admin_user' => $this->current_admin_user ? $this->current_admin_user['user_login'] : 'unknown'
-			) );
-
-			// Set memory and time limits
-			$this->set_import_limits();
-
-			try {
-				$url_to_request = $target_url . 'wp-admin/?wbcom_theme_demo_listing=yes';
+		private function handle_plugin_action( $plugins_manager, $action, $slug, $demo ) {
+			switch ( $action ) {
+				case 'install_plugin':
+					return $plugins_manager->do_plugin_install( $slug, false );
 				
-				$response = wp_remote_post( $url_to_request, array(
-					'method'     => 'POST',
-					'timeout'    => 120,
-					'sslverify'  => true,
-					'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION,
-					'headers'    => array(
-						'Content-Type' => 'application/x-www-form-urlencoded'
-					),
-					'body'       => array(
-						'theme_slug' => $theme_slug,
-						'demo_slug'  => $demo_slug,
-					),
-				) );
-
-				if ( is_wp_error( $response ) ) {
-					Reign_Demo_Installer_Logger::error( 'Failed to fetch demo package: ' . $response->get_error_message() );
-					wp_die( esc_html__( 'Failed to connect to demo server.', 'reign-demo-installer' ), '', array( 'response' => 500 ) );
-				}
-
-				$response_code = wp_remote_retrieve_response_code( $response );
-				if ( $response_code !== 200 ) {
-					Reign_Demo_Installer_Logger::error( 'Invalid response code from demo server: ' . $response_code );
-					wp_die( esc_html__( 'Demo server returned an error.', 'reign-demo-installer' ), '', array( 'response' => 500 ) );
-				}
-
-				$body = wp_remote_retrieve_body( $response );
-				if ( empty( $body ) ) {
-					wp_die( esc_html__( 'Empty response from demo server.', 'reign-demo-installer' ), '', array( 'response' => 500 ) );
-				}
-
-				// Validate JSON response
-				$demo_data = json_decode( $body, true );
-				if ( json_last_error() !== JSON_ERROR_NONE ) {
-					Reign_Demo_Installer_Logger::error( 'Invalid JSON response: ' . json_last_error_msg() );
-				}
-
-				echo $body;
-
-			} catch ( Exception $e ) {
-				Reign_Demo_Installer_Logger::error( 'Exception during demo package read: ' . $e->getMessage() );
-				wp_die( esc_html__( 'An error occurred while reading demo package.', 'reign-demo-installer' ), '', array( 'response' => 500 ) );
+				case 'enable_plugin':
+					return $plugins_manager->do_plugin_activate( $slug, false );
+				
+				default:
+					return new WP_Error( 'invalid_action', __( 'Invalid plugin action.', 'reign-demo-installer' ) );
 			}
-
-			wp_die();
 		}
 
 		/**
-		 * Legacy: Get theme demo data.
+		 * Handle demo data import based on type.
+		 *
+		 * @param string $action_for Action type
+		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
-		public function wbcom_get_theme_demo_data() {
-			// Security checks
-			if ( ! $this->verify_ajax_request() ) {
-				wp_die( esc_html__( 'Security check failed.', 'reign-demo-installer' ), '', array( 'response' => 403 ) );
-			}
-
-			$action_for = $this->security->get_request_param( 'action_for', 'string' );
-			$url_to_request = $this->security->get_request_param( 'url_to_request', 'url' );
-
-			if ( ! $action_for || ! $url_to_request ) {
-				wp_die( esc_html__( 'Missing required parameters.', 'reign-demo-installer' ), '', array( 'response' => 400 ) );
-			}
-
-			// Validate URL
-			if ( ! $this->security->validate_url_domain( $url_to_request ) ) {
-				Reign_Demo_Installer_Logger::error( 'Invalid URL attempted: ' . $url_to_request );
-				wp_die( esc_html__( 'Invalid URL.', 'reign-demo-installer' ), '', array( 'response' => 400 ) );
-			}
-
-			// Set memory and time limits
-			$this->set_import_limits();
-
-			try {
-				switch ( $action_for ) {
-					case 'post_types':
-						$this->handle_post_types_import( $url_to_request );
-						break;
-
-					case 'database_tables':
-						$this->handle_database_tables_import( $url_to_request );
-						break;
-
-					case 'upload_folders':
-						$this->handle_upload_folders_import( $url_to_request );
-						break;
-
-					default:
-						wp_die( esc_html__( 'Invalid action type.', 'reign-demo-installer' ), '', array( 'response' => 400 ) );
-				}
-
-			} catch ( Exception $e ) {
-				Reign_Demo_Installer_Logger::error( 'Exception during data import: ' . $e->getMessage() );
-				wp_die( esc_html__( 'An error occurred during import.', 'reign-demo-installer' ), '', array( 'response' => 500 ) );
-			}
-
-			wp_die();
-		}
-
-		/**
-		 * Legacy: Manage plugin installation.
-		 */
-		public function wbcom_manage_plugin_installation() {
-			// Security checks
-			if ( ! $this->verify_ajax_request() ) {
-				wp_send_json_error( array( 'message' => __( 'Security check failed.', 'reign-demo-installer' ) ) );
-			}
-
-			$plugin_action = $this->security->get_request_param( 'plugin_action', 'string' );
-			$plugin_slug = $this->security->get_request_param( 'plugin_slug', 'slug' );
-			$demo = $this->security->get_request_param( 'demo', 'slug' );
-
-			if ( ! $plugin_action || ! $plugin_slug || ! $demo ) {
-				wp_send_json_error( array( 'message' => __( 'Missing required parameters.', 'reign-demo-installer' ) ) );
-			}
-
-			// Log plugin action
-			Reign_Demo_Installer_Logger::log_plugin_action( $plugin_slug, 'attempting_' . $plugin_action );
-
-			try {
-				// Get plugins manager instance
-				if ( class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ) {
-					$plugins_manager = Reign_Demo_Installer_Plugins_Manager::instance();
-				} elseif ( function_exists( 'instantiate_wbcom_demo_importer_plugins_manager' ) ) {
-					$plugins_manager = instantiate_wbcom_demo_importer_plugins_manager();
-				} else {
-					wp_send_json_error( array( 'message' => __( 'Plugins manager not available.', 'reign-demo-installer' ) ) );
-				}
-
-				// Handle plugin action
-				switch ( $plugin_action ) {
-					case 'install_plugin':
-						$result = $plugins_manager->do_plugin_install( $plugin_slug, false );
-						break;
-
-					case 'enable_plugin':
-						$result = $plugins_manager->do_plugin_activate( $plugin_slug, false );
-						break;
-
-					default:
-						wp_send_json_error( array( 'message' => __( 'Invalid plugin action.', 'reign-demo-installer' ) ) );
-				}
-
-				if ( isset( $result['error'] ) ) {
-					Reign_Demo_Installer_Logger::log_plugin_action( $plugin_slug, 'error', $result['error'] );
-					wp_send_json_error( array( 'message' => $result['error'] ) );
-				} else {
-					Reign_Demo_Installer_Logger::log_plugin_action( $plugin_slug, 'success' );
-					wp_send_json_success( $result );
-				}
-
-			} catch ( Exception $e ) {
-				Reign_Demo_Installer_Logger::log_plugin_action( $plugin_slug, 'exception', $e->getMessage() );
-				wp_send_json_error( array( 'message' => __( 'An error occurred during plugin operation.', 'reign-demo-installer' ) ) );
+		private function handle_demo_data_import( $action_for, $url_to_request ) {
+			switch ( $action_for ) {
+				case 'post_types':
+					return $this->handle_post_types_import( $url_to_request );
+				
+				case 'database_tables':
+					return $this->handle_database_tables_import( $url_to_request );
+				
+				case 'upload_folders':
+					return $this->handle_upload_folders_import( $url_to_request );
+				
+				default:
+					return new WP_Error( 'invalid_action_type', __( 'Invalid action type.', 'reign-demo-installer' ) );
 			}
 		}
 
@@ -333,30 +332,83 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 * Handle post types import.
 		 *
 		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
 		private function handle_post_types_import( $url_to_request ) {
 			$post_slug = basename( $url_to_request, '.xml' );
-			$this->clone_post_type( $post_slug, $url_to_request );
+			return $this->clone_post_type( $post_slug, $url_to_request );
 		}
 
 		/**
 		 * Handle database tables import.
 		 *
 		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
 		private function handle_database_tables_import( $url_to_request ) {
 			$table_name = basename( $url_to_request, '.json' );
 			$table_name = preg_replace( '/[0-9]+/', '', $table_name );
-			$this->clone_database_table( $table_name, $url_to_request );
+			return $this->clone_database_table( $table_name, $url_to_request );
 		}
 
 		/**
 		 * Handle upload folders import.
 		 *
 		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
 		private function handle_upload_folders_import( $url_to_request ) {
-			$this->clone_uploads_folder( $url_to_request );
+			return $this->clone_uploads_folder( $url_to_request );
+		}
+
+		/**
+		 * Fetch demo package from remote server.
+		 *
+		 * @param string $target_url Target URL
+		 * @param string $theme_slug Theme slug
+		 * @param string $demo_slug Demo slug
+		 * @return string|WP_Error
+		 */
+		private function fetch_demo_package( $target_url, $theme_slug, $demo_slug ) {
+			$url_to_request = $target_url . 'wp-admin/?wbcom_theme_demo_listing=yes';
+			
+			$response = wp_remote_post( $url_to_request, array(
+				'method'     => 'POST',
+				'timeout'    => 120,
+				'sslverify'  => true,
+				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION,
+				'headers'    => array(
+					'Content-Type' => 'application/x-www-form-urlencoded'
+				),
+				'body'       => array(
+					'theme_slug' => $theme_slug,
+					'demo_slug'  => $demo_slug,
+				),
+			) );
+
+			if ( is_wp_error( $response ) ) {
+				$this->log_error( "Failed to fetch demo package: {$response->get_error_message()}" );
+				return new WP_Error( 'fetch_failed', __( 'Failed to connect to demo server.', 'reign-demo-installer' ) );
+			}
+
+			$response_code = wp_remote_retrieve_response_code( $response );
+			if ( $response_code !== 200 ) {
+				$this->log_error( "Invalid response code from demo server: {$response_code}" );
+				return new WP_Error( 'server_error', __( 'Demo server returned an error.', 'reign-demo-installer' ) );
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			if ( empty( $body ) ) {
+				return new WP_Error( 'empty_response', __( 'Empty response from demo server.', 'reign-demo-installer' ) );
+			}
+
+			// Validate JSON response
+			$demo_data = json_decode( $body, true );
+			if ( json_last_error() !== JSON_ERROR_NONE ) {
+				$this->log_error( "Invalid JSON response: {" . json_last_error_msg() . "}" );
+			}
+
+			return $body;
 		}
 
 		/**
@@ -364,13 +416,14 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 *
 		 * @param string $post_slug Post slug
 		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
-		private function clone_post_type( $post_slug = 'post', $url_to_request = '' ) {
+		private function clone_post_type( $post_slug, $url_to_request ) {
 			$retrieved_data = $this->safe_remote_get( $url_to_request );
 			
 			if ( is_wp_error( $retrieved_data ) ) {
-				Reign_Demo_Installer_Logger::error( 'Failed to fetch post type data: ' . $retrieved_data->get_error_message() );
-				return;
+				$this->log_error( "Failed to fetch post type data: {$retrieved_data->get_error_message()}" );
+				return $retrieved_data;
 			}
 
 			$upload = wp_upload_dir();
@@ -383,16 +436,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 			$file_path = $upload_dir . '/' . sanitize_file_name( $post_slug ) . '.xml';
 			
 			// Write file securely
-			global $wp_filesystem;
-			if ( ! $wp_filesystem ) {
-				require_once ABSPATH . 'wp-admin/includes/file.php';
-				WP_Filesystem();
-			}
-
-			if ( $wp_filesystem ) {
-				$wp_filesystem->put_contents( $file_path, $retrieved_data );
-			} else {
-				file_put_contents( $file_path, $retrieved_data );
+			$write_result = $this->write_file_securely( $file_path, $retrieved_data );
+			if ( is_wp_error( $write_result ) ) {
+				return $write_result;
 			}
 
 			// Import XML data
@@ -403,6 +449,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 
 			// Clean up
 			wp_delete_file( $file_path );
+			
+			return true;
 		}
 
 		/**
@@ -410,44 +458,271 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 *
 		 * @param string $table_name Table name
 		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
 		 */
-		private function clone_database_table( $table_name = '', $url_to_request = '' ) {
+		private function clone_database_table( $table_name, $url_to_request ) {
 			$retrieved_data = $this->safe_remote_get( $url_to_request, true );
 			
 			if ( is_wp_error( $retrieved_data ) ) {
-				Reign_Demo_Installer_Logger::error( 'Failed to fetch database table data: ' . $retrieved_data->get_error_message() );
-				return;
+				$this->log_error( "Failed to fetch database table data: {$retrieved_data->get_error_message()}" );
+				return $retrieved_data;
 			}
 
 			if ( empty( $retrieved_data ) || ! is_array( $retrieved_data ) ) {
-				Reign_Demo_Installer_Logger::error( 'Invalid database table data format' );
-				return;
-			}
-
-			// Replace placeholders
-			if ( $table_name !== 'options' ) {
-				$retrieved_data = $this->replace_url_placeholders( $retrieved_data );
+				$this->log_error( 'Invalid database table data format' );
+				return new WP_Error( 'invalid_data', 'Invalid database table data format' );
 			}
 
 			// Handle different table types
 			switch ( $table_name ) {
 				case 'theme_mods':
-					$this->import_theme_mods( $retrieved_data );
-					break;
-
+					return $this->import_theme_mods( $retrieved_data );
+				
 				case 'options':
-					$this->import_options( $retrieved_data );
-					break;
-
+					return $this->import_options( $retrieved_data );
+				
 				default:
-					$this->import_table_data( $table_name, $retrieved_data );
-					break;
+					return $this->import_table_data( $table_name, $retrieved_data );
+			}
+		}
+
+		/**
+		 * Clone uploads folder.
+		 *
+		 * @param string $url_to_request URL to request
+		 * @return bool|WP_Error
+		 */
+		private function clone_uploads_folder( $url_to_request ) {
+			$parent_folder_name = $this->extract_parent_folder_name( $url_to_request );
+			
+			$retrieved_data = $this->safe_remote_get( $url_to_request );
+			
+			if ( is_wp_error( $retrieved_data ) ) {
+				$this->log_error( "Failed to fetch upload folder: {$retrieved_data->get_error_message()}" );
+				return $retrieved_data;
 			}
 
-			// CRITICAL: Restore admin user after any table import
+			if ( empty( $retrieved_data ) ) {
+				return true; // Empty folder, nothing to do
+			}
+
+			$upload = wp_upload_dir();
+			$zip_file_path = $upload['basedir'] . '/reign-theme-demo.zip';
+
+			// Write zip file securely
+			$write_result = $this->write_file_securely( $zip_file_path, $retrieved_data );
+			if ( is_wp_error( $write_result ) ) {
+				return $write_result;
+			}
+
+			// Extract zip file
+			$extract_result = $this->extract_zip_file( $zip_file_path, $upload['basedir'] . '/' . $parent_folder_name . '/' );
+			
+			// Clean up zip file
+			wp_delete_file( $zip_file_path );
+			
+			return $extract_result;
+		}
+
+		/**
+		 * Extract ZIP file.
+		 *
+		 * @param string $zip_file_path ZIP file path
+		 * @param string $extract_path Extract path
+		 * @return bool|WP_Error
+		 */
+		private function extract_zip_file( $zip_file_path, $extract_path ) {
+			if ( class_exists( 'ZipArchive' ) ) {
+				$zip = new ZipArchive();
+				$res = $zip->open( $zip_file_path );
+				
+				if ( $res === true ) {
+					$zip->extractTo( $extract_path );
+					$zip->close();
+					
+					$this->log_info( "Extracted uploads to {$extract_path}" );
+					return true;
+				} else {
+					$this->log_error( "Failed to extract zip file: {$zip_file_path}" );
+					return new WP_Error( 'extract_failed', 'Failed to extract zip file' );
+				}
+			} else {
+				$this->log_error( 'ZipArchive class not available' );
+				return new WP_Error( 'zip_not_available', 'ZipArchive class not available' );
+			}
+		}
+
+		/**
+		 * Write file securely.
+		 *
+		 * @param string $file_path File path
+		 * @param string $content File content
+		 * @return bool|WP_Error
+		 */
+		private function write_file_securely( $file_path, $content ) {
+			global $wp_filesystem;
+			
+			if ( ! $wp_filesystem ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+				WP_Filesystem();
+			}
+
+			if ( $wp_filesystem ) {
+				$result = $wp_filesystem->put_contents( $file_path, $content );
+				if ( ! $result ) {
+					return new WP_Error( 'write_failed', 'Failed to write file using WP Filesystem' );
+				}
+			} else {
+				$result = file_put_contents( $file_path, $content );
+				if ( $result === false ) {
+					return new WP_Error( 'write_failed', 'Failed to write file using file_put_contents' );
+				}
+			}
+			
+			return true;
+		}
+
+		/**
+		 * Safely perform remote GET request.
+		 *
+		 * @param string $url URL to request
+		 * @param bool $decode_json Whether to decode JSON response
+		 * @return mixed|WP_Error Response data or WP_Error
+		 */
+		private function safe_remote_get( $url, $decode_json = false ) {
+			$response = wp_remote_get( $url, array( 
+				'sslverify' => true, 
+				'timeout' => 120,
+				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+			) );
+
+			if ( is_wp_error( $response ) ) {
+				return $response;
+			}
+
+			$response_code = wp_remote_retrieve_response_code( $response );
+			if ( $response_code !== 200 ) {
+				return new WP_Error( 'http_error', "HTTP {$response_code} error" );
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			
+			if ( $decode_json ) {
+				$decoded = json_decode( $body, true );
+				if ( json_last_error() !== JSON_ERROR_NONE ) {
+					return new WP_Error( 'json_error', 'Invalid JSON response' );
+				}
+				return $decoded;
+			}
+
+			return $body;
+		}
+
+		/**
+		 * Import theme modifications.
+		 *
+		 * @param array $data Theme mods data
+		 * @return bool
+		 */
+		private function import_theme_mods( $data ) {
+			foreach ( $data as $key => $value ) {
+				set_theme_mod( $key, $value );
+			}
+			$this->log_info( 'Theme mods imported successfully' );
+			return true;
+		}
+
+		/**
+		 * Import options data.
+		 *
+		 * @param array $data Options data
+		 * @return bool
+		 */
+		private function import_options( $data ) {
+			$default_options_keys = $this->get_default_options_keys();
+			$imported_count = 0;
+
+			foreach ( $data as $option ) {
+				if ( ! isset( $option['option_name'] ) ) {
+					continue;
+				}
+
+				if ( in_array( $option['option_name'], $default_options_keys, true ) ) {
+					continue; // Skip default WordPress options
+				}
+
+				$option_value = maybe_unserialize( $option['option_value'] );
+				$option_value = $this->replace_url_in_option_value( $option_value );
+				
+				$autoload = isset( $option['autoload'] ) ? $option['autoload'] : 'yes';
+				
+				update_option( $option['option_name'], $option_value, $autoload );
+				$imported_count++;
+			}
+
+			$this->log_info( "Imported {$imported_count} options" );
+			return true;
+		}
+
+		/**
+		 * Import table data.
+		 *
+		 * @param string $table_name Table name
+		 * @param array $data Table data
+		 * @return bool|WP_Error
+		 */
+		private function import_table_data( $table_name, $data ) {
+			global $wpdb;
+
+			$full_table_name = $wpdb->prefix . $table_name;
+			
+			// Check if we need to clear the table first
+			$import_data_key = 'reign_theme_demo_import_data';
+			$import_data = get_option( $import_data_key, array() );
+			
+			if ( ! isset( $import_data[ $full_table_name . '_done' ] ) ) {
+				// Special handling for user tables - don't clear if admin user exists
+				if ( ! in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
+					$wpdb->query( $wpdb->prepare( "DELETE FROM %i", $full_table_name ) );
+				} else {
+					// For user tables, only delete non-admin users
+					if ( $this->current_admin_user ) {
+						$admin_id = $this->current_admin_user['ID'];
+						if ( $table_name === 'users' ) {
+							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE ID != %d", $full_table_name, $admin_id ) );
+						} elseif ( $table_name === 'usermeta' ) {
+							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE user_id != %d", $full_table_name, $admin_id ) );
+						}
+					}
+				}
+				$import_data[ $full_table_name . '_done' ] = 'yes';
+				update_option( $import_data_key, $import_data );
+			}
+
+			$inserted_count = 0;
+			foreach ( $data as $row ) {
+				// Skip current admin user data for users/usermeta tables
+				if ( $this->should_skip_user_data( $table_name, $row ) ) {
+					continue;
+				}
+
+				// Clean up invalid columns for user tables
+				$row = $this->clean_user_table_data( $table_name, $row );
+
+				$result = $wpdb->insert( $full_table_name, $row );
+				if ( $result !== false ) {
+					$inserted_count++;
+				}
+			}
+
+			$this->log_info( "Imported {$inserted_count} rows to {$table_name}" );
+
+			// CRITICAL: Restore admin user after user table imports
 			if ( in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
 				$this->restore_admin_user();
 			}
+
+			return true;
 		}
 
 		/**
@@ -455,8 +730,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 */
 		private function restore_admin_user() {
 			if ( ! $this->current_admin_user ) {
-				Reign_Demo_Installer_Logger::error( 'No admin user data to restore!' );
-				return;
+				$this->log_error( 'No admin user data to restore!' );
+				return false;
 			}
 
 			global $wpdb;
@@ -479,14 +754,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				// Update or insert user
 				$existing_user = get_user_by( 'ID', $this->current_admin_user['ID'] );
 				if ( $existing_user ) {
-					// Update existing user
 					$wpdb->update( 
 						$wpdb->users, 
 						$user_data, 
 						array( 'ID' => $this->current_admin_user['ID'] ) 
 					);
 				} else {
-					// Insert user if somehow deleted
 					$wpdb->insert( $wpdb->users, $user_data );
 				}
 
@@ -521,16 +794,19 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				wp_cache_delete( $this->current_admin_user['user_login'], 'userlogins' );
 				wp_cache_delete( $this->current_admin_user['user_email'], 'useremail' );
 
-				Reign_Demo_Installer_Logger::info( 'Admin user successfully restored: ' . $this->current_admin_user['user_login'] );
+				$this->log_info( "Admin user successfully restored: {$this->current_admin_user['user_login']}" );
 
 				// Set authentication cookies to keep user logged in
 				wp_set_auth_cookie( $user_id, true );
 				
+				return true;
+				
 			} catch ( Exception $e ) {
-				Reign_Demo_Installer_Logger::error( 'Failed to restore admin user: ' . $e->getMessage() );
+				$this->log_error( "Failed to restore admin user: {$e->getMessage()}" );
 				
 				// Emergency fallback - ensure at least one admin exists
 				$this->ensure_admin_user_exists();
+				return false;
 			}
 		}
 
@@ -550,268 +826,10 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				) );
 
 				if ( ! is_wp_error( $user_id ) ) {
-					Reign_Demo_Installer_Logger::info( 'Emergency admin user created: ' . $this->current_admin_user['user_login'] );
+					$this->log_info( "Emergency admin user created: {$this->current_admin_user['user_login']}" );
 					wp_set_auth_cookie( $user_id, true );
 				}
 			}
-		}
-
-		/**
-		 * Import theme modifications.
-		 *
-		 * @param array $data Theme mods data
-		 */
-		private function import_theme_mods( $data ) {
-			foreach ( $data as $key => $value ) {
-				set_theme_mod( $key, $value );
-			}
-			Reign_Demo_Installer_Logger::info( 'Theme mods imported successfully' );
-		}
-
-		/**
-		 * Import options data.
-		 *
-		 * @param array $data Options data
-		 */
-		private function import_options( $data ) {
-			$default_options_keys = $this->get_default_options_keys();
-			$imported_count = 0;
-
-			foreach ( $data as $option ) {
-				if ( ! isset( $option['option_name'] ) ) {
-					continue;
-				}
-
-				if ( in_array( $option['option_name'], $default_options_keys, true ) ) {
-					continue; // Skip default WordPress options
-				}
-
-				$option_value = maybe_unserialize( $option['option_value'] );
-				$option_value = $this->replace_url_in_option_value( $option_value );
-				
-				$autoload = isset( $option['autoload'] ) ? $option['autoload'] : 'yes';
-				
-				update_option( $option['option_name'], $option_value, $autoload );
-				$imported_count++;
-			}
-
-			Reign_Demo_Installer_Logger::info( "Imported {$imported_count} options" );
-		}
-
-		/**
-		 * Import table data.
-		 *
-		 * @param string $table_name Table name
-		 * @param array $data Table data
-		 */
-		private function import_table_data( $table_name, $data ) {
-			global $wpdb;
-
-			$full_table_name = $wpdb->prefix . $table_name;
-			
-			// Check if we need to clear the table first
-			$import_data_key = 'reign_theme_demo_import_data';
-			$wbcom_theme_demo_import_data = get_option( $import_data_key, array() );
-			
-			if ( ! isset( $wbcom_theme_demo_import_data[ $full_table_name . '_done' ] ) ) {
-				// Special handling for user tables - don't clear if admin user exists
-				if ( ! in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
-					$wpdb->query( $wpdb->prepare( "DELETE FROM %i", $full_table_name ) );
-				} else {
-					// For user tables, only delete non-admin users
-					if ( $this->current_admin_user ) {
-						$admin_id = $this->current_admin_user['ID'];
-						if ( $table_name === 'users' ) {
-							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE ID != %d", $full_table_name, $admin_id ) );
-						} elseif ( $table_name === 'usermeta' ) {
-							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE user_id != %d", $full_table_name, $admin_id ) );
-						}
-					}
-				}
-				$wbcom_theme_demo_import_data[ $full_table_name . '_done' ] = 'yes';
-				update_option( $import_data_key, $wbcom_theme_demo_import_data );
-			}
-
-			$inserted_count = 0;
-			foreach ( $data as $row ) {
-				// Skip current admin user data for users/usermeta tables
-				if ( $this->should_skip_user_data( $table_name, $row ) ) {
-					continue;
-				}
-
-				// Clean up invalid columns for user tables
-				$row = $this->clean_user_table_data( $table_name, $row );
-
-				$result = $wpdb->insert( $full_table_name, $row );
-				if ( $result !== false ) {
-					$inserted_count++;
-				}
-			}
-
-			Reign_Demo_Installer_Logger::info( "Imported {$inserted_count} rows to {$table_name}" );
-		}
-
-		/**
-		 * Clone uploads folder.
-		 *
-		 * @param string $url_to_request URL to request
-		 */
-		private function clone_uploads_folder( $url_to_request = '' ) {
-			$parent_folder_name = $this->extract_parent_folder_name( $url_to_request );
-			
-			$retrieved_data = $this->safe_remote_get( $url_to_request );
-			
-			if ( is_wp_error( $retrieved_data ) ) {
-				Reign_Demo_Installer_Logger::error( 'Failed to fetch upload folder: ' . $retrieved_data->get_error_message() );
-				return;
-			}
-
-			if ( empty( $retrieved_data ) ) {
-				return;
-			}
-
-			$upload = wp_upload_dir();
-			$zip_file_path = $upload['basedir'] . '/reign-theme-demo.zip';
-
-			// Write zip file securely
-			global $wp_filesystem;
-			if ( ! $wp_filesystem ) {
-				require_once ABSPATH . 'wp-admin/includes/file.php';
-				WP_Filesystem();
-			}
-
-			if ( $wp_filesystem ) {
-				$wp_filesystem->put_contents( $zip_file_path, $retrieved_data );
-			} else {
-				file_put_contents( $zip_file_path, $retrieved_data );
-			}
-
-			// Extract zip file
-			if ( class_exists( 'ZipArchive' ) ) {
-				$zip = new ZipArchive();
-				$res = $zip->open( $zip_file_path );
-				
-				if ( $res === true ) {
-					$extract_path = $upload['basedir'] . '/' . $parent_folder_name . '/';
-					$zip->extractTo( $extract_path );
-					$zip->close();
-					
-					Reign_Demo_Installer_Logger::info( "Extracted uploads to {$extract_path}" );
-				} else {
-					Reign_Demo_Installer_Logger::error( "Failed to extract zip file: {$zip_file_path}" );
-				}
-			} else {
-				Reign_Demo_Installer_Logger::error( 'ZipArchive class not available' );
-			}
-
-			// Clean up zip file
-			wp_delete_file( $zip_file_path );
-		}
-
-		/**
-		 * Safely perform remote GET request.
-		 *
-		 * @param string $url URL to request
-		 * @param bool $decode_json Whether to decode JSON response
-		 * @return mixed Response data or WP_Error
-		 */
-		private function safe_remote_get( $url, $decode_json = false ) {
-			$response = wp_remote_get( $url, array( 
-				'sslverify' => true, 
-				'timeout' => 120,
-				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
-			) );
-
-			if ( is_wp_error( $response ) ) {
-				return $response;
-			}
-
-			$response_code = wp_remote_retrieve_response_code( $response );
-			if ( $response_code !== 200 ) {
-				return new WP_Error( 'http_error', "HTTP {$response_code} error" );
-			}
-
-			$body = wp_remote_retrieve_body( $response );
-			
-			if ( $decode_json ) {
-				$decoded = json_decode( $body, true );
-				if ( json_last_error() !== JSON_ERROR_NONE ) {
-					return new WP_Error( 'json_error', 'Invalid JSON response' );
-				}
-				return $decoded;
-			}
-
-			return $body;
-		}
-
-		/**
-		 * Verify AJAX request security.
-		 *
-		 * @return bool True if valid, false otherwise
-		 */
-		private function verify_ajax_request() {
-			// Check user capabilities
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return false;
-			}
-
-			// Verify nonce
-			$nonce = $this->security->get_request_param( 'nonce', 'string' );
-			if ( ! wp_verify_nonce( $nonce, 'reign_demo_installer_ajax' ) && 
-				 ! wp_verify_nonce( $nonce, 'reign_demo_installer_import' ) &&
-				 ! wp_verify_nonce( $nonce, 'reign_demo_installer_plugins' ) ) {
-				return false;
-			}
-
-			return true;
-		}
-
-		/**
-		 * Set memory and time limits for import.
-		 */
-		private function set_import_limits() {
-			if ( defined( 'REIGN_DEMO_INSTALLER_MEMORY_LIMIT' ) ) {
-				ini_set( 'memory_limit', REIGN_DEMO_INSTALLER_MEMORY_LIMIT );
-			}
-			
-			if ( defined( 'REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME' ) ) {
-				set_time_limit( REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME );
-			}
-		}
-
-		/**
-		 * Replace URL placeholders in data.
-		 *
-		 * @param array $data Data array
-		 * @return array Modified data
-		 */
-		private function replace_url_placeholders( $data ) {
-			return array_map( function( $value ) {
-				if ( is_string( $value ) ) {
-					return str_replace( '{{*home_url}}', home_url(), $value );
-				}
-				return $value;
-			}, $data );
-		}
-
-		/**
-		 * Replace URLs in option value.
-		 *
-		 * @param mixed $option_value Option value
-		 * @return mixed Modified option value
-		 */
-		private function replace_url_in_option_value( $option_value ) {
-			if ( is_array( $option_value ) ) {
-				foreach ( $option_value as $key => $value ) {
-					if ( is_string( $value ) ) {
-						$option_value[ $key ] = str_replace( '{{*home_url}}', get_site_url(), $value );
-					}
-				}
-			} elseif ( is_string( $option_value ) ) {
-				$option_value = str_replace( '{{*home_url}}', get_site_url(), $option_value );
-			}
-			
-			return $option_value;
 		}
 
 		/**
@@ -819,10 +837,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 *
 		 * @param string $table_name Table name
 		 * @param array $row Row data
-		 * @return bool True if should skip, false otherwise
+		 * @return bool
 		 */
 		private function should_skip_user_data( $table_name, $row ) {
-			// Always skip current admin user data to prevent overwriting
 			if ( ! $this->current_admin_user ) {
 				return false;
 			}
@@ -845,7 +862,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 *
 		 * @param string $table_name Table name
 		 * @param array $row Row data
-		 * @return array Cleaned row data
+		 * @return array
 		 */
 		private function clean_user_table_data( $table_name, $row ) {
 			if ( $table_name === 'users' ) {
@@ -862,10 +879,30 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
+		 * Replace URLs in option value.
+		 *
+		 * @param mixed $option_value Option value
+		 * @return mixed
+		 */
+		private function replace_url_in_option_value( $option_value ) {
+			if ( is_array( $option_value ) ) {
+				foreach ( $option_value as $key => $value ) {
+					if ( is_string( $value ) ) {
+						$option_value[ $key ] = str_replace( '{{*home_url}}', get_site_url(), $value );
+					}
+				}
+			} elseif ( is_string( $option_value ) ) {
+				$option_value = str_replace( '{{*home_url}}', get_site_url(), $option_value );
+			}
+			
+			return $option_value;
+		}
+
+		/**
 		 * Extract parent folder name from URL.
 		 *
 		 * @param string $url URL
-		 * @return string Parent folder name
+		 * @return string
 		 */
 		private function extract_parent_folder_name( $url ) {
 			$path_parts = array_filter( explode( '/', $url ) );
@@ -881,7 +918,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		/**
 		 * Get default WordPress options keys that should not be imported.
 		 *
-		 * @return array Default options keys
+		 * @return array
 		 */
 		private function get_default_options_keys() {
 			return array(
@@ -909,6 +946,68 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				'medium_large_size_w', 'medium_large_size_h', 'initial_db_version',
 				'wp_user_roles', 'fresh_site', 'cron'
 			);
+		}
+
+		/**
+		 * Set memory and time limits for import.
+		 */
+		private function set_import_limits() {
+			if ( defined( 'REIGN_DEMO_INSTALLER_MEMORY_LIMIT' ) ) {
+				ini_set( 'memory_limit', REIGN_DEMO_INSTALLER_MEMORY_LIMIT );
+			}
+			
+			if ( defined( 'REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME' ) ) {
+				set_time_limit( REIGN_DEMO_INSTALLER_MAX_EXECUTION_TIME );
+			}
+		}
+
+		/**
+		 * Get plugins manager instance.
+		 *
+		 * @return object|null
+		 */
+		private function get_plugins_manager() {
+			if ( class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ) {
+				return Reign_Demo_Installer_Plugins_Manager::instance();
+			} elseif ( function_exists( 'instantiate_wbcom_demo_importer_plugins_manager' ) ) {
+				return instantiate_wbcom_demo_importer_plugins_manager();
+			}
+			
+			return null;
+		}
+
+		/**
+		 * Log import start.
+		 *
+		 * @param string $demo_slug Demo slug
+		 * @param array $data Additional data
+		 */
+		private function log_import_start( $demo_slug, $data = array() ) {
+			if ( $this->logger ) {
+				$this->logger->log_import_start( $demo_slug, $data );
+			}
+		}
+
+		/**
+		 * Log info message.
+		 *
+		 * @param string $message Message
+		 */
+		private function log_info( $message ) {
+			if ( $this->logger ) {
+				$this->logger->info( $message );
+			}
+		}
+
+		/**
+		 * Log error message.
+		 *
+		 * @param string $message Message
+		 */
+		private function log_error( $message ) {
+			if ( $this->logger ) {
+				$this->logger->error( $message );
+			}
 		}
 	}
 
