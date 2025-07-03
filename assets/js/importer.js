@@ -1,6 +1,6 @@
 /*
-* Flexible Demo Importer with User Error Handling Options
-* Allows users to choose how to handle failed JSON processing
+* Enhanced Demo Importer with Simplified User Experience
+* Removes technical file classifications from user interface
 */
 (function($) {
     'use strict';
@@ -15,24 +15,19 @@
             processingTimeout: 300000,
             retryAttempts: 2,
             batchSize: 5,
-            // Error handling options
-            autoSkipOptional: true,        // Auto-skip optional files
-            showUserChoiceDialog: true     // Show dialog for critical failures
+            // Error handling options (internal use only)
+            autoSkipOptional: true,
+            showUserChoiceDialog: true
         };
 
-        // File criticality mapping
+        // File criticality mapping (internal use - hidden from user)
         const FILE_CRITICALITY = {
-            // Critical - Required for basic functionality
             'options': 'critical',
             'users': 'critical',
             'usermeta': 'critical',
-            
-            // Important - Core content but can work without
             'posts': 'important',
             'postmeta': 'important',
             'theme_mods': 'important',
-            
-            // Optional - Enhancement features
             'terms': 'optional',
             'term_taxonomy': 'optional',
             'term_relationships': 'optional',
@@ -97,7 +92,7 @@
             // Update UI
             button.prop('disabled', true).text('Starting Import...');
             $('#progress-bar-container').show();
-            updateProgress(0, 'Initializing flexible import...');
+            updateProgress(0, 'Preparing demo import...');
             
             // Start import process
             startBatchImport();
@@ -118,15 +113,30 @@
                 type: 'POST',
                 data: {
                     action: 'wbcom_create_temp_folder',
+                    demo_slug: $('#demo_slug').val(),
+                    plugins_json_key: getPluginsJsonKey(),
+                    theme_slug: $('#theme_slug').val(),
                     nonce: reignDemoInstaller.nonce
                 },
                 timeout: 30000,
                 success: function(response) {
                     if (response.success) {
                         tempFolderId = response.data.folder_id;
+                        
+                        // Show cache info if resuming
+                        if (response.data.resumable && response.data.existing_files) {
+                            var cacheCount = Object.keys(response.data.existing_files).length;
+                            if (cacheCount > 0) {
+                                showSimpleNotification(
+                                    `Found ${cacheCount} cached files. Resuming previous import...`, 
+                                    'info'
+                                );
+                            }
+                        }
+                        
                         getDemoManifest();
                     } else {
-                        handleError('Failed to create temp folder: ' + (response.data?.message || 'Unknown error'));
+                        handleError('Failed to create workspace: ' + (response.data?.message || 'Unknown error'));
                     }
                 },
                 error: function(xhr, status) {
@@ -135,8 +145,14 @@
             });
         }
 
+        function getPluginsJsonKey() {
+            // Get plugins_json_key from URL params or hidden field
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('plugins_json_key') || $('#plugins_json_key').val() || '';
+        }
+
         function getDemoManifest() {
-            updateProgress(5, 'Analyzing demo structure...');
+            updateProgress(5, 'Analyzing demo content...');
             
             $.ajax({
                 url: reignDemoInstaller.ajaxUrl,
@@ -160,12 +176,9 @@
                         }));
                         
                         downloadStats.total = downloadQueue.length;
-                        updateProgress(10, `Found ${downloadStats.total} files. Starting parallel downloads...`);
+                        updateProgress(10, `Found ${downloadStats.total} files. Starting download...`);
                         
-                        // Show file summary with criticality info
-                        showFileSummary();
-                        
-                        // Start parallel downloads
+                        // Start parallel downloads (no technical summary shown to user)
                         startParallelDownloads();
                     } else {
                         handleError('Failed to get demo files: ' + (response.data?.message || 'No files found'));
@@ -196,28 +209,8 @@
             return 'optional';
         }
 
-        function showFileSummary() {
-            const criticalCount = downloadQueue.filter(f => f.criticality === 'critical').length;
-            const importantCount = downloadQueue.filter(f => f.criticality === 'important').length;
-            const optionalCount = downloadQueue.filter(f => f.criticality === 'optional').length;
-            
-            const summaryHtml = `
-                <div class="import-file-summary">
-                    <h4>Import File Summary</h4>
-                    <div class="file-counts">
-                        <span class="critical-files">${criticalCount} Critical</span>
-                        <span class="important-files">${importantCount} Important</span>
-                        <span class="optional-files">${optionalCount} Optional</span>
-                    </div>
-                    <p class="summary-note">Optional files can be skipped if they fail to process.</p>
-                </div>
-            `;
-            
-            $('.demo-listing-wrap').prepend(summaryHtml);
-        }
-
         function startParallelDownloads() {
-            updateProgress(15, `Starting ${CONFIG.maxConcurrentDownloads} parallel downloads...`);
+            updateProgress(15, 'Downloading demo files...');
             
             // Start multiple concurrent downloads
             for (let i = 0; i < CONFIG.maxConcurrentDownloads; i++) {
@@ -245,7 +238,13 @@
                     nextFile.status = 'completed';
                     downloadStats.completed++;
                     processingQueue.push(nextFile);
-                    console.log(`✓ Downloaded: ${nextFile.name} (${downloadStats.completed}/${downloadStats.total})`);
+                    
+                    // Only log cache info, no detailed file info
+                    if (result.data?.cached) {
+                        console.log(`✓ Using cached: ${nextFile.name}`);
+                    } else {
+                        console.log(`✓ Downloaded: ${nextFile.name} (${downloadStats.completed}/${downloadStats.total})`);
+                    }
                 } else {
                     nextFile.attempts++;
                     
@@ -340,14 +339,13 @@
 
         function handleDownloadFailures() {
             const criticalFailures = failedFiles.filter(f => f.stage === 'download' && f.criticality === 'critical');
-            const importantFailures = failedFiles.filter(f => f.stage === 'download' && f.criticality === 'important');
-            const optionalFailures = failedFiles.filter(f => f.stage === 'download' && f.criticality === 'optional');
             
             if (criticalFailures.length > 0) {
-                showErrorDialog('download', criticalFailures, importantFailures, optionalFailures);
+                // Only show simplified error for critical failures
+                showErrorDialog('download', criticalFailures.length, downloadStats.failed - criticalFailures.length);
             } else {
                 // Only non-critical failures, can proceed
-                const errorMsg = `${downloadStats.failed} non-critical files failed to download. Continuing with available files...`;
+                const errorMsg = `Some files couldn't be downloaded, but the import can continue. Your site will work normally.`;
                 showSimpleNotification(errorMsg, 'warning');
                 startParallelProcessing();
             }
@@ -360,7 +358,7 @@
             }
             
             processingStats.total = processingQueue.length;
-            updateProgress(70, `Processing ${processingStats.total} files in parallel...`);
+            updateProgress(70, `Processing ${processingStats.total} files...`);
             
             for (let i = 0; i < CONFIG.maxConcurrentProcessing; i++) {
                 processNextFile();
@@ -441,7 +439,7 @@
                         file_type: file.type,
                         action_for: file.action_for,
                         preserve_admin: true,
-                        allow_partial: true, // Allow partial processing
+                        allow_partial: true,
                         file_criticality: file.criticality,
                         nonce: reignDemoInstaller.nonce
                     },
@@ -496,59 +494,43 @@
             const importantFailures = failedFiles.filter(f => f.stage === 'processing' && f.criticality === 'important');
             
             if (criticalFailures.length > 0) {
-                showErrorDialog('processing', criticalFailures, importantFailures, []);
+                showErrorDialog('processing', criticalFailures.length, importantFailures.length);
             } else if (importantFailures.length > 0 && CONFIG.showUserChoiceDialog) {
-                showErrorDialog('processing', [], importantFailures, []);
+                showErrorDialog('processing', 0, importantFailures.length);
             } else {
                 completeImport();
             }
         }
 
-        function showErrorDialog(stage, criticalFailures, importantFailures, optionalFailures) {
-            const totalFailures = criticalFailures.length + importantFailures.length + optionalFailures.length;
-            const isCritical = criticalFailures.length > 0;
+        function showErrorDialog(stage, criticalCount, otherCount) {
+            const isCritical = criticalCount > 0;
+            const totalFailed = criticalCount + otherCount;
             
             const dialogHtml = `
                 <div class="error-dialog-overlay">
                     <div class="error-dialog">
-                        <h3>${isCritical ? '🚨' : '⚠️'} ${stage === 'download' ? 'Download' : 'Processing'} Issues Detected</h3>
+                        <h3>${isCritical ? '🚨' : '⚠️'} Import Issue Detected</h3>
                         
                         <div class="error-summary">
-                            <p><strong>${totalFailures} files failed to ${stage}:</strong></p>
-                            ${criticalFailures.length > 0 ? `<p class="critical-error">• ${criticalFailures.length} critical files (required for basic functionality)</p>` : ''}
-                            ${importantFailures.length > 0 ? `<p class="important-error">• ${importantFailures.length} important files (may affect features)</p>` : ''}
-                            ${optionalFailures.length > 0 ? `<p class="optional-error">• ${optionalFailures.length} optional files (cosmetic features)</p>` : ''}
-                        </div>
-                        
-                        <div class="failed-files-list">
-                            <details>
-                                <summary>View failed files</summary>
-                                <ul>
-                                    ${[...criticalFailures, ...importantFailures, ...optionalFailures].map(file => 
-                                        `<li><span class="file-name">${file.name}</span> 
-                                         <span class="criticality ${file.criticality}">(${file.criticality})</span>
-                                         <div class="error-msg">${file.error}</div></li>`
-                                    ).join('')}
-                                </ul>
-                            </details>
+                            <p><strong>${totalFailed} files couldn't be ${stage === 'download' ? 'downloaded' : 'processed'}.</strong></p>
+                            ${isCritical ? `<p class="critical-error">Some essential files failed, which may affect core functionality.</p>` : `<p class="warning-error">Some optional files failed, but your site should work normally.</p>`}
                         </div>
                         
                         <div class="dialog-actions">
                             ${isCritical ? `
-                                <button class="btn-retry" data-action="retry">🔄 Retry Failed Files</button>
+                                <button class="btn-retry" data-action="retry">🔄 Try Again</button>
                                 <button class="btn-continue" data-action="continue">⚠️ Continue Anyway</button>
-                                <button class="btn-abort" data-action="abort">❌ Abort Import</button>
+                                <button class="btn-abort" data-action="abort">❌ Cancel Import</button>
                             ` : `
-                                <button class="btn-retry" data-action="retry">🔄 Retry Failed Files</button>
-                                <button class="btn-skip" data-action="skip">⏭️ Skip & Continue</button>
+                                <button class="btn-retry" data-action="retry">🔄 Try Again</button>
                                 <button class="btn-continue" data-action="continue">✅ Continue Import</button>
                             `}
                         </div>
                         
                         <div class="dialog-note">
                             ${isCritical ? 
-                                '<p class="warning-note">⚠️ Critical files are required for basic functionality. Continuing without them may result in an incomplete or broken site.</p>' :
-                                '<p class="info-note">ℹ️ You can safely continue without these files, though some features may not work perfectly.</p>'
+                                '<p class="warning-note">⚠️ Continuing without essential files may result in missing features or content.</p>' :
+                                '<p class="info-note">ℹ️ Your website will work normally without these optional files.</p>'
                             }
                         </div>
                     </div>
@@ -563,11 +545,7 @@
                 $('.error-dialog-overlay').remove();
             });
             
-            $('.error-dialog .btn-continue, .error-dialog .btn-skip').on('click', function() {
-                const action = $(this).data('action');
-                if (action === 'skip') {
-                    skipFailedFiles(stage);
-                }
+            $('.error-dialog .btn-continue').on('click', function() {
                 $('.error-dialog-overlay').remove();
                 if (stage === 'download') {
                     startParallelProcessing();
@@ -618,23 +596,10 @@
             showSimpleNotification(`Retrying ${stageFailures.length} failed files...`, 'info');
         }
 
-        function skipFailedFiles(stage) {
-            const stageFailures = failedFiles.filter(f => f.stage === stage);
-            
-            stageFailures.forEach(file => {
-                skippedFiles.push({...file, reason: 'User skipped'});
-                if (stage === 'processing') {
-                    processingStats.skipped++;
-                }
-            });
-            
-            showSimpleNotification(`Skipped ${stageFailures.length} failed files. Continuing import...`, 'warning');
-        }
-
         function abortImport() {
             importInProgress = false;
             $('#wbcom_get_theme_demo_data').prop('disabled', false).text('Install Demo');
-            updateProgress(0, 'Import aborted by user');
+            updateProgress(0, 'Import cancelled by user');
             
             if (tempFolderId) {
                 $.ajax({
@@ -643,16 +608,17 @@
                     data: {
                         action: 'wbcom_cleanup_temp_folder',
                         temp_folder_id: tempFolderId,
+                        keep_cache: true, // Keep for future attempts
                         nonce: reignDemoInstaller.nonce
                     }
                 });
             }
             
-            showSimpleNotification('Import aborted. You can try again when ready.', 'info');
+            showSimpleNotification('Import cancelled. You can try again when ready.', 'info');
         }
 
         function completeImport() {
-            updateProgress(95, 'Finalizing import and cleaning up...');
+            updateProgress(95, 'Finalizing import...');
             
             const duration = Math.round((Date.now() - startTime) / 1000);
             const downloadSuccessRate = Math.round((downloadStats.completed / downloadStats.total) * 100);
@@ -689,13 +655,14 @@
                 }
             });
             
-            // Cleanup temp folder
+            // Cleanup temp folder but keep cache for future use
             $.ajax({
                 url: reignDemoInstaller.ajaxUrl,
                 type: 'POST',
                 data: {
                     action: 'wbcom_cleanup_temp_folder',
                     temp_folder_id: tempFolderId,
+                    keep_cache: true, // Preserve for future imports
                     nonce: reignDemoInstaller.nonce
                 },
                 timeout: 30000,
@@ -707,9 +674,9 @@
                     if (failedFiles.length === 0 && skippedFiles.length === 0) {
                         showSimpleNotification('Demo imported successfully!', 'success');
                     } else if (failedFiles.length === 0) {
-                        showSimpleNotification(`Demo imported successfully! ${skippedFiles.length} optional files were skipped.`, 'success');
+                        showSimpleNotification(`Demo imported successfully!`, 'success');
                     } else {
-                        showSimpleNotification(`Demo imported with ${failedFiles.length} failures and ${skippedFiles.length} skipped files.`, 'warning');
+                        showSimpleNotification(`Demo imported with some minor issues.`, 'warning');
                     }
                     
                     setTimeout(function() {
@@ -739,6 +706,7 @@
                     data: {
                         action: 'wbcom_cleanup_temp_folder',
                         temp_folder_id: tempFolderId,
+                        keep_cache: true, // Keep for retry
                         nonce: reignDemoInstaller.nonce
                     }
                 });
@@ -856,61 +824,16 @@
 
 })(jQuery);
 
-// Enhanced CSS for error dialogs and notifications
+// Enhanced CSS for simplified user interface
 jQuery(document).ready(function($) {
-    if (!$('#flexible-error-css').length) {
-        $('<style id="flexible-error-css">').text(`
-            /* Import File Summary */
-            .import-file-summary {
-                background: #f8f9fa;
-                border: 1px solid #dee2e6;
-                border-radius: 6px;
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
-            .import-file-summary h4 {
-                margin: 0 0 10px;
-                color: #495057;
-            }
-            
-            .file-counts {
-                display: flex;
-                gap: 15px;
-                margin-bottom: 10px;
-            }
-            
-            .critical-files { color: #dc3545; font-weight: bold; }
-            .important-files { color: #fd7e14; font-weight: bold; }
-            .optional-files { color: #6c757d; }
-            
-            .summary-note {
-                margin: 0;
-                font-size: 12px;
-                color: #6c757d;
-                font-style: italic;
-            }
-            
-            /* Error Dialog */
-            .error-dialog-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.7);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                animation: fadeIn 0.3s ease;
-            }
-            
+    if (!$('#simplified-ui-css').length) {
+        $('<style id="simplified-ui-css">').text(`
+            /* Simplified Error Dialog */
             .error-dialog {
                 background: white;
                 border-radius: 8px;
                 padding: 25px;
-                max-width: 600px;
+                max-width: 500px;
                 width: 90%;
                 max-height: 80vh;
                 overflow-y: auto;
@@ -922,79 +845,27 @@ jQuery(document).ready(function($) {
                 margin: 0 0 15px;
                 color: #dc3545;
                 font-size: 18px;
+                text-align: center;
             }
             
             .error-summary {
                 background: #f8d7da;
                 border: 1px solid #f5c6cb;
                 border-radius: 4px;
-                padding: 12px;
-                margin-bottom: 15px;
+                padding: 15px;
+                margin-bottom: 20px;
+                text-align: center;
             }
             
-            .critical-error { color: #721c24; font-weight: bold; }
-            .important-error { color: #856404; }
-            .optional-error { color: #6c757d; }
-            
-            .failed-files-list {
-                margin: 15px 0;
-            }
-            
-            .failed-files-list details {
-                background: #f8f9fa;
-                border-radius: 4px;
-                padding: 10px;
-            }
-            
-            .failed-files-list summary {
-                cursor: pointer;
+            .critical-error {
+                color: #721c24;
                 font-weight: bold;
-                color: #495057;
+                margin: 10px 0;
             }
             
-            .failed-files-list ul {
-                margin: 10px 0 0;
-                padding-left: 20px;
-            }
-            
-            .failed-files-list li {
-                margin-bottom: 8px;
-                font-size: 13px;
-            }
-            
-            .file-name {
-                font-family: monospace;
-                background: #e9ecef;
-                padding: 2px 4px;
-                border-radius: 3px;
-            }
-            
-            .criticality {
-                font-size: 11px;
-                padding: 1px 4px;
-                border-radius: 3px;
-                text-transform: uppercase;
-            }
-            
-            .criticality.critical {
-                background: #dc3545;
-                color: white;
-            }
-            
-            .criticality.important {
-                background: #fd7e14;
-                color: white;
-            }
-            
-            .criticality.optional {
-                background: #6c757d;
-                color: white;
-            }
-            
-            .error-msg {
-                font-size: 11px;
-                color: #6c757d;
-                margin-top: 2px;
+            .warning-error {
+                color: #856404;
+                margin: 10px 0;
             }
             
             .dialog-actions {
@@ -1006,13 +877,14 @@ jQuery(document).ready(function($) {
             }
             
             .dialog-actions button {
-                padding: 10px 16px;
+                padding: 12px 20px;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
                 font-weight: bold;
                 transition: all 0.2s;
-                min-width: 120px;
+                min-width: 130px;
+                font-size: 14px;
             }
             
             .btn-retry {
@@ -1024,22 +896,22 @@ jQuery(document).ready(function($) {
                 background: #0056b3;
             }
             
-            .btn-continue, .btn-skip {
+            .btn-continue {
                 background: #28a745;
                 color: white;
             }
             
-            .btn-continue:hover, .btn-skip:hover {
+            .btn-continue:hover {
                 background: #1e7e34;
             }
             
             .btn-abort {
-                background: #dc3545;
+                background: #6c757d;
                 color: white;
             }
             
             .btn-abort:hover {
-                background: #c82333;
+                background: #545b62;
             }
             
             .dialog-note {
@@ -1047,7 +919,7 @@ jQuery(document).ready(function($) {
                 border: 1px solid #ffeaa7;
                 border-radius: 4px;
                 padding: 12px;
-                margin-top: 15px;
+                text-align: center;
             }
             
             .warning-note {
@@ -1062,7 +934,18 @@ jQuery(document).ready(function($) {
                 font-size: 13px;
             }
             
-            /* Notifications */
+            /* Hide technical file summary from users */
+            .import-file-summary {
+                display: none !important;
+            }
+            
+            /* Enhanced progress bar */
+            #progress-bar-container .completed {
+                transition: width 0.3s ease;
+                background: linear-gradient(90deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
+            }
+            
+            /* Simplified notifications */
             .simple-notification {
                 margin: 15px 0;
                 padding: 15px;
@@ -1118,28 +1001,6 @@ jQuery(document).ready(function($) {
             
             .simple-notification .dismiss:hover {
                 opacity: 1;
-            }
-            
-            /* Animations */
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            
-            @keyframes slideUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-15px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            /* Enhanced progress bar */
-            #progress-bar-container .completed {
-                transition: width 0.3s ease;
-                background: linear-gradient(90deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
             }
         `).appendTo('head');
     }
