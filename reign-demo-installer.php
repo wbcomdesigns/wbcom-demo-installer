@@ -198,6 +198,9 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 			include_once 'core/class-reign-demo-installer-security.php';
 			include_once 'core/class-reign-demo-installer-environment.php';
 			
+			// Admin Guardian - CRITICAL for preserving admin user during import
+			include_once 'core/class-reign-demo-installer-admin-guardian.php';
+			
 			// Admin includes
 			if ( is_admin() ) {
 				include_once 'core/admin-settings.php';

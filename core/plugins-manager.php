@@ -1,6 +1,7 @@
 <?php 
 /**
- * Plugins manager for Reign Demo Installer
+ * Independent Plugins Manager for Reign Demo Installer
+ * No dependency on TGM Plugin Activation
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -34,13 +35,6 @@ class Reign_Demo_Installer_Plugins_Manager {
 	var $plugins = array();
 
 	/**
-	 * TGM_Plugin_Activation Instance.
-	 *
-	 * @var TGM_Plugin_Activation
-	 */
-	var $tgmpa;
-
-	/**
 	 * WordPress repository regex.
 	 */
 	const WP_REPO_REGEX = '|^http[s]?://wordpress\.org/(?:extend/)?plugins/|';
@@ -68,65 +62,13 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * Main class constructor.
 	 */
 	function __construct() {
-		// Register the plugins in our class
-		add_action( 'init', array( $this, 'populate_plugins' ) );
-
 		// Register Ajax actions (new naming)
 		add_action( 'wp_ajax_reign_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
 		
 		// Backward compatibility (old naming)
 		add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
-
-		add_action( 'tgmpa_register', array( $this, 'required_plugins' ) );
-	}
-
-	/**
-	 * Register required plugins with TGMPA.
-	 */
-	public function required_plugins() {
-		$plugins = ! empty( $this->get_required_plugins() ) ? $this->get_required_plugins() : array();
-
-		$config = array(
-			'id'           => 'reign',
-			'default_path' => '',
-			'menu'         => 'tgmpa-install-plugins',
-			'parent_slug'  => 'plugins.php',
-			'capability'   => 'manage_options',
-			'has_notices'  => true,
-			'dismissable'  => true,
-			'dismiss_msg'  => '',
-			'is_automatic' => false,
-			'message'      => '',
-		);
-
-		if ( function_exists( 'tgmpa' ) ) {
-			tgmpa( $plugins, $config );
-		}
-	}
-
-	/**
-	 * Populate plugins array.
-	 */
-	public function populate_plugins() {
-		include_once 'class-tgm-plugin-activation.php';
-
-		if ( class_exists( 'TGM_Plugin_Activation' ) ) {
-			$this->tgmpa = TGM_Plugin_Activation::get_instance();
-			$this->tgmpa->populate_file_path();
-		}
-
-		$get_required_plugins = $this->get_required_plugins();
-		$_get_required_plugins = array();
 		
-		if ( ! empty( $get_required_plugins ) && is_array( $get_required_plugins ) ) {
-			foreach ( $get_required_plugins as $plugin ) {
-				if ( isset( $plugin['slug'] ) ) {
-					$_get_required_plugins[ $plugin['slug'] ] = $plugin;
-				}
-			}
-		}
-		
-		$this->plugins = $_get_required_plugins;
+		// Note: TGM Plugin Activation is no longer used - we're completely independent
 	}
 
 	/**
@@ -158,6 +100,16 @@ class Reign_Demo_Installer_Plugins_Manager {
 
 		// Log the action
 		Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'attempting_' . $action );
+
+		// Check if this is a pro plugin that's not installed
+		if ( $this->is_pro_plugin( $slug ) && ! $this->is_plugin_installed( $slug ) ) {
+			$message = sprintf( 
+				__( '%s is a premium plugin. Please purchase and upload it manually from the WordPress admin.', 'reign-demo-installer' ), 
+				$this->get_plugin_name( $slug )
+			);
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'pro_plugin_not_available', $message );
+			wp_send_json_error( array( 'message' => $message ) );
+		}
 
 		try {
 			switch ( $action ) {
@@ -201,7 +153,14 @@ class Reign_Demo_Installer_Plugins_Manager {
 					}
 				}
 				$this->plugins = $_get_required_plugins;
+				
+				Reign_Demo_Installer_Logger::info( 'Loaded ' . count( $_get_required_plugins ) . ' plugins configuration for demo: ' . $demo );
+			} else {
+				Reign_Demo_Installer_Logger::warning( 'Invalid plugins configuration JSON for demo: ' . $demo );
 			}
+		} else {
+			$error_msg = is_wp_error( $response ) ? $response->get_error_message() : 'HTTP ' . wp_remote_retrieve_response_code( $response );
+			Reign_Demo_Installer_Logger::warning( 'Failed to load plugins configuration for demo ' . $demo . ': ' . $error_msg );
 		}
 	}
 
@@ -213,16 +172,34 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * @return void|array
 	 */
 	function do_plugin_install( $slug, $echo = true ) {
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			$error = array( 'error' => __( 'Plugin configuration not found.', 'reign-demo-installer' ) );
+		// Check if this is a pro plugin
+		if ( $this->is_pro_plugin( $slug ) ) {
+			$error = array( 'error' => sprintf( 
+				__( '%s is a premium plugin. Please purchase and upload it manually.', 'reign-demo-installer' ), 
+				$this->get_plugin_name( $slug )
+			) );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'pro_plugin_install_blocked' );
 			if ( $echo ) {
 				wp_send_json_error( $error );
 			}
 			return $error;
 		}
 
-		$url = $this->get_download_url( $slug );
-		$status = $this->get_plugin_status( $slug );
+		// Check if already installed and active
+		if ( $this->is_plugin_active( $slug ) ) {
+			$status = $this->get_plugin_status( $slug );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'already_active' );
+			if ( $echo ) {
+				wp_send_json_success( $status );
+			}
+			return $status;
+		}
+
+		// Check if already installed but not active
+		if ( $this->is_plugin_installed( $slug ) ) {
+			// Just activate it
+			return $this->do_plugin_activate( $slug, $echo );
+		}
 
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			$error = array( 'error' => __( 'You don\'t have permissions to install plugins', 'reign-demo-installer' ) );
@@ -232,13 +209,16 @@ class Reign_Demo_Installer_Plugins_Manager {
 			return $error;
 		}
 
-		// Check if already installed
-		if ( $this->is_plugin_installed( $slug ) ) {
-			$status = $this->get_plugin_status( $slug );
+		// Get download URL
+		$download_url = $this->get_download_url( $slug );
+		
+		if ( empty( $download_url ) ) {
+			$error = array( 'error' => sprintf( __( 'Download URL not found for plugin %s.', 'reign-demo-installer' ), $slug ) );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'error', 'No download URL found' );
 			if ( $echo ) {
-				wp_send_json_success( $status );
+				wp_send_json_error( $error );
 			}
-			return $status;
+			return $error;
 		}
 
 		// Set up filesystem
@@ -250,15 +230,18 @@ class Reign_Demo_Installer_Plugins_Manager {
 			return $error;
 		}
 
+		// Include required files
 		if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 		}
 
+		// Create upgrader
 		$skin = new Automatic_Upgrader_Skin();
 		$upgrader = new Plugin_Upgrader( $skin );
 
 		// Install plugin
-		$result = $upgrader->install( $url );
+		Reign_Demo_Installer_Logger::info( 'Installing plugin from: ' . $download_url );
+		$result = $upgrader->install( $download_url );
 
 		if ( is_wp_error( $result ) ) {
 			$error = array( 'error' => $result->get_error_message() );
@@ -278,22 +261,19 @@ class Reign_Demo_Installer_Plugins_Manager {
 			return $error;
 		}
 
-		// Populate file path after installation
-		if ( $this->tgmpa ) {
-			$this->tgmpa->populate_file_path( $slug );
-		}
-
-		// Activate the plugin
-		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
-		$activate = activate_plugin( $plugin_file );
-		
-		if ( is_wp_error( $activate ) ) {
-			$error = array( 'error' => $activate->get_error_message() );
-			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'activate_error', $activate->get_error_message() );
-			if ( $echo ) {
-				wp_send_json_error( $error );
+		// Installation successful, now activate
+		$plugin_file = $this->is_pro_plugin( $slug ) ? $this->get_plugin_file_path_silent( $slug ) : $this->get_plugin_file_path( $slug );
+		if ( $plugin_file ) {
+			$activate = activate_plugin( $plugin_file );
+			
+			if ( is_wp_error( $activate ) ) {
+				$error = array( 'error' => $activate->get_error_message() );
+				Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'activate_error', $activate->get_error_message() );
+				if ( $echo ) {
+					wp_send_json_error( $error );
+				}
+				return $error;
 			}
-			return $error;
 		}
 
 		$status = $this->get_plugin_status( $slug );
@@ -313,26 +293,35 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * @return void|array
 	 */
 	function do_plugin_activate( $slug, $echo = true ) {
-		$status = $this->get_plugin_status( $slug );
-
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			$error = array( 'error' => __( 'Plugin configuration not found.', 'reign-demo-installer' ) );
+		// Check if already active
+		if ( $this->is_plugin_active( $slug ) ) {
+			$status = $this->get_plugin_status( $slug );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'already_active' );
 			if ( $echo ) {
-				wp_send_json_error( $error );
+				wp_send_json_success( $status );
 			}
-			return $error;
+			return $status;
 		}
 
 		if ( ! $this->is_plugin_installed( $slug ) ) {
-			$error = array( 'error' => __( 'Plugin is not installed.', 'reign-demo-installer' ) );
+			$error = array( 'error' => sprintf( __( 'Plugin %s is not installed.', 'reign-demo-installer' ), $slug ) );
 			if ( $echo ) {
 				wp_send_json_error( $error );
 			}
 			return $error;
 		}
 
-		$plugin_file_path = $this->_get_plugin_file_path_from_slug( $slug );
-		$result = activate_plugin( $plugin_file_path );
+		$plugin_file = $this->is_pro_plugin( $slug ) ? $this->get_plugin_file_path_silent( $slug ) : $this->get_plugin_file_path( $slug );
+		
+		if ( ! $plugin_file ) {
+			$error = array( 'error' => sprintf( __( 'Plugin file not found for %s.', 'reign-demo-installer' ), $slug ) );
+			if ( $echo ) {
+				wp_send_json_error( $error );
+			}
+			return $error;
+		}
+
+		$result = activate_plugin( $plugin_file );
 
 		if ( is_wp_error( $result ) ) {
 			$error = array( 'error' => $result->get_error_message() );
@@ -353,26 +342,129 @@ class Reign_Demo_Installer_Plugins_Manager {
 	}
 
 	/**
-	 * Get plugin file path from slug.
+	 * Get plugin file path from slug (silent version for pro plugins).
 	 *
 	 * @param string $slug Plugin slug
-	 * @return string Plugin file path
+	 * @return string|false Plugin file path or false if not found
 	 */
-	function _get_plugin_file_path_from_slug( $slug ) {
+	function get_plugin_file_path_silent( $slug ) {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 		
 		$plugins_list = get_plugins();
-		$keys = array_keys( $plugins_list );
 		
-		foreach ( $keys as $key ) {
-			if ( preg_match( '|^' . $slug . '/|', $key ) ) {
-				return $key;
+		// Method 1: Look for folder/file.php pattern
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			if ( strpos( $plugin_file, $slug . '/' ) === 0 ) {
+				return $plugin_file;
 			}
 		}
 		
-		return $slug;
+		// Method 2: Look for slug.php pattern (single file plugins)
+		if ( isset( $plugins_list[ $slug . '.php' ] ) ) {
+			return $slug . '.php';
+		}
+		
+		// Method 3: Look in plugin data for matching slug
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			$plugin_slug = dirname( $plugin_file );
+			if ( $plugin_slug === $slug ) {
+				return $plugin_file;
+			}
+		}
+		
+		// Method 4: Try to match by plugin name
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			$plugin_name_slug = sanitize_title( $plugin_data['Name'] );
+			if ( $plugin_name_slug === $slug ) {
+				return $plugin_file;
+			}
+		}
+		
+		// Method 5: For pro plugins, check common variations
+		$pro_variations = array(
+			$slug . '-pro',
+			str_replace( '-pro', '', $slug ),
+			$slug . '_pro',
+			str_replace( '_pro', '', $slug )
+		);
+		
+		foreach ( $pro_variations as $variation ) {
+			foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+				if ( strpos( $plugin_file, $variation . '/' ) === 0 ) {
+					return $plugin_file;
+				}
+			}
+		}
+		
+		// Silent version - no logging
+		return false;
+	}
+
+	/**
+	 * Get plugin file path from slug.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return string|false Plugin file path or false if not found
+	 */
+	function get_plugin_file_path( $slug ) {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		
+		$plugins_list = get_plugins();
+		
+		// Method 1: Look for folder/file.php pattern
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			if ( strpos( $plugin_file, $slug . '/' ) === 0 ) {
+				return $plugin_file;
+			}
+		}
+		
+		// Method 2: Look for slug.php pattern (single file plugins)
+		if ( isset( $plugins_list[ $slug . '.php' ] ) ) {
+			return $slug . '.php';
+		}
+		
+		// Method 3: Look in plugin data for matching slug
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			$plugin_slug = dirname( $plugin_file );
+			if ( $plugin_slug === $slug ) {
+				return $plugin_file;
+			}
+		}
+		
+		// Method 4: Try to match by plugin name
+		foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+			$plugin_name_slug = sanitize_title( $plugin_data['Name'] );
+			if ( $plugin_name_slug === $slug ) {
+				return $plugin_file;
+			}
+		}
+		
+		// Method 5: For pro plugins, check common variations
+		$pro_variations = array(
+			$slug . '-pro',
+			str_replace( '-pro', '', $slug ),
+			$slug . '_pro',
+			str_replace( '_pro', '', $slug )
+		);
+		
+		foreach ( $pro_variations as $variation ) {
+			foreach ( $plugins_list as $plugin_file => $plugin_data ) {
+				if ( strpos( $plugin_file, $variation . '/' ) === 0 ) {
+					return $plugin_file;
+				}
+			}
+		}
+		
+		// Only log for non-pro plugins to avoid spam
+		if ( ! $this->is_pro_plugin( $slug ) ) {
+			Reign_Demo_Installer_Logger::warning( 'Plugin file path not found for slug: ' . $slug );
+		}
+		
+		return false;
 	}
 
 	/**
@@ -382,49 +474,48 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * @return string Download URL
 	 */
 	public function get_download_url( $slug ) {
-		if ( ! isset( $this->plugins[ $slug ] ) ) {
-			return '';
-		}
+		// Check if we have plugin configuration
+		if ( isset( $this->plugins[ $slug ] ) ) {
+			$plugin = $this->plugins[ $slug ];
 
-		$plugin = $this->plugins[ $slug ];
+			// For paid plugins, don't provide download URLs
+			if ( isset( $plugin['is_paid'] ) && ( $plugin['is_paid'] === 'yes' || $plugin['is_paid'] === true ) ) {
+				return '';
+			}
 
-		// Check for external URL first
-		if ( isset( $plugin['external_url'] ) && ! empty( $plugin['external_url'] ) ) {
-			return $plugin['external_url'];
-		}
+			// Check for external URL (for free plugins with custom hosting)
+			if ( isset( $plugin['external_url'] ) && ! empty( $plugin['external_url'] ) ) {
+				$external_url = $plugin['external_url'];
+				
+				// If it's a purchase link (contains pricing keywords), don't use it for download
+				$purchase_indicators = array( '/pricing', '/buy', '/purchase', '/downloads/', 'wbcomdesigns.com/downloads' );
+				foreach ( $purchase_indicators as $indicator ) {
+					if ( strpos( $external_url, $indicator ) !== false ) {
+						// This is a purchase link, not a download link
+						return '';
+					}
+				}
+				
+				// If it's a direct zip file or plugin download, use it
+				if ( strpos( $external_url, '.zip' ) !== false || strpos( $external_url, '/plugins/' ) !== false ) {
+					return $external_url;
+				}
+			}
 
-		// Check for direct source
-		if ( isset( $plugin['source'] ) && ! empty( $plugin['source'] ) ) {
-			$plugin_source_type = $this->_get_plugin_source_type( $plugin['source'] );
-			
-			switch ( $plugin_source_type ) {
-				case 'repo':
+			// Check for direct source
+			if ( isset( $plugin['source'] ) && ! empty( $plugin['source'] ) ) {
+				$source = $plugin['source'];
+				
+				if ( $source === 'repo' || preg_match( self::WP_REPO_REGEX, $source ) ) {
 					return $this->get_wp_repo_download_url( $slug );
-				case 'external':
-					return $plugin['source'];
-				case 'bundled':
-					return $this->tgmpa->default_path . $plugin['source'];
+				} elseif ( preg_match( self::IS_URL_REGEX, $source ) ) {
+					return $source;
+				}
 			}
 		}
 
-		// Default to WordPress repository
+		// Default to WordPress repository for free plugins
 		return $this->get_wp_repo_download_url( $slug );
-	}
-
-	/**
-	 * Determine plugin source type.
-	 *
-	 * @param string $source Plugin source
-	 * @return string Source type
-	 */
-	function _get_plugin_source_type( $source ) {
-		if ( 'repo' === $source || preg_match( self::WP_REPO_REGEX, $source ) ) {
-			return 'repo';
-		} elseif ( preg_match( self::IS_URL_REGEX, $source ) ) {
-			return 'external';
-		} else {
-			return 'bundled';
-		}
 	}
 
 	/**
@@ -478,18 +569,15 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * @return bool True if installed, false otherwise
 	 */
 	public function is_plugin_installed( $slug ) {
-		if ( $this->tgmpa ) {
-			return $this->tgmpa->is_plugin_installed( $slug );
+		// For pro plugins, if we can't find the file path, assume it's not installed
+		// Don't trigger unnecessary file path searches
+		if ( $this->is_pro_plugin( $slug ) ) {
+			$plugin_file = $this->get_plugin_file_path_silent( $slug );
+			return ! empty( $plugin_file );
 		}
-
-		if ( ! function_exists( 'get_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		$installed_plugins = get_plugins();
-		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
 		
-		return isset( $installed_plugins[ $plugin_file ] );
+		$plugin_file = $this->get_plugin_file_path( $slug );
+		return ! empty( $plugin_file );
 	}
 
 	/**
@@ -499,12 +587,15 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 * @return bool True if active, false otherwise
 	 */
 	public function is_plugin_active( $slug ) {
-		if ( $this->tgmpa ) {
-			return $this->tgmpa->is_plugin_active( $slug );
+		// For pro plugins, if we can't find the file path, assume it's not active
+		// Don't trigger unnecessary file path searches
+		if ( $this->is_pro_plugin( $slug ) ) {
+			$plugin_file = $this->get_plugin_file_path_silent( $slug );
+			return $plugin_file ? is_plugin_active( $plugin_file ) : false;
 		}
-
-		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
-		return is_plugin_active( $plugin_file );
+		
+		$plugin_file = $this->get_plugin_file_path( $slug );
+		return $plugin_file ? is_plugin_active( $plugin_file ) : false;
 	}
 
 	/**
@@ -515,6 +606,11 @@ class Reign_Demo_Installer_Plugins_Manager {
 	 */
 	function get_plugin_status( $plugin_slug ) {
 		$status = array();
+
+		// Check if this is a pro plugin
+		$is_pro = $this->is_pro_plugin( $plugin_slug );
+		$plugin_config = isset( $this->plugins[ $plugin_slug ] ) ? $this->plugins[ $plugin_slug ] : array();
+		$external_url = isset( $plugin_config['external_url'] ) ? $plugin_config['external_url'] : '';
 
 		if ( $this->is_plugin_installed( $plugin_slug ) ) {
 			if ( $this->is_plugin_active( $plugin_slug ) ) {
@@ -529,12 +625,26 @@ class Reign_Demo_Installer_Plugins_Manager {
 				$status['action']      = 'enable_plugin';
 			}
 		} else {
-			$status['status']      = 'reign-not-installed';
-			$status['status_text'] = __( 'Not Installed', 'reign-demo-installer' );
-			$status['action_text'] = __( 'Install Now', 'reign-demo-installer' );
-			$status['action']      = 'install_plugin';
+			if ( $is_pro ) {
+				$status['status']      = 'reign-pro-not-installed';
+				$status['status_text'] = __( 'Not Installed (Premium)', 'reign-demo-installer' );
+				
+				if ( ! empty( $external_url ) ) {
+					$status['action_text'] = __( 'Buy Now', 'reign-demo-installer' );
+					$status['action']      = 'buy_now';
+					$status['external_url'] = $external_url;
+				} else {
+					$status['action_text'] = __( 'Purchase Required', 'reign-demo-installer' );
+					$status['action']      = 'purchase_required';
+				}
+			} else {
+				$status['status']      = 'reign-not-installed';
+				$status['status_text'] = __( 'Not Installed', 'reign-demo-installer' );
+				$status['action_text'] = __( 'Install Now', 'reign-demo-installer' );
+				$status['action']      = 'install_plugin';
+			}
 
-			if ( ! current_user_can( 'install_plugins' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) && ! $is_pro ) {
 				$status['status']      = 'reign-not-installed reign-addons-disabled';
 				$status['action_text'] = __( 'You don\'t have permission to install plugins. Contact site administrator.', 'reign-demo-installer' );
 				$status['action']      = 'contact_network_admin';
@@ -545,46 +655,111 @@ class Reign_Demo_Installer_Plugins_Manager {
 	}
 
 	/**
+	 * Check if plugin is a pro/premium plugin.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return bool True if pro plugin, false otherwise
+	 */
+	public function is_pro_plugin( $slug ) {
+		// Check plugin configuration first
+		if ( isset( $this->plugins[ $slug ] ) ) {
+			$plugin = $this->plugins[ $slug ];
+			
+			// Check if marked as paid in config (your format: "is_paid": "yes")
+			if ( isset( $plugin['is_paid'] ) && ( $plugin['is_paid'] === 'yes' || $plugin['is_paid'] === true ) ) {
+				return true;
+			}
+		}
+
+		// Common pro plugin indicators in slug
+		$pro_indicators = array(
+			'-pro',
+			'_pro',
+			'-premium',
+			'_premium',
+			'-paid',
+			'_paid'
+		);
+
+		// Check slug for pro indicators
+		foreach ( $pro_indicators as $indicator ) {
+			if ( strpos( $slug, $indicator ) !== false ) {
+				return true;
+			}
+		}
+
+		// Known pro plugins list (fallback)
+		$known_pro_plugins = array(
+			'dokan-pro',
+			'elementor-pro',
+			'woocommerce-memberships',
+			'woocommerce-subscriptions',
+			'buddyboss-platform-pro',
+			'learndash',
+			'lifter-lms',
+			'restrict-content-pro',
+			'memberpress',
+			'ultimate-member-pro',
+			'wpml-multilingual-cms',
+			'acf-pro',
+			'gravity-forms',
+			'ninja-forms-pro',
+			'wp-rocket',
+			'oxygen',
+			'divi-builder',
+			'reign-dokan-addon'
+		);
+
+		return in_array( $slug, $known_pro_plugins, true );
+	}
+
+	/**
+	 * Get plugin name from slug or configuration.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return string Plugin name
+	 */
+	public function get_plugin_name( $slug ) {
+		// Check configuration first
+		if ( isset( $this->plugins[ $slug ] ) && isset( $this->plugins[ $slug ]['name'] ) ) {
+			return $this->plugins[ $slug ]['name'];
+		}
+
+		// Check installed plugins
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugins_list = get_plugins();
+		$plugin_file = $this->get_plugin_file_path( $slug );
+		
+		if ( $plugin_file && isset( $plugins_list[ $plugin_file ]['Name'] ) ) {
+			return $plugins_list[ $plugin_file ]['Name'];
+		}
+
+		// Fallback: prettify slug
+		return ucwords( str_replace( array( '-', '_' ), ' ', $slug ) );
+	}
+
+	/**
 	 * Get installed plugin version.
 	 *
 	 * @param string $slug Plugin slug
 	 * @return string Version number or empty string
 	 */
 	public function get_installed_version( $slug ) {
-		if ( $this->tgmpa ) {
-			return $this->tgmpa->get_installed_version( $slug );
-		}
-
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		$installed_plugins = get_plugins();
-		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
+		$plugin_file = $this->get_plugin_file_path( $slug );
 
-		if ( isset( $installed_plugins[ $plugin_file ]['Version'] ) ) {
+		if ( $plugin_file && isset( $installed_plugins[ $plugin_file ]['Version'] ) ) {
 			return $installed_plugins[ $plugin_file ]['Version'];
 		}
 
 		return '';
-	}
-
-	/**
-	 * Get list of plugins.
-	 *
-	 * @param string $plugin_folder Plugin folder
-	 * @return array Array of installed plugins
-	 */
-	public function get_plugins( $plugin_folder = '' ) {
-		if ( $this->tgmpa ) {
-			return $this->tgmpa->get_plugins( $plugin_folder );
-		}
-
-		if ( ! function_exists( 'get_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		return get_plugins( $plugin_folder );
 	}
 
 	/**
@@ -646,38 +821,28 @@ class Reign_Demo_Installer_Plugins_Manager {
 	}
 
 	/**
-	 * Check if plugin has update available.
+	 * Debug function to list all installed plugins.
 	 *
-	 * @param string $slug Plugin slug
-	 * @return false|string Version number or false
+	 * @return array List of all installed plugins
 	 */
-	public function does_plugin_have_update( $slug ) {
-		if ( $this->tgmpa ) {
-			return $this->tgmpa->does_plugin_have_update( $slug );
+	public function debug_list_installed_plugins() {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
-
-		return false;
-	}
-
-	/**
-	 * Check if plugin requires update.
-	 *
-	 * @param string $slug Plugin slug
-	 * @return bool True if update required, false otherwise
-	 */
-	public function plugin_has_update( $slug ) {
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			return false;
+		
+		$plugins = get_plugins();
+		$plugin_list = array();
+		
+		foreach ( $plugins as $plugin_file => $plugin_data ) {
+			$plugin_list[] = array(
+				'file' => $plugin_file,
+				'name' => $plugin_data['Name'],
+				'slug' => dirname( $plugin_file ),
+				'active' => is_plugin_active( $plugin_file )
+			);
 		}
-
-		$installed_version = $this->get_installed_version( $slug );
-		$minimum_version = isset( $this->plugins[ $slug ]['version'] ) ? $this->plugins[ $slug ]['version'] : '';
-
-		if ( empty( $minimum_version ) || empty( $installed_version ) ) {
-			return false;
-		}
-
-		return version_compare( $minimum_version, $installed_version, '>' );
+		
+		return $plugin_list;
 	}
 }
 

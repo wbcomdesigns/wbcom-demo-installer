@@ -1,6 +1,7 @@
 <?php
 /**
- * Admin settings for Reign Demo Installer
+ * Admin settings for Reign Demo Installer - FINAL VERSION
+ * Updated to handle your JSON format with is_paid and external_url
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -526,6 +527,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render individual plugin card.
+		 * Updated to handle your JSON format with is_paid and external_url
 		 *
 		 * @param array $plugin Plugin data
 		 * @param array $plugin_status Plugin status
@@ -534,6 +536,10 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		 * @param string $plugins_json_key Plugins JSON key
 		 */
 		private function render_plugin_card( $plugin, $plugin_status, $plugin_dependency, $already_active_class, $plugins_json_key ) {
+			$is_pro = isset( $plugin['is_paid'] ) && ( $plugin['is_paid'] === 'yes' || $plugin['is_paid'] === true );
+			$external_url = isset( $plugin['external_url'] ) ? esc_url( $plugin['external_url'] ) : '';
+			$has_external_link = ! empty( $external_url );
+			
 			?>
 			<div class="wbcom-req-plugin-card">
 				<div class="plugin-container">
@@ -544,7 +550,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 									 alt="<?php echo esc_attr( $plugin['name'] ); ?>" 
 									 class="pluign_image">
 							</li>
-							<li class="plugin-name"><?php echo esc_html( $plugin['name'] ); ?></li>
+							<li class="plugin-name">
+								<?php echo esc_html( $plugin['name'] ); ?>
+								<?php if ( $is_pro ) : ?>
+									<span class="pro-badge"><?php esc_html_e( 'Premium', 'reign-demo-installer' ); ?></span>
+								<?php endif; ?>
+							</li>
 							<li class="plugin-status">
 								<span class="<?php echo esc_attr( $already_active_class ); ?>">
 									<?php echo esc_html( $plugin_status['status_text'] ); ?>
@@ -559,16 +570,23 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo esc_attr( $plugin['slug'] ); ?>">
 								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo esc_attr( $plugin_status['action'] ); ?>">
 								
-								<?php if ( isset( $plugin['is_paid'] ) ) : ?>
-									<?php if ( $plugin_status['status_text'] != 'Active' ) : ?>
-										<a class="button button-primary buy-now-plugins" target="_blank" 
-										   href="<?php echo esc_url( $plugin['external_url'] ); ?>">
-											<?php esc_html_e( 'Buy Now', 'reign-demo-installer' ); ?>
-										</a>
+								<?php if ( $is_pro ) : ?>
+									<?php if ( $plugin_status['status_text'] !== 'Active' ) : ?>
+										<?php if ( $has_external_link ) : ?>
+											<a class="button button-primary buy-now-plugins" target="_blank" 
+											   href="<?php echo esc_url( $external_url ); ?>">
+												<?php esc_html_e( 'Buy Now', 'reign-demo-installer' ); ?>
+											</a>
+										<?php endif; ?>
 										<a class="plugin-action-button button upload-plugins" target="_blank" 
 										   href="<?php echo esc_url( admin_url( 'plugin-install.php' ) ); ?>">
 											<?php esc_html_e( 'Upload Plugin', 'reign-demo-installer' ); ?>
 										</a>
+										<?php if ( $plugin_status['action'] === 'enable_plugin' ) : ?>
+											<button class="plugin-action-button button activate-plugin">
+												<?php esc_html_e( 'Activate', 'reign-demo-installer' ); ?>
+											</button>
+										<?php endif; ?>
 									<?php else : ?>
 										<button class="plugin-action-button button <?php echo esc_attr( $already_active_class ); ?>">
 											<?php echo esc_html( $plugin_status['action_text'] ); ?>
@@ -783,13 +801,102 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				)
 			);
 
-			// Enqueue styles
+			// Enqueue styles including new plugin card styles
 			wp_enqueue_style(
 				'reign-demo-installer-css',
 				REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
 				array(),
 				REIGN_DEMO_INSTALLER_VERSION
 			);
+
+			// Add inline styles for plugin cards
+			$custom_css = "
+				.pro-badge {
+					background: #ff6b35;
+					color: white;
+					font-size: 10px;
+					padding: 2px 6px;
+					border-radius: 3px;
+					margin-left: 8px;
+					font-weight: bold;
+					text-transform: uppercase;
+				}
+				
+				.buy-now-plugins {
+					margin-right: 5px !important;
+				}
+				
+				.upload-plugins {
+					background: #0073aa;
+					border-color: #0073aa;
+					color: white;
+				}
+				
+				.plugin-dependency.optional {
+					color: #666;
+				}
+				
+				.plugin-dependency.required {
+					color: #d63384;
+					font-weight: bold;
+				}
+				
+				.wbcom-req-plugin-card {
+					margin-bottom: 20px;
+					border: 1px solid #ddd;
+					border-radius: 5px;
+					overflow: hidden;
+				}
+				
+				.plugin-container {
+					padding: 15px;
+				}
+				
+				.plugin-importer-sec ul {
+					list-style: none;
+					margin: 0;
+					padding: 0;
+				}
+				
+				.plugin-importer-sec li {
+					margin-bottom: 10px;
+				}
+				
+				.importer-plugin-thumb img {
+					max-width: 80px;
+					height: auto;
+					border-radius: 3px;
+				}
+				
+				.plugin-name {
+					font-size: 16px;
+					font-weight: bold;
+					display: flex;
+					align-items: center;
+				}
+				
+				.plugin-status span.already-active {
+					color: #46b450;
+					font-weight: bold;
+				}
+				
+				.plugin-description {
+					color: #666;
+					font-size: 14px;
+					line-height: 1.4;
+				}
+				
+				.importer-button {
+					display: flex;
+					gap: 8px;
+					flex-wrap: wrap;
+				}
+				
+				.importer-button .button {
+					font-size: 13px;
+				}
+			";
+			wp_add_inline_style( 'reign-demo-installer-css', $custom_css );
 		}
 
 		/**

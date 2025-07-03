@@ -1,6 +1,7 @@
 <?php
 /**
- * AJAX handler for Reign Demo Installer
+ * AJAX handler for Reign Demo Installer - FIXED VERSION
+ * Preserves current admin user and prevents role downgrade
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -37,6 +38,13 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		private $security;
 
 		/**
+		 * Current admin user data to preserve.
+		 *
+		 * @var array
+		 */
+		private $current_admin_user = null;
+
+		/**
 		 * Main instance.
 		 *
 		 * @since 3.0.0
@@ -56,6 +64,36 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		public function __construct() {
 			$this->security = Reign_Demo_Installer_Security::instance();
 			$this->init_hooks();
+		}
+
+		/**
+		 * Preserve current admin user data.
+		 */
+		private function preserve_current_admin_user() {
+			// Only preserve once per import session
+			if ( $this->current_admin_user !== null || ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+			
+			$current_user = wp_get_current_user();
+			
+			$this->current_admin_user = array(
+				'ID' => $current_user->ID,
+				'user_login' => $current_user->user_login,
+				'user_email' => $current_user->user_email,
+				'user_pass' => $current_user->user_pass, // Keep encrypted password
+				'user_nicename' => $current_user->user_nicename,
+				'user_url' => $current_user->user_url,
+				'user_registered' => $current_user->user_registered,
+				'user_activation_key' => $current_user->user_activation_key,
+				'user_status' => $current_user->user_status,
+				'display_name' => $current_user->display_name,
+				'roles' => $current_user->roles,
+				'capabilities' => $current_user->allcaps,
+				'meta' => get_user_meta( $current_user->ID )
+			);
+			
+			Reign_Demo_Installer_Logger::info( 'Current admin user preserved: ' . $current_user->user_login );
 		}
 
 		/**
@@ -105,6 +143,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				wp_die( esc_html__( 'Security check failed.', 'reign-demo-installer' ), '', array( 'response' => 403 ) );
 			}
 
+			// Preserve admin user only once at the start of import
+			$this->preserve_current_admin_user();
+
 			// Get and validate parameters
 			$theme_slug = $this->security->get_request_param( 'theme_slug', 'slug' );
 			$demo_slug = $this->security->get_request_param( 'demo_slug', 'slug' );
@@ -123,7 +164,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 			// Log import start
 			Reign_Demo_Installer_Logger::log_import_start( $demo_slug, array(
 				'theme_slug' => $theme_slug,
-				'target_url' => $target_url
+				'target_url' => $target_url,
+				'admin_user' => $this->current_admin_user ? $this->current_admin_user['user_login'] : 'unknown'
 			) );
 
 			// Set memory and time limits
@@ -401,6 +443,117 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					$this->import_table_data( $table_name, $retrieved_data );
 					break;
 			}
+
+			// CRITICAL: Restore admin user after any table import
+			if ( in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
+				$this->restore_admin_user();
+			}
+		}
+
+		/**
+		 * CRITICAL: Restore admin user after import.
+		 */
+		private function restore_admin_user() {
+			if ( ! $this->current_admin_user ) {
+				Reign_Demo_Installer_Logger::error( 'No admin user data to restore!' );
+				return;
+			}
+
+			global $wpdb;
+			
+			try {
+				// Restore user data
+				$user_data = array(
+					'ID' => $this->current_admin_user['ID'],
+					'user_login' => $this->current_admin_user['user_login'],
+					'user_email' => $this->current_admin_user['user_email'],
+					'user_pass' => $this->current_admin_user['user_pass'],
+					'user_nicename' => $this->current_admin_user['user_nicename'],
+					'user_url' => $this->current_admin_user['user_url'],
+					'user_registered' => $this->current_admin_user['user_registered'],
+					'user_activation_key' => $this->current_admin_user['user_activation_key'],
+					'user_status' => $this->current_admin_user['user_status'],
+					'display_name' => $this->current_admin_user['display_name'],
+				);
+
+				// Update or insert user
+				$existing_user = get_user_by( 'ID', $this->current_admin_user['ID'] );
+				if ( $existing_user ) {
+					// Update existing user
+					$wpdb->update( 
+						$wpdb->users, 
+						$user_data, 
+						array( 'ID' => $this->current_admin_user['ID'] ) 
+					);
+				} else {
+					// Insert user if somehow deleted
+					$wpdb->insert( $wpdb->users, $user_data );
+				}
+
+				// Restore user meta and capabilities
+				$user_id = $this->current_admin_user['ID'];
+				
+				// Clear existing meta first
+				$wpdb->delete( $wpdb->usermeta, array( 'user_id' => $user_id ) );
+				
+				// Restore all user meta
+				if ( isset( $this->current_admin_user['meta'] ) && is_array( $this->current_admin_user['meta'] ) ) {
+					foreach ( $this->current_admin_user['meta'] as $meta_key => $meta_values ) {
+						if ( is_array( $meta_values ) ) {
+							foreach ( $meta_values as $meta_value ) {
+								add_user_meta( $user_id, $meta_key, maybe_unserialize( $meta_value ) );
+							}
+						}
+					}
+				}
+
+				// Ensure admin capabilities
+				$user = new WP_User( $user_id );
+				$user->set_role( 'administrator' );
+				
+				// Add super admin capability if multisite
+				if ( is_multisite() ) {
+					grant_super_admin( $user_id );
+				}
+
+				// Force WordPress to recognize the restored user
+				wp_cache_delete( $user_id, 'users' );
+				wp_cache_delete( $this->current_admin_user['user_login'], 'userlogins' );
+				wp_cache_delete( $this->current_admin_user['user_email'], 'useremail' );
+
+				Reign_Demo_Installer_Logger::info( 'Admin user successfully restored: ' . $this->current_admin_user['user_login'] );
+
+				// Set authentication cookies to keep user logged in
+				wp_set_auth_cookie( $user_id, true );
+				
+			} catch ( Exception $e ) {
+				Reign_Demo_Installer_Logger::error( 'Failed to restore admin user: ' . $e->getMessage() );
+				
+				// Emergency fallback - ensure at least one admin exists
+				$this->ensure_admin_user_exists();
+			}
+		}
+
+		/**
+		 * Emergency fallback to ensure admin user exists.
+		 */
+		private function ensure_admin_user_exists() {
+			$admin_users = get_users( array( 'role' => 'administrator' ) );
+			
+			if ( empty( $admin_users ) && $this->current_admin_user ) {
+				// Create emergency admin user
+				$user_id = wp_insert_user( array(
+					'user_login' => $this->current_admin_user['user_login'],
+					'user_email' => $this->current_admin_user['user_email'],
+					'user_pass' => wp_generate_password(),
+					'role' => 'administrator'
+				) );
+
+				if ( ! is_wp_error( $user_id ) ) {
+					Reign_Demo_Installer_Logger::info( 'Emergency admin user created: ' . $this->current_admin_user['user_login'] );
+					wp_set_auth_cookie( $user_id, true );
+				}
+			}
 		}
 
 		/**
@@ -461,14 +614,27 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 			$wbcom_theme_demo_import_data = get_option( $import_data_key, array() );
 			
 			if ( ! isset( $wbcom_theme_demo_import_data[ $full_table_name . '_done' ] ) ) {
-				$wpdb->query( $wpdb->prepare( "DELETE FROM %i", $full_table_name ) );
+				// Special handling for user tables - don't clear if admin user exists
+				if ( ! in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
+					$wpdb->query( $wpdb->prepare( "DELETE FROM %i", $full_table_name ) );
+				} else {
+					// For user tables, only delete non-admin users
+					if ( $this->current_admin_user ) {
+						$admin_id = $this->current_admin_user['ID'];
+						if ( $table_name === 'users' ) {
+							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE ID != %d", $full_table_name, $admin_id ) );
+						} elseif ( $table_name === 'usermeta' ) {
+							$wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE user_id != %d", $full_table_name, $admin_id ) );
+						}
+					}
+				}
 				$wbcom_theme_demo_import_data[ $full_table_name . '_done' ] = 'yes';
 				update_option( $import_data_key, $wbcom_theme_demo_import_data );
 			}
 
 			$inserted_count = 0;
 			foreach ( $data as $row ) {
-				// Skip current user data for users/usermeta tables
+				// Skip current admin user data for users/usermeta tables
 				if ( $this->should_skip_user_data( $table_name, $row ) ) {
 					continue;
 				}
@@ -656,7 +822,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		 * @return bool True if should skip, false otherwise
 		 */
 		private function should_skip_user_data( $table_name, $row ) {
-			$current_user_id = get_current_user_id();
+			// Always skip current admin user data to prevent overwriting
+			if ( ! $this->current_admin_user ) {
+				return false;
+			}
+
+			$current_user_id = $this->current_admin_user['ID'];
 			
 			if ( $table_name === 'users' && isset( $row['ID'] ) && $row['ID'] == $current_user_id ) {
 				return true;
