@@ -1,10 +1,7 @@
 <?php
 /**
- * Admin User Guardian - Extra safety layer to preserve admin users during demo import
+ * Admin User Guardian - FIXED VERSION with reduced logging
  * 
- * This class provides an additional safety mechanism to ensure the current admin user
- * is never lost during the demo import process.
- *
  * @package Reign_Demo_Installer
  * @since 3.0.0
  */
@@ -43,9 +40,14 @@ class Reign_Demo_Installer_Admin_Guardian {
 	private $import_session_id = null;
 
 	/**
-	 * Main instance.
+	 * Flag to prevent multiple activations.
 	 *
-	 * @return Reign_Demo_Installer_Admin_Guardian
+	 * @var bool
+	 */
+	private $guardian_active = false;
+
+	/**
+	 * Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -58,53 +60,27 @@ class Reign_Demo_Installer_Admin_Guardian {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init' ) );
+		// Only initialize for admin users during actual import
+		add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'activate_guardian_for_import' ), 1 );
+		add_action( 'wp_ajax_reign_read_theme_demo_package_file', array( $this, 'activate_guardian_for_import' ), 1 );
 	}
 
 	/**
-	 * Initialize guardian.
+	 * Activate guardian ONLY during actual import.
 	 */
-	public function init() {
-		// Only activate during demo import
-		if ( $this->is_demo_import_in_progress() ) {
-			$this->activate_guardian();
+	public function activate_guardian_for_import() {
+		// Only activate once per session
+		if ( $this->guardian_active ) {
+			return;
 		}
 
-		// Handle AJAX requests
-		add_action( 'wp_ajax_reign_guardian_backup_admin', array( $this, 'backup_current_admin' ) );
-		add_action( 'wp_ajax_reign_guardian_restore_admin', array( $this, 'restore_admin_user' ) );
-		add_action( 'wp_ajax_reign_guardian_verify_session', array( $this, 'verify_admin_session' ) );
+		// Only for admin users
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-		// Hook into user deletion to prevent admin removal
-		add_action( 'delete_user', array( $this, 'prevent_admin_deletion' ), 1, 3 );
-
-		// Hook into user meta updates to preserve admin capabilities
-		add_action( 'update_user_meta', array( $this, 'preserve_admin_capabilities' ), 1, 4 );
-
-		// Emergency recovery hooks
-		add_action( 'wp_login', array( $this, 'check_admin_restoration' ), 10, 2 );
-		add_action( 'admin_init', array( $this, 'emergency_admin_check' ) );
-	}
-
-	/**
-	 * Check if demo import is in progress.
-	 *
-	 * @return bool
-	 */
-	private function is_demo_import_in_progress() {
-		// Check for import-related AJAX actions
-		$import_actions = array(
-			'wbcom_read_theme_demo_package_file',
-			'wbcom_get_theme_demo_data',
-			'reign_read_theme_demo_package_file',
-			'reign_get_theme_demo_data'
-		);
-
-		$current_action = isset( $_POST['action'] ) ? sanitize_text_field( $_POST['action'] ) : '';
-		
-		return in_array( $current_action, $import_actions, true ) || 
-			   isset( $_POST['import_session_id'] ) ||
-			   get_transient( 'reign_demo_import_active' );
+		$this->guardian_active = true;
+		$this->activate_guardian();
 	}
 
 	/**
@@ -118,42 +94,26 @@ class Reign_Demo_Installer_Admin_Guardian {
 		// Backup current admin immediately
 		$this->backup_current_admin_silent();
 
-		// Set up periodic admin verification
+		// Set up periodic admin verification (reduced frequency)
 		$this->schedule_admin_verification();
 
-		Reign_Demo_Installer_Logger::info( 'Admin guardian activated for import session: ' . $this->import_session_id );
-	}
-
-	/**
-	 * Backup current admin user (AJAX handler).
-	 */
-	public function backup_current_admin() {
-		// Verify request
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( 'Insufficient permissions' );
-		}
-
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'reign_guardian_nonce' ) ) {
-			wp_send_json_error( 'Invalid nonce' );
-		}
-
-		$backup_result = $this->backup_current_admin_silent();
-		
-		if ( $backup_result ) {
-			wp_send_json_success( 'Admin user backed up successfully' );
-		} else {
-			wp_send_json_error( 'Failed to backup admin user' );
+		// Reduced logging - only log once per session
+		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::info( 'Admin guardian activated for import session: ' . $this->import_session_id );
 		}
 	}
 
 	/**
 	 * Backup current admin user silently.
-	 *
-	 * @return bool Success status
 	 */
 	private function backup_current_admin_silent() {
 		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
 			return false;
+		}
+
+		// Don't backup if already exists
+		if ( $this->admin_backup !== null ) {
+			return true;
 		}
 
 		$current_user = wp_get_current_user();
@@ -186,40 +146,74 @@ class Reign_Demo_Installer_Admin_Guardian {
 		// Also store in transient for quick access
 		set_transient( 'reign_current_admin_backup', $this->admin_backup, DAY_IN_SECONDS );
 
-		Reign_Demo_Installer_Logger::info( 'Admin user backup created: ' . $current_user->user_login );
+		// Reduced logging - only log once
+		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::info( 'Admin user backup created: ' . $current_user->user_login );
+		}
 		
 		return true;
 	}
 
 	/**
-	 * Restore admin user (AJAX handler).
+	 * Schedule periodic admin verification during import.
 	 */
-	public function restore_admin_user() {
-		// Verify request
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'reign_guardian_nonce' ) ) {
-			wp_send_json_error( 'Invalid nonce' );
+	private function schedule_admin_verification() {
+		// Use WordPress cron to verify admin every 2 minutes during import (reduced frequency)
+		if ( ! wp_next_scheduled( 'reign_verify_admin_hook' ) ) {
+			wp_schedule_event( time(), 'reign_2_minutes', 'reign_verify_admin_hook' );
 		}
 
-		$user_id = isset( $_POST['user_id'] ) ? intval( $_POST['user_id'] ) : 0;
+		add_action( 'reign_verify_admin_hook', array( $this, 'periodic_admin_check' ) );
+
+		// Add custom cron schedule
+		add_filter( 'cron_schedules', array( $this, 'add_custom_cron_schedule' ) );
+	}
+
+	/**
+	 * Add custom cron schedule.
+	 */
+	public function add_custom_cron_schedule( $schedules ) {
+		$schedules['reign_2_minutes'] = array(
+			'interval' => 120, // 2 minutes instead of 30 seconds
+			'display' => __( 'Every 2 minutes', 'reign-demo-installer' )
+		);
 		
-		if ( ! $user_id ) {
-			wp_send_json_error( 'Invalid user ID' );
+		return $schedules;
+	}
+
+	/**
+	 * Periodic admin check during import.
+	 */
+	public function periodic_admin_check() {
+		// Only run during active import
+		if ( ! get_transient( 'reign_demo_import_active' ) ) {
+			// Clear the scheduled event
+			wp_clear_scheduled_hook( 'reign_verify_admin_hook' );
+			return;
 		}
 
-		$restore_result = $this->restore_admin_user_silent( $user_id );
+		$backup = get_transient( 'reign_current_admin_backup' );
 		
-		if ( $restore_result ) {
-			wp_send_json_success( 'Admin user restored successfully' );
-		} else {
-			wp_send_json_error( 'Failed to restore admin user' );
+		if ( ! $backup ) {
+			return;
+		}
+
+		// Check if admin user still exists and has proper permissions
+		$admin_user = get_user_by( 'ID', $backup['ID'] );
+		
+		if ( ! $admin_user || ! user_can( $admin_user, 'manage_options' ) ) {
+			// Admin user is missing or downgraded, restore it
+			$this->restore_admin_user_silent( $backup['ID'] );
+			
+			// Log warning only when restoration is needed
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::warning( 'Admin user automatically restored during import' );
+			}
 		}
 	}
 
 	/**
 	 * Restore admin user silently.
-	 *
-	 * @param int $user_id User ID to restore
-	 * @return bool Success status
 	 */
 	private function restore_admin_user_silent( $user_id = 0 ) {
 		if ( ! $user_id && $this->admin_backup ) {
@@ -234,7 +228,9 @@ class Reign_Demo_Installer_Admin_Guardian {
 		$backup = $this->admin_backup ?: get_option( 'reign_admin_backup_' . $user_id );
 		
 		if ( ! $backup ) {
-			Reign_Demo_Installer_Logger::error( 'No admin backup found for user ID: ' . $user_id );
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::error( 'No admin backup found for user ID: ' . $user_id );
+			}
 			return false;
 		}
 
@@ -305,149 +301,23 @@ class Reign_Demo_Installer_Admin_Guardian {
 			// Set authentication cookie
 			wp_set_auth_cookie( $backup['ID'], true );
 
-			Reign_Demo_Installer_Logger::info( 'Admin user restored successfully: ' . $backup['user_login'] );
+			// Log success only when needed
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::info( 'Admin user restored successfully: ' . $backup['user_login'] );
+			}
 			
 			return true;
 
 		} catch ( Exception $e ) {
-			Reign_Demo_Installer_Logger::error( 'Failed to restore admin user: ' . $e->getMessage() );
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::error( 'Failed to restore admin user: ' . $e->getMessage() );
+			}
 			return false;
 		}
 	}
 
 	/**
-	 * Verify admin session (AJAX handler).
-	 */
-	public function verify_admin_session() {
-		if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-			$current_user = wp_get_current_user();
-			wp_send_json_success( array(
-				'user_id' => $current_user->ID,
-				'user_login' => $current_user->user_login,
-				'roles' => $current_user->roles
-			) );
-		} else {
-			wp_send_json_error( 'Admin session not found' );
-		}
-	}
-
-	/**
-	 * Prevent admin user deletion during import.
-	 *
-	 * @param int $user_id User ID being deleted
-	 * @param int|null $reassign_id User ID to reassign posts to
-	 * @param WP_User $user User object being deleted
-	 */
-	public function prevent_admin_deletion( $user_id, $reassign_id, $user ) {
-		// Only intervene during demo import
-		if ( ! get_transient( 'reign_demo_import_active' ) ) {
-			return;
-		}
-
-		// Check if this is the backed up admin user
-		$backup = get_transient( 'reign_current_admin_backup' );
-		
-		if ( $backup && $backup['ID'] == $user_id ) {
-			// Prevent deletion by throwing an error
-			wp_die( 
-				esc_html__( 'Cannot delete admin user during demo import.', 'reign-demo-installer' ),
-				esc_html__( 'Operation Blocked', 'reign-demo-installer' ),
-				array( 'response' => 403 )
-			);
-		}
-	}
-
-	/**
-	 * Preserve admin capabilities during meta updates.
-	 *
-	 * @param int $meta_id Meta ID
-	 * @param int $user_id User ID
-	 * @param string $meta_key Meta key
-	 * @param mixed $meta_value Meta value
-	 */
-	public function preserve_admin_capabilities( $meta_id, $user_id, $meta_key, $meta_value ) {
-		// Only intervene during demo import
-		if ( ! get_transient( 'reign_demo_import_active' ) ) {
-			return;
-		}
-
-		// Check if this affects admin capabilities
-		if ( in_array( $meta_key, array( 'wp_capabilities', 'wp_user_level' ) ) ) {
-			$backup = get_transient( 'reign_current_admin_backup' );
-			
-			if ( $backup && $backup['ID'] == $user_id ) {
-				// Restore admin capabilities
-				update_user_meta( $user_id, 'wp_capabilities', array( 'administrator' => true ) );
-				update_user_meta( $user_id, 'wp_user_level', 10 );
-				
-				Reign_Demo_Installer_Logger::info( 'Admin capabilities preserved for user: ' . $user_id );
-			}
-		}
-	}
-
-	/**
-	 * Schedule periodic admin verification during import.
-	 */
-	private function schedule_admin_verification() {
-		// Use WordPress cron to verify admin every 30 seconds during import
-		if ( ! wp_next_scheduled( 'reign_verify_admin_hook' ) ) {
-			wp_schedule_event( time(), 'reign_30_seconds', 'reign_verify_admin_hook' );
-		}
-
-		add_action( 'reign_verify_admin_hook', array( $this, 'periodic_admin_check' ) );
-
-		// Add custom cron schedule
-		add_filter( 'cron_schedules', array( $this, 'add_custom_cron_schedule' ) );
-	}
-
-	/**
-	 * Add custom cron schedule.
-	 *
-	 * @param array $schedules Existing schedules
-	 * @return array Modified schedules
-	 */
-	public function add_custom_cron_schedule( $schedules ) {
-		$schedules['reign_30_seconds'] = array(
-			'interval' => 30,
-			'display' => __( 'Every 30 seconds', 'reign-demo-installer' )
-		);
-		
-		return $schedules;
-	}
-
-	/**
-	 * Periodic admin check during import.
-	 */
-	public function periodic_admin_check() {
-		// Only run during active import
-		if ( ! get_transient( 'reign_demo_import_active' ) ) {
-			// Clear the scheduled event
-			wp_clear_scheduled_hook( 'reign_verify_admin_hook' );
-			return;
-		}
-
-		$backup = get_transient( 'reign_current_admin_backup' );
-		
-		if ( ! $backup ) {
-			return;
-		}
-
-		// Check if admin user still exists and has proper permissions
-		$admin_user = get_user_by( 'ID', $backup['ID'] );
-		
-		if ( ! $admin_user || ! user_can( $admin_user, 'manage_options' ) ) {
-			// Admin user is missing or downgraded, restore it
-			$this->restore_admin_user_silent( $backup['ID'] );
-			
-			Reign_Demo_Installer_Logger::warning( 'Admin user automatically restored during import' );
-		}
-	}
-
-	/**
 	 * Check admin restoration on login.
-	 *
-	 * @param string $user_login User login
-	 * @param WP_User $user User object
 	 */
 	public function check_admin_restoration( $user_login, $user ) {
 		// Check if we have a backup for this user
@@ -461,7 +331,10 @@ class Reign_Demo_Installer_Admin_Guardian {
 				grant_super_admin( $user->ID );
 			}
 			
-			Reign_Demo_Installer_Logger::info( 'Admin permissions restored on login for: ' . $user_login );
+			// Log only when restoration happens
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::info( 'Admin permissions restored on login for: ' . $user_login );
+			}
 		}
 	}
 
@@ -469,7 +342,11 @@ class Reign_Demo_Installer_Admin_Guardian {
 	 * Emergency admin check on admin_init.
 	 */
 	public function emergency_admin_check() {
-		// Only run if we recently had an import
+		// Only run if we recently had an import and are in admin
+		if ( ! is_admin() ) {
+			return;
+		}
+
 		$recent_backup = get_transient( 'reign_current_admin_backup' );
 		
 		if ( ! $recent_backup ) {
@@ -490,7 +367,10 @@ class Reign_Demo_Installer_Admin_Guardian {
 			// Refresh current user object
 			wp_set_current_user( $current_user->ID );
 			
-			Reign_Demo_Installer_Logger::info( 'Emergency admin restoration completed' );
+			// Log only when restoration happens
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::info( 'Emergency admin restoration completed' );
+			}
 			
 			// Show admin notice
 			add_action( 'admin_notices', function() {
@@ -512,13 +392,17 @@ class Reign_Demo_Installer_Admin_Guardian {
 		// Clear scheduled events
 		wp_clear_scheduled_hook( 'reign_verify_admin_hook' );
 		
-		Reign_Demo_Installer_Logger::info( 'Admin guardian cleanup completed' );
+		// Reset guardian state
+		$this->guardian_active = false;
+		
+		// Log cleanup only once
+		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::info( 'Admin guardian cleanup completed' );
+		}
 	}
 
 	/**
 	 * Get admin backup status.
-	 *
-	 * @return array Backup status
 	 */
 	public function get_backup_status() {
 		$backup = get_transient( 'reign_current_admin_backup' );
@@ -533,9 +417,6 @@ class Reign_Demo_Installer_Admin_Guardian {
 
 	/**
 	 * Emergency restore function (can be called manually).
-	 *
-	 * @param int $user_id Optional user ID
-	 * @return bool Success status
 	 */
 	public function emergency_restore( $user_id = 0 ) {
 		if ( ! $user_id ) {
@@ -554,13 +435,11 @@ class Reign_Demo_Installer_Admin_Guardian {
 endif;
 
 /**
- * Initialize the Admin Guardian.
- *
- * @return Reign_Demo_Installer_Admin_Guardian
+ * Initialize the Admin Guardian only when needed.
  */
 function reign_demo_installer_admin_guardian() {
 	return Reign_Demo_Installer_Admin_Guardian::instance();
 }
 
 // Initialize only when needed
-add_action( 'init', 'reign_demo_installer_admin_guardian', 5 );
+add_action( 'admin_init', 'reign_demo_installer_admin_guardian', 5 );

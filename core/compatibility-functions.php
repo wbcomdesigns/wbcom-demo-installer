@@ -1,9 +1,10 @@
 <?php
 /**
- * Compatibility functions for Reign Demo Installer
+ * Compatibility functions for Reign Demo Installer - Enhanced Version
  * 
  * This file maintains backward compatibility with old function names
  * and constants to prevent breaking existing functionality.
+ * Enhanced with file missing detection and reduced duplicate logging.
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -52,6 +53,157 @@ if ( ! defined( 'WBCOM_DEMO_INSTALLER_PACKAGE_URL' ) ) {
 
 if ( ! defined( 'WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL' ) ) {
 	define( 'WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL', REIGN_DEMO_INSTALLER_PACKAGE_PLUGINS_URL );
+}
+
+/**
+ * ============================================================================
+ * FILE DETECTION AND LOGGING
+ * Check for missing files and log them only once
+ * ============================================================================
+ */
+
+/**
+ * Check and log missing files once per session
+ */
+function reign_demo_installer_check_missing_files() {
+	static $files_checked = false;
+	
+	// Only check once per session to avoid duplicate logs
+	if ( $files_checked ) {
+		return;
+	}
+	
+	$files_checked = true;
+	
+	$required_files = array(
+		'core/class-reign-demo-installer-logger.php',
+		'core/class-reign-demo-installer-security.php',
+		'core/class-reign-demo-installer-environment.php',
+		'core/class-reign-demo-installer-admin-guardian.php',
+		'core/admin-settings.php',
+		'core/ajax-handler.php',
+		'core/plugins-manager.php',
+		'core/prerequisites-checks.php',
+		'core/success.php',
+		'assets/js/importer.js',
+		'assets/js/jquery.mixitup.min.js',
+		'assets/css/demo-listing.css',
+		'languages/',
+		'demos/',
+		'demo-plugins/',
+		'plugin-thumb/',
+		'demos-imgs/',
+	);
+	
+	$missing_files = array();
+	$plugin_dir = REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH;
+	
+	foreach ( $required_files as $file ) {
+		$file_path = $plugin_dir . $file;
+		
+		// For directories, check if they exist
+		if ( substr( $file, -1 ) === '/' ) {
+			if ( ! is_dir( $file_path ) ) {
+				$missing_files[] = array(
+					'file' => $file,
+					'type' => 'directory',
+					'path' => $file_path,
+					'critical' => in_array( $file, array( 'core/', 'assets/' ), true )
+				);
+			}
+		} else {
+			// For files, check if they exist and are readable
+			if ( ! file_exists( $file_path ) ) {
+				$missing_files[] = array(
+					'file' => $file,
+					'type' => 'file',
+					'path' => $file_path,
+					'critical' => strpos( $file, 'core/' ) === 0
+				);
+			} elseif ( ! is_readable( $file_path ) ) {
+				$missing_files[] = array(
+					'file' => $file,
+					'type' => 'file',
+					'path' => $file_path,
+					'critical' => strpos( $file, 'core/' ) === 0,
+					'issue' => 'not_readable'
+				);
+			}
+		}
+	}
+	
+	if ( ! empty( $missing_files ) ) {
+		_log_missing_files( $missing_files );
+	} else if ( class_exists( 'Reign_Demo_Installer_Logger' ) && WP_DEBUG ) {
+		Reign_Demo_Installer_Logger::debug( 'All required plugin files found and accessible' );
+	}
+}
+
+/**
+ * Log missing files with detailed information
+ *
+ * @param array $missing_files Array of missing file information
+ */
+function _log_missing_files( $missing_files ) {
+	$critical_missing = array();
+	$non_critical_missing = array();
+	
+	foreach ( $missing_files as $file_info ) {
+		if ( $file_info['critical'] ) {
+			$critical_missing[] = $file_info;
+		} else {
+			$non_critical_missing[] = $file_info;
+		}
+	}
+	
+	// Log critical missing files as errors
+	if ( ! empty( $critical_missing ) ) {
+		$critical_list = array_map( function( $file ) {
+			$status = isset( $file['issue'] ) ? ' (' . $file['issue'] . ')' : ' (missing)';
+			return $file['file'] . $status;
+		}, $critical_missing );
+		
+		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::error( 
+				'Critical plugin files missing or inaccessible: ' . implode( ', ', $critical_list ),
+				array( 'missing_files' => $critical_missing )
+			);
+		}
+		
+		// Also log to WordPress error log
+		error_log( '[Reign Demo Installer] Critical files missing: ' . implode( ', ', $critical_list ) );
+	}
+	
+	// Log non-critical missing files as warnings
+	if ( ! empty( $non_critical_missing ) ) {
+		$non_critical_list = array_map( function( $file ) {
+			$status = isset( $file['issue'] ) ? ' (' . $file['issue'] . ')' : ' (missing)';
+			return $file['file'] . $status;
+		}, $non_critical_missing );
+		
+		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::warning( 
+				'Optional plugin files missing: ' . implode( ', ', $non_critical_list ),
+				array( 'missing_files' => $non_critical_missing )
+			);
+		}
+	}
+	
+	// Show admin notice for critical missing files
+	if ( ! empty( $critical_missing ) ) {
+		add_action( 'admin_notices', function() use ( $critical_missing ) {
+			$file_list = implode( ', ', array_column( $critical_missing, 'file' ) );
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong>Reign Demo Installer:</strong> 
+					Critical files missing or inaccessible: <?php echo esc_html( $file_list ); ?>
+					<br>Please reinstall the plugin or check file permissions.
+				</p>
+			</div>
+			<?php
+		});
+	}
 }
 
 /**
@@ -342,9 +494,17 @@ add_action( 'admin_footer', 'reign_demo_installer_js_compatibility' );
  */
 
 /**
- * Migrate old data to new format.
+ * Migrate old data to new format with reduced logging.
  */
 function reign_demo_installer_migrate_data() {
+	static $migration_checked = false;
+	
+	// Only run migration check once per session
+	if ( $migration_checked ) {
+		return;
+	}
+	
+	$migration_checked = true;
 	$migration_version = get_option( 'reign_demo_installer_migration_version', '0' );
 	
 	if ( version_compare( $migration_version, '3.0.0', '<' ) ) {
@@ -354,11 +514,13 @@ function reign_demo_installer_migrate_data() {
 			'wbcom_theme_demo_req_plugins',
 		);
 		
+		$migrated_count = 0;
 		foreach ( $old_options as $old_option ) {
 			$value = get_option( $old_option );
 			if ( $value !== false ) {
 				$new_option = str_replace( 'wbcom_', 'reign_', $old_option );
 				update_option( $new_option, $value );
+				$migrated_count++;
 				
 				// Don't delete old option immediately to allow rollback
 				// delete_option( $old_option );
@@ -368,9 +530,11 @@ function reign_demo_installer_migrate_data() {
 		// Update migration version
 		update_option( 'reign_demo_installer_migration_version', '3.0.0' );
 		
-		// Log migration
-		if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
-			Reign_Demo_Installer_Logger::info( 'Data migration completed from version ' . $migration_version . ' to 3.0.0' );
+		// Log migration only if something was actually migrated
+		if ( $migrated_count > 0 && class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+			Reign_Demo_Installer_Logger::info( 
+				"Data migration completed from version {$migration_version} to 3.0.0. Migrated {$migrated_count} options." 
+			);
 		}
 	}
 }
@@ -439,6 +603,15 @@ if ( ! function_exists( 'wbcom_theme_demo_installer_log_error' ) ) {
  * Load legacy text domain.
  */
 function reign_demo_installer_load_legacy_textdomain() {
+	static $textdomain_loaded = false;
+	
+	// Only load once
+	if ( $textdomain_loaded ) {
+		return;
+	}
+	
+	$textdomain_loaded = true;
+	
 	// Load old text domain for backward compatibility
 	$old_domain = 'wbcom-theme-demo-installer';
 	$new_domain = 'reign-demo-installer';
@@ -455,15 +628,37 @@ add_action( 'plugins_loaded', 'reign_demo_installer_load_legacy_textdomain' );
 
 /**
  * ============================================================================
- * FINAL COMPATIBILITY CHECK
- * Log any compatibility issues
+ * OPTIMIZED COMPATIBILITY CHECK
+ * Reduce duplicate logging by checking compatibility status smartly
  * ============================================================================
  */
 
 /**
- * Check and log compatibility status.
+ * Check and log compatibility status with smart caching.
  */
 function reign_demo_installer_compatibility_check() {
+	// Only run on plugin pages and limit frequency
+	if ( ! is_admin() ) {
+		return;
+	}
+	
+	$screen = get_current_screen();
+	if ( ! $screen || strpos( $screen->id, 'reign-demo-installer' ) === false ) {
+		return;
+	}
+	
+	// Use transient to cache compatibility check for 1 hour
+	$cache_key = 'reign_demo_installer_compatibility_check';
+	$cached_result = get_transient( $cache_key );
+	
+	if ( $cached_result !== false ) {
+		return; // Skip if already checked recently
+	}
+	
+	// Check for missing files first
+	reign_demo_installer_check_missing_files();
+	
+	// Only log compatibility status in debug mode and if something is wrong
 	if ( class_exists( 'Reign_Demo_Installer_Logger' ) && WP_DEBUG ) {
 		$compatibility_status = array(
 			'constants_mapped' => defined( 'WBCOM_Theme_Demo_Installer_VERSION' ),
@@ -472,7 +667,121 @@ function reign_demo_installer_compatibility_check() {
 			'migration_complete' => get_option( 'reign_demo_installer_migration_version' ) === '3.0.0',
 		);
 		
-		Reign_Demo_Installer_Logger::debug( 'Compatibility status: ' . wp_json_encode( $compatibility_status ) );
+		// Only log if there are issues
+		$has_issues = in_array( false, $compatibility_status, true );
+		
+		if ( $has_issues ) {
+			Reign_Demo_Installer_Logger::warning( 
+				'Compatibility issues detected: ' . wp_json_encode( $compatibility_status ),
+				array( 'compatibility_status' => $compatibility_status )
+			);
+		} else {
+			// Only log success once per hour in debug mode
+			Reign_Demo_Installer_Logger::debug( 
+				'Compatibility status: All checks passed',
+				array( 'compatibility_status' => $compatibility_status )
+			);
+		}
 	}
+	
+	// Cache the result for 1 hour to prevent duplicate checks
+	set_transient( $cache_key, true, HOUR_IN_SECONDS );
 }
 add_action( 'admin_init', 'reign_demo_installer_compatibility_check' );
+
+/**
+ * ============================================================================
+ * CLEAR CACHE WHEN NEEDED
+ * Clear compatibility cache when plugin is updated or files change
+ * ============================================================================
+ */
+
+/**
+ * Clear compatibility cache on plugin update.
+ */
+function reign_demo_installer_clear_compatibility_cache() {
+	delete_transient( 'reign_demo_installer_compatibility_check' );
+}
+add_action( 'upgrader_process_complete', 'reign_demo_installer_clear_compatibility_cache' );
+add_action( 'activated_plugin', 'reign_demo_installer_clear_compatibility_cache' );
+add_action( 'deactivated_plugin', 'reign_demo_installer_clear_compatibility_cache' );
+
+/**
+ * ============================================================================
+ * DEVELOPMENT HELPERS
+ * Functions to help with debugging and development
+ * ============================================================================
+ */
+
+/**
+ * Get detailed compatibility report for debugging.
+ *
+ * @return array Compatibility report
+ */
+function reign_demo_installer_get_compatibility_report() {
+	$report = array(
+		'plugin_info' => array(
+			'version' => REIGN_DEMO_INSTALLER_VERSION,
+			'path' => REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH,
+			'url' => REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL,
+		),
+		'constants' => array(
+			'new_constants_defined' => defined( 'REIGN_DEMO_INSTALLER_VERSION' ),
+			'old_constants_mapped' => defined( 'WBCOM_Theme_Demo_Installer_VERSION' ),
+		),
+		'functions' => array(
+			'main_function_exists' => function_exists( 'reign_demo_installer' ),
+			'compatibility_function_exists' => function_exists( 'instantiate_wbcom_theme_demo_installer' ),
+		),
+		'classes' => array(
+			'main_class_exists' => class_exists( 'Reign_Demo_Installer' ),
+			'compatibility_class_exists' => class_exists( 'WBCOM_Theme_Demo_Installer' ),
+		),
+		'migration' => array(
+			'version' => get_option( 'reign_demo_installer_migration_version', '0' ),
+			'complete' => get_option( 'reign_demo_installer_migration_version' ) === '3.0.0',
+		),
+		'files' => array(),
+		'timestamp' => current_time( 'mysql' ),
+	);
+	
+	// Check file existence
+	$required_files = array(
+		'core/admin-settings.php',
+		'core/ajax-handler.php',
+		'core/plugins-manager.php',
+		'assets/js/importer.js',
+	);
+	
+	foreach ( $required_files as $file ) {
+		$file_path = REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH . $file;
+		$report['files'][ $file ] = array(
+			'exists' => file_exists( $file_path ),
+			'readable' => file_exists( $file_path ) && is_readable( $file_path ),
+			'size' => file_exists( $file_path ) ? filesize( $file_path ) : 0,
+		);
+	}
+	
+	return $report;
+}
+
+/**
+ * Debug function to output compatibility report.
+ */
+function reign_demo_installer_debug_compatibility() {
+	if ( ! current_user_can( 'manage_options' ) || ! WP_DEBUG ) {
+		return;
+	}
+	
+	$report = reign_demo_installer_get_compatibility_report();
+	
+	echo '<pre>';
+	echo 'Reign Demo Installer Compatibility Report:' . PHP_EOL;
+	echo wp_json_encode( $report, JSON_PRETTY_PRINT );
+	echo '</pre>';
+}
+
+// Add debug action for administrators
+if ( WP_DEBUG && current_user_can( 'manage_options' ) ) {
+	add_action( 'wp_ajax_reign_debug_compatibility', 'reign_demo_installer_debug_compatibility' );
+}

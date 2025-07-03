@@ -1,7 +1,7 @@
 <?php
 /**
- * Admin settings for Reign Demo Installer - WordPress Standard Notices
- * Updated to handle JSON format with is_paid and external_url
+ * Admin settings for Reign Demo Installer - Complete File
+ * Updated with streamlined batch download approach
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -593,7 +593,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		}
 
 		/**
-		 * Render demo importer interface.
+		 * Render demo importer interface - UPDATED for streamlined batch download.
 		 *
 		 * @param array $demo_info Demo information
 		 * @param string $theme_slug Theme slug
@@ -608,25 +608,34 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 						 style="width:100%;" 
 						 alt="<?php echo esc_attr( $demo_info['demo_name'] ); ?>" />
 				</div>
+				
 				<div class="reign-demos-progress-container">
+					<!-- Simplified Progress Bar -->
 					<div id="progress-bar-container" style="display: none;">
-						<div class="skills completed">0%</div>
+						<div class="progress-wrapper">
+							<div class="progress-bar">
+								<div class="completed">0%</div>
+							</div>
+						</div>
 					</div>
-					<div id="progress-snackbar"></div>
-					<div class='loader' style='display:none;text-align:center;'></div>
 					
+					<!-- Status Message -->
+					<div id="wbtd-current-action" style="display:none;">
+						<?php esc_html_e( 'Initializing...', 'reign-demo-installer' ); ?>
+					</div>
+					
+					<!-- Import Button -->
+					<div class="import-button-container">
+						<button type='submit' id='wbcom_get_theme_demo_data' class='button button-primary button-hero'>
+							<?php esc_html_e( 'Start Demo Import', 'reign-demo-installer' ); ?>
+						</button>
+					</div>
+					
+					<!-- Hidden Fields -->
 					<input type='hidden' id='theme_slug' value='<?php echo esc_attr( $theme_slug ); ?>' />
 					<input type='hidden' id='demo_slug' value='<?php echo esc_attr( $demo_slug ); ?>' />
 					<input type='hidden' id='target_url' value='<?php echo esc_url( $target_url ); ?>' />
 					<input type='hidden' id='demo_nonce' value='<?php echo esc_attr( wp_create_nonce( 'reign_demo_installer_import' ) ); ?>' />
-					
-					<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>
-						<?php esc_html_e( 'Install Demo', 'reign-demo-installer' ); ?>
-					</button>
-					
-					<div id="wbtd-current-action" style="display:none;">
-						<?php esc_html_e( 'Initializing...', 'reign-demo-installer' ); ?>
-					</div>
 				</div>
 			</div>
 
@@ -635,21 +644,20 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		}
 
 		/**
-		 * Render important notes section.
+		 * Render important notes section - UPDATED for cleaner messaging.
 		 */
 		private function render_important_notes() {
 			?>
 			<div class="info-importer">
 				<div class="info-impoter-heading">
-					<?php esc_html_e( 'Important Notes:', 'reign-demo-installer' ); ?>
+					<?php esc_html_e( 'Before You Start:', 'reign-demo-installer' ); ?>
 				</div>
 				<div class="info-impoter-content">
 					<ul>
-						<li><?php esc_html_e( 'Demo Importer is suggested for fresh installations only. Please make sure you have a full backup of your site before importing demo data.', 'reign-demo-installer' ); ?></li>
-						<li><?php esc_html_e( 'Importing all the demo content will take some time, so please be patient.', 'reign-demo-installer' ); ?></li>
-						<li><?php esc_html_e( 'Do not close this browser tab during the import process.', 'reign-demo-installer' ); ?></li>
-						<li><?php esc_html_e( 'If the import fails, you can try again or contact support.', 'reign-demo-installer' ); ?></li>
-						<li><?php esc_html_e( 'You will remain logged in as admin after the import completes.', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'This will download and import all demo content automatically', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'The process takes 5-15 minutes depending on your connection', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'You will remain logged in as admin throughout the process', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'Do not close this browser tab during the import', 'reign-demo-installer' ); ?></li>
 					</ul>
 				</div>
 			</div>
@@ -795,9 +803,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 								<?php endif; ?>
 							</li>
 							<li class="plugin-status">
-								<span class="<?php echo esc_attr( $already_active_class ); ?>">
+								<p class="<?php echo esc_attr( $already_active_class ); ?>">
 									<?php echo esc_html( $plugin_status['status_text'] ); ?>
-								</span>
+								</p>
 							</li>
 							<li class="plugin-dependency <?php echo esc_attr( strtolower( $plugin_dependency ) ); ?>">
 								<?php echo esc_html( $plugin_dependency ); ?>
@@ -1087,6 +1095,118 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		 */
 		private function add_custom_styles() {
 			$custom_css = "
+				/* Streamlined Progress Bar */
+				#progress-bar-container {
+					margin: 20px 0;
+					padding: 20px;
+					background: #f8f9fa;
+					border-radius: 8px;
+					border: 1px solid #dee2e6;
+				}
+				
+				.progress-wrapper {
+					margin-bottom: 15px;
+				}
+				
+				.progress-bar {
+					background: #e9ecef;
+					border-radius: 6px;
+					height: 30px;
+					position: relative;
+					overflow: hidden;
+					box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+				}
+				
+				.progress-bar .completed {
+					background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+					height: 100%;
+					width: 0%;
+					transition: width 0.5s ease;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: white;
+					font-weight: bold;
+					font-size: 14px;
+					text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+				}
+				
+				/* Status Message */
+				#wbtd-current-action {
+					margin: 15px 0;
+					padding: 12px 16px;
+					background: #f0f9ff;
+					border-left: 4px solid #3b82f6;
+					color: #1e40af;
+					font-weight: 500;
+					text-align: center;
+					border-radius: 4px;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+				}
+				
+				/* Import Button */
+				.import-button-container {
+					text-align: center;
+					margin: 30px 0;
+				}
+				
+				.import-button-container .button-hero {
+					font-size: 18px;
+					padding: 15px 30px;
+					height: auto;
+					line-height: 1.4;
+					border-radius: 6px;
+					transition: all 0.2s ease;
+					box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+				}
+				
+				.import-button-container .button-hero:hover {
+					transform: translateY(-1px);
+					box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+				}
+				
+				.import-button-container .button-hero:disabled {
+					opacity: 0.6;
+					cursor: not-allowed;
+					transform: none;
+				}
+				
+				/* Info Box */
+				.info-importer {
+					background: #fff3cd;
+					border: 1px solid #ffeaa7;
+					border-radius: 6px;
+					padding: 20px;
+					margin: 20px 0;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+				}
+				
+				.info-impoter-heading {
+					font-weight: bold;
+					color: #856404;
+					margin-bottom: 15px;
+					font-size: 16px;
+					display: flex;
+					align-items: center;
+				}
+				
+				.info-impoter-heading:before {
+					content: 'ℹ️';
+					margin-right: 8px;
+					font-size: 18px;
+				}
+				
+				.info-impoter-content ul {
+					margin: 0;
+					padding-left: 20px;
+				}
+				
+				.info-impoter-content li {
+					color: #856404;
+					margin-bottom: 8px;
+					line-height: 1.4;
+				}
+				
 				.pro-badge {
 					background: #ff6b35;
 					color: white;
