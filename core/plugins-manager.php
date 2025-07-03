@@ -1,34 +1,61 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
-	return; }
+<?php 
+/**
+ * Plugins manager for Reign Demo Installer
+ *
+ * @package Reign_Demo_Installer
+ * @since 3.0.0
+ */
 
-class WBCOM_Demo_Importer_Plugins_Manager {
+// Prevent direct access
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ) :
+
+/**
+ * Reign_Demo_Installer_Plugins_Manager class.
+ */
+class Reign_Demo_Installer_Plugins_Manager {
 
 	/**
-	 * @var WBCOM_Demo_Importer_Plugins_Manager The single instance of the class
-	 * @since 1.0.0
+	 * The single instance of the class.
+	 *
+	 * @var Reign_Demo_Installer_Plugins_Manager
+	 * @since 3.0.0
 	 */
 	protected static $_instance = null;
 
+	/**
+	 * Plugins array.
+	 *
+	 * @var array
+	 */
 	var $plugins = array();
 
 	/**
-	 * @var TGM_Plugin_Activation Instance
+	 * TGM_Plugin_Activation Instance.
+	 *
+	 * @var TGM_Plugin_Activation
 	 */
 	var $tgmpa;
 
+	/**
+	 * WordPress repository regex.
+	 */
 	const WP_REPO_REGEX = '|^http[s]?://wordpress\.org/(?:extend/)?plugins/|';
+	
+	/**
+	 * URL regex.
+	 */
 	const IS_URL_REGEX  = '|^http[s]?://|';
 
-
 	/**
-	 * Main WBCOM_Demo_Importer_Plugins_Manager Instance
+	 * Main instance.
 	 *
-	 * Ensures only one instance of WBCOM_Demo_Importer_Plugins_Manager is loaded or can be loaded.
-	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 * @static
-	 * @see WBCOM_Demo_Importer_Plugins_Manager()
-	 * @return WBCOM_Demo_Importer_Plugins_Manager - Main instance
+	 * @return Reign_Demo_Installer_Plugins_Manager - Main instance
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -38,573 +65,358 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Main class constructor
+	 * Main class constructor.
 	 */
 	function __construct() {
-
-		// register the plugins in our class
+		// Register the plugins in our class
 		add_action( 'init', array( $this, 'populate_plugins' ) );
 
-		// Register Ajax actions
+		// Register Ajax actions (new naming)
+		add_action( 'wp_ajax_reign_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
+		
+		// Backward compatibility (old naming)
 		add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
 
 		add_action( 'tgmpa_register', array( $this, 'required_plugins' ) );
-
-		// run code on class init
-		// do_action( 'WBCOM_Demo_Importer_Plugins_Manager_init' );
-
-		// add_filter( 'tgmpa_load', array( $this, 'tgmpa_load_hook' ) );
 	}
 
+	/**
+	 * Register required plugins with TGMPA.
+	 */
 	public function required_plugins() {
-		/*
-		 * Array of plugin arrays. Required keys are name and slug.
-		 * If the source is NOT from the .org repo, then source is also required.
-		 */
-		$plugins = array();
-
 		$plugins = ! empty( $this->get_required_plugins() ) ? $this->get_required_plugins() : array();
 
-		/*
-		 * Array of configuration settings. Amend each line as needed.
-		 *
-		 * TGMPA will start providing localized text strings soon. If you already have translations of our standard
-		 * strings available, please help us make TGMPA even better by giving us access to these translations or by
-		 * sending in a pull-request with .po file(s) with the translations.
-		 *
-		 * Only uncomment the strings in the config array if you want to customize the strings.
-		 */
 		$config = array(
-			'id'           => 'wbcom',                 // Unique ID for hashing notices for multiple instances of TGMPA.
-			'default_path' => '',                      // Default absolute path to bundled plugins.
-			'menu'         => 'tgmpa-install-plugins', // Menu slug.
-			'parent_slug'  => 'plugins.php',            // Parent menu slug.
-			'capability'   => 'manage_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
-			'has_notices'  => true,                    // Show admin notices or not.
-			'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
-			'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
-			'is_automatic' => false,                   // Automatically Activate Plugins after installation or not.
-			'message'      => '',                      // Message to output right before the plugins table.
+			'id'           => 'reign',
+			'default_path' => '',
+			'menu'         => 'tgmpa-install-plugins',
+			'parent_slug'  => 'plugins.php',
+			'capability'   => 'manage_options',
+			'has_notices'  => true,
+			'dismissable'  => true,
+			'dismiss_msg'  => '',
+			'is_automatic' => false,
+			'message'      => '',
 		);
 
-		tgmpa( $plugins, $config );
+		if ( function_exists( 'tgmpa' ) ) {
+			tgmpa( $plugins, $config );
+		}
 	}
 
-
+	/**
+	 * Populate plugins array.
+	 */
 	public function populate_plugins() {
-
 		include_once 'class-tgm-plugin-activation.php';
 
-		$this->tgmpa = TGM_Plugin_Activation::get_instance();
+		if ( class_exists( 'TGM_Plugin_Activation' ) ) {
+			$this->tgmpa = TGM_Plugin_Activation::get_instance();
+			$this->tgmpa->populate_file_path();
+		}
 
-		$this->tgmpa->populate_file_path();
-
-		// $this->plugins = $this->tgmpa->plugins;
-		// $this->plugins = $this->get_required_plugins();
-
-		$get_required_plugins  = $this->get_required_plugins();
+		$get_required_plugins = $this->get_required_plugins();
 		$_get_required_plugins = array();
+		
 		if ( ! empty( $get_required_plugins ) && is_array( $get_required_plugins ) ) {
-			foreach ( $get_required_plugins as $key => $value ) {
-				$_get_required_plugins[ $value['slug'] ] = $value;
+			foreach ( $get_required_plugins as $plugin ) {
+				if ( isset( $plugin['slug'] ) ) {
+					$_get_required_plugins[ $plugin['slug'] ] = $plugin;
+				}
 			}
 		}
+		
 		$this->plugins = $_get_required_plugins;
-
 	}
 
-	public function tgmpa_load_hook() {
-		return is_admin();
-	}
-
+	/**
+	 * Handle plugin actions (install, activate, etc.).
+	 */
 	public function do_plugin_action() {
+		// Security check
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions.', 'reign-demo-installer' ) ) );
+		}
 
-		$action                = ! empty( $_POST['plugin_action'] ) ? $_POST['plugin_action'] : false;
-		$slug                  = ! empty( $_POST['plugin_slug'] ) ? $_POST['plugin_slug'] : false;
-		$demo                  = ! empty( $_POST['demo'] ) ? $_POST['demo'] : false;
-		$_get_required_plugins = array();
-		$url_to_request        = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $demo . '/plugins.json';
-		$response              = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+		// Verify nonce
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'reign_demo_installer_ajax' ) && 
+			 ! wp_verify_nonce( $nonce, 'reign_demo_installer_plugins' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'reign-demo-installer' ) ) );
+		}
 
-		if ( ! is_wp_error( $response ) ) {
-			if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-				$response = isset( $response['body'] ) ? $response['body'] : '';
-				if ( ! empty( $response ) ) {
-					$response = json_decode( $response, true );
-				}
-				if ( ! empty( $response ) && is_array( $response ) ) {
-					$get_required_plugins = $response;
-				}
+		$action = ! empty( $_POST['plugin_action'] ) ? sanitize_text_field( $_POST['plugin_action'] ) : false;
+		$slug = ! empty( $_POST['plugin_slug'] ) ? sanitize_key( $_POST['plugin_slug'] ) : false;
+		$demo = ! empty( $_POST['demo'] ) ? sanitize_key( $_POST['demo'] ) : false;
+
+		if ( ! $action || ! $slug || ! $demo ) {
+			wp_send_json_error( array( 'message' => __( 'Missing required parameters.', 'reign-demo-installer' ) ) );
+		}
+
+		// Load plugins configuration
+		$this->load_plugins_configuration( $demo );
+
+		// Log the action
+		Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'attempting_' . $action );
+
+		try {
+			switch ( $action ) {
+				case 'enable_plugin':
+					$this->do_plugin_activate( $slug );
+					break;
+				case 'install_plugin':
+					$this->do_plugin_install( $slug );
+					break;
+				default:
+					wp_send_json_error( array( 'message' => __( 'Invalid action.', 'reign-demo-installer' ) ) );
 			}
+		} catch ( Exception $e ) {
+			Reign_Demo_Installer_Logger::error( 'Plugin action exception: ' . $e->getMessage() );
+			wp_send_json_error( array( 'message' => __( 'An error occurred during plugin operation.', 'reign-demo-installer' ) ) );
 		}
-
-		foreach ( $get_required_plugins as $key => $value ) {
-			$_get_required_plugins[ $value['slug'] ] = $value;
-		}
-		$this->plugins = $_get_required_plugins;
-
-		switch ( $action ) {
-			case 'enable_plugin':
-				$this->do_plugin_activate( $slug );
-				break;
-			case 'install_plugin':
-				$this->do_plugin_install( $slug );
-				break;
-			default:
-				break;
-		}
-
 	}
 
 	/**
-	 * Performs the plugin update
+	 * Load plugins configuration for demo.
 	 *
-	 * @param string $slug [description]
+	 * @param string $demo Demo slug
 	 */
-	function do_plugin_update( $slug ) {
+	private function load_plugins_configuration( $demo ) {
+		$url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $demo . '/plugins.json';
+		$response = wp_remote_get( $url_to_request, array( 
+			'sslverify' => true, 
+			'timeout' => 30,
+			'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+		) );
 
-		$status = $this->get_plugin_status( $slug );
-
-		$active = false;
-		if ( $this->is_plugin_active( $slug ) ) {
-			$active = true;
-		}
-
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			$status['error'] = 'We have no data about this plugin.';
-			wp_send_json_error( $status );
-		}
-
-		if ( $this->does_plugin_have_update( $slug ) ) {
-
-			if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
-				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-			}
-
-			$upgrader = new Plugin_Upgrader( new Automatic_Upgrader_Skin() );
-			// Inject our info into the update transient.
-			$source                       = $this->get_download_url( $slug );
-			$to_inject                    = array( $slug => $this->plugins[ $slug ] );
-			$to_inject[ $slug ]['source'] = $source;
-			$this->inject_update_info( $to_inject );
-			$result = $upgrader->upgrade( $this->plugins[ $slug ]['file_path'] );
-
-			if ( is_wp_error( $result ) ) {
-				$status['error'] = $result->get_error_message();
-				wp_send_json_error( $status );
-			}
-
-			if ( $active === true ) {
-				$this->tgmpa->populate_file_path( $slug );
-				$result = activate_plugin( $this->plugins[ $slug ]['file_path'] );
-				if ( is_wp_error( $result ) ) {
-					$status['error'] = wp_kses_post( $result->get_error_message() );
+		if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
+			$body = wp_remote_retrieve_body( $response );
+			$plugins_config = json_decode( $body, true );
+			
+			if ( json_last_error() === JSON_ERROR_NONE && is_array( $plugins_config ) ) {
+				$_get_required_plugins = array();
+				foreach ( $plugins_config as $plugin ) {
+					if ( isset( $plugin['slug'] ) ) {
+						$_get_required_plugins[ $plugin['slug'] ] = $plugin;
+					}
 				}
+				$this->plugins = $_get_required_plugins;
 			}
-
-			// Return the status of the plugin
-			$status = $this->get_plugin_status( $slug );
-			wp_send_json_success( $status );
-		}
-
-		$status['error'] = 'The plugin does not have an update.';
-		wp_send_json_error( $status );
-
-	}
-
-	/**
-	 * Enable a child theme
-	 *
-	 * @param  string $slug The slug used in the addons config file for the child theme
-	 * @return string A json formatted value
-	 */
-	function enable_child_theme( $slug ) {
-
-		$status = $this->get_plugin_status( $slug );
-
-		// Get all installed themes
-		$current_installed_themes = wp_get_themes();
-		// Get the themes currently installed
-		$active_theme      = wp_get_theme();
-		$theme_folder_name = $active_theme->get_template();
-
-		$child_theme = false;
-
-		if ( is_array( $current_installed_themes ) ) {
-			foreach ( $current_installed_themes as $key => $theme_obj ) {
-				if ( $theme_obj->get( 'Template' ) === $theme_folder_name ) {
-					$child_theme = $theme_obj;
-				}
-			}
-		}
-
-		if ( $child_theme !== false ) {
-			switch_theme( $child_theme->get_stylesheet() );
-			$status = $this->get_plugin_status( $slug );
-		}
-
-		wp_send_json_success( $status );
-	}
-
-	function install_child_theme( $slug ) {
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			wp_send_json_error( array( 'error' => 'We don\'t know anything about this theme' ) );
-		}
-
-		$url    = $this->get_download_url( $slug );
-		$status = $this->get_plugin_status( $slug );
-
-		if ( ! current_user_can( 'install_themes' ) ) {
-			$status['error'] = 'You don\'t have permissions to install install_themes';
-			wp_send_json_error( array( 'error' => '' ) );
-		}
-
-		if ( ! class_exists( 'Theme_Upgrader', false ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		}
-
-		$skin     = new Automatic_Upgrader_Skin();
-		$upgrader = new Theme_Upgrader( $skin, array( 'clear_destination' => true ) );
-		$result   = $upgrader->install( $url );
-
-		// There is a bug in WP where the install method can return null in case the folder already exists
-		// see https://core.trac.wordpress.org/ticket/27365
-		if ( $result === null && ! empty( $skin->result ) ) {
-			$result = $skin->result;
-		}
-
-		if ( is_wp_error( $skin->result ) ) {
-			$status['error'] = $result->get_error_message();
-			wp_send_json_error( $status );
-		}
-
-		$status = $this->get_plugin_status( $slug );
-		wp_send_json_success( $status );
-	}
-
-	/**
-	 * Will check if a child theme is installed for the current theme
-	 *
-	 * @return boolean true/false if a child theme is installed or not
-	 */
-	function is_child_theme_installed() {
-
-		// Get all installed themes
-		$current_installed_themes = wp_get_themes();
-		// Get the themes currently installed
-		$active_theme      = wp_get_theme();
-		$theme_folder_name = $active_theme->get_template();
-
-		if ( is_array( $current_installed_themes ) ) {
-			foreach ( $current_installed_themes as $key => $theme_obj ) {
-				if ( $theme_obj->get( 'Template' ) === $theme_folder_name ) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Checks if a child theme is active or not
-	 *
-	 * @return boolean If the child theme is in use
-	 */
-	function is_child_theme_active() {
-		$active_theme = wp_get_theme();
-		$template     = $active_theme->get( 'Template' );
-		return ! empty( $template );
-	}
-
-	function get_addon_config( $plugin_slug ) {
-		if ( ! empty( $this->plugins[ $plugin_slug ] ) ) {
-			return $this->plugins[ $plugin_slug ];
 		}
 	}
 
 	/**
-	 * Returns the status and actions for a plugin
+	 * Perform plugin installation.
 	 *
-	 * @param  string $plugin_slug The plugin slug
-	 * @return array  The status and actions for the requested plugin
-	 */
-	function get_plugin_status( $plugin_slug ) {
-
-		$status        = array();
-		$plugin_config = $this->get_addon_config( $plugin_slug );
-
-		if ( isset( $plugin_config['addon_type'] ) && $plugin_config['addon_type'] === 'child_theme' ) {
-			// We have a theme
-			if ( $this->is_child_theme_installed() ) {
-				// Check if the theme is active or not
-				if ( $this->is_child_theme_active() ) {
-					$status['status']      = 'wbcom-active wbcom-addons-disabled';
-					$status['status_text'] = __( 'Active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Child theme installed and active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'no_action';
-				} else {
-					$status['status']      = 'wbcom-inactive';
-					$status['status_text'] = __( 'Inactive', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Activate child theme', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'enable_child_theme';
-				}
-			} else {
-				$status['status']      = 'wbcom-needs-install';
-				$status['status_text'] = __( 'Not installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action_text'] = __( 'Install child theme', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action']      = 'install_theme';
-
-				if ( ! current_user_can( 'install_themes' ) ) {
-					$status['status']      = 'wbcom-not-installed wbcom-addons-disabled';
-					$status['action_text'] = __( 'Permissions needed to install child themes. Contact site administrator.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'contact_network_admin';
-				}
-			}
-		} else {
-			if ( $this->is_plugin_installed( $plugin_slug ) ) {
-				if ( $this->is_plugin_active( $plugin_slug ) ) {
-					$status['status']      = 'wbcom-active';
-					$status['status_text'] = __( 'Active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'disable_plugin';
-				} else {
-					$status['status']      = 'wbcom-inactive';
-					$status['status_text'] = __( 'Inactive', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Activate', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'enable_plugin';
-				}
-			} else {
-				$status['status']      = 'wbcom-not-installed';
-				$status['status_text'] = __( 'Not Installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action_text'] = __( 'Install Now', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action']      = 'install_plugin';
-
-				if ( ! current_user_can( 'install_plugins' ) ) {
-					$status['status']      = 'wbcom-not-installed wbcom-addons-disabled';
-					$status['action_text'] = __( 'You don\'t have permission to install plugins. Contact site administrator.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'contact_network_admin';
-				}
-			}
-		}
-
-		return $status;
-	}
-
-	/**
-	 * Inject information into the 'update_plugins' site transient as WP checks that before running an update.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $plugins The plugin information for the plugins which are to be updated.
-	 */
-	public function inject_update_info( $plugins ) {
-		$this->tgmpa->inject_update_info( $plugins );
-	}
-
-	/**
-	 * Performs plugin update
-	 *
-	 * @return type
-	 */
-	function plugin_has_update( $slug ) {
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			return false;
-		}
-
-		$installed_version = $this->get_installed_version( $slug );
-		$minimum_version   = $this->plugins[ $slug ]['version'];
-
-		return version_compare( $minimum_version, $installed_version, '>' );
-
-	}
-
-	/**
-	 * Performs plugins installation
-	 *
-	 * @param string  $slug
-	 * @param boolean $echo
-	 * @return void | array
+	 * @param string $slug Plugin slug
+	 * @param boolean $echo Whether to echo JSON response
+	 * @return void|array
 	 */
 	function do_plugin_install( $slug, $echo = true ) {
-
 		if ( empty( $this->plugins[ $slug ] ) ) {
-			return false;
+			$error = array( 'error' => __( 'Plugin configuration not found.', 'reign-demo-installer' ) );
+			if ( $echo ) {
+				wp_send_json_error( $error );
+			}
+			return $error;
 		}
 
 		$url = $this->get_download_url( $slug );
-
 		$status = $this->get_plugin_status( $slug );
 
 		if ( ! current_user_can( 'install_plugins' ) ) {
-			$status['error'] = 'You don\'t have permissions to install plugins';
+			$error = array( 'error' => __( 'You don\'t have permissions to install plugins', 'reign-demo-installer' ) );
 			if ( $echo ) {
-				wp_send_json_error( $status );
-			} else {
-				return $status;
+				wp_send_json_error( $error );
 			}
+			return $error;
 		}
 
-		$method = ''; // Leave blank so WP_Filesystem can populate it as necessary.
-
-		if ( false === ( $creds = request_filesystem_credentials( esc_url_raw( $url ), $method, false, false, array() ) ) ) {
-			return true;
+		// Check if already installed
+		if ( $this->is_plugin_installed( $slug ) ) {
+			$status = $this->get_plugin_status( $slug );
+			if ( $echo ) {
+				wp_send_json_success( $status );
+			}
+			return $status;
 		}
 
-		if ( ! WP_Filesystem( $creds ) ) {
-			request_filesystem_credentials( esc_url_raw( $url ), $method, true, false, array() ); // Setup WP_Filesystem.
-			return true;
+		// Set up filesystem
+		if ( ! $this->setup_filesystem() ) {
+			$error = array( 'error' => __( 'Could not access filesystem.', 'reign-demo-installer' ) );
+			if ( $echo ) {
+				wp_send_json_error( $error );
+			}
+			return $error;
 		}
 
 		if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 		}
 
-		$skin     = new Automatic_Upgrader_Skin();
-		$upgrader = new Plugin_Upgrader( $skin, array( 'clear_destination' => true ) );
+		$skin = new Automatic_Upgrader_Skin();
+		$upgrader = new Plugin_Upgrader( $skin );
 
+		// Install plugin
 		$result = $upgrader->install( $url );
 
-		// There is a bug in WP where the install method can return null in case the folder already exists
-		// see https://core.trac.wordpress.org/ticket/27365
-		if ( $result === null && ! empty( $skin->result ) ) {
-			$result = $skin->result;
+		if ( is_wp_error( $result ) ) {
+			$error = array( 'error' => $result->get_error_message() );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'install_error', $result->get_error_message() );
+			if ( $echo ) {
+				wp_send_json_error( $error );
+			}
+			return $error;
 		}
 
 		if ( is_wp_error( $skin->result ) ) {
-			$status['error'] = $result->get_error_message();
+			$error = array( 'error' => $skin->result->get_error_message() );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'install_error', $skin->result->get_error_message() );
 			if ( $echo ) {
-				wp_send_json_error( $status );
-			} else {
-				return $status;
+				wp_send_json_error( $error );
 			}
+			return $error;
 		}
 
-		$this->tgmpa->populate_file_path( $slug );
-		$plugin_activate = $upgrader->plugin_info();
-		$activate        = activate_plugin( $plugin_activate );
+		// Populate file path after installation
+		if ( $this->tgmpa ) {
+			$this->tgmpa->populate_file_path( $slug );
+		}
+
+		// Activate the plugin
+		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
+		$activate = activate_plugin( $plugin_file );
+		
 		if ( is_wp_error( $activate ) ) {
-			$status['error'] = wp_kses_post( $activate->get_error_message() );
+			$error = array( 'error' => $activate->get_error_message() );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'activate_error', $activate->get_error_message() );
 			if ( $echo ) {
-				wp_send_json_error( $status );
-			} else {
-				return $status;
+				wp_send_json_error( $error );
 			}
+			return $error;
 		}
 
 		$status = $this->get_plugin_status( $slug );
+		Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'installed_and_activated' );
 
 		if ( $echo ) {
 			wp_send_json_success( $status );
-		} else {
-			return $status;
 		}
-
+		return $status;
 	}
 
 	/**
-	 * Performs a plugin deactivation
+	 * Perform plugin activation.
 	 *
-	 * @return type
-	 */
-	function do_plugin_deactivate( $slug ) {
-
-		$status = $this->get_plugin_status( $slug );
-
-		if ( empty( $this->plugins[ $slug ] ) ) {
-			$status['error'] = 'We have no data about this plugin.';
-			wp_send_json_error( $status );
-		}
-
-		deactivate_plugins( $this->plugins[ $slug ]['file_path'] );
-
-		$status = $this->get_plugin_status( $slug );
-		wp_send_json_success( $status );
-
-	}
-
-	/**
-	 * Performs plugins activation
-	 *
-	 * @param string $slug
-	 * @param bool   $echo
-	 * @return void | array
+	 * @param string $slug Plugin slug
+	 * @param bool $echo Whether to echo JSON response
+	 * @return void|array
 	 */
 	function do_plugin_activate( $slug, $echo = true ) {
-
 		$status = $this->get_plugin_status( $slug );
 
 		if ( empty( $this->plugins[ $slug ] ) ) {
-			$status['error'] = 'We have no data about this plugin.';
+			$error = array( 'error' => __( 'Plugin configuration not found.', 'reign-demo-installer' ) );
 			if ( $echo ) {
-				wp_send_json_error( $status );
-			} else {
-				return $status;
+				wp_send_json_error( $error );
 			}
+			return $error;
+		}
+
+		if ( ! $this->is_plugin_installed( $slug ) ) {
+			$error = array( 'error' => __( 'Plugin is not installed.', 'reign-demo-installer' ) );
+			if ( $echo ) {
+				wp_send_json_error( $error );
+			}
+			return $error;
 		}
 
 		$plugin_file_path = $this->_get_plugin_file_path_from_slug( $slug );
-		$result           = activate_plugin( $plugin_file_path );
+		$result = activate_plugin( $plugin_file_path );
 
 		if ( is_wp_error( $result ) ) {
-			$status['error'] = $result->get_error_message();
+			$error = array( 'error' => $result->get_error_message() );
+			Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'activate_error', $result->get_error_message() );
 			if ( $echo ) {
-				wp_send_json_error( $status );
-			} else {
-				return $status;
+				wp_send_json_error( $error );
 			}
+			return $error;
 		}
 
 		$status = $this->get_plugin_status( $slug );
+		Reign_Demo_Installer_Logger::log_plugin_action( $slug, 'activated' );
+
 		if ( $echo ) {
 			wp_send_json_success( $status );
-		} else {
-			return $status;
 		}
+		return $status;
 	}
 
+	/**
+	 * Get plugin file path from slug.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return string Plugin file path
+	 */
 	function _get_plugin_file_path_from_slug( $slug ) {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
+		
 		$plugins_list = get_plugins();
-		$keys         = array_keys( $plugins_list );
+		$keys = array_keys( $plugins_list );
+		
 		foreach ( $keys as $key ) {
 			if ( preg_match( '|^' . $slug . '/|', $key ) ) {
 				return $key;
 			}
 		}
+		
 		return $slug;
 	}
 
 	/**
-	 * Returns the install url for the current plugin
+	 * Get download URL for plugin.
 	 *
-	 * @param string $slug
-	 * @return string
+	 * @param string $slug Plugin slug
+	 * @return string Download URL
 	 */
 	public function get_download_url( $slug ) {
-		$dl_source = '';
-
-		if ( isset( $this->plugins[ $slug ]['external_url'] ) && ! empty( $this->plugins[ $slug ]['external_url'] ) ) {
-			return $this->plugins[ $slug ]['external_url'];
-			// $plugin_source_type = $this->_get_plugin_source_type( $this->plugins[ $slug ]['source'] );
-		} else {
-			$plugin_source_type = 'repo';
+		if ( ! isset( $this->plugins[ $slug ] ) ) {
+			return '';
 		}
 
-		switch ( $plugin_source_type ) {
-			case 'repo':
-				return $this->get_wp_repo_download_url( $slug );
-			case 'external':
-				return $this->plugins[ $slug ]['source'];
-			case 'bundled':
-				return $this->tgmpa->default_path . $this->plugins[ $slug ]['source'];
+		$plugin = $this->plugins[ $slug ];
+
+		// Check for external URL first
+		if ( isset( $plugin['external_url'] ) && ! empty( $plugin['external_url'] ) ) {
+			return $plugin['external_url'];
 		}
 
-		return $dl_source; // Should never happen.
+		// Check for direct source
+		if ( isset( $plugin['source'] ) && ! empty( $plugin['source'] ) ) {
+			$plugin_source_type = $this->_get_plugin_source_type( $plugin['source'] );
+			
+			switch ( $plugin_source_type ) {
+				case 'repo':
+					return $this->get_wp_repo_download_url( $slug );
+				case 'external':
+					return $plugin['source'];
+				case 'bundled':
+					return $this->tgmpa->default_path . $plugin['source'];
+			}
+		}
+
+		// Default to WordPress repository
+		return $this->get_wp_repo_download_url( $slug );
 	}
 
+	/**
+	 * Determine plugin source type.
+	 *
+	 * @param string $source Plugin source
+	 * @return string Source type
+	 */
 	function _get_plugin_source_type( $source ) {
 		if ( 'repo' === $source || preg_match( self::WP_REPO_REGEX, $source ) ) {
 			return 'repo';
@@ -615,115 +427,284 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		}
 	}
 
+	/**
+	 * Get WordPress repository download URL.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return string Download URL
+	 */
 	function get_wp_repo_download_url( $slug ) {
-		include_once ABSPATH . 'wp-admin/includes/plugin-install.php'; // for plugins_api..
-		$api = plugins_api(
-			'plugin_information',
-			array(
-				'slug'   => $slug,
-				'fields' => array( 'sections' => false ),
-			)
-		); // Save on a bit of bandwidth.
-		if ( is_wp_error( $api ) ) {
-			$status['error'] = $api->get_error_message();
-			wp_send_json_error( $status );
+		if ( ! function_exists( 'plugins_api' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 		}
 
-		return $api->download_link;
+		$api = plugins_api( 'plugin_information', array(
+			'slug'   => $slug,
+			'fields' => array( 'sections' => false ),
+		) );
+
+		if ( is_wp_error( $api ) ) {
+			Reign_Demo_Installer_Logger::error( 'WordPress API error for ' . $slug . ': ' . $api->get_error_message() );
+			return '';
+		}
+
+		return isset( $api->download_link ) ? $api->download_link : '';
 	}
 
+	/**
+	 * Setup WordPress filesystem.
+	 *
+	 * @return bool True if successful, false otherwise
+	 */
+	private function setup_filesystem() {
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		$method = '';
+		$creds = request_filesystem_credentials( '', $method, false, false, array() );
+		
+		if ( false === $creds ) {
+			return false;
+		}
+
+		return WP_Filesystem( $creds );
+	}
 
 	/**
-	 * Check if a plugin is installed. Does not take must-use plugins into account.
+	 * Check if plugin is installed.
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $slug Plugin slug.
-	 * @return bool True if installed, false otherwise.
+	 * @param string $slug Plugin slug
+	 * @return bool True if installed, false otherwise
 	 */
 	public function is_plugin_installed( $slug ) {
+		if ( $this->tgmpa ) {
+			return $this->tgmpa->is_plugin_installed( $slug );
+		}
 
-		return $this->tgmpa->is_plugin_installed( $slug );
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$installed_plugins = get_plugins();
+		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
+		
+		return isset( $installed_plugins[ $plugin_file ] );
 	}
 
 	/**
-	 * Check whether there is an update available for a plugin.
+	 * Check if plugin is active.
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $slug Plugin slug.
-	 * @return false|string Version number string of the available update or false if no update available.
-	 */
-	public function does_plugin_have_update( $slug ) {
-		return $this->tgmpa->does_plugin_have_update( $slug );
-	}
-
-	/**
-	 * Check if a plugin is active.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $slug Plugin slug.
-	 * @return bool True if active, false otherwise.
+	 * @param string $slug Plugin slug
+	 * @return bool True if active, false otherwise
 	 */
 	public function is_plugin_active( $slug ) {
-		return $this->tgmpa->is_plugin_active( $slug );
+		if ( $this->tgmpa ) {
+			return $this->tgmpa->is_plugin_active( $slug );
+		}
+
+		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
+		return is_plugin_active( $plugin_file );
 	}
 
 	/**
-	 * Retrieve the version number of an installed plugin.
+	 * Get plugin status.
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $slug Plugin slug.
-	 * @return string Version number as string or an empty string if the plugin is not installed
-	 *                or version unknown (plugins which don't comply with the plugin header standard).
+	 * @param string $plugin_slug Plugin slug
+	 * @return array Plugin status information
 	 */
-	public function get_installed_version( $slug ) {
+	function get_plugin_status( $plugin_slug ) {
+		$status = array();
 
-		return $this->tgmpa->get_installed_version( $slug );
-	}
+		if ( $this->is_plugin_installed( $plugin_slug ) ) {
+			if ( $this->is_plugin_active( $plugin_slug ) ) {
+				$status['status']      = 'reign-active';
+				$status['status_text'] = __( 'Active', 'reign-demo-installer' );
+				$status['action_text'] = __( 'Already Installed & Activated', 'reign-demo-installer' );
+				$status['action']      = 'no_action';
+			} else {
+				$status['status']      = 'reign-inactive';
+				$status['status_text'] = __( 'Inactive', 'reign-demo-installer' );
+				$status['action_text'] = __( 'Activate', 'reign-demo-installer' );
+				$status['action']      = 'enable_plugin';
+			}
+		} else {
+			$status['status']      = 'reign-not-installed';
+			$status['status_text'] = __( 'Not Installed', 'reign-demo-installer' );
+			$status['action_text'] = __( 'Install Now', 'reign-demo-installer' );
+			$status['action']      = 'install_plugin';
 
-	/**
-	 * Wrapper around the core WP get_plugins function, making sure it's actually available.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $plugin_folder Optional. Relative path to single plugin folder.
-	 * @return array Array of installed plugins with plugin information.
-	 */
-	public function get_plugins( $plugin_folder = '' ) {
-		return $this->tgmpa->get_plugins( $plugin_folder );
-	}
-
-	public function get_required_plugins() {
-		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === $_GET['step'] ) {
-
-			$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
-			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
-
-			if ( ! is_wp_error( $response ) ) {
-				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-					$response = isset( $response['body'] ) ? $response['body'] : '';
-					if ( ! empty( $response ) ) {
-						$response = json_decode( $response, true );
-					}
-					if ( ! empty( $response ) && is_array( $response ) ) {
-						return $response;
-					}
-				}
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				$status['status']      = 'reign-not-installed reign-addons-disabled';
+				$status['action_text'] = __( 'You don\'t have permission to install plugins. Contact site administrator.', 'reign-demo-installer' );
+				$status['action']      = 'contact_network_admin';
 			}
 		}
 
+		return $status;
 	}
 
+	/**
+	 * Get installed plugin version.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return string Version number or empty string
+	 */
+	public function get_installed_version( $slug ) {
+		if ( $this->tgmpa ) {
+			return $this->tgmpa->get_installed_version( $slug );
+		}
+
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$installed_plugins = get_plugins();
+		$plugin_file = $this->_get_plugin_file_path_from_slug( $slug );
+
+		if ( isset( $installed_plugins[ $plugin_file ]['Version'] ) ) {
+			return $installed_plugins[ $plugin_file ]['Version'];
+		}
+
+		return '';
+	}
+
+	/**
+	 * Get list of plugins.
+	 *
+	 * @param string $plugin_folder Plugin folder
+	 * @return array Array of installed plugins
+	 */
+	public function get_plugins( $plugin_folder = '' ) {
+		if ( $this->tgmpa ) {
+			return $this->tgmpa->get_plugins( $plugin_folder );
+		}
+
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		return get_plugins( $plugin_folder );
+	}
+
+	/**
+	 * Get required plugins configuration.
+	 *
+	 * @return array Required plugins
+	 */
+	public function get_required_plugins() {
+		// Check if we're on the plugins manager step
+		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === $_GET['step'] ) {
+			$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_key( $_GET['plugins_json_key'] ) : '';
+			
+			if ( ! empty( $plugins_json_key ) ) {
+				return $this->fetch_plugins_config( $plugins_json_key );
+			}
+		}
+
+		// Check if we have cached plugins config
+		$cached_plugins = get_option( 'reign_theme_demo_req_plugins', array() );
+		if ( ! empty( $cached_plugins ) ) {
+			return $cached_plugins;
+		}
+
+		return array();
+	}
+
+	/**
+	 * Fetch plugins configuration from remote source.
+	 *
+	 * @param string $plugins_json_key Plugins JSON key
+	 * @return array Plugins configuration
+	 */
+	private function fetch_plugins_config( $plugins_json_key ) {
+		$url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
+		$response = wp_remote_get( $url_to_request, array( 
+			'sslverify' => true, 
+			'timeout' => 30,
+			'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+		) );
+
+		if ( is_wp_error( $response ) ) {
+			Reign_Demo_Installer_Logger::error( 'Failed to fetch plugins config: ' . $response->get_error_message() );
+			return array();
+		}
+
+		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return array();
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+		$plugins = json_decode( $body, true );
+
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			Reign_Demo_Installer_Logger::error( 'Invalid JSON in plugins config: ' . json_last_error_msg() );
+			return array();
+		}
+
+		return is_array( $plugins ) ? $plugins : array();
+	}
+
+	/**
+	 * Check if plugin has update available.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return false|string Version number or false
+	 */
+	public function does_plugin_have_update( $slug ) {
+		if ( $this->tgmpa ) {
+			return $this->tgmpa->does_plugin_have_update( $slug );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if plugin requires update.
+	 *
+	 * @param string $slug Plugin slug
+	 * @return bool True if update required, false otherwise
+	 */
+	public function plugin_has_update( $slug ) {
+		if ( empty( $this->plugins[ $slug ] ) ) {
+			return false;
+		}
+
+		$installed_version = $this->get_installed_version( $slug );
+		$minimum_version = isset( $this->plugins[ $slug ]['version'] ) ? $this->plugins[ $slug ]['version'] : '';
+
+		if ( empty( $minimum_version ) || empty( $installed_version ) ) {
+			return false;
+		}
+
+		return version_compare( $minimum_version, $installed_version, '>' );
+	}
+}
+
+endif;
+
+// Backward compatibility - maintain old class name as alias
+if ( ! class_exists( 'WBCOM_Demo_Importer_Plugins_Manager' ) ) {
+	class_alias( 'Reign_Demo_Installer_Plugins_Manager', 'WBCOM_Demo_Importer_Plugins_Manager' );
 }
 
 /**
- * Shortcut to WBCOM_Demo_Importer_Plugins_Manager class
+ * Shortcut to Reign_Demo_Installer_Plugins_Manager class.
+ *
+ * @return Reign_Demo_Installer_Plugins_Manager
+ */
+function instantiate_reign_demo_installer_plugins_manager() {
+	return Reign_Demo_Installer_Plugins_Manager::instance();
+}
+
+/**
+ * Backward compatibility function.
+ *
+ * @return Reign_Demo_Installer_Plugins_Manager
  */
 function instantiate_wbcom_demo_importer_plugins_manager() {
-	return WBCOM_Demo_Importer_Plugins_Manager::instance();
+	return Reign_Demo_Installer_Plugins_Manager::instance();
 }
-instantiate_wbcom_demo_importer_plugins_manager();
 
+// Initialize the plugins manager
+instantiate_reign_demo_installer_plugins_manager();

@@ -1,34 +1,59 @@
 <?php
+/**
+ * Admin settings for Reign Demo Installer
+ *
+ * @package Reign_Demo_Installer
+ * @since 3.0.0
+ */
+
+// Prevent direct access
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
+// EMERGENCY FIX - Force load pluggable functions
+if ( ! function_exists( 'wp_get_current_user' ) ) {
+    require_once( ABSPATH . 'wp-includes/pluggable.php' );
+}
+
+if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 	/**
-	 * @class WBCOM_TDI_ADMIN_SETTINGS
-	 * @version 1.0.0
+	 * Reign_Demo_Installer_Admin_Settings class.
+	 *
+	 * @class Reign_Demo_Installer_Admin_Settings
+	 * @version 3.0.0
 	 */
-	class WBCOM_TDI_ADMIN_SETTINGS {
+	class Reign_Demo_Installer_Admin_Settings {
 
 		/**
 		 * The single instance of the class.
 		 *
-		 * @var WBCOM_TDI_ADMIN_SETTINGS
-		 * @since 1.0.0
+		 * @var Reign_Demo_Installer_Admin_Settings
+		 * @since 3.0.0
 		 */
 		protected static $_instance = null;
-		protected static $_slug     = 'wbcom-theme-demo-installer';
+		
+		/**
+		 * Menu slug
+		 *
+		 * @var string
+		 */
+		protected static $_slug = 'reign-demo-installer';
 
 		/**
-		 * Main WBCOM_TDI_ADMIN_SETTINGS Instance.
+		 * Security instance
 		 *
-		 * Ensures only one instance of WBCOM_TDI_ADMIN_SETTINGS is loaded or can be loaded.
+		 * @var Reign_Demo_Installer_Security
+		 */
+		private $security;
+
+		/**
+		 * Main instance.
 		 *
-		 * @since 1.0.0
+		 * @since 3.0.0
 		 * @static
-		 * @see WBCOM_TDI_ADMIN_SETTINGS()
-		 * @return WBCOM_TDI_ADMIN_SETTINGS - Main instance.
+		 * @return Reign_Demo_Installer_Admin_Settings - Main instance.
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -37,48 +62,146 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			return self::$_instance;
 		}
 
-
 		/**
-		 * WBCOM_TDI_ADMIN_SETTINGS Constructor.
+		 * Constructor.
 		 */
 		public function __construct() {
+			if ( class_exists( 'Reign_Demo_Installer_Security' ) ) {
+				$this->security = Reign_Demo_Installer_Security::instance();
+			}
+			
 			$this->init_hooks();
 		}
 
 		/**
 		 * Hook into actions and filters.
 		 *
-		 * @since  1.0.0
+		 * @since 3.0.0
 		 */
 		private function init_hooks() {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_init', array( $this, 'handle_demo_actions' ) );
 		}
 
+		/**
+		 * Add admin menu.
+		 */
 		public function add_admin_menu() {
+			// Always add menu for admin users
 			add_menu_page(
-				$page_title = __( 'Theme Installer', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
-				$menu_title = __( 'Theme Installer', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
-				$capability = 'manage_options',
-				$menu_slug  = self::$_slug,
-				$function   = array( $this, 'render_page_for_added_menu' ),
-				$icon_url   = '',
-				$position   = null
+				esc_html__( 'Reign Demo Installer', 'reign-demo-installer' ),
+				esc_html__( 'Demo Installer', 'reign-demo-installer' ),
+				'manage_options',
+				self::$_slug,
+				array( $this, 'render_page_for_added_menu' ),
+				'dashicons-download',
+				59
 			);
 		}
 
+		/**
+		 * Handle demo actions (install, activate, etc.).
+		 */
+		public function handle_demo_actions() {
+			// Only process if we're on our admin page
+			if ( ! isset( $_GET['page'] ) || $_GET['page'] !== self::$_slug ) {
+				return;
+			}
+
+			// Check if there's an action to handle
+			$action = $this->security ? $this->security->get_request_param( 'action', 'string' ) : '';
+			
+			if ( empty( $action ) ) {
+				return;
+			}
+
+			// Verify nonce for security
+			$nonce = $this->security ? $this->security->get_request_param( '_wpnonce', 'string' ) : '';
+			
+			if ( ! wp_verify_nonce( $nonce, 'reign_demo_installer_' . $action ) ) {
+				wp_die( esc_html__( 'Security check failed. Please try again.', 'reign-demo-installer' ) );
+			}
+
+			// Check user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permissions to perform this action.', 'reign-demo-installer' ) );
+			}
+
+			// Handle different actions
+			switch ( $action ) {
+				case 'clear_logs':
+					$this->handle_clear_logs();
+					break;
+				
+				case 'reset_plugin':
+					$this->handle_reset_plugin();
+					break;
+			}
+		}
+
+		/**
+		 * Handle clear logs action.
+		 */
+		private function handle_clear_logs() {
+			if ( class_exists( 'Reign_Demo_Installer_Logger' ) ) {
+				Reign_Demo_Installer_Logger::clear_log();
+				add_action( 'admin_notices', function() {
+					echo '<div class="notice notice-success is-dismissible"><p>';
+					echo esc_html__( 'Logs cleared successfully.', 'reign-demo-installer' );
+					echo '</p></div>';
+				});
+			}
+		}
+
+		/**
+		 * Handle reset plugin action.
+		 */
+		private function handle_reset_plugin() {
+			// Clear all plugin options
+			delete_option( 'reign_theme_demo_import_data' );
+			delete_option( 'reign_theme_demo_req_plugins' );
+			
+			add_action( 'admin_notices', function() {
+				echo '<div class="notice notice-success is-dismissible"><p>';
+				echo esc_html__( 'Plugin reset successfully.', 'reign-demo-installer' );
+				echo '</p></div>';
+			});
+		}
+
+		/**
+		 * Show step header.
+		 *
+		 * @param string $currentTab Current tab
+		 */
 		public function show_step_header( $currentTab = '' ) {
 			?>
 			<div class="tab">
-				<button class="tablinks <?php echo ( $currentTab == 'select-demo' ) ? 'active' : ''; ?>"><?php _e( 'Select Demo', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'manage-plugins' ) ? 'active' : ''; ?>"><?php _e( 'Manage Plugins', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'install-demo' ) ? 'active' : ''; ?>"><?php _e( 'Install Demo', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'success' ) ? 'active' : ''; ?>"><?php _e( 'Success', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
+				<button class="tablinks <?php echo ( $currentTab == 'select-demo' ) ? 'active' : ''; ?>">
+					<?php esc_html_e( 'Select Demo', 'reign-demo-installer' ); ?>
+				</button>
+				<button class="tablinks <?php echo ( $currentTab == 'manage-plugins' ) ? 'active' : ''; ?>">
+					<?php esc_html_e( 'Manage Plugins', 'reign-demo-installer' ); ?>
+				</button>
+				<button class="tablinks <?php echo ( $currentTab == 'install-demo' ) ? 'active' : ''; ?>">
+					<?php esc_html_e( 'Install Demo', 'reign-demo-installer' ); ?>
+				</button>
+				<button class="tablinks <?php echo ( $currentTab == 'success' ) ? 'active' : ''; ?>">
+					<?php esc_html_e( 'Success', 'reign-demo-installer' ); ?>
+				</button>
 			</div>
 			<?php
 		}
 
+		/**
+		 * Render admin page.
+		 */
 		public function render_page_for_added_menu() {
+			// Simple capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'reign-demo-installer' ) );
+			}
+
 			$theme_info = wp_get_theme();
 
 			// Get parent theme name
@@ -86,6 +209,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			$property   = $reflection->getProperty( 'parent' );
 			$property->setAccessible( true );
 			$parent = $property->getValue( $theme_info );
+			
 			if ( $parent ) {
 				$theme_info = $property->getValue( $theme_info );
 			} else {
@@ -96,357 +220,601 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			}
 
 			echo '<div class="wrap">';
-
 			echo '<div class="demo-listing-wrap">';
 
-			?>
+			// Show theme info
+			$this->render_theme_info( $theme_info );
 
-		<div class="theme-info">
-			<h1><?php echo $theme_info['Name']; ?></h1>
-		</div>
+			// Determine current step
+			$current_step = $this->get_current_step();
+			
+			// Show step header
+			$this->show_step_header( $current_step );
 
-			<?php
-			if ( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
-				$this->show_step_header( 'success' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
-				$this->show_step_header( 'install-demo' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
-				$this->show_step_header( 'manage-plugins' );
+			echo '<div class="reign-demos-wrapper reign-importer-section">';
 
-			} else {
-				$this->show_step_header( 'select-demo' );
+			// Render appropriate content based on step
+			switch ( $current_step ) {
+				case 'success':
+					$this->render_success_page();
+					break;
+					
+				case 'install-demo':
+					$this->render_demo_install_page();
+					break;
+					
+				case 'manage-plugins':
+					$this->render_plugins_manager_page();
+					break;
+					
+				default:
+					$this->render_demo_selection_page();
+					break;
 			}
+
+			echo '</div>'; // reign-demos-wrapper
+			echo '</div>'; // demo-listing-wrap
+			echo '</div>'; // wrap
+		}
+
+		/**
+		 * Render theme info section.
+		 *
+		 * @param array $theme_info Theme information
+		 */
+		private function render_theme_info( $theme_info ) {
 			?>
-
-		<div class="reign-demos-wrapper reign-importer-section">
+			<div class="theme-info">
+				<h1><?php echo esc_html( $theme_info['Name'] ); ?></h1>
+			</div>
 			<?php
+		}
 
-			if ( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
-				delete_option( 'wbcom_theme_demo_import_data' );
-				delete_option( 'wbcom_theme_demo_req_plugins' );
-				include_once 'success.php';
-				/** to deal with GeoDirectory import issue */
-				if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
-					geodir_tool_restore_cpt_from_taxonomies();
+		/**
+		 * Get current step based on URL parameters.
+		 *
+		 * @return string Current step
+		 */
+		private function get_current_step() {
+			if ( isset( $_GET['success'] ) && $_GET['success'] === 'success' ) {
+				return 'success';
+			}
+			
+			if ( isset( $_GET['step'] ) ) {
+				$step = $this->security ? $this->security->get_request_param( 'step', 'string' ) : sanitize_text_field( $_GET['step'] );
+				
+				switch ( $step ) {
+					case 'demo_import':
+						return 'install-demo';
+					case 'plugins_manager':
+						return 'manage-plugins';
 				}
+			}
+			
+			return 'select-demo';
+		}
+
+		/**
+		 * Render success page.
+		 */
+		private function render_success_page() {
+			delete_option( 'reign_theme_demo_import_data' );
+			delete_option( 'reign_theme_demo_req_plugins' );
+			include_once 'success.php';
+			
+			// Handle GeoDirectory import issue
+			if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
+				geodir_tool_restore_cpt_from_taxonomies();
+			}
+		}
+
+		/**
+		 * Render demo installation page.
+		 */
+		private function render_demo_install_page() {
+			$target_url = $this->security ? $this->security->get_request_param( 'target_url', 'url' ) : '';
+			$theme_slug = $this->security ? $this->security->get_request_param( 'theme_slug', 'slug' ) : '';
+			$demo_slug = $this->security ? $this->security->get_request_param( 'demo_slug', 'slug' ) : '';
+
+			if ( ! $target_url || ! $theme_slug || ! $demo_slug ) {
+				wp_die( esc_html__( 'Invalid parameters provided.', 'reign-demo-installer' ) );
+			}
+
+			$target_demo_info = $this->get_demo_info( $target_url );
+			
+			if ( empty( $target_demo_info ) ) {
+				echo '<div class="notice notice-error"><p>';
+				esc_html_e( 'Could not retrieve demo information. Please try again later.', 'reign-demo-installer' );
+				echo '</p></div>';
 				return;
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
+			}
 
-				$target_url       = $_GET['target_url'];
-				$target_demo_info = array();
+			$this->render_demo_importer_interface( $target_demo_info, $theme_slug, $demo_slug, $target_url );
+		}
 
-				$current_url           = $this->get_demo_installer_page_url();
-				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
-				$retrieved_data        = '';
-				$response              = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
-				if ( is_wp_error( $response ) ) {
-					$error_message = $response->get_error_message();
-					echo "Something went wrong: $error_message";
-				} else {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-						$response = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response ) ) {
-							$response = json_decode( $response, true );
-						}
-						if ( ! empty( $response ) && is_array( $response ) ) {
-							$motive_key = '';
-							foreach ( $response as $key => $value ) {
-								$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
-								if ( $target_url == $demo_target_url ) {
-									$target_demo_info = $value;
-									break;
-								}
-							}
-						} else {
-							_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-						}
-					}
+		/**
+		 * Get demo information from target URL.
+		 *
+		 * @param string $target_url Target URL
+		 * @return array Demo information
+		 */
+		private function get_demo_info( $target_url ) {
+			$parent_url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
+			$response = wp_remote_get( $parent_url_to_request, array( 
+				'sslverify' => true, 
+				'timeout' => 15,
+				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+			) );
+
+			if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+				return array();
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			$demos = json_decode( $body, true );
+
+			if ( json_last_error() !== JSON_ERROR_NONE ) {
+				return array();
+			}
+
+			// Find the target demo
+			foreach ( $demos as $demo ) {
+				if ( isset( $demo['target_url'] ) && $demo['target_url'] === $target_url ) {
+					return $demo;
 				}
+			}
 
-				echo "<div class='wrap wbcom-demo-importer'>";
-				?>
-			<div class="reign-demos-alertboxes">
-				<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $target_demo_info['screenshot']; ?>" style="width:100%;" />
-			</div>
-			<div class="reign-demos-progress-container">
-				<div id="progress-bar-container" style="display: none;">
-					<div class="skills completed">80%</div>
+			return array();
+		}
+
+		/**
+		 * Render demo importer interface.
+		 *
+		 * @param array $demo_info Demo information
+		 * @param string $theme_slug Theme slug
+		 * @param string $demo_slug Demo slug
+		 * @param string $target_url Target URL
+		 */
+		private function render_demo_importer_interface( $demo_info, $theme_slug, $demo_slug, $target_url ) {
+			?>
+			<div class='wrap wbcom-demo-importer'>
+				<div class="reign-demos-alertboxes">
+					<img src="<?php echo esc_url( REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'demos-imgs/' . $demo_info['screenshot'] ); ?>" 
+						 style="width:100%;" 
+						 alt="<?php echo esc_attr( $demo_info['demo_name'] ); ?>" />
 				</div>
-				<div id="progress-snackbar"></div>
-				<?php
-				echo "<div class='loader' style='display:none;text-align:center;'></div>";
-				echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
-				echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
-				echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
-				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . '</button>';
-				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
-				echo '</div>';
-				?>
+				<div class="reign-demos-progress-container">
+					<div id="progress-bar-container" style="display: none;">
+						<div class="skills completed">0%</div>
+					</div>
+					<div id="progress-snackbar"></div>
+					<div class='loader' style='display:none;text-align:center;'></div>
+					
+					<input type='hidden' id='theme_slug' value='<?php echo esc_attr( $theme_slug ); ?>' />
+					<input type='hidden' id='demo_slug' value='<?php echo esc_attr( $demo_slug ); ?>' />
+					<input type='hidden' id='target_url' value='<?php echo esc_url( $target_url ); ?>' />
+					<input type='hidden' id='demo_nonce' value='<?php echo esc_attr( wp_create_nonce( 'reign_demo_installer_import' ) ); ?>' />
+					
+					<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>
+						<?php esc_html_e( 'Install Demo', 'reign-demo-installer' ); ?>
+					</button>
+					
+					<div id="wbtd-current-action" style="display:none;">
+						<?php esc_html_e( 'Initializing...', 'reign-demo-installer' ); ?>
+					</div>
+				</div>
 			</div>
-
 
 			<div class="info-importer">
-				<div class="info-impoter-heading">Please note:</div>
+				<div class="info-impoter-heading">
+					<?php esc_html_e( 'Important Notes:', 'reign-demo-installer' ); ?>
+				</div>
 				<div class="info-impoter-content">
 					<ul>
-						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>, Please make sure you have <strong>full backup</strong> of site before importing demo data.</li>
-
-						<li>Importing All the demo content will take some time so be patient.</li>
-						<!-- <li>Seem's Hard ?? We offer free demo installation services, please submit details at <a href="https://brndle.com/downloads/free-theme-installation-service/"> Free Theme Installation</a> </li> -->
+						<li><?php esc_html_e( 'Demo Importer is suggested for fresh installations only. Please make sure you have a full backup of your site before importing demo data.', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'Importing all the demo content will take some time, so please be patient.', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'Do not close this browser tab during the import process.', 'reign-demo-installer' ); ?></li>
+						<li><?php esc_html_e( 'If the import fails, you can try again or contact support.', 'reign-demo-installer' ); ?></li>
 					</ul>
 				</div>
 			</div>
+			<?php
+		}
 
-				<?php
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
+		/**
+		 * Render plugins manager page.
+		 */
+		private function render_plugins_manager_page() {
+			$theme_slug = $this->security ? $this->security->get_request_param( 'theme_slug', 'slug' ) : '';
+			$demo_slug = $this->security ? $this->security->get_request_param( 'demo_slug', 'slug' ) : '';
+			$target_url = $this->security ? $this->security->get_request_param( 'target_url', 'url' ) : '';
+			$plugins_json_key = $this->security ? $this->security->get_request_param( 'plugins_json_key', 'slug' ) : '';
 
-				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
-				$retrieved_data = '';
-				$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+			if ( ! $plugins_json_key ) {
+				wp_die( esc_html__( 'Missing plugins configuration.', 'reign-demo-installer' ) );
+			}
 
-				if ( ! is_wp_error( $response ) ) {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-						$response = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response ) ) {
-							$response = json_decode( $response, true );
-						}
-						if ( ! empty( $response ) && is_array( $response ) ) {
-							update_option( 'wbcom_theme_demo_req_plugins', $response );
-						}
+			// Fetch plugins configuration
+			$plugins_list = $this->get_plugins_configuration( $plugins_json_key );
+			
+			if ( empty( $plugins_list ) ) {
+				echo '<div class="notice notice-error"><p>';
+				esc_html_e( 'Could not retrieve plugins configuration. Please try again later.', 'reign-demo-installer' );
+				echo '</p></div>';
+				return;
+			}
+
+			$demo_import_url = $this->get_demo_installer_page_url( array(
+				'theme_slug' => $theme_slug,
+				'demo_slug'  => $demo_slug,
+				'target_url' => $target_url,
+				'step'       => 'demo_import',
+			) );
+
+			$this->render_plugins_list( $plugins_list, $demo_import_url, $plugins_json_key );
+		}
+
+		/**
+		 * Get plugins configuration.
+		 *
+		 * @param string $plugins_json_key Plugins JSON key
+		 * @return array Plugins configuration
+		 */
+		private function get_plugins_configuration( $plugins_json_key ) {
+			$url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
+			$response = wp_remote_get( $url_to_request, array( 
+				'sslverify' => true, 
+				'timeout' => 15,
+				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+			) );
+
+			if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+				return array();
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			$plugins = json_decode( $body, true );
+
+			if ( json_last_error() !== JSON_ERROR_NONE ) {
+				return array();
+			}
+
+			// Store in option for later use
+			update_option( 'reign_theme_demo_req_plugins', $plugins );
+
+			return $plugins;
+		}
+
+		/**
+		 * Render plugins list.
+		 *
+		 * @param array $plugins_list Plugins list
+		 * @param string $demo_import_url Demo import URL
+		 * @param string $plugins_json_key Plugins JSON key
+		 */
+		private function render_plugins_list( $plugins_list, $demo_import_url, $plugins_json_key ) {
+			$num_of_req_plugins_installed = 0;
+			$required_plugins_to_activate = 0;
+
+			?>
+			<div class="goto-install-demo-step">
+				<a href="<?php echo esc_url( $demo_import_url ); ?>" class="button button-primary">
+					<?php esc_html_e( 'Proceed to Demo Installation', 'reign-demo-installer' ); ?>
+				</a>
+			</div>
+			<?php
+
+			foreach ( $plugins_list as $plugin ) {
+				$plugin_status = $this->get_plugin_status( $plugin['slug'] );
+				$plugin_dependency = 'Optional';
+				
+				if ( isset( $plugin['required'] ) && $plugin['required'] == true ) {
+					$required_plugins_to_activate++;
+					$plugin_dependency = 'Required';
+					if ( $plugin_status['status_text'] == 'Active' ) {
+						$num_of_req_plugins_installed++;
 					}
 				}
 
-				$num_of_req_plugins_installed = 0;
-				$required_plugins_to_activate = 0;
-				$demo_import_url              = $this->get_demo_installer_page_url(
-					array(
-						'theme_slug' => $_GET['theme_slug'],
-						'demo_slug'  => $_GET['demo_slug'],
-						'target_url' => $_GET['target_url'],
-						'step'       => 'demo_import',
-					)
-				);
+				$already_active_class = ( $plugin_status['status_text'] == 'Active' ) ? 'already-active' : '';
 
-				$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
-				?>
-			<div class="goto-install-demo-step">
-				<a href="<?php echo $demo_import_url; ?>" class="button button-primary"><?php _e( 'Go To Demo Installation', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+				$this->render_plugin_card( $plugin, $plugin_status, $plugin_dependency, $already_active_class, $plugins_json_key );
+			}
+
+			$this->render_plugins_scripts( $required_plugins_to_activate, $num_of_req_plugins_installed );
+		}
+
+		/**
+		 * Render individual plugin card.
+		 *
+		 * @param array $plugin Plugin data
+		 * @param array $plugin_status Plugin status
+		 * @param string $plugin_dependency Plugin dependency
+		 * @param string $already_active_class CSS class
+		 * @param string $plugins_json_key Plugins JSON key
+		 */
+		private function render_plugin_card( $plugin, $plugin_status, $plugin_dependency, $already_active_class, $plugins_json_key ) {
+			?>
+			<div class="wbcom-req-plugin-card">
+				<div class="plugin-container">
+					<div class="plugin-importer-sec">
+						<ul>
+							<li class="importer-plugin-thumb">
+								<img src="<?php echo esc_url( REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'plugin-thumb/' . $plugin['plugin_thumb'] ); ?>" 
+									 alt="<?php echo esc_attr( $plugin['name'] ); ?>" 
+									 class="pluign_image">
+							</li>
+							<li class="plugin-name"><?php echo esc_html( $plugin['name'] ); ?></li>
+							<li class="plugin-status">
+								<span class="<?php echo esc_attr( $already_active_class ); ?>">
+									<?php echo esc_html( $plugin_status['status_text'] ); ?>
+								</span>
+							</li>
+							<li class="plugin-dependency <?php echo esc_attr( strtolower( $plugin_dependency ) ); ?>">
+								<?php echo esc_html( $plugin_dependency ); ?>
+							</li>
+							<li class="plugin-description"><?php echo esc_html( $plugin['description'] ); ?></li>
+							<li class="importer-button">
+								<input type="hidden" class="demo-name" name="demo-name" value="<?php echo esc_attr( $plugins_json_key ); ?>">
+								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo esc_attr( $plugin['slug'] ); ?>">
+								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo esc_attr( $plugin_status['action'] ); ?>">
+								
+								<?php if ( isset( $plugin['is_paid'] ) ) : ?>
+									<?php if ( $plugin_status['status_text'] != 'Active' ) : ?>
+										<a class="button button-primary buy-now-plugins" target="_blank" 
+										   href="<?php echo esc_url( $plugin['external_url'] ); ?>">
+											<?php esc_html_e( 'Buy Now', 'reign-demo-installer' ); ?>
+										</a>
+										<a class="plugin-action-button button upload-plugins" target="_blank" 
+										   href="<?php echo esc_url( admin_url( 'plugin-install.php' ) ); ?>">
+											<?php esc_html_e( 'Upload Plugin', 'reign-demo-installer' ); ?>
+										</a>
+									<?php else : ?>
+										<button class="plugin-action-button button <?php echo esc_attr( $already_active_class ); ?>">
+											<?php echo esc_html( $plugin_status['action_text'] ); ?>
+										</button>
+									<?php endif; ?>
+								<?php else : ?>
+									<button class="plugin-action-button button <?php echo esc_attr( $already_active_class ); ?>">
+										<?php echo esc_html( $plugin_status['action_text'] ); ?>
+									</button>
+								<?php endif; ?>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-				<?php
-				foreach ( $plugins_list as $key => $plugin ) {
-					$plugin_status = instantiate_wbcom_demo_importer_plugins_manager()->get_plugin_status( $plugin['slug'] );
+			<?php
+		}
 
-					/*
-					temp code to manage count */
-					// if( isset( $plugin['is_paid'] ) ) {
-					// $num_of_req_plugins_installed++;
-					// }
-					/* temp code to manage count */
+		/**
+		 * Render plugins management scripts.
+		 *
+		 * @param int $required_plugins_to_activate Required plugins count
+		 * @param int $num_of_req_plugins_installed Installed plugins count
+		 */
+		private function render_plugins_scripts( $required_plugins_to_activate, $num_of_req_plugins_installed ) {
+			?>
+			<div class="demo_listing_modal"></div>
+			<input type="hidden" id="required_plugins_to_activate" 
+				   name="required_plugins_to_activate" 
+				   value="<?php echo esc_attr( $required_plugins_to_activate ); ?>">
+			<input type="hidden" id="num_of_req_plugins_installed" 
+				   name="num_of_req_plugins_installed" 
+				   value="<?php echo esc_attr( $num_of_req_plugins_installed ); ?>">
+			<input type="hidden" id="plugins_nonce" 
+				   value="<?php echo esc_attr( wp_create_nonce( 'reign_demo_installer_plugins' ) ); ?>">
+			<?php
+		}
 
-					$plugin_dependency = 'Optional';
-					if ( isset( $plugin['required'] ) && ( $plugin['required'] == true ) ) {
-						$required_plugins_to_activate++;
-						$plugin_dependency = 'Required';
-						if ( $plugin_status['status_text'] == 'Active' ) {
-							$num_of_req_plugins_installed++;
-						}
+		/**
+		 * Render demo selection page.
+		 */
+		private function render_demo_selection_page() {
+			delete_option( 'reign_theme_demo_import_data' );
+			delete_option( 'reign_theme_demo_req_plugins' );
+
+			echo '<div id="demos_import_filter">';
+
+			$demos = $this->get_available_demos();
+			
+			if ( empty( $demos ) ) {
+				echo '<div class="notice notice-error"><p>';
+				esc_html_e( 'No demos available at this time. Please try again later.', 'reign-demo-installer' );
+				echo '</p></div>';
+				echo '</div>';
+				return;
+			}
+
+			$this->render_demos_grid( $demos );
+			echo '</div>';
+		}
+
+		/**
+		 * Get available demos.
+		 *
+		 * @return array Available demos
+		 */
+		private function get_available_demos() {
+			$parent_url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
+			$response = wp_remote_get( $parent_url_to_request, array( 
+				'sslverify' => true, 
+				'timeout' => 15,
+				'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION
+			) );
+
+			if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+				return array();
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			$demos = json_decode( $body, true );
+
+			return ( json_last_error() === JSON_ERROR_NONE ) ? $demos : array();
+		}
+
+		/**
+		 * Render demos grid.
+		 *
+		 * @param array $demos Available demos
+		 */
+		private function render_demos_grid( $demos ) {
+			$current_motive = '';
+			
+			foreach ( $demos as $key => $demo ) {
+				// Start new section for different motive
+				if ( $current_motive !== $demo['motive_key'] ) {
+					if ( $current_motive !== '' ) {
+						echo '</div>'; // Close previous section
 					}
-					$already_active_class = '';
-					if ( $plugin_status['status_text'] == 'Active' ) {
-						$already_active_class = 'already-active';
-					}
-					?>
+					$current_motive = $demo['motive_key'];
+					echo '<div class="demo-content-wrap">';
+				}
 
-				<div class="wbcom-req-plugin-card">
-					<div class="plugin-container">
-						<div class="plugin-importer-sec">
-							<ul>
-								<li class="importer-plugin-thumb"><img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'plugin-thumb/'. $plugin['plugin_thumb']; ?>" alt="plugin-thumb" class="pluign_image"></li>
-								<li class="plugin-name"><?php echo $plugin['name']; ?></li>
-								<li class="plugin-status"><span class="<?php echo $already_active_class; ?>"><?php echo $plugin_status['status_text']; ?></span></li>
-								<li class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></li>
-								<li class="plugin-description"><?php echo $plugin['description']; ?></li>
-								<li class="importer-button">
-								<input type="hidden" class="demo-name" name="demo-name" value="<?php echo $_GET['plugins_json_key']; ?>">
-								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo $plugin['slug']; ?>">
-								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo $plugin_status['action']; ?>">
-									<?php
-									if ( isset( $plugin['is_paid'] ) ) {
-										if ( $plugin_status['status_text'] != 'Active' ) {
-											?>
-												<a class="button button-primary buy-now-plugins" target="_blank" href="<?php echo $plugin['external_url']; ?>"><?php _e( 'Buy Now', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
-												<a class="plugin-action-button button upload-plugins" target="_blank" href="plugin-install.php"><?php _e( 'Upload Plugin', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
-												<?php
-										} else {
-											?>
-												<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
-												<?php
-										}
-									} else {
-										?>
-											<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
-											<?php
-									}
-									?>
-								</li>
-							</ul>
+				$this->render_demo_card( $demo );
 
+				// Close last section
+				if ( $key === count( $demos ) - 1 ) {
+					echo '</div>';
+				}
+			}
+		}
+
+		/**
+		 * Render individual demo card.
+		 *
+		 * @param array $demo Demo data
+		 */
+		private function render_demo_card( $demo ) {
+			$preview_url = isset( $demo['preview_url'] ) ? esc_url( $demo['preview_url'] ) : '';
+			$import_url = $this->get_demo_installer_page_url( array(
+				'theme_slug'       => $demo['theme_slug'],
+				'demo_slug'        => $demo['demo_slug'],
+				'target_url'       => $demo['target_url'],
+				'step'             => 'plugins_manager',
+				'plugins_json_key' => $demo['plugins_json_key'],
+			) );
+
+			?>
+			<div class='wbcom-demo-importer import_filter <?php echo esc_attr( $demo['motive_key'] ); ?>'>
+				<div class="container">
+					<img src="<?php echo esc_url( REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'demos-imgs/' . $demo['screenshot'] ); ?>" 
+						 alt="<?php echo esc_attr( $demo['demo_name'] ); ?>" 
+						 class="image" 
+						 style="width:100%">
+					<div class="demo-title">
+						<h2><?php echo esc_html( $demo['demo_name'] ); ?></h2>
+						<div class="middle">
+							<a href="<?php echo esc_url( $import_url ); ?>" class="wbcom-button import">
+								<?php esc_html_e( 'Import', 'reign-demo-installer' ); ?>
+							</a>
+							<?php if ( $preview_url ) : ?>
+								<a target="_blank" href="<?php echo esc_url( $preview_url ); ?>" class="wbcom-button preview">
+									<?php esc_html_e( 'Preview', 'reign-demo-installer' ); ?>
+								</a>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
-					<?php
-				}
-				?>
-			<div class="demo_listing_modal"></div>
-			<input type="hidden" id="required_plugins_to_activate" name="required_plugins_to_activate" value="<?php echo $required_plugins_to_activate; ?>">
-			<input type="hidden" id="num_of_req_plugins_installed" name="num_of_req_plugins_installed" value="<?php echo $num_of_req_plugins_installed; ?>">
-				<?php
-			} else {
-				delete_option( 'wbcom_theme_demo_import_data' );
-				delete_option( 'wbcom_theme_demo_req_plugins' );
-
-				$current_url = $this->get_demo_installer_page_url();
-
-				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
-				$retrieved_data = '';
-				$response       = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
-
-				echo '<div id="demos_import_filter">';
-
-				if ( is_wp_error( $response ) ) {
-					$error_message = $response->get_error_message();
-					echo "Something went wrong: $error_message";
-				} else {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-						$response = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response ) ) {
-							$response = json_decode( $response, true );
-						}
-						if ( ! empty( $response ) && is_array( $response ) ) {
-							$motive_key = '';
-							foreach ( $response as $key => $value ) {
-								if ( ( $key !== 0 ) && ( $motive_key !== $value['motive_key'] ) ) {
-									echo '</div>';
-								}
-								if ( $motive_key !== $value['motive_key'] ) {
-									$motive_key = $value['motive_key'];
-									// echo '<h4 class="demo-name">'.$value['motive_name'].'</h4>';
-									echo '<div class="demo-content-wrap">';
-								}
-								$preview_url = isset( $value['preview_url'] ) ? $value['preview_url'] : '';
-								$href        = $this->get_demo_installer_page_url(
-									array(
-										'theme_slug'       => $value['theme_slug'],
-										'demo_slug'        => $value['demo_slug'],
-										'target_url'       => $value['target_url'],
-										'step'             => 'plugins_manager',
-										'plugins_json_key' => $value['plugins_json_key'],
-									)
-								);
-								?>
-								<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
-									<div class="container">
-										<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
-										<div class="demo-title">
-											<h2><?php echo $value['demo_name']; ?></h2>
-											<form method="get" action="<?php echo $current_url; ?>">
-												<div class="middle">
-													<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
-													<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<?php
-								if ( ( $key === ( count( $response ) - 1 ) ) ) {
-									echo '</div>';
-								}
-							}
-						} else {
-							_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-						}
-					}
-				}
-			}
-			echo '</div>';
-			echo '</div>';
-
-			echo '</div>';
+			</div>
+			<?php
 		}
 
+		/**
+		 * Get plugin status.
+		 *
+		 * @param string $plugin_slug Plugin slug
+		 * @return array Plugin status
+		 */
+		private function get_plugin_status( $plugin_slug ) {
+			if ( class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ) {
+				$plugins_manager = Reign_Demo_Installer_Plugins_Manager::instance();
+				return $plugins_manager->get_plugin_status( $plugin_slug );
+			}
+			
+			// Fallback status
+			return array(
+				'status_text' => 'Unknown',
+				'action_text' => 'Check Status',
+				'action' => 'check_status'
+			);
+		}
+
+		/**
+		 * Enqueue admin scripts and styles.
+		 */
 		public function admin_enqueue_scripts() {
 			$screen = get_current_screen();
-			if ( $screen->id != 'toplevel_page_wbcom-theme-demo-installer' ) {
-				return; }
-
-			$required_plugins_to_activate = 0;
-			$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
-			foreach ( $plugins_list as $key => $value ) {
-				if ( $value['required'] ) {
-					$required_plugins_to_activate++;
-				}
+			if ( ! $screen || $screen->id !== 'toplevel_page_' . self::$_slug ) {
+				return;
 			}
 
-			wp_register_script(
-				$handle    = 'wbcom_theme_demo_installer_js',
-				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/importer.js',
-				$deps      = array( 'jquery' ),
-				$ver       = time(),
-				$in_footer = true
-			);
-			wp_register_script(
-				$handle    = 'wbcom_theme_demo_installer_js_filter',
-				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/jquery.mixitup.min.js',
-				$deps      = array( 'jquery' ),
-				$ver       = time(),
-				$in_footer = true
+			// Enqueue scripts
+			wp_enqueue_script(
+				'reign-demo-installer-js',
+				REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'assets/js/importer.js',
+				array( 'jquery' ),
+				REIGN_DEMO_INSTALLER_VERSION,
+				true
 			);
 
+			wp_enqueue_script(
+				'reign-demo-installer-filter-js',
+				REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'assets/js/jquery.mixitup.min.js',
+				array( 'jquery' ),
+				REIGN_DEMO_INSTALLER_VERSION,
+				true
+			);
+
+			// Localize script
 			wp_localize_script(
-				'wbcom_theme_demo_installer_js',
-				'wbcom_theme_demo_installer_params',
+				'reign-demo-installer-js',
+				'reignDemoInstaller',
 				array(
-					'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-					'success_url'                  => $this->get_demo_installer_page_url( array( 'success' => 'success' ) ),
-					'required_plugins_to_activate' => $required_plugins_to_activate,
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'successUrl' => $this->get_demo_installer_page_url( array( 'success' => 'success' ) ),
+					'nonce' => wp_create_nonce( 'reign_demo_installer_ajax' ),
+					'strings' => array(
+						'installing' => esc_html__( 'Installing...', 'reign-demo-installer' ),
+						'activating' => esc_html__( 'Activating...', 'reign-demo-installer' ),
+						'error' => esc_html__( 'An error occurred. Please try again.', 'reign-demo-installer' ),
+						'success' => esc_html__( 'Operation completed successfully.', 'reign-demo-installer' ),
+					)
 				)
 			);
 
-			wp_enqueue_script( 'wbcom_theme_demo_installer_js' );
-			wp_enqueue_script( 'wbcom_theme_demo_installer_js_filter' );
-
-			wp_register_style(
-				$handle = 'wbcom-demo-listing-css',
-				$src    = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
-				$deps   = array(),
-				$ver    = time(),
-				$media  = 'all'
+			// Enqueue styles
+			wp_enqueue_style(
+				'reign-demo-installer-css',
+				REIGN_DEMO_INSTALLER_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
+				array(),
+				REIGN_DEMO_INSTALLER_VERSION
 			);
-			wp_enqueue_style( 'wbcom-demo-listing-css' );
 		}
 
+		/**
+		 * Get demo installer page URL.
+		 *
+		 * @param array $args URL arguments
+		 * @return string Page URL
+		 */
 		public function get_demo_installer_page_url( $args = array() ) {
-			$current_url        = admin_url();
-			$installer_page_url = $current_url . 'admin.php?page=wbcom-theme-demo-installer';
+			$base_url = admin_url( 'admin.php?page=' . self::$_slug );
+			
 			if ( ! empty( $args ) ) {
-				$installer_page_url = add_query_arg(
-					$args,
-					$installer_page_url
-				);
+				$base_url = add_query_arg( $args, $base_url );
 			}
-			return $installer_page_url;
+			
+			return $base_url;
 		}
-
 	}
 
 endif;
 
 /**
- * Main instance of WBCOM_TDI_ADMIN_SETTINGS.
+ * Main instance of Reign_Demo_Installer_Admin_Settings.
  *
- * @since  1.0.0
- * @return WBCOM_TDI_ADMIN_SETTINGS
+ * @since 3.0.0
+ * @return Reign_Demo_Installer_Admin_Settings
  */
-WBCOM_TDI_ADMIN_SETTINGS::instance();
-?>
+Reign_Demo_Installer_Admin_Settings::instance();
