@@ -1,7 +1,7 @@
 /*
-* Final Enhanced Demo Importer - Polished User Experience
-* Emphasizes positive messaging while keeping detailed debugging in console/logs only
-* Version: 3.0.0 Final
+* Enhanced Demo Importer - Sequential File Processing 
+* Processes files one by one without folder structure dependency
+* Version: 3.0.1 Fixed
 */
 (function($) {
     'use strict';
@@ -11,7 +11,7 @@
         // Configuration
         const CONFIG = {
             maxConcurrentDownloads: 3,
-            maxConcurrentProcessing: 2,
+            maxConcurrentProcessing: 1, // Process one file at a time
             downloadTimeout: 180000,
             processingTimeout: 300000,
             retryAttempts: 2,
@@ -57,8 +57,9 @@
         var processingQueue = [];
         var failedFiles = [];
         var skippedFiles = [];
+        var processedFiles = [];
         var userChoices = {
-            continueOnErrors: true, // Default to continue for better UX
+            continueOnErrors: true,
             skipOptionalFiles: true,
             retryFailedFiles: false
         };
@@ -108,6 +109,7 @@
             processingStats = { total: 0, completed: 0, failed: 0, inProgress: 0, skipped: 0 };
             failedFiles = [];
             skippedFiles = [];
+            processedFiles = [];
         }
 
         function startBatchImport() {
@@ -127,10 +129,7 @@
                 success: function(response) {
                     if (response.success) {
                         tempFolderId = response.data.folder_id;
-                        
-                        // Console log for debugging, positive user message
                         console.log('✓ Workspace created:', response.data);
-                        
                         getDemoManifest();
                     } else {
                         handleError('Setup issue detected. Let\'s try again...', response.data?.message);
@@ -165,21 +164,26 @@
                 timeout: 60000,
                 success: function(response) {
                     if (response.success && response.data.files) {
-                        // Enhanced: Prepare file list with path preservation
+                        // SIMPLIFIED: Just prepare files by their names - no complex path handling needed
                         downloadQueue = response.data.files.map((file, index) => ({
-                            ...file,
                             id: index,
+                            name: file.name, // Simple filename like "options1.json" or "07-break-1.zip"
+                            url: file.url,
+                            type: file.type,
+                            action_for: file.action_for,
                             attempts: 0,
                             status: 'pending',
-                            criticality: determineFileCriticality(file.name, file.action_for),
-                            // Enhanced: Preserve path information for upload files
-                            path_info: file.path_info || null
+                            criticality: determineFileCriticality(file.name, file.action_for)
                         }));
                         
                         downloadStats.total = downloadQueue.length;
                         
-                        // Log path distribution for debugging
-                        logPathDistribution();
+                        console.log('📁 Files prepared for processing:', {
+                            total: downloadStats.total,
+                            database_files: downloadQueue.filter(f => f.action_for === 'database_tables').length,
+                            upload_files: downloadQueue.filter(f => f.action_for === 'upload_folders').length,
+                            file_samples: downloadQueue.slice(0, 5).map(f => f.name)
+                        });
                         
                         updateProgress(10, `Found ${downloadStats.total} files. Starting secure download...`);
                         showUserMessage(`Downloading ${downloadStats.total} demo files...`, 'info');
@@ -197,24 +201,6 @@
                     handleError('Demo server connection issue. Please try again.');
                 }
             });
-        }
-
-        function logPathDistribution() {
-            const pathCounts = {};
-            const uploadFiles = downloadQueue.filter(f => f.action_for === 'upload_folders');
-            
-            uploadFiles.forEach(file => {
-                if (file.path_info && file.path_info.relative_path) {
-                    const path = file.path_info.relative_path;
-                    pathCounts[path] = (pathCounts[path] || 0) + 1;
-                } else {
-                    pathCounts['root'] = (pathCounts['root'] || 0) + 1;
-                }
-            });
-            
-            if (Object.keys(pathCounts).length > 0) {
-                console.log('📁 Upload files by path:', pathCounts);
-            }
         }
 
         function determineFileCriticality(fileName, actionFor) {
@@ -253,7 +239,6 @@
             nextFile.status = 'downloading';
             downloadStats.inProgress++;
             
-            // Enhanced: Pass path info to download
             downloadFile(nextFile).then(result => {
                 downloadStats.inProgress--;
                 
@@ -262,30 +247,15 @@
                     downloadStats.completed++;
                     processingQueue.push(nextFile);
                     
-                    // Console logging for debugging, no user alerts for individual files
                     let logMessage = `✓ Downloaded: ${nextFile.name} (${downloadStats.completed}/${downloadStats.total})`;
-                    
-                    if (nextFile.action_for === 'upload_folders' && nextFile.path_info) {
-                        const pathDisplay = nextFile.path_info.relative_path || 'root';
-                        logMessage += ` → ${pathDisplay}`;
-                    }
-                    
                     if (result.data?.cached) {
                         logMessage = logMessage.replace('Downloaded:', 'Using cached:');
                     }
-                    
                     console.log(logMessage);
                 } else {
                     nextFile.attempts++;
                     
-                    let errorMessage = `⚠ Download failed: ${nextFile.name}`;
-                    
-                    if (nextFile.action_for === 'upload_folders' && nextFile.path_info) {
-                        const pathDisplay = nextFile.path_info.relative_path || 'root';
-                        errorMessage += ` (path: ${pathDisplay})`;
-                    }
-                    
-                    errorMessage += ` - ${result.error}`;
+                    let errorMessage = `⚠ Download failed: ${nextFile.name} - ${result.error}`;
                     
                     if (nextFile.attempts < CONFIG.retryAttempts) {
                         nextFile.status = 'pending';
@@ -312,13 +282,6 @@
 
         function downloadFile(file) {
             return new Promise((resolve) => {
-                // Enhanced: Prepare path info for upload files
-                let pathInfoData = '';
-                if (file.action_for === 'upload_folders' && file.path_info) {
-                    pathInfoData = JSON.stringify(file.path_info);
-                    console.log(`📁 Processing upload file with path: ${file.path_info.relative_path || 'root'}`);
-                }
-
                 $.ajax({
                     url: reignDemoInstaller.ajaxUrl,
                     type: 'POST',
@@ -328,7 +291,7 @@
                         file_url: file.url,
                         file_name: file.name,
                         file_type: file.type,
-                        path_info: pathInfoData, // Enhanced: Pass path info
+                        action_for: file.action_for,
                         nonce: reignDemoInstaller.nonce
                     },
                     timeout: CONFIG.downloadTimeout,
@@ -360,7 +323,6 @@
                 const activeDownloads = downloadStats.inProgress;
                 let statusText = `Downloading files... ${downloadStats.completed}/${downloadStats.total}`;
                 
-                // Add encouraging messaging
                 if (downloadStats.completed > 0) {
                     const percentage = Math.round((downloadStats.completed / downloadStats.total) * 100);
                     statusText += ` (${percentage}% complete)`;
@@ -379,7 +341,7 @@
                         handleDownloadFailures();
                     } else {
                         showUserMessage('All files downloaded successfully! Processing content...', 'success');
-                        startParallelProcessing();
+                        startSequentialProcessing();
                     }
                 }
                 
@@ -400,27 +362,25 @@
             const criticalFailures = failedFiles.filter(f => f.stage === 'download' && f.criticality === 'critical');
             
             if (criticalFailures.length > 0) {
-                // Only show error for critical failures
                 showUserMessage('Some essential files need attention. Let\'s try to continue...', 'warning');
                 console.error('Critical download failures:', criticalFailures);
                 
-                // Still attempt to continue with processing
                 setTimeout(() => {
-                    startParallelProcessing();
+                    startSequentialProcessing();
                 }, 2000);
             } else {
-                // Only optional files failed - continue optimistically
                 const skipMsg = downloadStats.failed > 0 ? 
                     `Continuing with ${downloadStats.completed} files (${downloadStats.failed} optional files skipped)...` :
                     'All essential files ready! Processing content...';
                 
                 showUserMessage(skipMsg, 'info');
                 console.log(`Download completed with ${downloadStats.failed} optional failures`);
-                startParallelProcessing();
+                startSequentialProcessing();
             }
         }
 
-        function startParallelProcessing() {
+        // FIXED: Sequential processing instead of parallel
+        function startSequentialProcessing() {
             if (processingQueue.length === 0) {
                 completeImport();
                 return;
@@ -430,68 +390,79 @@
             updateProgress(70, `Processing ${processingStats.total} files...`);
             showUserMessage('Setting up your demo content...', 'info');
             
-            for (let i = 0; i < CONFIG.maxConcurrentProcessing; i++) {
-                processNextFile();
-            }
+            // Sort files by priority: database files first, then uploads
+            processingQueue.sort((a, b) => {
+                const priorityA = a.action_for === 'database_tables' ? 1 : 2;
+                const priorityB = b.action_for === 'database_tables' ? 1 : 2;
+                
+                if (priorityA !== priorityB) {
+                    return priorityA - priorityB;
+                }
+                
+                // Within same type, critical files first
+                const criticalityOrder = { 'critical': 1, 'important': 2, 'optional': 3 };
+                return (criticalityOrder[a.criticality] || 3) - (criticalityOrder[b.criticality] || 3);
+            });
             
-            monitorProcessingProgress();
+            console.log('📋 Processing order:', processingQueue.map(f => `${f.name} (${f.action_for}, ${f.criticality})`));
+            
+            processNextFileSequentially();
         }
 
-        function processNextFile() {
+        // FIXED: Process files one by one
+        function processNextFileSequentially() {
             const nextFile = processingQueue.find(file => !file.processing && !file.processed && !file.skipProcessing);
             
             if (!nextFile) {
+                // All files processed
+                completeImport();
                 return;
             }
 
             nextFile.processing = true;
-            processingStats.inProgress++;
+            processingStats.inProgress = 1;
+            
+            const currentIndex = processedFiles.length + processingStats.failed + processingStats.skipped + 1;
+            updateProgress(70 + Math.round((currentIndex / processingStats.total) * 25), 
+                          `Processing ${nextFile.name} (${currentIndex}/${processingStats.total})...`);
+            
+            console.log(`🔄 Processing file ${currentIndex}/${processingStats.total}: ${nextFile.name}`);
             
             processFile(nextFile).then(result => {
-                processingStats.inProgress--;
+                processingStats.inProgress = 0;
                 nextFile.processing = false;
                 nextFile.processed = true;
                 
                 if (result.success) {
                     processingStats.completed++;
-                    
-                    // Enhanced logging with path context
-                    let logMessage = `✓ Processed: ${nextFile.name} (${processingStats.completed}/${processingStats.total})`;
-                    
-                    if (nextFile.action_for === 'upload_folders' && nextFile.path_info) {
-                        const pathDisplay = nextFile.path_info.relative_path || 'root';
-                        logMessage += ` → ${pathDisplay}`;
-                    }
-                    
-                    console.log(logMessage);
+                    processedFiles.push(nextFile);
+                    console.log(`✓ Processed: ${nextFile.name} (${processingStats.completed}/${processingStats.total})`);
                 } else {
                     processingStats.failed++;
                     failedFiles.push({...nextFile, stage: 'processing', error: result.error});
-                    
-                    // Enhanced error logging with path context
-                    let errorMessage = `✗ Processing failed: ${nextFile.name} - ${result.error}`;
-                    
-                    if (nextFile.action_for === 'upload_folders' && nextFile.path_info) {
-                        const pathDisplay = nextFile.path_info.relative_path || 'root';
-                        errorMessage += ` (path: ${pathDisplay})`;
-                    }
-                    
-                    console.error(errorMessage);
+                    console.error(`✗ Processing failed: ${nextFile.name} - ${result.error}`);
                     
                     handleProcessingFailure(nextFile, result.error);
                 }
                 
-                processNextFile();
+                // Small delay between files to prevent overwhelming
+                setTimeout(() => {
+                    processNextFileSequentially();
+                }, 500);
                 
             }).catch(error => {
-                processingStats.inProgress--;
+                processingStats.inProgress = 0;
                 nextFile.processing = false;
                 nextFile.processed = true;
                 processingStats.failed++;
                 failedFiles.push({...nextFile, stage: 'processing', error: error.message});
                 console.error(`✗ Processing exception: ${nextFile.name}`, error);
+                
                 handleProcessingFailure(nextFile, error.message);
-                processNextFile();
+                
+                setTimeout(() => {
+                    processNextFileSequentially();
+                }, 500);
             });
         }
 
@@ -507,18 +478,11 @@
             // For critical files, log but still try to continue
             if (file.criticality === 'critical') {
                 console.error(`❌ Critical file failed: ${file.name} - ${error}`);
-                // Don't stop the import, but log for debugging
             }
         }
 
         function processFile(file) {
             return new Promise((resolve) => {
-                // Enhanced: Prepare path info for upload files
-                let pathInfoData = '';
-                if (file.action_for === 'upload_folders' && file.path_info) {
-                    pathInfoData = JSON.stringify(file.path_info);
-                }
-
                 $.ajax({
                     url: reignDemoInstaller.ajaxUrl,
                     type: 'POST',
@@ -531,18 +495,11 @@
                         preserve_admin: true,
                         allow_partial: true,
                         file_criticality: file.criticality,
-                        path_info: pathInfoData, // Enhanced: Pass path info
                         nonce: reignDemoInstaller.nonce
                     },
                     timeout: CONFIG.processingTimeout,
                     success: function(response) {
                         if (response.success) {
-                            // Enhanced logging for path-aware processing
-                            if (file.action_for === 'upload_folders' && file.path_info) {
-                                const pathDisplay = file.path_info.relative_path || 'root';
-                                console.log(`✓ Processed upload file to: ${pathDisplay} - ${file.name}`);
-                            }
-                            
                             resolve({ success: true, data: response.data });
                         } else {
                             resolve({ success: false, error: response.data?.message || 'Processing failed' });
@@ -561,92 +518,6 @@
             });
         }
 
-        function monitorProcessingProgress() {
-            const progressInterval = setInterval(() => {
-                const totalProcessed = processingStats.completed + processingStats.skipped;
-                const processingProgress = Math.round((totalProcessed / processingStats.total) * 25);
-                const currentProgress = 70 + processingProgress;
-                
-                const activeProcessing = processingStats.inProgress;
-                let statusText = `Processing content... ${totalProcessed}/${processingStats.total}`;
-                
-                // Add encouraging progress info
-                if (totalProcessed > 0) {
-                    const percentage = Math.round((totalProcessed / processingStats.total) * 100);
-                    statusText += ` (${percentage}% complete)`;
-                }
-                
-                if (activeProcessing > 0) {
-                    statusText += ` - ${activeProcessing} active`;
-                }
-                
-                updateProgress(currentProgress, statusText);
-                
-                if (processingStats.completed + processingStats.failed + processingStats.skipped >= processingStats.total) {
-                    clearInterval(progressInterval);
-                    
-                    // Log final processing summary for debugging
-                    logFinalProcessingSummary();
-                    
-                    // Always proceed to completion - let success page handle any issues
-                    completeImport();
-                }
-                
-                // Handle stalled processing
-                if (processingStats.inProgress === 0 && totalProcessed < processingStats.total) {
-                    const stalledFiles = processingQueue.filter(f => !f.processing && !f.processed && !f.skipProcessing).length;
-                    if (stalledFiles > 0) {
-                        console.log(`Restarting ${stalledFiles} stalled processing tasks`);
-                        for (let i = 0; i < Math.min(CONFIG.maxConcurrentProcessing, stalledFiles); i++) {
-                            processNextFile();
-                        }
-                    }
-                }
-            }, 1000);
-        }
-
-        function logFinalProcessingSummary() {
-            const summary = {
-                total: processingStats.total,
-                completed: processingStats.completed,
-                failed: processingStats.failed,
-                skipped: processingStats.skipped,
-                failedFiles: failedFiles.length,
-                skippedFiles: skippedFiles.length
-            };
-            
-            console.log('📋 Final Processing Summary:', summary);
-            
-            // Log path-specific results for debugging
-            const processedPaths = {};
-            const failedPaths = {};
-            
-            processingQueue.forEach(file => {
-                if (file.action_for !== 'upload_folders') return;
-                
-                const path = (file.path_info && file.path_info.relative_path) || 'root';
-                
-                if (file.processed && !file.skipProcessing) {
-                    processedPaths[path] = (processedPaths[path] || 0) + 1;
-                }
-            });
-            
-            failedFiles.forEach(file => {
-                if (file.action_for !== 'upload_folders') return;
-                
-                const path = (file.path_info && file.path_info.relative_path) || 'root';
-                failedPaths[path] = (failedPaths[path] || 0) + 1;
-            });
-            
-            if (Object.keys(processedPaths).length > 0) {
-                console.log('📁 Processed by path:', processedPaths);
-            }
-            
-            if (Object.keys(failedPaths).length > 0) {
-                console.log('📁 Failed by path:', failedPaths);
-            }
-        }
-
         function completeImport() {
             updateProgress(95, 'Finalizing your demo...');
             
@@ -654,6 +525,9 @@
             const downloadSuccessRate = Math.round((downloadStats.completed / downloadStats.total) * 100);
             const processingSuccessRate = processingStats.total > 0 ? 
                 Math.round(((processingStats.completed + processingStats.skipped) / processingStats.total) * 100) : 100;
+            
+            // Generate detailed file reports
+            const fileReports = generateFileReports();
             
             // Detailed console summary for debugging
             console.log(`🎉 Import Summary:
@@ -664,6 +538,9 @@
                 Failed: ${failedFiles.length}
             `);
             
+            // Log detailed file reports
+            logDetailedFileReports(fileReports);
+            
             // Store import summary for success page
             const importSummary = {
                 duration: duration,
@@ -672,7 +549,8 @@
                 skipped: processingStats.skipped + skippedFiles.length,
                 failed: failedFiles.length,
                 skippedFiles: skippedFiles,
-                failedFiles: failedFiles
+                failedFiles: failedFiles,
+                fileReports: fileReports
             };
             
             // Send summary to server
@@ -702,7 +580,6 @@
                     
                     $(window).off('beforeunload');
                     
-                    // Always show success message to user - let success page handle details
                     if (downloadSuccessRate >= 80 && processingSuccessRate >= 80) {
                         showUserMessage('Demo imported successfully! Redirecting...', 'success');
                     } else {
@@ -720,8 +597,6 @@
             $('#progress-bar-container .completed').css('width', percent + '%');
             $('#progress-bar-container .completed').text(percent + '%');
             $('#wbtd-current-action').text(message).show();
-            
-            // Console log for debugging
             console.log(`[${percent}%] ${message}`);
         }
 
@@ -760,7 +635,6 @@
             
             $('.demo-listing-wrap').prepend(notification);
             
-            // Auto-hide info messages, keep errors and warnings visible
             if (type === 'info' || type === 'success') {
                 setTimeout(function() {
                     notification.fadeOut();
@@ -859,267 +733,3 @@
     }); // End document ready
 
 })(jQuery);
-
-// Enhanced CSS for user-friendly interface
-jQuery(document).ready(function($) {
-    if (!$('#user-friendly-ui-css').length) {
-        $('<style id="user-friendly-ui-css">').text(`
-            /* User-friendly messaging system */
-            .user-message {
-                margin: 15px 0;
-                padding: 15px 20px;
-                border-radius: 8px;
-                position: relative;
-                animation: slideDown 0.5s ease;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-                font-weight: 500;
-                border-left: 5px solid;
-            }
-            
-            .user-message.success {
-                background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-                border-left-color: #28a745;
-                color: #155724;
-            }
-            
-            .user-message.error {
-                background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-                border-left-color: #dc3545;
-                color: #721c24;
-            }
-            
-            .user-message.warning {
-                background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-                border-left-color: #ffc107;
-                color: #856404;
-            }
-            
-            .user-message.info {
-                background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-                border-left-color: #17a2b8;
-                color: #0c5460;
-            }
-            
-            .user-message p {
-                margin: 0;
-                padding-right: 40px;
-                line-height: 1.5;
-                font-size: 15px;
-            }
-            
-            .user-message .dismiss {
-                position: absolute;
-                top: 15px;
-                right: 20px;
-                background: none;
-                border: none;
-                font-size: 20px;
-                cursor: pointer;
-                color: inherit;
-                opacity: 0.7;
-                transition: opacity 0.3s;
-                border-radius: 50%;
-                width: 25px;
-                height: 25px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .user-message .dismiss:hover {
-                opacity: 1;
-                background: rgba(0,0,0,0.1);
-            }
-
-            /* Enhanced progress bar styling */
-            #progress-bar-container {
-                margin: 25px 0;
-                padding: 25px;
-                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                border-radius: 12px;
-                border: 1px solid #dee2e6;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            }
-            
-            .progress-wrapper {
-                margin-bottom: 20px;
-            }
-            
-            .progress-bar {
-                background: #e9ecef;
-                border-radius: 25px;
-                height: 35px;
-                position: relative;
-                overflow: hidden;
-                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-            }
-            
-            .progress-bar .completed {
-                background: linear-gradient(90deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
-                height: 100%;
-                width: 0%;
-                transition: width 0.8s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: bold;
-                font-size: 15px;
-                text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .progress-bar .completed::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-                animation: shimmer 2s infinite;
-            }
-            
-            @keyframes shimmer {
-                0% { left: -100%; }
-                50% { left: 100%; }
-                100% { left: 100%; }
-            }
-            
-            /* Status message styling */
-            #wbtd-current-action {
-                margin: 20px 0;
-                padding: 15px 20px;
-                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-                border-left: 4px solid #3b82f6;
-                color: #1e40af;
-                font-weight: 500;
-                text-align: center;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
-                font-size: 16px;
-                line-height: 1.4;
-            }
-            
-            /* Import button enhancement */
-            .import-button-container {
-                text-align: center;
-                margin: 35px 0;
-            }
-            
-            .import-button-container .button-hero {
-                font-size: 18px;
-                padding: 18px 35px;
-                height: auto;
-                line-height: 1.4;
-                border-radius: 8px;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                background: linear-gradient(135deg, #007cba 0%, #0073aa 100%);
-                border: none;
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .import-button-container .button-hero:hover:not(:disabled) {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            }
-            
-            .import-button-container .button-hero:disabled {
-                opacity: 0.7;
-                cursor: not-allowed;
-                transform: none;
-                background: #6c757d;
-            }
-            
-            /* Plugin cards enhancement */
-            .plugin-action-button {
-                transition: all 0.3s ease;
-                border-radius: 6px;
-            }
-            
-            .plugin-action-button:hover:not(:disabled) {
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            }
-            
-            .plugin-action-button.already-active {
-                background: #28a745 !important;
-                border-color: #28a745 !important;
-                color: white !important;
-            }
-            
-            /* Loading state improvements */
-            .demo_listing_loading {
-                pointer-events: none;
-            }
-            
-            .demo_listing_loading::after {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.8);
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            /* Animation improvements */
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            /* Responsive improvements */
-            @media (max-width: 768px) {
-                .user-message {
-                    margin: 10px;
-                    padding: 15px;
-                }
-                
-                #progress-bar-container {
-                    margin: 15px 0;
-                    padding: 20px 15px;
-                }
-                
-                .import-button-container .button-hero {
-                    width: 100%;
-                    font-size: 16px;
-                    padding: 15px 25px;
-                }
-                
-                .progress-bar {
-                    height: 30px;
-                }
-                
-                .progress-bar .completed {
-                    font-size: 14px;
-                }
-            }
-            
-            /* Accessibility improvements */
-            .user-message:focus,
-            .progress-bar:focus {
-                outline: 2px solid #007cba;
-                outline-offset: 2px;
-            }
-            
-            .button:focus {
-                outline: 2px solid #007cba;
-                outline-offset: 2px;
-            }
-        `).appendTo('head');
-    }
-});

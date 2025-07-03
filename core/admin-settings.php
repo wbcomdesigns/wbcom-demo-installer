@@ -1,7 +1,6 @@
 <?php
 /**
- * Admin settings for Reign Demo Installer - Complete File
- * Updated with streamlined batch download approach
+ * Admin settings for Reign Demo Installer - Complete File with Reports
  *
  * @package Reign_Demo_Installer
  * @since 3.0.0
@@ -21,9 +20,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 	/**
 	 * Reign_Demo_Installer_Admin_Settings class.
-	 *
-	 * @class Reign_Demo_Installer_Admin_Settings
-	 * @version 3.0.0
 	 */
 	class Reign_Demo_Installer_Admin_Settings {
 
@@ -64,10 +60,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Main instance.
-		 *
-		 * @since 3.0.0
-		 * @static
-		 * @return Reign_Demo_Installer_Admin_Settings - Main instance.
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -93,16 +85,37 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Hook into actions and filters.
-		 *
-		 * @since 3.0.0
 		 */
 		private function init_hooks() {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 			add_action( 'admin_init', array( $this, 'handle_demo_actions' ) );
 			
+			// AJAX action for clearing file reports
+			add_action( 'wp_ajax_clear_file_reports', array( $this, 'clear_file_reports' ) );
+			
 			// Initialize admin notices system
 			$this->init_admin_notices();
+		}
+
+		/**
+		 * Clear file reports AJAX handler.
+		 */
+		public function clear_file_reports() {
+			// Security checks
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => 'Insufficient permissions' ) );
+			}
+			
+			$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+			if ( ! wp_verify_nonce( $nonce, 'clear_file_reports' ) ) {
+				wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
+			}
+			
+			// Clear the file reports
+			delete_option( 'reign_demo_import_summary' );
+			
+			wp_send_json_success( array( 'message' => 'Reports cleared successfully' ) );
 		}
 
 		/**
@@ -120,7 +133,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		 * Add admin menu.
 		 */
 		public function add_admin_menu() {
-			// Always add menu for admin users
 			add_menu_page(
 				esc_html__( 'Reign Demo Installer', 'reign-demo-installer' ),
 				esc_html__( 'Demo Installer', 'reign-demo-installer' ),
@@ -142,14 +154,14 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 			}
 
 			// Check if there's an action to handle
-			$action = $this->security ? $this->security->get_request_param( 'action', 'string' ) : '';
+			$action = isset( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : '';
 			
 			if ( empty( $action ) ) {
 				return;
 			}
 
 			// Verify nonce for security
-			$nonce = $this->security ? $this->security->get_request_param( '_wpnonce', 'string' ) : '';
+			$nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( $_GET['_wpnonce'] ) : '';
 			
 			if ( ! wp_verify_nonce( $nonce, 'reign_demo_installer_' . $action ) ) {
 				$this->show_admin_notice( 
@@ -206,6 +218,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				// Clear all plugin options
 				delete_option( 'reign_theme_demo_import_data' );
 				delete_option( 'reign_theme_demo_req_plugins' );
+				delete_option( 'reign_demo_import_summary' );
 				
 				$this->show_admin_notice( 
 					__( 'Plugin reset successfully. All demo import data has been cleared.', 'reign-demo-installer' ), 
@@ -223,11 +236,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Show admin notice with proper WordPress styling
-		 *
-		 * @param string $message Notice message
-		 * @param string $type Notice type (success, error, warning, info)
-		 * @param bool $is_dismissible Whether the notice can be dismissed
-		 * @param array $data Additional data for the notice
 		 */
 		public function show_admin_notice( $message, $type = 'info', $is_dismissible = true, $data = array() ) {
 			// Validate notice type
@@ -270,8 +278,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render individual admin notice
-		 *
-		 * @param array $notice Notice data
 		 */
 		private function render_admin_notice( $notice ) {
 			$message = isset( $notice['message'] ) ? $notice['message'] : '';
@@ -292,9 +298,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				$notice_classes[] = 'is-dismissible';
 			}
 			
-			// Add custom class for our plugin notices
 			$notice_classes[] = 'reign-demo-installer-notice';
-			
 			$class_string = implode( ' ', $notice_classes );
 			
 			?>
@@ -304,14 +308,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 					<p><?php echo esc_html( $data['details'] ); ?></p>
 				<?php else : ?>
 					<p><?php echo esc_html( $message ); ?></p>
-				<?php endif; ?>
-				
-				<?php if ( ! empty( $data['action_url'] ) && ! empty( $data['action_text'] ) ) : ?>
-					<p>
-						<a href="<?php echo esc_url( $data['action_url'] ); ?>" class="button button-primary">
-							<?php echo esc_html( $data['action_text'] ); ?>
-						</a>
-					</p>
 				<?php endif; ?>
 			</div>
 			<?php
@@ -331,53 +327,12 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				background: #fff;
 				box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 			}
-			
-			.reign-demo-installer-notice.notice-success {
-				border-left-color: #00a32a;
-			}
-			
-			.reign-demo-installer-notice.notice-error {
-				border-left-color: #d63638;
-			}
-			
-			.reign-demo-installer-notice.notice-warning {
-				border-left-color: #dba617;
-			}
-			
-			.reign-demo-installer-notice.notice-info {
-				border-left-color: #72aee6;
-			}
-			
-			.reign-demo-installer-notice p {
-				margin: 0.5em 0;
-				padding: 2px;
-				font-size: 13px;
-				line-height: 1.5;
-			}
-			
-			.reign-demo-installer-notice .button {
-				margin-top: 8px;
-			}
-
-			/* WordPress standard notice button styling */
-			.reign-demo-installer-notice .button-primary {
-				background: #2271b1;
-				border-color: #2271b1;
-				color: #fff;
-			}
-
-			.reign-demo-installer-notice .button-primary:hover {
-				background: #135e96;
-				border-color: #135e96;
-			}
 			</style>
 			<?php
 		}
 
 		/**
 		 * Show step header.
-		 *
-		 * @param string $currentTab Current tab
 		 */
 		public function show_step_header( $currentTab = '' ) {
 			$steps = array(
@@ -386,15 +341,153 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				'install-demo' => __( 'Install Demo', 'reign-demo-installer' ),
 				'success' => __( 'Success', 'reign-demo-installer' ),
 			);
+			
+			// Add reports tab if we have import summary
+			$import_summary = get_option( 'reign_demo_import_summary', array() );
+			if ( ! empty( $import_summary ) ) {
+				$steps['file-reports'] = __( 'File Reports', 'reign-demo-installer' );
+			}
+			
 			?>
 			<div class="tab">
 				<?php foreach ( $steps as $step => $label ) : ?>
-					<button class="tablinks <?php echo ( $currentTab === $step ) ? 'active' : ''; ?>">
-						<?php echo esc_html( $label ); ?>
-					</button>
+					<?php if ( $step === 'file-reports' ) : ?>
+						<button class="tablinks <?php echo ( $currentTab === $step ) ? 'active' : ''; ?>" 
+								onclick="showFileReports()" type="button">
+							📋 <?php echo esc_html( $label ); ?>
+						</button>
+					<?php else : ?>
+						<button class="tablinks <?php echo ( $currentTab === $step ) ? 'active' : ''; ?>">
+							<?php echo esc_html( $label ); ?>
+						</button>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
+			
+			<?php if ( ! empty( $import_summary ) ) : ?>
+			<script>
+			function showFileReports() {
+				// Hide main content
+				document.querySelector('.reign-demos-wrapper').style.display = 'none';
+				
+				// Show reports
+				let reportsDiv = document.getElementById('file-reports-section');
+				if ( !reportsDiv ) {
+					reportsDiv = document.createElement('div');
+					reportsDiv.id = 'file-reports-section';
+					reportsDiv.innerHTML = '<?php echo addslashes( $this->get_file_reports_html() ); ?>';
+					document.querySelector('.demo-listing-wrap').appendChild(reportsDiv);
+				}
+				reportsDiv.style.display = 'block';
+				
+				// Update active tab
+				document.querySelectorAll('.tablinks').forEach(btn => btn.classList.remove('active'));
+				event.target.classList.add('active');
+			}
+			</script>
+			<?php endif; ?>
 			<?php
+		}
+
+		/**
+		 * Get file reports HTML
+		 */
+		private function get_file_reports_html() {
+			$import_summary = get_option( 'reign_demo_import_summary', array() );
+			
+			if ( empty( $import_summary ) || ! isset( $import_summary['fileReports'] ) ) {
+				return '<div class="notice notice-info"><p>No file reports available.</p></div>';
+			}
+
+			$reports = $import_summary['fileReports'];
+			ob_start();
+			?>
+			<div class="file-reports-container">
+				<h2>📋 File Import Report</h2>
+				
+				<?php if ( ! empty( $reports['downloadFailed'] ) ) : ?>
+				<div class="report-section error">
+					<h3>❌ Download Failed (<?php echo count( $reports['downloadFailed'] ); ?>)</h3>
+					<ul>
+						<?php foreach ( $reports['downloadFailed'] as $file ) : ?>
+						<li><code><?php echo esc_html( $file['name'] ); ?></code> - <?php echo esc_html( $file['lastError'] ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $reports['processingFailed'] ) ) : ?>
+				<div class="report-section error">
+					<h3>💥 Processing Failed (<?php echo count( $reports['processingFailed'] ); ?>)</h3>
+					<ul>
+						<?php foreach ( $reports['processingFailed'] as $file ) : ?>
+						<li><code><?php echo esc_html( $file['name'] ); ?></code> - <?php echo esc_html( $file['error'] ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $reports['downloadedButNotProcessed'] ) ) : ?>
+				<div class="report-section warning">
+					<h3>⚠️ Downloaded but Not Processed (<?php echo count( $reports['downloadedButNotProcessed'] ); ?>)</h3>
+					<ul>
+						<?php foreach ( $reports['downloadedButNotProcessed'] as $file ) : ?>
+						<li><code><?php echo esc_html( $file['name'] ); ?></code> - <?php echo esc_html( $file['reason'] ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $reports['downloadedAndProcessed'] ) ) : ?>
+				<div class="report-section success">
+					<h3>✅ Successfully Processed (<?php echo count( $reports['downloadedAndProcessed'] ); ?>)</h3>
+					<p>All these files were successfully downloaded and processed.</p>
+				</div>
+				<?php endif; ?>
+
+				<div class="report-section info">
+					<h3>📊 Summary</h3>
+					<p><strong>Total Files:</strong> <?php echo esc_html( $import_summary['downloads']['total'] ?? 0 ); ?></p>
+					<p><strong>Downloaded:</strong> <?php echo esc_html( $import_summary['downloads']['completed'] ?? 0 ); ?></p>
+					<p><strong>Processed:</strong> <?php echo esc_html( $import_summary['processing']['completed'] ?? 0 ); ?></p>
+					<p><strong>Failed:</strong> <?php echo esc_html( $import_summary['failed'] ?? 0 ); ?></p>
+					<p><strong>Duration:</strong> <?php echo esc_html( $import_summary['duration'] ?? 0 ); ?>s</p>
+				</div>
+
+				<div class="report-actions">
+					<button type="button" class="button" onclick="clearReports()">Clear Reports</button>
+				</div>
+			</div>
+
+			<style>
+			.file-reports-container { margin: 20px 0; }
+			.report-section { margin: 15px 0; padding: 15px; border-radius: 5px; }
+			.report-section.error { background: #fdf2f2; border-left: 4px solid #dc3545; }
+			.report-section.warning { background: #fffbf0; border-left: 4px solid #ffc107; }
+			.report-section.success { background: #f0f9f3; border-left: 4px solid #28a745; }
+			.report-section.info { background: #f0f8ff; border-left: 4px solid #17a2b8; }
+			.report-section h3 { margin-top: 0; }
+			.report-actions { margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd; }
+			</style>
+
+			<script>
+			function clearReports() {
+				if (confirm('Clear all file reports?')) {
+					jQuery.post(ajaxurl, {
+						action: 'clear_file_reports',
+						nonce: '<?php echo wp_create_nonce( 'clear_file_reports' ); ?>'
+					}, function(response) {
+						if (response.success) {
+							location.reload();
+						} else {
+							alert('Failed to clear reports');
+						}
+					});
+				}
+			}
+			</script>
+			<?php
+			return ob_get_clean();
 		}
 
 		/**
@@ -429,8 +522,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get theme information.
-		 *
-		 * @return array
 		 */
 		private function get_theme_info() {
 			$theme_info = wp_get_theme();
@@ -449,8 +540,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render theme info section.
-		 *
-		 * @param array $theme_info Theme information
 		 */
 		private function render_theme_info( $theme_info ) {
 			?>
@@ -470,8 +559,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get current step based on URL parameters.
-		 *
-		 * @return string Current step
 		 */
 		private function get_current_step() {
 			if ( isset( $_GET['success'] ) && $_GET['success'] === 'success' ) {
@@ -479,7 +566,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 			}
 			
 			if ( isset( $_GET['step'] ) ) {
-				$step = $this->security ? $this->security->get_request_param( 'step', 'string' ) : sanitize_text_field( $_GET['step'] );
+				$step = sanitize_text_field( $_GET['step'] );
 				
 				switch ( $step ) {
 					case 'demo_import':
@@ -494,8 +581,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render step content based on current step.
-		 *
-		 * @param string $current_step Current step
 		 */
 		private function render_step_content( $current_step ) {
 			switch ( $current_step ) {
@@ -544,9 +629,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		 * Render demo installation page.
 		 */
 		private function render_demo_install_page() {
-			$target_url = $this->security ? $this->security->get_request_param( 'target_url', 'url' ) : '';
-			$theme_slug = $this->security ? $this->security->get_request_param( 'theme_slug', 'slug' ) : '';
-			$demo_slug = $this->security ? $this->security->get_request_param( 'demo_slug', 'slug' ) : '';
+			$target_url = isset( $_GET['target_url'] ) ? esc_url_raw( $_GET['target_url'] ) : '';
+			$theme_slug = isset( $_GET['theme_slug'] ) ? sanitize_text_field( $_GET['theme_slug'] ) : '';
+			$demo_slug = isset( $_GET['demo_slug'] ) ? sanitize_text_field( $_GET['demo_slug'] ) : '';
 
 			if ( ! $target_url || ! $theme_slug || ! $demo_slug ) {
 				$this->show_admin_notice( 
@@ -571,9 +656,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get demo information from target URL.
-		 *
-		 * @param string $target_url Target URL
-		 * @return array Demo information
 		 */
 		private function get_demo_info( $target_url ) {
 			$demos = $this->get_available_demos();
@@ -593,12 +675,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		}
 
 		/**
-		 * Render demo importer interface - UPDATED for streamlined batch download.
-		 *
-		 * @param array $demo_info Demo information
-		 * @param string $theme_slug Theme slug
-		 * @param string $demo_slug Demo slug
-		 * @param string $target_url Target URL
+		 * Render demo importer interface.
 		 */
 		private function render_demo_importer_interface( $demo_info, $theme_slug, $demo_slug, $target_url ) {
 			?>
@@ -610,7 +687,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				</div>
 				
 				<div class="reign-demos-progress-container">
-					<!-- Simplified Progress Bar -->
+					<!-- Progress Bar -->
 					<div id="progress-bar-container" style="display: none;">
 						<div class="progress-wrapper">
 							<div class="progress-bar">
@@ -639,15 +716,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				</div>
 			</div>
 
-			<?php $this->render_important_notes(); ?>
-			<?php
-		}
-
-		/**
-		 * Render important notes section - UPDATED for cleaner messaging.
-		 */
-		private function render_important_notes() {
-			?>
 			<div class="info-importer">
 				<div class="info-impoter-heading">
 					<?php esc_html_e( 'Before You Start:', 'reign-demo-installer' ); ?>
@@ -668,10 +736,10 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 		 * Render plugins manager page.
 		 */
 		private function render_plugins_manager_page() {
-			$theme_slug = $this->security ? $this->security->get_request_param( 'theme_slug', 'slug' ) : '';
-			$demo_slug = $this->security ? $this->security->get_request_param( 'demo_slug', 'slug' ) : '';
-			$target_url = $this->security ? $this->security->get_request_param( 'target_url', 'url' ) : '';
-			$plugins_json_key = $this->security ? $this->security->get_request_param( 'plugins_json_key', 'slug' ) : '';
+			$theme_slug = isset( $_GET['theme_slug'] ) ? sanitize_text_field( $_GET['theme_slug'] ) : '';
+			$demo_slug = isset( $_GET['demo_slug'] ) ? sanitize_text_field( $_GET['demo_slug'] ) : '';
+			$target_url = isset( $_GET['target_url'] ) ? esc_url_raw( $_GET['target_url'] ) : '';
+			$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( $_GET['plugins_json_key'] ) : '';
 
 			if ( ! $plugins_json_key ) {
 				$this->show_admin_notice( 
@@ -704,9 +772,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get plugins configuration.
-		 *
-		 * @param string $plugins_json_key Plugins JSON key
-		 * @return array Plugins configuration
 		 */
 		private function get_plugins_configuration( $plugins_json_key ) {
 			$url_to_request = REIGN_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
@@ -735,10 +800,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render plugins list.
-		 *
-		 * @param array $plugins_list Plugins list
-		 * @param string $demo_import_url Demo import URL
-		 * @param string $plugins_json_key Plugins JSON key
 		 */
 		private function render_plugins_list( $plugins_list, $demo_import_url, $plugins_json_key ) {
 			$num_of_req_plugins_installed = 0;
@@ -774,17 +835,10 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render individual plugin card.
-		 *
-		 * @param array $plugin Plugin data
-		 * @param array $plugin_status Plugin status
-		 * @param string $plugin_dependency Plugin dependency
-		 * @param string $already_active_class CSS class
-		 * @param string $plugins_json_key Plugins JSON key
 		 */
 		private function render_plugin_card( $plugin, $plugin_status, $plugin_dependency, $already_active_class, $plugins_json_key ) {
 			$is_pro = isset( $plugin['is_paid'] ) && ( $plugin['is_paid'] === 'yes' || $plugin['is_paid'] === true );
 			$external_url = isset( $plugin['external_url'] ) ? esc_url( $plugin['external_url'] ) : '';
-			$has_external_link = ! empty( $external_url );
 			
 			?>
 			<div class="wbcom-req-plugin-card">
@@ -827,12 +881,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render plugin action buttons.
-		 *
-		 * @param array $plugin Plugin data
-		 * @param array $plugin_status Plugin status
-		 * @param bool $is_pro Is premium plugin
-		 * @param string $external_url External URL
-		 * @param string $already_active_class CSS class
 		 */
 		private function render_plugin_buttons( $plugin, $plugin_status, $is_pro, $external_url, $already_active_class ) {
 			if ( $is_pro ) {
@@ -876,9 +924,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render plugins management scripts.
-		 *
-		 * @param int $required_plugins_to_activate Required plugins count
-		 * @param int $num_of_req_plugins_installed Installed plugins count
 		 */
 		private function render_plugins_scripts( $required_plugins_to_activate, $num_of_req_plugins_installed ) {
 			?>
@@ -920,8 +965,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get available demos.
-		 *
-		 * @return array Available demos
 		 */
 		private function get_available_demos() {
 			// Use cached data if available
@@ -950,8 +993,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render demos grid.
-		 *
-		 * @param array $demos Available demos
 		 */
 		private function render_demos_grid( $demos ) {
 			$current_motive = '';
@@ -977,8 +1018,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Render individual demo card.
-		 *
-		 * @param array $demo Demo data
 		 */
 		private function render_demo_card( $demo ) {
 			$preview_url = isset( $demo['preview_url'] ) ? esc_url( $demo['preview_url'] ) : '';
@@ -1017,9 +1056,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 
 		/**
 		 * Get plugin status.
-		 *
-		 * @param string $plugin_slug Plugin slug
-		 * @return array Plugin status
 		 */
 		private function get_plugin_status( $plugin_slug ) {
 			if ( class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ) {
@@ -1085,171 +1121,10 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 				array(),
 				REIGN_DEMO_INSTALLER_VERSION
 			);
-
-			// Add inline styles for enhanced UI
-			$this->add_custom_styles();
-		}
-
-		/**
-		 * Add custom inline styles.
-		 */
-		private function add_custom_styles() {
-			$custom_css = "
-				/* Streamlined Progress Bar */
-				#progress-bar-container {
-					margin: 20px 0;
-					padding: 20px;
-					background: #f8f9fa;
-					border-radius: 8px;
-					border: 1px solid #dee2e6;
-				}
-				
-				.progress-wrapper {
-					margin-bottom: 15px;
-				}
-				
-				.progress-bar {
-					background: #e9ecef;
-					border-radius: 6px;
-					height: 30px;
-					position: relative;
-					overflow: hidden;
-					box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-				}
-				
-				.progress-bar .completed {
-					background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
-					height: 100%;
-					width: 0%;
-					transition: width 0.5s ease;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: white;
-					font-weight: bold;
-					font-size: 14px;
-					text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-				}
-				
-				/* Status Message */
-				#wbtd-current-action {
-					margin: 15px 0;
-					padding: 12px 16px;
-					background: #f0f9ff;
-					border-left: 4px solid #3b82f6;
-					color: #1e40af;
-					font-weight: 500;
-					text-align: center;
-					border-radius: 4px;
-					box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-				}
-				
-				/* Import Button */
-				.import-button-container {
-					text-align: center;
-					margin: 30px 0;
-				}
-				
-				.import-button-container .button-hero {
-					font-size: 18px;
-					padding: 15px 30px;
-					height: auto;
-					line-height: 1.4;
-					border-radius: 6px;
-					transition: all 0.2s ease;
-					box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-				}
-				
-				.import-button-container .button-hero:hover {
-					transform: translateY(-1px);
-					box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-				}
-				
-				.import-button-container .button-hero:disabled {
-					opacity: 0.6;
-					cursor: not-allowed;
-					transform: none;
-				}
-				
-				/* Info Box */
-				.info-importer {
-					background: #fff3cd;
-					border: 1px solid #ffeaa7;
-					border-radius: 6px;
-					padding: 20px;
-					margin: 20px 0;
-					box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-				}
-				
-				.info-impoter-heading {
-					font-weight: bold;
-					color: #856404;
-					margin-bottom: 15px;
-					font-size: 16px;
-					display: flex;
-					align-items: center;
-				}
-				
-				.info-impoter-heading:before {
-					content: 'ℹ️';
-					margin-right: 8px;
-					font-size: 18px;
-				}
-				
-				.info-impoter-content ul {
-					margin: 0;
-					padding-left: 20px;
-				}
-				
-				.info-impoter-content li {
-					color: #856404;
-					margin-bottom: 8px;
-					line-height: 1.4;
-				}
-				
-				.pro-badge {
-					background: #ff6b35;
-					color: white;
-					font-size: 10px;
-					padding: 2px 6px;
-					border-radius: 3px;
-					margin-left: 8px;
-					font-weight: bold;
-					text-transform: uppercase;
-				}
-				
-				.buy-now-plugins {
-					margin-right: 5px !important;
-				}
-				
-				.upload-plugins {
-					background: #0073aa;
-					border-color: #0073aa;
-					color: white;
-				}
-				
-				.plugin-dependency.optional {
-					color: #666;
-				}
-				
-				.plugin-dependency.required {
-					color: #d63384;
-					font-weight: bold;
-				}
-				
-				.theme-version {
-					color: #666;
-					font-style: italic;
-				}
-			";
-			wp_add_inline_style( 'reign-demo-installer-css', $custom_css );
 		}
 
 		/**
 		 * Get demo installer page URL.
-		 *
-		 * @param array $args URL arguments
-		 * @return string Page URL
 		 */
 		public function get_demo_installer_page_url( $args = array() ) {
 			$base_url = admin_url( 'admin.php?page=' . self::$_slug );
@@ -1266,8 +1141,5 @@ endif;
 
 /**
  * Main instance of Reign_Demo_Installer_Admin_Settings.
- *
- * @since 3.0.0
- * @return Reign_Demo_Installer_Admin_Settings
  */
 Reign_Demo_Installer_Admin_Settings::instance();

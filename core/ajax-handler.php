@@ -1,10 +1,10 @@
 <?php
 /**
- * AJAX handler for Reign Demo Installer - FIXED VERSION
- * Properly handles path structure like the old working system
+ * AJAX handler for Reign Demo Installer - SIMPLIFIED VERSION
+ * Handles files one by one without complex folder structure dependency
  *
  * @package Reign_Demo_Installer
- * @since 3.0.0
+ * @since 3.0.1
  */
 
 // Prevent direct access
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * Get demo manifest with path-aware processing.
+		 * Get demo manifest - SIMPLIFIED without complex path processing.
 		 */
 		public function get_demo_manifest() {
 			if ( ! $this->validate_request() ) return;
@@ -183,8 +183,8 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					wp_send_json_error( array( 'message' => 'Invalid demo data received' ) );
 				}
 
-				// FIXED: Prepare file list with path preservation matching old system
-				$files = $this->prepare_file_list_with_paths( $demo_data );
+				// SIMPLIFIED: Just prepare file list without complex path handling
+				$files = $this->prepare_simple_file_list( $demo_data );
 
 				if ( empty( $files ) ) {
 					wp_send_json_error( array( 'message' => 'No demo files found' ) );
@@ -204,9 +204,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Enhanced file list preparation with path information matching old system.
+		 * SIMPLIFIED: Prepare file list without complex path processing.
 		 */
-		private function prepare_file_list_with_paths( $demo_data ) {
+		private function prepare_simple_file_list( $demo_data ) {
 			$files = array();
 			
 			// Add database tables
@@ -216,60 +216,24 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 						'name' => basename( $url ),
 						'url' => $url,
 						'type' => 'database_table',
-						'action_for' => 'database_tables',
-						'path_info' => null // Database files don't need path preservation
+						'action_for' => 'database_tables'
 					);
 				}
 			}
 
-			// FIXED: Add upload folders WITH proper path preservation like old system
+			// Add upload folders - simplified without path processing
 			if ( isset( $demo_data['upload_folders'] ) && is_array( $demo_data['upload_folders'] ) ) {
 				foreach ( $demo_data['upload_folders'] as $url ) {
-					$path_info = $this->extract_path_info_from_url( $url );
-					
 					$files[] = array(
 						'name' => basename( $url ),
 						'url' => $url,
 						'type' => 'upload_folder',
-						'action_for' => 'upload_folders',
-						'path_info' => $path_info // CRITICAL: Preserve path information
+						'action_for' => 'upload_folders'
 					);
 				}
 			}
 
 			return $files;
-		}
-
-		/**
-		 * FIXED: Extract path information from URL matching old clone_uploads_folder logic.
-		 */
-		private function extract_path_info_from_url( $url ) {
-			// Replicate the old logic: $parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
-			$url_parts = explode( '/', $url );
-			$url_parts = array_filter( $url_parts ); // Remove empty elements
-			$url_parts = array_values( $url_parts ); // Reindex
-			
-			$filename = end( $url_parts ); // Last element is filename
-			$parent_folder = isset( $url_parts[ count( $url_parts ) - 2 ] ) ? $url_parts[ count( $url_parts ) - 2 ] : '';
-			
-			// Extract the path after 'theme_demo'
-			$demo_index = array_search( 'theme_demo', $url_parts );
-			$relative_path = '';
-			
-			if ( $demo_index !== false && $demo_index < count( $url_parts ) - 1 ) {
-				// Get everything after 'theme_demo' but before the filename
-				$relative_parts = array_slice( $url_parts, $demo_index + 1, -1 );
-				$relative_path = implode( '/', $relative_parts );
-			}
-			
-			$this->debug_log( "Extracted path info for {$filename}: parent={$parent_folder}, relative={$relative_path}" );
-			
-			return array(
-				'parent_folder' => $parent_folder,
-				'relative_path' => $relative_path,
-				'full_path' => dirname( implode( '/', $url_parts ) ),
-				'filename' => $filename
-			);
 		}
 
 		/**
@@ -324,7 +288,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Process file with better error handling and path awareness.
+		 * SIMPLIFIED: Process file without complex path handling.
 		 */
 		public function process_local_demo_file() {
 			if ( ! $this->validate_request() ) return;
@@ -334,17 +298,6 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				$file_name = $this->get_param( 'file_name', 'filename' );
 				$action_for = $this->get_param( 'action_for' );
 				$file_criticality = $this->get_param( 'file_criticality', 'string', 'optional' );
-				
-				// FIXED: Get path info from request
-				$path_info_json = $this->get_param( 'path_info', 'string', '' );
-				$path_info = null;
-				
-				if ( ! empty( $path_info_json ) ) {
-					$path_info = json_decode( $path_info_json, true );
-					if ( json_last_error() !== JSON_ERROR_NONE ) {
-						$path_info = null;
-					}
-				}
 
 				$folder_info = get_transient( 'reign_temp_folder_' . $temp_folder_id );
 				if ( ! $folder_info || $folder_info['user_id'] !== get_current_user_id() ) {
@@ -357,11 +310,11 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					wp_send_json_error( array( 'message' => 'File not found in temp folder' ) );
 				}
 
-				// Set up environment with better resource management
+				// Set up environment
 				$this->prepare_processing_environment();
 
-				// FIXED: Process with path info
-				$result = $this->process_file_by_type_with_path( $file_path, $action_for, $file_criticality, $path_info );
+				// SIMPLIFIED: Process file without path complexity
+				$result = $this->process_file_by_type_simple( $file_path, $action_for, $file_criticality );
 
 				if ( is_wp_error( $result ) ) {
 					if ( $file_criticality === 'critical' ) {
@@ -408,17 +361,16 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Enhanced file processing with path awareness.
+		 * SIMPLIFIED: Process file by type without path complexity.
 		 */
-		private function process_file_by_type_with_path( $file_path, $action_for, $criticality, $path_info ) {
+		private function process_file_by_type_simple( $file_path, $action_for, $criticality ) {
 			try {
 				switch ( $action_for ) {
 					case 'database_tables':
 						return $this->process_database_file( $file_path, $criticality );
 						
 					case 'upload_folders':
-						// FIXED: Pass path info to upload processing
-						return $this->process_upload_file( $file_path, $criticality, $path_info );
+						return $this->process_upload_file_simple( $file_path, $criticality );
 						
 					default:
 						return new WP_Error( 'invalid_type', 'Unknown file type: ' . $action_for );
@@ -429,35 +381,27 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Process upload file with path awareness matching old clone_uploads_folder.
+		 * SIMPLIFIED: Process upload ZIP file - just extract to uploads directory.
 		 */
-		private function process_upload_file( $file_path, $criticality, $path_info = null ) {
+		private function process_upload_file_simple( $file_path, $criticality ) {
 			$file_content = file_get_contents( $file_path );
 			if ( $file_content === false ) {
 				return new WP_Error( 'read_error', 'Cannot read upload file' );
 			}
 
 			$upload_dir = wp_upload_dir();
-			$temp_zip = $upload_dir['basedir'] . '/wbcom-theme-demo-' . time() . '.zip';
+			$temp_zip = $upload_dir['basedir'] . '/temp-' . basename( $file_path );
 
-			// Save content to temporary zip
+			// Save content to temporary zip in uploads directory
 			if ( file_put_contents( $temp_zip, $file_content ) === false ) {
 				return new WP_Error( 'write_error', 'Cannot write temporary zip file' );
 			}
 
 			try {
-				// FIXED: Determine extraction path based on path_info like old system
-				$extract_path = $this->determine_extraction_path_like_old_system( $upload_dir['basedir'], $path_info );
+				// Extract directly to uploads directory - all ZIP files contain proper folder structure
+				$extract_path = $upload_dir['basedir'];
 				
-				// Ensure the extraction directory exists
-				if ( ! is_dir( $extract_path ) ) {
-					if ( ! wp_mkdir_p( $extract_path ) ) {
-						throw new Exception( "Cannot create directory: {$extract_path}" );
-					}
-				}
-				
-				// FIXED: Extract using ZipArchive like old system
-				$extraction_result = $this->extract_zip_like_old_system( $temp_zip, $extract_path );
+				$extraction_result = $this->extract_zip_simple( $temp_zip, $extract_path );
 				
 				if ( is_wp_error( $extraction_result ) ) {
 					if ( $criticality !== 'critical' ) {
@@ -467,10 +411,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 					throw new Exception( $extraction_result->get_error_message() );
 				}
 
-				// Log successful extraction with path info
-				$relative_path = $path_info ? ( $path_info['relative_path'] ?: $path_info['parent_folder'] ) : 'root';
-				$this->debug_log( "Successfully extracted: " . basename( $file_path ) . " to {$relative_path}" );
-				
+				$this->debug_log( "Successfully extracted ZIP: " . basename( $file_path ) . " to uploads directory" );
 				return true;
 
 			} catch ( Exception $e ) {
@@ -492,25 +433,9 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Determine proper extraction path like old clone_uploads_folder method.
+		 * SIMPLIFIED: Extract ZIP file directly to target directory.
 		 */
-		private function determine_extraction_path_like_old_system( $base_upload_dir, $path_info ) {
-			if ( ! $path_info || empty( $path_info['parent_folder'] ) ) {
-				return trailingslashit( $base_upload_dir );
-			}
-			
-			// FIXED: Use parent_folder like old system: $upload['basedir'] . '/' . $parentFolderName . '/'
-			$extraction_path = trailingslashit( $base_upload_dir ) . trailingslashit( $path_info['parent_folder'] );
-			
-			$this->debug_log( "Extraction path (old system style): {$extraction_path} from parent folder: {$path_info['parent_folder']}" );
-			
-			return $extraction_path;
-		}
-
-		/**
-		 * FIXED: Extract ZIP file like old system using ZipArchive.
-		 */
-		private function extract_zip_like_old_system( $zip_file, $extract_path ) {
+		private function extract_zip_simple( $zip_file, $extract_path ) {
 			if ( ! class_exists( 'ZipArchive' ) ) {
 				return new WP_Error( 'ziparchive_missing', 'ZipArchive not available' );
 			}
@@ -522,7 +447,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 				return new WP_Error( 'ziparchive_open_failed', "Cannot open ZIP: error {$result}" );
 			}
 
-			// FIXED: Extract exactly like old system: $zip->extractTo( $extract_path );
+			// Extract all files to the target directory
 			if ( ! $zip->extractTo( $extract_path ) ) {
 				$zip->close();
 				return new WP_Error( 'extraction_failed', 'ZipArchive extraction failed' );
@@ -537,7 +462,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Process database file with improved error handling.
+		 * Process database file with improved error handling.
 		 */
 		private function process_database_file( $file_path, $criticality ) {
 			$file_content = file_get_contents( $file_path );
@@ -861,7 +786,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Download file with retry logic and better error handling.
+		 * Download file with retry logic.
 		 */
 		private function download_with_retry( $url, $max_attempts = 3 ) {
 			for ( $attempt = 1; $attempt <= $max_attempts; $attempt++ ) {
@@ -893,7 +818,7 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 		}
 
 		/**
-		 * FIXED: Prepare processing environment with better resource management.
+		 * Prepare processing environment.
 		 */
 		private function prepare_processing_environment() {
 			// More aggressive resource settings
