@@ -125,7 +125,6 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 			include_once 'core/admin-settings.php';
 			include_once 'core/ajax-handler.php';
 			include_once 'core/plugins-manager.php';
-			include_once 'update-checker/update-checker.php';
 		}
 
 		/**
@@ -135,16 +134,6 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 			$locale = apply_filters( 'wbcom_theme_demo_installer_plugin_locale', get_locale(), WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
 			load_textdomain( WBCOM_Theme_Demo_Installer_TEXT_DOMAIN, WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'language/' . WBCOM_Theme_Demo_Installer_TEXT_DOMAIN . '-' . $locale . '.mo' );
 			load_plugin_textdomain( WBCOM_Theme_Demo_Installer_TEXT_DOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/language' );
-		}
-
-		public function installer_update_checker() {
-			if( class_exists( 'PucFactory' ) ){
-				$myUpdateChecker = PucFactory::buildUpdateChecker(
-					'https://demos.wbcomdesigns.com/exporter/free-plugins/wbcom-demo-installer.json',
-					__FILE__,
-					'wbcom-demo-installer'
-				);
-			}
 		}
 
 	}
