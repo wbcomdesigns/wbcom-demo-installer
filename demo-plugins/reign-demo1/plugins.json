@@ -1,0 +1,68 @@
+[
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/elementor-logo.jpg",
+        "name": "Elementor",
+        "slug": "elementor",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+    },
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/wbcom-logo.jpg",
+        "name": "Wbcom Essential",
+        "slug": "wbcom-essential",
+        "required": true,
+        "version": "3.7.3",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.7.3/wbcom-essential.zip",
+        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
+    },
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/bp-logo.jpg",
+        "name": "Buddypress",
+        "slug": "buddypress",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+    },
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/bbpress-logo.jpg",
+        "name": "bbPress",
+        "slug": "bbpress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "bbPress is forum software with a twist from the creators of WordPress."
+    },
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/rt-media-logo.jpg",
+        "name": "rtMedia for WordPress, BuddyPress and bbPress",
+        "slug": "buddypress-media",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
+    },
+    {
+        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/pmp-pro-logo.jpg",
+        "name": "Paid Memberships Pro",
+        "slug": "paid-memberships-pro",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "This plugin is designed for premium content sites, clubs/associations, subscription products, newsletters and more!"
+    }
+]
