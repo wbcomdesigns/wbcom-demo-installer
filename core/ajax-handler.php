@@ -52,6 +52,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 		private function init_hooks() {
 			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'wbcom_get_theme_demo_data' ) );
 			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
+			add_action( 'wp_ajax_wbcom_get_demo_plugins_data', array( $this, 'wbcom_get_demo_plugins_data' ) );
 		}
 
 		public function wbcom_read_theme_demo_package_file() {
@@ -480,6 +481,51 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 				unlink( $upload_dir );
 			}
+		}
+
+		public function wbcom_get_demo_plugins_data() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			// Capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			if ( isset( $_POST['plugins_key'] ) ) {
+				$plugins_key = sanitize_text_field( $_POST['plugins_key'] );
+				
+				// Try local file first
+				$local_path = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
+				if ( file_exists( $local_path ) ) {
+					$plugins_data = file_get_contents( $local_path );
+					$plugins_data = json_decode( $plugins_data, true );
+					
+					if ( $plugins_data ) {
+						wp_send_json_success( $plugins_data );
+					}
+				}
+				
+				// Fallback to remote URL
+				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_key . '/plugins.json';
+				$response = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 30 ) );
+				
+				if ( ! is_wp_error( $response ) ) {
+					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+						$response_body = isset( $response['body'] ) ? $response['body'] : '';
+						if ( ! empty( $response_body ) ) {
+							$plugins_data = json_decode( $response_body, true );
+							if ( $plugins_data ) {
+								wp_send_json_success( $plugins_data );
+							}
+						}
+					}
+				}
+			}
+			
+			wp_send_json_error( __( 'Failed to fetch plugin data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
 		}
 
 	}

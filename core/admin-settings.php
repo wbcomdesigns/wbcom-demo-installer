@@ -349,14 +349,25 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 										'plugins_json_key' => $value['plugins_json_key'],
 									)
 								);
+								
+								// Get demo categories based on plugins
+								$demo_categories = $this->get_demo_categories( $value['plugins_json_key'] );
+								$categories_attr = ! empty( $demo_categories ) ? implode( ' ', $demo_categories ) : '';
 								?>
-								<div class='wbcom-demo-importer import_filter <?php echo $value['motive_key']; ?>'>
+								<div class='wbcom-demo-importer demo-details import_filter <?php echo $value['motive_key']; ?>' data-demo-slug="<?php echo $value['demo_slug']; ?>" data-plugins-key="<?php echo $value['plugins_json_key']; ?>" data-categories="<?php echo esc_attr( $categories_attr ); ?>">
 									<div class="container">
 										<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
 										<div class="demo-title">
-											<h2><?php echo $value['demo_name']; ?></h2>
+											<h2 class="demo-name"><?php echo $value['demo_name']; ?></h2>
+											<?php if ( ! empty( $demo_categories ) ) : ?>
+												<div class="category-badges">
+													<?php foreach ( $demo_categories as $category ) : ?>
+														<span class="category-badge <?php echo esc_attr( $category ); ?>"><?php echo esc_html( $category ); ?></span>
+													<?php endforeach; ?>
+												</div>
+											<?php endif; ?>
 											<form method="get" action="<?php echo $current_url; ?>">
-												<div class="middle">
+												<div class="middle demo-import-actions">
 													<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
 													<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
 												</div>
@@ -423,6 +434,16 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			wp_enqueue_script( 'wbcom_theme_demo_installer_js' );
 			wp_enqueue_script( 'wbcom_theme_demo_installer_js_filter' );
 
+			// Register and enqueue demo filter assets
+			wp_register_script(
+				$handle    = 'wbcom_demo_filter_js',
+				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/demo-filter.js',
+				$deps      = array( 'jquery' ),
+				$ver       = time(),
+				$in_footer = true
+			);
+			wp_enqueue_script( 'wbcom_demo_filter_js' );
+
 			wp_register_style(
 				$handle = 'wbcom-demo-listing-css',
 				$src    = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
@@ -431,6 +452,16 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$media  = 'all'
 			);
 			wp_enqueue_style( 'wbcom-demo-listing-css' );
+
+			// Register and enqueue demo filter styles
+			wp_register_style(
+				$handle = 'wbcom-demo-filter-css',
+				$src    = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-filter.css',
+				$deps   = array(),
+				$ver    = time(),
+				$media  = 'all'
+			);
+			wp_enqueue_style( 'wbcom-demo-filter-css' );
 		}
 
 		public function get_demo_installer_page_url( $args = array() ) {
@@ -443,6 +474,63 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				);
 			}
 			return $installer_page_url;
+		}
+
+		/**
+		 * Get demo categories based on plugins used
+		 */
+		public function get_demo_categories( $plugins_key ) {
+			$categories = array();
+			
+			// Plugin to category mapping
+			$plugin_category_map = array(
+				// Community plugins
+				'buddyboss-platform' => 'community',
+				'buddypress' => 'community',
+				'peepso' => 'community',
+				'peepso-core' => 'community',
+				
+				// LMS plugins
+				'learndash' => 'lms',
+				'sfwd-lms' => 'lms',
+				'sensei-lms' => 'lms',
+				'tutor' => 'lms',
+				'lifterlms' => 'lms',
+				
+				// Marketplace plugins
+				'dokan-lite' => 'marketplace',
+				'dokan' => 'marketplace',
+				'wc-multivendor-marketplace' => 'marketplace',
+				'wc-frontend-manager' => 'marketplace',
+				'wc-vendors' => 'marketplace',
+				
+				// Directory plugins
+				'geodirectory' => 'directory',
+				
+				// Job plugins
+				'wp-job-manager' => 'jobs'
+			);
+			
+			// Try to read plugins.json file
+			$plugins_file = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
+			
+			if ( file_exists( $plugins_file ) ) {
+				$plugins_data = file_get_contents( $plugins_file );
+				$plugins_data = json_decode( $plugins_data, true );
+				
+				if ( is_array( $plugins_data ) ) {
+					foreach ( $plugins_data as $plugin ) {
+						if ( isset( $plugin['slug'] ) && isset( $plugin_category_map[ $plugin['slug'] ] ) ) {
+							$category = $plugin_category_map[ $plugin['slug'] ];
+							if ( ! in_array( $category, $categories ) ) {
+								$categories[] = $category;
+							}
+						}
+					}
+				}
+			}
+			
+			return $categories;
 		}
 
 	}
