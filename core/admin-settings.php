@@ -484,11 +484,15 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			
 			// Plugin to category mapping
 			$plugin_category_map = array(
-				// Community plugins
-				'buddyboss-platform' => 'community',
-				'buddypress' => 'community',
-				'peepso' => 'community',
-				'peepso-core' => 'community',
+				// BuddyBoss plugins
+				'buddyboss-platform' => 'buddyboss',
+				
+				// BuddyPress plugins
+				'buddypress' => 'buddypress',
+				
+				// PeepSo plugins
+				'peepso' => 'peepso',
+				'peepso-core' => 'peepso',
 				
 				// LMS plugins
 				'learndash' => 'lms',

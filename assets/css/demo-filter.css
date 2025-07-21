@@ -69,16 +69,28 @@
 }
 
 /* Category specific colors */
-.category-badge.community {
+.category-badge.buddyboss {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #2196f3;
+}
+
+.category-badge.buddypress {
     background: #e8f5e9;
     color: #2e7d32;
     border: 1px solid #4caf50;
 }
 
+.category-badge.peepso {
+    background: #f3e5f5;
+    color: #7b1fa2;
+    border: 1px solid #9c27b0;
+}
+
 .category-badge.lms {
-    background: #e3f2fd;
-    color: #1565c0;
-    border: 1px solid #2196f3;
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ff9800;
 }
 
 .category-badge.marketplace {

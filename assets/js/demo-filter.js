@@ -10,7 +10,9 @@ jQuery(document).ready(function($) {
                     <h3>Filter Demos by Category <span id="demo-count"></span></h3>
                     <div class="filter-buttons">
                         <button class="filter-btn active" data-category="all">All Demos</button>
-                        <button class="filter-btn" data-category="community">Community</button>
+                        <button class="filter-btn" data-category="buddyboss">BuddyBoss</button>
+                        <button class="filter-btn" data-category="buddypress">BuddyPress</button>
+                        <button class="filter-btn" data-category="peepso">PeepSo</button>
                         <button class="filter-btn" data-category="lms">Learning (LMS)</button>
                         <button class="filter-btn" data-category="marketplace">Marketplace</button>
                         <button class="filter-btn" data-category="directory">Directory</button>
