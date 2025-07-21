@@ -78,7 +78,9 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					}
 					
 					// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
-					$url_to_request = $target_url . 'wp-admin/?wbcom_theme_demo_listing=yes';
+					// Add API key for internal exporter access
+					$api_key = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
+					$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
 					$response       = wp_remote_post(
 						$url_to_request,
 						array(
