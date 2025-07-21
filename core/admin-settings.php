@@ -267,7 +267,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					<div class="plugin-container">
 						<div class="plugin-importer-sec">
 							<ul>
-								<li class="importer-plugin-thumb"><img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'plugin-thumb/'. $plugin['plugin_thumb']; ?>" alt="plugin-thumb" class="pluign_image"></li>
+								<li class="importer-plugin-thumb"><img src="<?php echo esc_url( ! empty( $plugin['plugin_thumb'] ) ? $plugin['plugin_thumb'] : WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'plugin-thumb/admin-plugins.svg' ); ?>" alt="plugin-thumb" class="plugin_image"></li>
 								<li class="plugin-name"><?php echo $plugin['name']; ?></li>
 								<li class="plugin-status"><span class="<?php echo $already_active_class; ?>"><?php echo $plugin_status['status_text']; ?></span></li>
 								<li class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></li>
