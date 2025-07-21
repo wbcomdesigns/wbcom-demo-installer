@@ -93,10 +93,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						$api_key = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
 						$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
 						
-						// Log the request for debugging
-						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-							error_log( 'WBCOM Demo Installer: Requesting demo data from ' . $url_to_request );
-						}
 						
 						$response = wp_remote_post(
 							$url_to_request,
@@ -151,11 +147,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						if ( json_last_error() !== JSON_ERROR_NONE ) {
 							ob_end_clean();
 							
-							// Log the error for debugging
-							if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-								error_log( 'WBCOM Demo Installer: Invalid JSON received. Error: ' . json_last_error_msg() );
-								error_log( 'Response preview: ' . substr( $response_body, 0, 500 ) );
-							}
 							
 							wp_send_json_error( array( 
 								'message' => __( 'Invalid JSON response from demo server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
@@ -242,12 +233,9 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						
 						// Ensure table name is not empty after sanitization
 						if ( empty( $table_name ) ) {
-							error_log( "Error: Table name is empty after processing filename: $filename" );
 							wp_die( __( 'Invalid table name extracted from filename', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
 						}
 						
-						// Log the table import for debugging
-						error_log( "Importing data from file: $filename to table: {$wpdb->prefix}$table_name" );
 						
 						$this->clone_database_table( $table_name, $url_to_request );
 					}
@@ -326,8 +314,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 		public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 			$retrieved_data = '';
 			
-			// Log the start of import
-			error_log( "Starting import for table: $table_name from URL: $url_to_request" );
 			
 			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
@@ -336,15 +322,8 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					$response = isset( $response['body'] ) ? $response['body'] : '';
 					if ( ! empty( $response ) ) {
 						$retrieved_data = json_decode( $response, true );
-						error_log( "Successfully retrieved and decoded data. Record count: " . count( $retrieved_data ) );
-					} else {
-						error_log( "Error: Response body is empty" );
 					}
-				} else {
-					error_log( "Error: HTTP response code: " . ( isset( $response['response']['code'] ) ? $response['response']['code'] : 'unknown' ) );
 				}
-			} else {
-				error_log( "Error: WP Error - " . $response->get_error_message() );
 			}
 
 			if ( ! empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
@@ -497,8 +476,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 				global $wpdb;
 				
-				// Log the start of database operations
-				error_log( "Starting database operations for table: $table_name" );
 				
 				// Start transaction for data integrity
 				$wpdb->query( 'START TRANSACTION' );
@@ -506,7 +483,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				try {
 					if ( ( $table_name == 'users' ) || ( $table_name == 'usermeta' ) ) {
 						$table_name = $wpdb->prefix . $table_name;
-						error_log( "Processing users/usermeta table: $table_name" );
 						
 						// Verify table exists
 						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
@@ -539,11 +515,9 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						return;
 					} else {
 						$table_name = $wpdb->prefix . $table_name;
-						error_log( "Processing general table: $table_name" );
 
 						// Verify table exists
 						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
-							error_log( "Error: Table $table_name does not exist" );
 							throw new Exception( sprintf( __( 'Table %s does not exist', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name ) );
 						}
 
@@ -563,27 +537,21 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 							update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
 						}
 
-						error_log( "Inserting " . count( $retrieved_data ) . " records into $table_name" );
 						$inserted_count = 0;
 						
 						foreach ( $retrieved_data as $key => $value ) {
 							$result = $wpdb->insert( $table_name, $value );
 							if ( $result === false ) {
-								error_log( "Failed to insert record at index $key: " . $wpdb->last_error );
 								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
 							}
 							$inserted_count++;
 						}
-						
-						error_log( "Successfully inserted $inserted_count records into $table_name" );
 					}
 					
 					$wpdb->query( 'COMMIT' );
-					error_log( "Database import completed successfully for table: $table_name" );
 					
 				} catch ( Exception $e ) {
 					$wpdb->query( 'ROLLBACK' );
-					error_log( "Database import failed for table $table_name: " . $e->getMessage() );
 					wp_die( $e->getMessage() );
 				}
 			}
