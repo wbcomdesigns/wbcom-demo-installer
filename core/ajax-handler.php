@@ -56,69 +56,158 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 		}
 
 		public function wbcom_read_theme_demo_package_file() {
-			// Security check
-			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
-				wp_die( __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
-			}
+			// Disable error reporting to prevent PHP warnings/notices from corrupting JSON
+			error_reporting(0);
+			@ini_set('display_errors', 0);
 			
-			// Capability check
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
-			}
+			// Start output buffering to catch any unexpected output
+			ob_start();
 			
-			if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
-				if ( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
-					// Sanitize inputs
-					$theme_slug = sanitize_text_field( $_POST['theme_slug'] );
-					$demo_slug = sanitize_text_field( $_POST['demo_slug'] );
-					$target_url = esc_url_raw( $_POST['target_url'] );
-					
-					// Validate URL
-					if ( ! filter_var( $target_url, FILTER_VALIDATE_URL ) ) {
-						wp_die( __( 'Invalid target URL provided', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
-					}
-					
-					// $url_to_request = WBCOM_Theme_Demo_Installer_URL_TO_REQUEST;
-					// Add API key for internal exporter access
-					$api_key = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
-					$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
-					$response       = wp_remote_post(
-						$url_to_request,
-						array(
-							'method'  => 'POST',
-							'timeout' => 120,
-							'headers' => array(),
-							'body'    => array(
-								'theme_slug' => $theme_slug,
-								'demo_slug'  => $demo_slug,
-							),
-						)
-					);
-					if ( ! is_wp_error( $response ) ) {
-						if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
-							$response = isset( $response['body'] ) ? $response['body'] : '';
-							if ( ! empty( $response ) ) {
-								echo $response;
-							}
+			try {
+				// Security check
+				if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
+				
+				// Capability check
+				if ( ! current_user_can( 'manage_options' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
+				
+				if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
+					if ( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
+						// Sanitize inputs
+						$theme_slug = sanitize_text_field( $_POST['theme_slug'] );
+						$demo_slug = sanitize_text_field( $_POST['demo_slug'] );
+						$target_url = esc_url_raw( $_POST['target_url'] );
+						
+						// Validate URL
+						if ( ! filter_var( $target_url, FILTER_VALIDATE_URL ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 'message' => __( 'Invalid target URL provided', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 						}
+						
+						// Add API key for internal exporter access
+						$api_key = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
+						$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
+						
+						// Log the request for debugging
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'WBCOM Demo Installer: Requesting demo data from ' . $url_to_request );
+						}
+						
+						$response = wp_remote_post(
+							$url_to_request,
+							array(
+								'method'  => 'POST',
+								'timeout' => 120,
+								'headers' => array(
+									'Content-Type' => 'application/x-www-form-urlencoded',
+									'Accept' => 'application/json',
+								),
+								'body'    => array(
+									'theme_slug' => $theme_slug,
+									'demo_slug'  => $demo_slug,
+								),
+								'sslverify' => false,
+							)
+						);
+						
+						if ( is_wp_error( $response ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 
+								'message' => __( 'Failed to connect to demo server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+								'details' => $response->get_error_message()
+							) );
+						}
+						
+						$response_code = wp_remote_retrieve_response_code( $response );
+						$response_body = wp_remote_retrieve_body( $response );
+						
+						if ( $response_code !== 200 ) {
+							ob_end_clean();
+							wp_send_json_error( array( 
+								'message' => sprintf( __( 'Demo server returned error code %d', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $response_code ),
+								'code' => $response_code
+							) );
+						}
+						
+						if ( empty( $response_body ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 'message' => __( 'Demo server returned empty response', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+						}
+						
+						// Clean any potential BOM or whitespace
+						$response_body = trim( $response_body );
+						
+						// Remove UTF-8 BOM if present
+						$bom = pack('H*','EFBBBF');
+						$response_body = preg_replace("/^$bom/", '', $response_body);
+						
+						// Validate JSON before sending
+						$json_test = json_decode( $response_body, true );
+						if ( json_last_error() !== JSON_ERROR_NONE ) {
+							ob_end_clean();
+							
+							// Log the error for debugging
+							if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+								error_log( 'WBCOM Demo Installer: Invalid JSON received. Error: ' . json_last_error_msg() );
+								error_log( 'Response preview: ' . substr( $response_body, 0, 500 ) );
+							}
+							
+							wp_send_json_error( array( 
+								'message' => __( 'Invalid JSON response from demo server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+								'json_error' => json_last_error_msg()
+							) );
+						}
+						
+						// Clear output buffer
+						ob_end_clean();
+						
+						// Set proper headers
+						header( 'Content-Type: application/json; charset=utf-8' );
+						
+						// Output the clean JSON
+						echo $response_body;
+						wp_die();
 					}
 				}
+			} catch ( Exception $e ) {
+				ob_end_clean();
+				wp_send_json_error( array( 
+					'message' => __( 'An error occurred while fetching demo data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+					'error' => $e->getMessage()
+				) );
 			}
-			wp_die();
+			
+			ob_end_clean();
+			wp_send_json_error( array( 'message' => __( 'Invalid request', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 		}
 
 		public function wbcom_get_theme_demo_data() {
-			// Security check
-			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
-				wp_die( __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
-			}
+			// Disable error reporting to prevent PHP warnings/notices from corrupting output
+			error_reporting(0);
+			@ini_set('display_errors', 0);
 			
-			// Capability check
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
-			}
+			// Start output buffering to catch any unexpected output
+			ob_start();
 			
-			if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_get_theme_demo_data' ) ) {
+			try {
+				// Security check
+				if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
+				
+				// Capability check
+				if ( ! current_user_can( 'manage_options' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
+				
+				if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_get_theme_demo_data' ) ) {
 
 				if ( isset( $_POST['action_for'] ) && ( sanitize_text_field( $_POST['action_for'] ) == 'post_types' ) ) {
 					$url_to_request = isset( $_POST['url_to_request'] ) ? esc_url_raw( $_POST['url_to_request'] ) : '';
@@ -130,6 +219,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						$post_slug = sanitize_file_name( str_replace( '.xml', '', $post_slug ) );
 						$this->clone_post_type( $post_slug, $url_to_request );
 					}
+					ob_end_clean();
 					wp_die();
 				}
 
@@ -138,24 +228,50 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					
 					// Validate URL
 					if ( ! empty( $url_to_request ) && filter_var( $url_to_request, FILTER_VALIDATE_URL ) ) {
+						global $wpdb;
 						$url_parts = explode( '/', $url_to_request );
-						$table_name = end( $url_parts );
-						$table_name = str_replace( '.json', '', $table_name );
-						$table_name = preg_replace( '/[0-9]+/', '', $table_name );
+						$filename = end( $url_parts );
+						$table_name = str_replace( '.json', '', $filename );
+						
+						// Remove number suffix from table name (e.g., posts_0001 -> posts)
+						// This handles both old format (posts_1) and new format (posts_0001)
+						$table_name = preg_replace( '/_\d+$/', '', $table_name );
+						
 						// Sanitize table name to prevent SQL injection
 						$table_name = preg_replace( '/[^a-zA-Z0-9_]/', '', $table_name );
+						
+						// Ensure table name is not empty after sanitization
+						if ( empty( $table_name ) ) {
+							error_log( "Error: Table name is empty after processing filename: $filename" );
+							wp_die( __( 'Invalid table name extracted from filename', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+						}
+						
+						// Log the table import for debugging
+						error_log( "Importing data from file: $filename to table: {$wpdb->prefix}$table_name" );
+						
 						$this->clone_database_table( $table_name, $url_to_request );
 					}
+					ob_end_clean();
 					wp_die();
 				}
 
 				if ( isset( $_POST['action_for'] ) && ( $_POST['action_for'] == 'upload_folders' ) ) {
 					$url_to_request = isset( $_POST['url_to_request'] ) ? $_POST['url_to_request'] : '';
 					$this->clone_uploads_folder( $url_to_request );
+					ob_end_clean();
 					wp_die();
 				}
 			}
-			wp_die();
+			} catch ( Exception $e ) {
+				ob_end_clean();
+				wp_send_json_error( array( 
+					'message' => __( 'An error occurred while processing demo data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+					'error' => $e->getMessage()
+				) );
+			}
+			
+			ob_end_clean();
+			wp_send_json_error( array( 'message' => __( 'Invalid request', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 		}
 
 		public function clone_post_type( $post_slug = 'post', $url_to_request = '' ) {
@@ -209,6 +325,10 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 		public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 			$retrieved_data = '';
+			
+			// Log the start of import
+			error_log( "Starting import for table: $table_name from URL: $url_to_request" );
+			
 			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 			if ( ! is_wp_error( $response ) ) {
@@ -216,8 +336,15 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					$response = isset( $response['body'] ) ? $response['body'] : '';
 					if ( ! empty( $response ) ) {
 						$retrieved_data = json_decode( $response, true );
+						error_log( "Successfully retrieved and decoded data. Record count: " . count( $retrieved_data ) );
+					} else {
+						error_log( "Error: Response body is empty" );
 					}
+				} else {
+					error_log( "Error: HTTP response code: " . ( isset( $response['response']['code'] ) ? $response['response']['code'] : 'unknown' ) );
 				}
+			} else {
+				error_log( "Error: WP Error - " . $response->get_error_message() );
 			}
 
 			if ( ! empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
@@ -370,12 +497,16 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 				global $wpdb;
 				
+				// Log the start of database operations
+				error_log( "Starting database operations for table: $table_name" );
+				
 				// Start transaction for data integrity
 				$wpdb->query( 'START TRANSACTION' );
 				
 				try {
 					if ( ( $table_name == 'users' ) || ( $table_name == 'usermeta' ) ) {
 						$table_name = $wpdb->prefix . $table_name;
+						error_log( "Processing users/usermeta table: $table_name" );
 						
 						// Verify table exists
 						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
@@ -408,9 +539,11 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						return;
 					} else {
 						$table_name = $wpdb->prefix . $table_name;
+						error_log( "Processing general table: $table_name" );
 
 						// Verify table exists
 						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
+							error_log( "Error: Table $table_name does not exist" );
 							throw new Exception( sprintf( __( 'Table %s does not exist', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name ) );
 						}
 
@@ -430,18 +563,27 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 							update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
 						}
 
+						error_log( "Inserting " . count( $retrieved_data ) . " records into $table_name" );
+						$inserted_count = 0;
+						
 						foreach ( $retrieved_data as $key => $value ) {
 							$result = $wpdb->insert( $table_name, $value );
 							if ( $result === false ) {
+								error_log( "Failed to insert record at index $key: " . $wpdb->last_error );
 								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
 							}
+							$inserted_count++;
 						}
+						
+						error_log( "Successfully inserted $inserted_count records into $table_name" );
 					}
 					
 					$wpdb->query( 'COMMIT' );
+					error_log( "Database import completed successfully for table: $table_name" );
 					
 				} catch ( Exception $e ) {
 					$wpdb->query( 'ROLLBACK' );
+					error_log( "Database import failed for table $table_name: " . $e->getMessage() );
 					wp_die( $e->getMessage() );
 				}
 			}

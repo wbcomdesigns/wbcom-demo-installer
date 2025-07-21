@@ -129,6 +129,7 @@ jQuery( document ).ready( function( $ ) {
     	$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
+			dataType : 'text', // Changed from default to 'text' to handle raw response
 			data : {
 				action : 'wbcom_read_theme_demo_package_file',
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
@@ -137,13 +138,97 @@ jQuery( document ).ready( function( $ ) {
 				nonce : wbcom_theme_demo_installer_params.ajax_nonce
 			},
 			success : function( response ) {
-				wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
-				$( '#progress-bar-container' ).show();
-				wbcom_theme_demo_data = $.parseJSON( response );
-				total_requests = ( wbcom_theme_demo_data.database_tables.length + wbcom_theme_demo_data.upload_folders.length );
-				percentage_increment = ( 100 / total_requests );
-				_wbcom_read_theme_demo_json_files();
-				_wbcom_read_theme_demo_upload_folders();
+				try {
+					// Clean the response to remove any PHP warnings/notices before JSON
+					var cleanResponse = response;
+					
+					// Find the first occurrence of '{' or '['
+					var jsonStart = Math.min(
+						cleanResponse.indexOf('{') !== -1 ? cleanResponse.indexOf('{') : Infinity,
+						cleanResponse.indexOf('[') !== -1 ? cleanResponse.indexOf('[') : Infinity
+					);
+					
+					if (jsonStart !== Infinity && jsonStart > 0) {
+						// Extract only the JSON part
+						cleanResponse = cleanResponse.substring(jsonStart);
+						console.warn('Response contained non-JSON content before position ' + jsonStart);
+					}
+					
+					// Try to parse the cleaned response
+					wbcom_theme_demo_data = JSON.parse(cleanResponse);
+					
+					// Validate the parsed data
+					if (!wbcom_theme_demo_data || typeof wbcom_theme_demo_data !== 'object') {
+						throw new Error('Invalid demo data structure');
+					}
+					
+					// Ensure required properties exist
+					if (!wbcom_theme_demo_data.database_tables || !Array.isArray(wbcom_theme_demo_data.database_tables)) {
+						wbcom_theme_demo_data.database_tables = [];
+					}
+					if (!wbcom_theme_demo_data.upload_folders || !Array.isArray(wbcom_theme_demo_data.upload_folders)) {
+						wbcom_theme_demo_data.upload_folders = [];
+					}
+					
+					wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+					$( '#progress-bar-container' ).show();
+					
+					total_requests = ( wbcom_theme_demo_data.database_tables.length + wbcom_theme_demo_data.upload_folders.length );
+					percentage_increment = total_requests > 0 ? ( 100 / total_requests ) : 100;
+					
+					_wbcom_read_theme_demo_json_files();
+					_wbcom_read_theme_demo_upload_folders();
+					
+				} catch (e) {
+					console.error('JSON Parse Error:', e);
+					console.error('Raw Response:', response);
+					
+					// Show detailed error message
+					var errorMsg = 'Failed to parse demo data. ';
+					if (response.includes('<?php') || response.includes('Warning:') || response.includes('Notice:') || response.includes('Fatal error:')) {
+						errorMsg += 'The server response contains PHP errors. Please check the server logs.';
+					} else if (response.trim() === '') {
+						errorMsg += 'The server returned an empty response.';
+					} else {
+						errorMsg += 'Invalid JSON format: ' + e.message;
+					}
+					
+					_show_import_error(errorMsg);
+					
+					// Log additional debug info
+					if (response.length > 1000) {
+						console.error('Response preview (first 500 chars):', response.substring(0, 500));
+						console.error('Response preview (last 500 chars):', response.substring(response.length - 500));
+					}
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.error('AJAX Error:', textStatus, errorThrown);
+				var errorMsg = 'Failed to connect to server. ';
+				
+				// Check if we have a JSON error response
+				if (jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.message) {
+					errorMsg = jqXHR.responseJSON.data.message;
+					if (jqXHR.responseJSON.data.details) {
+						errorMsg += ' Details: ' + jqXHR.responseJSON.data.details;
+					}
+				} else if (jqXHR.status === 0) {
+					errorMsg += 'No connection. Verify network.';
+				} else if (jqXHR.status == 404) {
+					errorMsg += 'Requested page not found [404].';
+				} else if (jqXHR.status == 500) {
+					errorMsg += 'Internal Server Error [500].';
+				} else if (textStatus === 'parsererror') {
+					errorMsg += 'Requested JSON parse failed.';
+				} else if (textStatus === 'timeout') {
+					errorMsg += 'Time out error.';
+				} else if (textStatus === 'abort') {
+					errorMsg += 'Ajax request aborted.';
+				} else {
+					errorMsg += 'Uncaught Error: ' + (errorThrown || textStatus);
+				}
+				
+				_show_import_error(errorMsg);
 			}
 		});
 	}
