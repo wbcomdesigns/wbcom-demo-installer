@@ -15,7 +15,7 @@
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.3",
+        "version": "3.9.4",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
@@ -68,13 +68,13 @@
     },
     {
         "plugin_thumb": "bb-logo.jpg",
-         "name": "BuddyBoss Platform",
-         "slug": "buddyboss-platform",
-         "required": false,
-         "version": "2.9.11",
-         "force_activation": false,
-         "force_deactivation": false,
-         "external_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.9.11/buddyboss-platform-plugin.zip",
-         "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+        "name": "BuddyBoss Platform",
+        "slug": "buddyboss-platform",
+        "required": false,
+        "version": "2.9.11",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.9.11/buddyboss-platform-plugin.zip",
+        "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     }
 ]

@@ -27,7 +27,7 @@
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.3",
+        "version": "3.9.4",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
@@ -35,7 +35,7 @@
     },
     {
         "plugin_thumb": "geo-directory-logo.jpg",
-        "name": "GeoDirectory – Business Directory Plugin",
+        "name": "GeoDirectory \u2013 Business Directory Plugin",
         "slug": "geodirectory",
         "required": true,
         "version": "",

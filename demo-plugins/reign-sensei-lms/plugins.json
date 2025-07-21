@@ -1,6 +1,6 @@
 [
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/elementor-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
         "name": "Elementor",
         "slug": "elementor",
         "required": true,
@@ -11,18 +11,18 @@
         "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/wbcom-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "2.6.0",
+        "version": "3.9.4",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/2.6.0/wbcom-essential.zip",
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/senseilms-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/senseilms-logo.jpg",
         "name": "Sensei LMS",
         "slug": "sensei-lms",
         "required": true,
@@ -33,7 +33,7 @@
         "description": "Sensei LMS integrates effortlessly with your WordPress site, making it easy to create courses, lessons and quizzes."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/sensei-certificate-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/sensei-certificate-logo.jpg",
         "name": "Sensei LMS Certificates",
         "slug": "sensei-certificates",
         "required": false,
@@ -44,7 +44,7 @@
         "description": "Award your students with a certificate of completion for their completed courses."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/sensei-media-attachments-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/sensei-media-attachments-logo.jpg",
         "name": "Sensei LMS Media Attachments",
         "slug": "sensei-media-attachments",
         "required": false,
@@ -55,11 +55,11 @@
         "description": "Sensei LMS Media Attachments enables you to attach media files to your courses and lessons in Sensei LMS."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/wbcom-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
         "is_paid": "yes",
         "name": "Reign Sensei Addon",
         "slug": "reign-sensei-addon",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
@@ -67,7 +67,7 @@
         "description": "Reign Sensei LMS Addon provides seemless integration of Tutor LMS with Reign theme."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/woocommerce-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
         "name": "WooCommerce",
         "slug": "woocommerce",
         "required": false,
@@ -77,7 +77,7 @@
         "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/bp-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
         "name": "Buddypress",
         "slug": "buddypress",
         "required": false,
@@ -88,7 +88,7 @@
         "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
-        "plugin_thumb": "https:\/\/demos.wbcomdesigns.com\/exporter\/demos-plugin-thumb\/rt-media-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/rt-media-logo.jpg",
         "name": "rtMedia for WordPress, BuddyPress and bbPress",
         "slug": "buddypress-media",
         "required": true,

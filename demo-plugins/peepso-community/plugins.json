@@ -15,7 +15,7 @@
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.3",
+        "version": "3.9.4",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
@@ -23,7 +23,7 @@
     },
     {
         "plugin_thumb": "peepso-logo.jpg",
-        "name": "PeepSo – User Profile and Social Networking Plugin",
+        "name": "PeepSo \u2013 User Profile and Social Networking Plugin",
         "slug": "peepso",
         "required": true,
         "version": "",

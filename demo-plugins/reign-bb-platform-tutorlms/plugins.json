@@ -15,7 +15,7 @@
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.3",
+        "version": "3.9.4",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
@@ -65,5 +65,4 @@
         "external_url": "",
         "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     }
-
 ]
