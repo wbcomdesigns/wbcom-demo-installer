@@ -118,10 +118,19 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	public function do_plugin_action() {
+		// Security check
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+			wp_send_json_error( array( 'error' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+		}
+		
+		// Capability check
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( array( 'error' => __( 'You do not have permission to install plugins', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+		}
 
-		$action                = ! empty( $_POST['plugin_action'] ) ? $_POST['plugin_action'] : false;
-		$slug                  = ! empty( $_POST['plugin_slug'] ) ? $_POST['plugin_slug'] : false;
-		$demo                  = ! empty( $_POST['demo'] ) ? $_POST['demo'] : false;
+		$action                = ! empty( $_POST['plugin_action'] ) ? sanitize_text_field( $_POST['plugin_action'] ) : false;
+		$slug                  = ! empty( $_POST['plugin_slug'] ) ? sanitize_text_field( $_POST['plugin_slug'] ) : false;
+		$demo                  = ! empty( $_POST['demo'] ) ? sanitize_text_field( $_POST['demo'] ) : false;
 		$_get_required_plugins = array();
 		$url_to_request        = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $demo . '/plugins.json';
 		$response              = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );

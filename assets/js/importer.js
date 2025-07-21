@@ -24,6 +24,7 @@ jQuery( document ).ready( function( $ ) {
 				plugin_action : thisRef.siblings( 'input.plugin-action').val(),
 				plugin_slug : thisRef.siblings( 'input.plugin-slug').val(),
 				demo : thisRef.siblings( 'input.demo-name').val(),
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
 			},
 			success : function( response ) {
 				_hide_plugin_installer_loader();
@@ -38,12 +39,15 @@ jQuery( document ).ready( function( $ ) {
 					_check_all_required_plugin_installed();
 				}
 				else {
-					alert( 'There was a problem performing the action.' );
+					_show_admin_notice( 'There was a problem performing the action.', 'error' );
 				}
 			},
 			'error' : function( response ) {
 				_hide_plugin_installer_loader();
-				alert( 'There was a problem performing the action.' );
+				var errorMsg = response.responseJSON && response.responseJSON.data && response.responseJSON.data.error 
+					? response.responseJSON.data.error 
+					: 'There was a problem performing the action.';
+				_show_admin_notice( errorMsg, 'error' );
 			}
 		});
 	});
@@ -63,6 +67,30 @@ jQuery( document ).ready( function( $ ) {
 
 	function _hide_plugin_installer_loader() {
 		jQuery( 'body' ).removeClass( 'demo_listing_loading' );
+	}
+	
+	function _show_admin_notice( message, type ) {
+		// Remove any existing notices
+		$( '.wbcom-notice' ).remove();
+		
+		// Create notice HTML
+		var noticeClass = 'notice notice-' + type + ' is-dismissible wbcom-notice';
+		var noticeHtml = '<div class="' + noticeClass + '"><p>' + message + '</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+		
+		// Add notice after page title
+		$( '.wrap h1' ).first().after( noticeHtml );
+		
+		// Make dismissible
+		$( '.wbcom-notice .notice-dismiss' ).on( 'click', function() {
+			$( this ).parent().fadeOut( 300, function() { $( this ).remove(); } );
+		});
+		
+		// Auto-hide success messages after 5 seconds
+		if ( type === 'success' ) {
+			setTimeout( function() {
+				$( '.wbcom-notice' ).fadeOut( 300, function() { $( this ).remove(); } );
+			}, 5000 );
+		}
 	}
 
 });
@@ -106,6 +134,7 @@ jQuery( document ).ready( function( $ ) {
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
 				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
 				target_url : thisRef.siblings( '#target_url' ).val(),
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
 			},
 			success : function( response ) {
 				wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
@@ -150,6 +179,7 @@ jQuery( document ).ready( function( $ ) {
 				action : 'wbcom_get_theme_demo_data',
 				url_to_request : url_to_request,
 				action_for : action_for,
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
 			},
 			success : function( response ) {
 				if( action_for == 'database_tables' ) {
@@ -186,7 +216,7 @@ jQuery( document ).ready( function( $ ) {
 				}
 			},
 			error: function ( jqXHR, status, err ) {
-				alert( "error in :: " + url_to_request );
+				_show_import_error( 'Error processing: ' + url_to_request + '. ' + ( err || 'Unknown error' ) );
 				if( action_for == 'database_tables' ) {
 					wbcom_tdd_database_tables_done = wbcom_tdd_database_tables_done + 1;
 					if( wbcom_tdd_database_tables_done == wbcom_tdd_database_tables_count ) {
@@ -235,6 +265,22 @@ jQuery( document ).ready( function( $ ) {
 	function wbcom_tdd_show_current_activity( message ) {
 		$( '#wbtd-current-action' ).show();
 		$( '#wbtd-current-action' ).html( message );
+	}
+	
+	function _show_import_error( message ) {
+		// Update progress bar to show error state
+		$( '#progress-bar-container .completed' ).css( 'background-color', '#dc3232' );
+		
+		// Show error in snackbar
+		var $snackbar = $( '#progress-snackbar' );
+		$snackbar.html( '<div class="notice notice-error"><p>' + message + '</p></div>' );
+		$snackbar.show();
+		
+		// Hide loader
+		$( 'div.loader' ).hide();
+		
+		// Change button text to allow retry
+		$( '#wbcom_get_theme_demo_data' ).text( 'Retry Import' ).prop( 'disabled', false );
 	}
 
 });

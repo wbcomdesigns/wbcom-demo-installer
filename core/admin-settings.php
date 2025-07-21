@@ -79,6 +79,11 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		}
 
 		public function render_page_for_added_menu() {
+			// Security check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( __( 'You do not have sufficient permissions to access this page.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
 			$theme_info = wp_get_theme();
 
 			// Get parent theme name
@@ -106,11 +111,11 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		</div>
 
 			<?php
-			if ( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
+			if ( isset( $_GET['success'] ) && ( sanitize_text_field( $_GET['success'] ) == 'success' ) ) {
 				$this->show_step_header( 'success' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'demo_import' ) ) {
 				$this->show_step_header( 'install-demo' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'plugins_manager' ) ) {
 				$this->show_step_header( 'manage-plugins' );
 
 			} else {
@@ -121,7 +126,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		<div class="reign-demos-wrapper reign-importer-section">
 			<?php
 
-			if ( isset( $_GET['success'] ) && ( $_GET['success'] == 'success' ) ) {
+			if ( isset( $_GET['success'] ) && ( sanitize_text_field( $_GET['success'] ) == 'success' ) ) {
 				delete_option( 'wbcom_theme_demo_import_data' );
 				delete_option( 'wbcom_theme_demo_req_plugins' );
 				include_once 'success.php';
@@ -130,9 +135,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					geodir_tool_restore_cpt_from_taxonomies();
 				}
 				return;
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'demo_import' ) ) {
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'demo_import' ) ) {
 
-				$target_url       = $_GET['target_url'];
+				$target_url       = isset( $_GET['target_url'] ) ? esc_url_raw( $_GET['target_url'] ) : '';
 				$target_demo_info = array();
 
 				$current_url           = $this->get_demo_installer_page_url();
@@ -175,9 +180,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				<div id="progress-snackbar"></div>
 				<?php
 				echo "<div class='loader' style='display:none;text-align:center;'></div>";
-				echo "<input type='hidden' id='theme_slug' value='$_GET[theme_slug]' />";
-				echo "<input type='hidden' id='demo_slug' value='$_GET[demo_slug]' />";
-				echo "<input type='hidden' id='target_url' value='$_GET[target_url]' />";
+				echo "<input type='hidden' id='theme_slug' value='" . esc_attr( sanitize_text_field( $_GET['theme_slug'] ) ) . "' />";
+				echo "<input type='hidden' id='demo_slug' value='" . esc_attr( sanitize_text_field( $_GET['demo_slug'] ) ) . "' />";
+				echo "<input type='hidden' id='target_url' value='" . esc_attr( esc_url_raw( $_GET['target_url'] ) ) . "' />";
 				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . '</button>';
 				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
 				echo '</div>';
@@ -198,9 +203,10 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			</div>
 
 				<?php
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( $_GET['step'] == 'plugins_manager' ) ) {
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'plugins_manager' ) ) {
 
-				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
+				$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( $_GET['plugins_json_key'] ) : '';
+				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
 				$retrieved_data = '';
 				$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
@@ -220,9 +226,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$required_plugins_to_activate = 0;
 				$demo_import_url              = $this->get_demo_installer_page_url(
 					array(
-						'theme_slug' => $_GET['theme_slug'],
-						'demo_slug'  => $_GET['demo_slug'],
-						'target_url' => $_GET['target_url'],
+						'theme_slug' => sanitize_text_field( $_GET['theme_slug'] ),
+						'demo_slug'  => sanitize_text_field( $_GET['demo_slug'] ),
+						'target_url' => esc_url_raw( $_GET['target_url'] ),
 						'step'       => 'demo_import',
 					)
 				);
@@ -410,6 +416,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					'ajax_url'                     => admin_url( 'admin-ajax.php' ),
 					'success_url'                  => $this->get_demo_installer_page_url( array( 'success' => 'success' ) ),
 					'required_plugins_to_activate' => $required_plugins_to_activate,
+					'ajax_nonce'                   => wp_create_nonce( 'wbcom_demo_installer_nonce' ),
 				)
 			);
 
