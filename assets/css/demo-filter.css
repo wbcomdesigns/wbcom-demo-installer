@@ -2,10 +2,11 @@
 .demo-filter-wrapper {
     background: #fff;
     padding: 20px;
+    padding-top: 0;
     margin-bottom: 30px;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #e1e1e1;
+    border-radius: 0;
+    width: 100%;
 }
 
 .demo-filter-wrapper h3 {
