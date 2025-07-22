@@ -129,6 +129,23 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			if ( isset( $_GET['success'] ) && ( sanitize_text_field( $_GET['success'] ) == 'success' ) ) {
 				delete_option( 'wbcom_theme_demo_import_data' );
 				delete_option( 'wbcom_theme_demo_req_plugins' );
+				
+				// Delete Kirki font transients
+				global $wpdb;
+				$transients = $wpdb->get_col( 
+					"SELECT option_name FROM {$wpdb->options} 
+					WHERE option_name LIKE '_transient_kirki_googlefonts%' 
+					OR option_name LIKE '_transient_timeout_kirki_googlefonts%'"
+				);
+				foreach ( $transients as $transient ) {
+					delete_option( $transient );
+				}
+				
+				// Regenerate Elementor CSS files
+				if ( class_exists( '\Elementor\Plugin' ) ) {
+					\Elementor\Plugin::$instance->files_manager->clear_cache();
+				}
+				
 				include_once 'success.php';
 				/** to deal with GeoDirectory import issue */
 				if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
