@@ -55,14 +55,14 @@
         "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
     },
     {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/pmp-pro-logo.jpg",
-        "name": "Paid Memberships Pro",
-        "slug": "paid-memberships-pro",
+        "plugin_thumb": "",
+        "name": "The Events Calendar",
+        "slug": "the-events-calendar",
         "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,
         "external_url": "",
-        "description": "This plugin is designed for premium content sites, clubs/associations, subscription products, newsletters and more!"
-    }
+        "description": "The Events Calendar is a carefully crafted, extensible plugin that lets you easily share your events. Beautiful. Solid. Awesome."
+    } 
 ]
