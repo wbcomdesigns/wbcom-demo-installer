@@ -60,7 +60,7 @@
         "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/rt-media-logo.jpg",
         "name": "rtMedia for WordPress, BuddyPress and bbPress",
         "slug": "buddypress-media",
-        "required": true,
+        "required": false,
         "version": "",
         "force_activation": false,
         "force_deactivation": false,

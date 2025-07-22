@@ -46,6 +46,17 @@
         "description": "Reign LearnDash Addon provides seemless integration of Learndash with Reign theme."
     },
     {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
+        "name": "Buddypress",
+        "slug": "buddypress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+    },
+    {
         "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/edd-logo.jpg",
         "name": "Easy Digital Downloads",
         "slug": "easy-digital-downloads",
