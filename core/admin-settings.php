@@ -609,6 +609,22 @@ if ( ! class_exists( 'Reign_Demo_Installer_Admin_Settings' ) ) :
 			delete_option( 'reign_theme_demo_import_data' );
 			delete_option( 'reign_theme_demo_req_plugins' );
 			
+			// Delete Kirki font transients
+			global $wpdb;
+			$transients = $wpdb->get_col( 
+				"SELECT option_name FROM {$wpdb->options} 
+				WHERE option_name LIKE '_transient_kirki_googlefonts%' 
+				OR option_name LIKE '_transient_timeout_kirki_googlefonts%'"
+			);
+			foreach ( $transients as $transient ) {
+				delete_option( $transient );
+			}
+			
+			// Regenerate Elementor CSS files
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			
 			$success_file = REIGN_DEMO_INSTALLER_PLUGIN_DIR_PATH . 'core/success.php';
 			if ( file_exists( $success_file ) ) {
 				include_once $success_file;
