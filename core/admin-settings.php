@@ -104,6 +104,19 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 			echo '<div class="demo-listing-wrap">';
 
+			// Check if this is a multisite installation
+			if ( is_multisite() ) {
+				?>
+				<div class="notice notice-error">
+					<h2><?php _e( 'Multisite Installation Detected', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></h2>
+					<p><?php _e( 'The Demo Importer is not compatible with WordPress Multisite installations. Please use a single site WordPress installation to import demo content.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></p>
+					<p><?php _e( 'Demo import modifies database tables and settings in ways that are not compatible with the multisite architecture.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></p>
+				</div>
+				</div></div>
+				<?php
+				return;
+			}
+
 			?>
 
 		<div class="theme-info">
@@ -212,9 +225,9 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				<div class="info-impoter-heading">Please note:</div>
 				<div class="info-impoter-content">
 					<ul>
-						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>, Please make sure you have <strong>full backup</strong> of site before importing demo data.</li>
-
-						<li>Importing All the demo content will take some time so be patient.</li>
+						<li>Demo Importer is suggested for <strong>Fresh Installation only</strong>. Please make sure you have a <strong>full backup</strong> of your site before importing demo data.</li>
+						<li>Demo Importer is <strong>NOT compatible with Multisite</strong> installations. Please use a single site WordPress installation.</li>
+						<li>Importing all the demo content will take some time, so please be patient.</li>
 						<!-- <li>Seem's Hard ?? We offer free demo installation services, please submit details at <a href="https://brndle.com/downloads/free-theme-installation-service/"> Free Theme Installation</a> </li> -->
 					</ul>
 				</div>
