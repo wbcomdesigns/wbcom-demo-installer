@@ -56,6 +56,17 @@
         "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bbpress-logo.jpg",
+        "name": "bbPress",
+        "slug": "bbpress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "bbPress is forum software with a twist from the creators of WordPress."
+    },
+    {
         "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/rt-media-logo.jpg",
         "name": "rtMedia for WordPress, BuddyPress and bbPress",
         "slug": "buddypress-media",
