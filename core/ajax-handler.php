@@ -53,6 +53,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'wbcom_get_theme_demo_data' ) );
 			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
 			add_action( 'wp_ajax_wbcom_get_demo_plugins_data', array( $this, 'wbcom_get_demo_plugins_data' ) );
+			add_action( 'wp_ajax_wbcom_demo_import_finalize', array( $this, 'wbcom_demo_import_finalize' ) );
 		}
 
 		public function wbcom_read_theme_demo_package_file() {
@@ -284,6 +285,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				wp_die( __( 'Retrieved empty data from remote server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
 			}
 			
+			
 			$upload         = wp_upload_dir();
 			$upload_dir     = $upload['basedir'];
 			$upload_dir     = $upload_dir . '/wbcom-temp-folder';
@@ -304,8 +306,29 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				wp_die( __( 'Failed to write temporary file', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
 			}
 
+			// Check if we have a custom importer or use WordPress importer
 			global $wbcom_xml_wp_import;
-			$wbcom_xml_wp_import->import( $file_path );
+			if ( isset( $wbcom_xml_wp_import ) && is_object( $wbcom_xml_wp_import ) ) {
+				$wbcom_xml_wp_import->import( $file_path );
+			} else {
+				// Use WordPress core importer if available
+				if ( ! defined( 'WP_LOAD_IMPORTERS' ) ) {
+					define( 'WP_LOAD_IMPORTERS', true );
+				}
+				
+				// Load WordPress importer
+				if ( ! class_exists( 'WP_Import' ) ) {
+					$class_wp_import = ABSPATH . 'wp-admin/includes/class-wp-import.php';
+					if ( file_exists( $class_wp_import ) ) {
+						require_once $class_wp_import;
+					}
+				}
+				
+				if ( class_exists( 'WP_Import' ) ) {
+					$wp_import = new WP_Import();
+					$wp_import->import( $file_path );
+				}
+			}
 
 			// Use WP_Filesystem to delete file
 			$wp_filesystem->delete( $file_path );
@@ -313,7 +336,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 		public function clone_database_table( $table_name = '', $url_to_request = '' ) {
 			$retrieved_data = '';
-			
 			
 			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
@@ -327,14 +349,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			}
 
 			if ( ! empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
-				if ( $table_name != 'options' ) {
-					$retrieved_data = array_map(
-						function( $value ) {
-							return str_replace( '{{*home_url}}', home_url(), $value );
-						},
-						$retrieved_data
-					);
-				}
+				// No URL replacement here - will be done in finalize step
 
 				if ( $table_name == 'theme_mods' ) {
 					foreach ( $retrieved_data as $key => $value ) {
@@ -461,13 +476,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					foreach ( $retrieved_data as $key => $value ) {
 						if ( ! in_array( $value['option_name'], $default_options_keys ) ) {
 							$option_value = maybe_unserialize( $value['option_value'] );
-							if ( is_array( $option_value ) ) {
-								foreach ( $option_value as $op_key => $op_value ) {
-									if ( is_string( $op_value ) ) {
-										$option_value[ $op_key ] = str_replace( '{{*home_url}}', get_site_url(), $op_value );
-									}
-								}
-							}
 							update_option( $value['option_name'], $option_value, $value['autoload'] );
 						}
 					}
@@ -590,6 +598,107 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				}
 
 				unlink( $upload_dir );
+			}
+		}
+
+		/**
+		 * Finalize demo import - perform search and replace
+		 */
+		public function wbcom_demo_import_finalize() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Get the source URL from the demo server
+			$source_url = isset( $_POST['target_url'] ) ? esc_url_raw( $_POST['target_url'] ) : '';
+			if ( empty( $source_url ) ) {
+				wp_send_json_error( array( 'message' => __( 'Source URL not provided', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Parse the source URL
+			$source_url_parsed = parse_url( $source_url );
+			$source_domain = $source_url_parsed['scheme'] . '://' . $source_url_parsed['host'];
+			
+			// Get current site URL
+			$current_url = home_url();
+			
+			// Perform search-replace on all tables
+			$this->search_replace_all_tables( $source_domain, $current_url );
+			
+			// Clear caches
+			wp_cache_flush();
+			
+			// Regenerate permalinks
+			flush_rewrite_rules();
+			
+			// Clear Elementor cache if active
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			
+			wp_send_json_success( array( 
+				'message' => __( 'Demo import finalized successfully', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) 
+			) );
+		}
+		
+		/**
+		 * Search and replace in all database tables
+		 */
+		private function search_replace_all_tables( $search, $replace ) {
+			global $wpdb;
+			
+			// Get all tables
+			$tables = $wpdb->get_col( "SHOW TABLES" );
+			
+			foreach ( $tables as $table ) {
+				// Skip non-WordPress tables
+				if ( strpos( $table, $wpdb->prefix ) !== 0 ) {
+					continue;
+				}
+				
+				// Get all columns
+				$columns = $wpdb->get_results( "SHOW COLUMNS FROM `$table`" );
+				if ( empty( $columns ) ) {
+					continue;
+				}
+				
+				$text_columns = array();
+				foreach ( $columns as $column ) {
+					// Only process text-based columns
+					if ( preg_match( '/text|varchar|char|blob/i', $column->Type ) ) {
+						$text_columns[] = $column->Field;
+					}
+				}
+				
+				if ( empty( $text_columns ) ) {
+					continue;
+				}
+				
+				// Process each text column
+				foreach ( $text_columns as $column ) {
+					// Handle both http and https versions
+					$search_http = str_replace( 'https://', 'http://', $search );
+					$search_https = str_replace( 'http://', 'https://', $search );
+					
+					// Update regular strings
+					$wpdb->query( $wpdb->prepare( 
+						"UPDATE `$table` SET `$column` = REPLACE(`$column`, %s, %s)",
+						$search_http,
+						$replace
+					) );
+					
+					$wpdb->query( $wpdb->prepare( 
+						"UPDATE `$table` SET `$column` = REPLACE(`$column`, %s, %s)",
+						$search_https,
+						$replace
+					) );
+				}
 			}
 		}
 

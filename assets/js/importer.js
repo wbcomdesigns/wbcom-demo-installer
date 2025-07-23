@@ -335,11 +335,36 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function wbcom_demo_import_done() {
-		setTimeout( function() {
-			window.location = wbcom_theme_demo_installer_params.success_url;
-		},
-		2000
-		);
+		// Show finalizing message
+		wbcom_tdd_show_current_activity( 'Finalizing import - replacing URLs...' );
+		
+		// Call finalize AJAX
+		jQuery.ajax({
+			type : 'POST',
+			url  : wbcom_theme_demo_installer_params.ajax_url,
+			data : {
+				action: 'wbcom_demo_import_finalize',
+				target_url: target_url,
+				nonce: wbcom_theme_demo_installer_params.ajax_nonce
+			},
+			success: function( response ) {
+				if ( response.success ) {
+					wbcom_tdd_show_current_activity( 'Import completed successfully!' );
+					setTimeout( function() {
+						window.location = wbcom_theme_demo_installer_params.success_url;
+					}, 1500 );
+				} else {
+					_show_import_error( response.data.message || 'Error finalizing import' );
+				}
+			},
+			error: function( jqXHR, status, err ) {
+				// Even if finalize fails, redirect to success page
+				console.error( 'Finalize error:', err );
+				setTimeout( function() {
+					window.location = wbcom_theme_demo_installer_params.success_url;
+				}, 2000 );
+			}
+		});
 	}
 
 	function wbcom_tdd_update_progress_bar( progress_percentage ) {
