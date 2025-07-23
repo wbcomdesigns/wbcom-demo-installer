@@ -200,6 +200,7 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				echo "<input type='hidden' id='theme_slug' value='" . esc_attr( sanitize_text_field( $_GET['theme_slug'] ) ) . "' />";
 				echo "<input type='hidden' id='demo_slug' value='" . esc_attr( sanitize_text_field( $_GET['demo_slug'] ) ) . "' />";
 				echo "<input type='hidden' id='target_url' value='" . esc_attr( esc_url_raw( $_GET['target_url'] ) ) . "' />";
+				echo "<input type='hidden' id='current_site_url' value='" . esc_attr( esc_url_raw( home_url() ) ) . "' />";
 				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . '</button>';
 				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
 				echo '</div>';

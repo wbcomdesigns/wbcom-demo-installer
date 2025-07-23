@@ -103,6 +103,7 @@ jQuery( document ).ready( function( $ ) {
 
 	var wbcom_theme_demo_data = '';
     var thisRef = '';
+    var target_url = ''; // Add target_url to global scope
 
     var wbcom_tdd_database_tables_count = '';
     var wbcom_tdd_database_tables_done = 0;
@@ -126,6 +127,10 @@ jQuery( document ).ready( function( $ ) {
 
     function _wbcom_read_theme_demo_package_file() {
     	wbcom_tdd_show_current_activity( 'Reading Files ...' );
+    	
+    	// Store target_url in global scope
+    	target_url = thisRef.siblings( '#target_url' ).val();
+    	
     	$.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
@@ -134,7 +139,7 @@ jQuery( document ).ready( function( $ ) {
 				action : 'wbcom_read_theme_demo_package_file',
 				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
 				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
-				target_url : thisRef.siblings( '#target_url' ).val(),
+				target_url : target_url,
 				nonce : wbcom_theme_demo_installer_params.ajax_nonce
 			},
 			success : function( response ) {
@@ -151,7 +156,7 @@ jQuery( document ).ready( function( $ ) {
 					if (jsonStart !== Infinity && jsonStart > 0) {
 						// Extract only the JSON part
 						cleanResponse = cleanResponse.substring(jsonStart);
-						console.warn('Response contained non-JSON content before position ' + jsonStart);
+						// Response contained non-JSON content before position
 					}
 					
 					// Try to parse the cleaned response
@@ -180,8 +185,6 @@ jQuery( document ).ready( function( $ ) {
 					_wbcom_read_theme_demo_upload_folders();
 					
 				} catch (e) {
-					console.error('JSON Parse Error:', e);
-					console.error('Raw Response:', response);
 					
 					// Show detailed error message
 					var errorMsg = 'Failed to parse demo data. ';
@@ -195,15 +198,10 @@ jQuery( document ).ready( function( $ ) {
 					
 					_show_import_error(errorMsg);
 					
-					// Log additional debug info
-					if (response.length > 1000) {
-						console.error('Response preview (first 500 chars):', response.substring(0, 500));
-						console.error('Response preview (last 500 chars):', response.substring(response.length - 500));
-					}
+					// Additional debug info removed for production
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				console.error('AJAX Error:', textStatus, errorThrown);
 				var errorMsg = 'Failed to connect to server. ';
 				
 				// Check if we have a JSON error response
@@ -338,6 +336,15 @@ jQuery( document ).ready( function( $ ) {
 		// Show finalizing message
 		wbcom_tdd_show_current_activity( 'Finalizing import - replacing URLs...' );
 		
+		// Ensure target_url is defined
+		if (typeof target_url === 'undefined' || !target_url) {
+			// If no target URL, skip finalization and redirect
+			setTimeout( function() {
+				window.location = wbcom_theme_demo_installer_params.success_url;
+			}, 1500 );
+			return;
+		}
+		
 		// Call finalize AJAX
 		jQuery.ajax({
 			type : 'POST',
@@ -359,7 +366,6 @@ jQuery( document ).ready( function( $ ) {
 			},
 			error: function( jqXHR, status, err ) {
 				// Even if finalize fails, redirect to success page
-				console.error( 'Finalize error:', err );
 				setTimeout( function() {
 					window.location = wbcom_theme_demo_installer_params.success_url;
 				}, 2000 );
