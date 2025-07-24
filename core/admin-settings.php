@@ -130,7 +130,10 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$this->show_step_header( 'install-demo' );
 			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'plugins_manager' ) ) {
 				$this->show_step_header( 'manage-plugins' );
-
+			} elseif ( isset( $_GET['action'] ) && ( sanitize_text_field( $_GET['action'] ) == 'fix_buddypress_users' ) ) {
+				// Handle BuddyPress user fix
+				$this->fix_buddypress_users();
+				return;
 			} else {
 				$this->show_step_header( 'select-demo' );
 			}

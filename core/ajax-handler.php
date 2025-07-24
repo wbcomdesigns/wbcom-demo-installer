@@ -497,10 +497,15 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 							throw new Exception( sprintf( __( 'Table %s does not exist', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name ) );
 						}
 						
+						$processed_count = 0;
+						$skipped_count = 0;
+						
 						foreach ( $retrieved_data as $key => $value ) {
 							if ( ( isset( $value['ID'] ) ) && ( $value['ID'] == get_current_user_id() ) ) {
+								$skipped_count++;
 								continue;
 							} elseif ( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
+								$skipped_count++;
 								continue;
 							}
 
@@ -513,13 +518,61 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 							}
 							/** user table strcuture mismatch fix */
 
+							// For usermeta, handle table prefix in capability keys
+							if ( $table_name == $wpdb->prefix . 'usermeta' && isset( $value['meta_key'] ) ) {
+								$current_prefix = $wpdb->prefix;
+								
+								// Common capability/role related meta keys that need prefix update
+								$prefix_keys = array( 'capabilities', 'user_level', 'dashboard_quick_press_last_post_id', 'user-settings', 'user-settings-time' );
+								
+								foreach ( $prefix_keys as $key ) {
+									// Detect source prefix by looking for the key pattern
+									if ( preg_match( '/^(.+_)' . preg_quote( $key, '/' ) . '$/', $value['meta_key'], $matches ) ) {
+										$source_prefix = $matches[1];
+										// Replace source prefix with current prefix
+										$value['meta_key'] = $current_prefix . $key;
+										break;
+									}
+								}
+								
+								// Also handle blog-specific capabilities for multisite
+								if ( preg_match( '/^(.+_)(\d+_capabilities)$/', $value['meta_key'], $matches ) ) {
+									$value['meta_key'] = $current_prefix . $matches[2];
+								}
+								
+								// If this is a last_activity key and it's empty/old, update it
+								if ( $value['meta_key'] === 'last_activity' && 
+								    ( empty( $value['meta_value'] ) || strtotime( $value['meta_value'] ) < strtotime( '-1 year' ) ) ) {
+									$value['meta_value'] = current_time( 'mysql', true );
+								}
+							}
+
 							$result = $wpdb->insert( $table_name, $value );
 							if ( $result === false ) {
 								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
 							}
+							
+							// After inserting user meta, if BuddyPress is active, ensure user is activated
+							if ( $table_name == $wpdb->prefix . 'usermeta' && 
+							     $value['meta_key'] === 'last_activity' && 
+							     function_exists( 'bp_update_user_last_activity' ) ) {
+								bp_update_user_last_activity( $value['user_id'] );
+							}
+							
+							$processed_count++;
 						}
 						
 						$wpdb->query( 'COMMIT' );
+						
+						// Log import results
+						error_log( sprintf( 
+							'WBCOM Demo Import - Table: %s, Processed: %d, Skipped: %d, Total: %d', 
+							$table_name, 
+							$processed_count, 
+							$skipped_count, 
+							count( $retrieved_data ) 
+						) );
+						
 						return;
 					} else {
 						$table_name = $wpdb->prefix . $table_name;
@@ -547,7 +600,33 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 						$inserted_count = 0;
 						
+						// Detect if we're using BuddyBoss or BuddyPress (check once for all tables)
+						$is_buddyboss = $this->is_buddyboss_platform();
+						
+						// Check if this is a BuddyPress/BuddyBoss table and handle compatibility
+						if ( strpos( $table_name, 'bp_' ) !== false ) {
+							// Get table columns to check compatibility
+							$columns = $wpdb->get_col( "SHOW COLUMNS FROM `$table_name`" );
+							$columns = array_flip( $columns );
+							
+							if ( $is_buddyboss ) {
+								error_log( 'WBCOM Demo Import: Processing ' . $table_name . ' for BuddyBoss Platform' );
+							} else {
+								error_log( 'WBCOM Demo Import: Processing ' . $table_name . ' for standard BuddyPress' );
+							}
+						}
+						
 						foreach ( $retrieved_data as $key => $value ) {
+							// For BuddyPress tables, remove fields that don't exist
+							if ( strpos( $table_name, 'bp_' ) !== false && isset( $columns ) ) {
+								foreach ( $value as $field => $data ) {
+									if ( ! isset( $columns[ $field ] ) ) {
+										// Remove fields that don't exist in current installation
+										unset( $value[ $field ] );
+									}
+								}
+							}
+							
 							$result = $wpdb->insert( $table_name, $value );
 							if ( $result === false ) {
 								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
@@ -635,6 +714,9 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			
 			// Perform search-replace on all tables
 			$this->search_replace_all_tables( $source_base_url, $current_url );
+			
+			// Activate BuddyPress users
+			$this->activate_buddypress_users();
 			
 			// Clear caches
 			wp_cache_flush();
@@ -778,6 +860,72 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			}
 			
 			return $data;
+		}
+
+		/**
+		 * Activate BuddyPress users by setting last activity
+		 */
+		private function activate_buddypress_users() {
+			// Check if BuddyPress/BuddyBoss is active
+			if ( ! function_exists( 'bp_is_active' ) ) {
+				return;
+			}
+			
+			// Log which platform we're using
+			if ( defined( 'BP_PLATFORM_VERSION' ) ) {
+				error_log( 'WBCOM Demo Import: Activating users for BuddyBoss Platform v' . BP_PLATFORM_VERSION );
+			} else {
+				error_log( 'WBCOM Demo Import: Activating users for BuddyPress' );
+			}
+			
+			global $wpdb;
+			
+			// Get users without last_activity meta
+			$users_without_activity = $wpdb->get_col( "
+				SELECT u.ID 
+				FROM {$wpdb->users} u
+				LEFT JOIN {$wpdb->usermeta} um ON u.ID = um.user_id AND um.meta_key = 'last_activity'
+				WHERE um.umeta_id IS NULL
+				AND u.ID != " . get_current_user_id()
+			);
+			
+			// Set last activity for users who don't have it
+			foreach ( $users_without_activity as $user_id ) {
+				bp_update_user_last_activity( $user_id );
+			}
+			
+			// Ensure all users are properly indexed by BuddyPress
+			$all_users = get_users( array( 'fields' => 'ID' ) );
+			foreach ( $all_users as $user_id ) {
+				// Also ensure user has member_type if needed
+				if ( function_exists( 'bp_set_member_type' ) ) {
+					$member_types = bp_get_member_type( $user_id, false );
+					if ( empty( $member_types ) ) {
+						// Set default member type if none exists
+						bp_set_member_type( $user_id, '' );
+					}
+				}
+			}
+			
+			// Handle signups table if it exists
+			global $wpdb;
+			$signups_table = $wpdb->prefix . 'signups';
+			if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $signups_table ) ) == $signups_table ) {
+				// Activate any pending signups
+				$wpdb->update(
+					$signups_table,
+					array( 'active' => 1, 'activated' => current_time( 'mysql', true ) ),
+					array( 'active' => 0 )
+				);
+			}
+		}
+
+		/**
+		 * Helper function to detect if BuddyBoss Platform is active
+		 */
+		private function is_buddyboss_platform() {
+			// Check for BuddyBoss-specific constants or classes
+			return defined('BP_PLATFORM_VERSION') || class_exists('BuddyBoss_Platform');
 		}
 
 		public function wbcom_get_demo_plugins_data() {

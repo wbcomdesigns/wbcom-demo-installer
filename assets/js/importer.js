@@ -15,7 +15,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 
 		_show_plugin_installer_loader();
-		$.ajax({
+		jQuery.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
 			dataType : 'json',
@@ -99,7 +99,10 @@ jQuery( document ).ready( function( $ ) {
 /*
 * Demo Importer Manager Code
 */
-jQuery( document ).ready( function( $ ) {
+(function($) {
+    'use strict';
+    
+    $(document).ready(function() {
 
 	var wbcom_theme_demo_data = '';
     var thisRef = '';
@@ -131,7 +134,7 @@ jQuery( document ).ready( function( $ ) {
     	// Store target_url in global scope
     	target_url = thisRef.siblings( '#target_url' ).val();
     	
-    	$.ajax({
+    	jQuery.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
 			dataType : 'text', // Changed from default to 'text' to handle raw response
@@ -255,7 +258,7 @@ jQuery( document ).ready( function( $ ) {
 
 	function _wbcom_get_theme_demo_data( url_to_request, action_for ) {
 		wbcom_tdd_show_current_activity( 'Reading Files ...' );
-		$.ajax({
+		jQuery.ajax({
 			url : wbcom_theme_demo_installer_params.ajax_url,
 			type : 'post',
 			data : {
@@ -399,4 +402,5 @@ jQuery( document ).ready( function( $ ) {
 		$( '#wbcom_get_theme_demo_data' ).text( 'Retry Import' ).prop( 'disabled', false );
 	}
 
-});
+    });
+})(jQuery);
