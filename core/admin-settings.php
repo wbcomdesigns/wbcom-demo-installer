@@ -146,16 +146,12 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				delete_option( 'wbcom_theme_demo_import_data' );
 				delete_option( 'wbcom_theme_demo_req_plugins' );
 				
-				// Delete Kirki font transients
-				global $wpdb;
-				$transients = $wpdb->get_col( 
-					"SELECT option_name FROM {$wpdb->options} 
-					WHERE option_name LIKE '_transient_kirki_googlefonts%' 
-					OR option_name LIKE '_transient_timeout_kirki_googlefonts%'"
-				);
-				foreach ( $transients as $transient ) {
-					delete_option( $transient );
-				}
+				// Delete specific Kirki-related options
+				delete_option( '_transient_timeout_kirki_remote_url_contents' );
+				delete_option( '_transient_kirki_remote_url_contents' );
+				delete_option( '_site_transient_timeout_kirki_googlefonts_cache' );
+				delete_option( '_site_transient_kirki_googlefonts_cache' );
+				delete_option( 'kirki_downloaded_font_files' );
 				
 				// Regenerate Elementor CSS files
 				if ( class_exists( '\Elementor\Plugin' ) ) {
