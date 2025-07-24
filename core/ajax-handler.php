@@ -623,13 +623,18 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			
 			// Parse the source URL
 			$source_url_parsed = parse_url( $source_url );
-			$source_domain = $source_url_parsed['scheme'] . '://' . $source_url_parsed['host'];
 			
-			// Get current site URL
-			$current_url = home_url();
+			// Build the full source URL including path
+			$source_base_url = $source_url_parsed['scheme'] . '://' . $source_url_parsed['host'];
+			if ( ! empty( $source_url_parsed['path'] ) && $source_url_parsed['path'] !== '/' ) {
+				$source_base_url .= rtrim( $source_url_parsed['path'], '/' );
+			}
+			
+			// Get current site URL (without trailing slash)
+			$current_url = rtrim( home_url(), '/' );
 			
 			// Perform search-replace on all tables
-			$this->search_replace_all_tables( $source_domain, $current_url );
+			$this->search_replace_all_tables( $source_base_url, $current_url );
 			
 			// Clear caches
 			wp_cache_flush();
@@ -669,10 +674,15 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				}
 				
 				$text_columns = array();
+				$primary_key = '';
 				foreach ( $columns as $column ) {
 					// Only process text-based columns
 					if ( preg_match( '/text|varchar|char|blob/i', $column->Type ) ) {
 						$text_columns[] = $column->Field;
+					}
+					// Find primary key
+					if ( $column->Key === 'PRI' ) {
+						$primary_key = $column->Field;
 					}
 				}
 				
@@ -680,26 +690,94 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 					continue;
 				}
 				
-				// Process each text column
+				// If no primary key, try to find a unique identifier
+				if ( empty( $primary_key ) ) {
+					// Look for common ID fields
+					foreach ( $columns as $column ) {
+						if ( in_array( strtolower( $column->Field ), array( 'id', 'ID', 'option_id', 'meta_id', 'comment_id', 'term_id' ) ) ) {
+							$primary_key = $column->Field;
+							break;
+						}
+					}
+					// If still no key found, skip this table
+					if ( empty( $primary_key ) ) {
+						continue;
+					}
+				}
+				
+				// Process each row individually to handle serialized data
 				foreach ( $text_columns as $column ) {
-					// Handle both http and https versions
-					$search_http = str_replace( 'https://', 'http://', $search );
-					$search_https = str_replace( 'http://', 'https://', $search );
+					// Get all rows that contain the search string
+					$search_variants = array(
+						str_replace( 'https://', 'http://', $search ),
+						str_replace( 'http://', 'https://', $search )
+					);
 					
-					// Update regular strings
-					$wpdb->query( $wpdb->prepare( 
-						"UPDATE `$table` SET `$column` = REPLACE(`$column`, %s, %s)",
-						$search_http,
-						$replace
-					) );
-					
-					$wpdb->query( $wpdb->prepare( 
-						"UPDATE `$table` SET `$column` = REPLACE(`$column`, %s, %s)",
-						$search_https,
-						$replace
-					) );
+					foreach ( $search_variants as $search_variant ) {
+						$rows = $wpdb->get_results( $wpdb->prepare(
+							"SELECT `$primary_key`, `$column` FROM `$table` WHERE `$column` LIKE %s",
+							'%' . $wpdb->esc_like( $search_variant ) . '%'
+						) );
+						
+						foreach ( $rows as $row ) {
+							$data = $row->$column;
+							$primary_value = $row->$primary_key;
+							
+							// Process the data
+							$updated_data = $this->recursive_unserialize_replace( $search_variant, $replace, $data );
+							
+							// Only update if data changed
+							if ( $updated_data !== $data ) {
+								$wpdb->update(
+									$table,
+									array( $column => $updated_data ),
+									array( $primary_key => $primary_value )
+								);
+							}
+						}
+					}
 				}
 			}
+		}
+		
+		/**
+		 * Recursively unserialize and replace data
+		 */
+		private function recursive_unserialize_replace( $search, $replace, $data ) {
+			// Check if it's serialized data
+			if ( is_serialized( $data ) ) {
+				$unserialized = @unserialize( $data );
+				if ( $unserialized !== false ) {
+					$unserialized = $this->recursive_replace( $search, $replace, $unserialized );
+					return serialize( $unserialized );
+				}
+			}
+			
+			// If not serialized, do simple replace
+			if ( is_string( $data ) ) {
+				return str_replace( $search, $replace, $data );
+			}
+			
+			return $data;
+		}
+		
+		/**
+		 * Recursively replace strings in arrays/objects
+		 */
+		private function recursive_replace( $search, $replace, $data ) {
+			if ( is_string( $data ) ) {
+				return str_replace( $search, $replace, $data );
+			} elseif ( is_array( $data ) ) {
+				foreach ( $data as $key => $value ) {
+					$data[ $key ] = $this->recursive_replace( $search, $replace, $value );
+				}
+			} elseif ( is_object( $data ) ) {
+				foreach ( $data as $key => $value ) {
+					$data->$key = $this->recursive_replace( $search, $replace, $value );
+				}
+			}
+			
+			return $data;
 		}
 
 		public function wbcom_get_demo_plugins_data() {
