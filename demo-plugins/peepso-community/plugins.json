@@ -31,5 +31,25 @@
         "force_deactivation": false,
         "external_url": "https://www.peepso.com/get-free-peepso/?peepso-download",
         "description": "PeepSo is a super-light, free, user profile and social network plugin for WordPress that allows you to quickly and effortlessly add a social network or an online community."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
+        "name": "WooCommerce",
+        "slug": "woocommerce",
+        "required": false,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
+    },
+    {
+        "plugin_thumb": "",
+        "name": "wpForo Forum",
+        "slug": "wpforo",
+        "required": false,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "WordPress Forum plugin. wpForo is a full-fledged forum solution for your community. Comes with multiple modern forum layouts."
     }
 ]
