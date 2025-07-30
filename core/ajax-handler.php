@@ -42,6 +42,17 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 		 */
 		public function __construct() {
 			$this->init_hooks();
+			$this->includes();
+		}
+
+		/**
+		 * Include required files
+		 */
+		private function includes() {
+			$plugin_dir = plugin_dir_path( dirname( __FILE__ ) );
+			if ( file_exists( $plugin_dir . 'includes/class-buddypress-components-enabler.php' ) ) {
+				require_once $plugin_dir . 'includes/class-buddypress-components-enabler.php';
+			}
 		}
 
 		/**
@@ -54,6 +65,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
 			add_action( 'wp_ajax_wbcom_get_demo_plugins_data', array( $this, 'wbcom_get_demo_plugins_data' ) );
 			add_action( 'wp_ajax_wbcom_demo_import_finalize', array( $this, 'wbcom_demo_import_finalize' ) );
+			add_action( 'wp_ajax_wbcom_enable_buddypress_components', array( $this, 'wbcom_enable_buddypress_components' ) );
 		}
 
 		public function wbcom_read_theme_demo_package_file() {
@@ -351,6 +363,17 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			if ( ! empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
 				// No URL replacement here - will be done in finalize step
 
+				// Enable all BuddyPress/BuddyBoss components before importing BP tables
+				if ( strpos( $table_name, 'bp_' ) === 0 || $table_name === 'signups' ) {
+					static $components_enabled = false;
+					
+					if ( ! $components_enabled && function_exists( 'buddypress' ) && class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+						error_log( 'WBCOM Demo Import: Enabling all BP components before importing ' . $table_name );
+						WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+						$components_enabled = true;
+					}
+				}
+
 				if ( $table_name == 'theme_mods' ) {
 					foreach ( $retrieved_data as $key => $value ) {
 						set_theme_mod( $key, $value );
@@ -359,6 +382,12 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				}
 
 				if ( $table_name == 'options' ) {
+					// Enable all BP components before importing options
+					if ( function_exists( 'buddypress' ) && class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+						error_log( 'WBCOM Demo Import: Enabling all BP components before importing options table' );
+						WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+					}
+					
 					$default_options_keys = array(
 						'siteurl',
 						'home',
@@ -473,11 +502,24 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						'_worker_public_key',
 					);
 
+					// Store current active components before import
+					$preserve_components = bp_get_option( 'bp-active-components', array() );
+					
 					foreach ( $retrieved_data as $key => $value ) {
 						if ( ! in_array( $value['option_name'], $default_options_keys ) ) {
+							// Skip bp-active-components to preserve our enabled components
+							if ( $value['option_name'] === 'bp-active-components' ) {
+								continue;
+							}
+							
 							$option_value = maybe_unserialize( $value['option_value'] );
 							update_option( $value['option_name'], $option_value, $value['autoload'] );
 						}
+					}
+					
+					// Restore our enabled components after import
+					if ( ! empty( $preserve_components ) ) {
+						bp_update_option( 'bp-active-components', $preserve_components );
 					}
 					return;
 				}
@@ -926,6 +968,42 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 		private function is_buddyboss_platform() {
 			// Check for BuddyBoss-specific constants or classes
 			return defined('BP_PLATFORM_VERSION') || class_exists('BuddyBoss_Platform');
+		}
+
+		/**
+		 * Enable all BuddyPress/BuddyBoss components
+		 */
+		public function wbcom_enable_buddypress_components() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Check if BuddyPress or BuddyBoss is active
+			if ( ! function_exists( 'buddypress' ) ) {
+				wp_send_json_error( array( 'message' => __( 'BuddyPress or BuddyBoss Platform is not active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Enable all components
+			if ( class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+				$enabled_components = WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+				
+				if ( $enabled_components ) {
+					wp_send_json_success( array( 
+						'message' => __( 'All components enabled successfully', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+						'components' => $enabled_components
+					) );
+				} else {
+					wp_send_json_error( array( 'message' => __( 'Failed to enable components', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
+			} else {
+				wp_send_json_error( array( 'message' => __( 'Component enabler class not found', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
 		}
 
 		public function wbcom_get_demo_plugins_data() {
