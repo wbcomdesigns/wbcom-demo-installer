@@ -82,10 +82,10 @@
         "name": "BuddyBoss Platform",
         "slug": "buddyboss-platform",
         "required": false,
-        "version": "2.9.11",
+        "version": "",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.9.11/buddyboss-platform-plugin.zip",
+        "external_url": "https://buddyboss.com/free-downloads/buddyboss-platform.php",
         "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
