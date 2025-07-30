@@ -27,10 +27,10 @@
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.4",
+        "version": "4.0.0",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
