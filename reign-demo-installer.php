@@ -225,6 +225,7 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'on_plugins_loaded' ) );
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 			add_filter( 'plugin_action_links_' . REIGN_DEMO_INSTALLER_PLUGIN_BASENAME, array( $this, 'alter_plugin_action_links' ) );
+			add_action( 'wp', array( $this, 'installer_update_checker' ) );
 			
 			// Admin only hooks
 			if ( is_admin() ) {
@@ -351,6 +352,16 @@ if ( ! class_exists( 'Reign_Demo_Installer' ) ) :
 
 			// Load backward compatibility last
 			$this->load_backward_compatibility();
+		}
+		
+		public function installer_update_checker() {
+			if( class_exists( 'PucFactory' ) ){
+				$myUpdateChecker = PucFactory::buildUpdateChecker(
+					'https://demos.wbcomdesigns.com/exporter/free-plugins/wbcom-demo-installer.json',
+					__FILE__,
+					'wbcom-demo-installer'
+				);
+			}
 		}
 
 		/**
