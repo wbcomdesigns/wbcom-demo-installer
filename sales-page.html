@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wbcom Theme Demo Installer - Exclusive for Reign Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #5925DC;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #5925DC;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #5925DC 0%, #7B4FE0 100%);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
+        }
+        
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-description {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #fff;
+            color: #5925DC;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: #fff;
+            color: #5925DC;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #5925DC;
+            background: #fff;
+            box-shadow: 0 20px 40px rgba(89, 37, 220, 0.1);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #5925DC, #7B4FE0);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Demo Showcase */
+        .demos {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .demo-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .demo-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+                        linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-image::after {
+            content: 'Demo Preview';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #999;
+            font-weight: 600;
+        }
+        
+        .demo-content {
+            padding: 25px;
+        }
+        
+        .demo-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .demo-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .demo-features li {
+            color: #666;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .demo-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5925DC;
+            font-weight: bold;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #5925DC, #7B4FE0);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .step-description {
+            color: #666;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 60%;
+            width: 80%;
+            height: 2px;
+            background: #e0e0e0;
+            background: linear-gradient(90deg, #5925DC 0%, #e0e0e0 100%);
+        }
+        
+        /* Compatibility */
+        .compatibility {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .plugin-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        
+        .plugin-logo {
+            width: 120px;
+            height: 60px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #666;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .plugin-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* Bundle Notice */
+        .bundle-notice {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .bundle-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bundle-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .bundle-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .bundle-description {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .bundle-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .bundle-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* FAQ Preview */
+        .faq-preview {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .faq-item {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #5925DC;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            text-align: center;
+            color: #bbb;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero-description {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .plugin-logos {
+                gap: 30px;
+            }
+            
+            .bundle-features {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Wbcom Designs</div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#demos">Demos</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#bundle">Get Reign</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">🎯 Exclusive for Reign Theme</div>
+                <h1>Import Professional Demos in One Click</h1>
+                <p class="hero-description">
+                    Transform your WordPress site instantly with our powerful demo installer. 
+                    Import complete websites including content, settings, and configurations with just a single click.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#bundle" class="btn btn-primary">Get Reign Theme Bundle</a>
+                    <a href="#demos" class="btn btn-secondary">View All Demos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features for Easy Setup</h2>
+                <p class="section-subtitle">
+                    Everything you need to launch your community, business, or learning platform quickly
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">One-Click Import</h3>
+                    <p class="feature-description">
+                        Import complete demo websites with a single click. No technical knowledge required.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Pixel-Perfect Demos</h3>
+                    <p class="feature-description">
+                        Get exactly what you see in the preview. All layouts, colors, and settings imported perfectly.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Smart Configuration</h3>
+                    <p class="feature-description">
+                        Automatically configures plugins, creates pages, sets up menus, and imports all settings.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3 class="feature-title">BuddyPress/BuddyBoss Ready</h3>
+                    <p class="feature-description">
+                        Seamlessly works with both BuddyPress and BuddyBoss Platform. All components auto-configured.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3 class="feature-title">Complete Package</h3>
+                    <p class="feature-description">
+                        Imports everything - posts, pages, media, users, settings, widgets, and theme options.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Fast & Reliable</h3>
+                    <p class="feature-description">
+                        Optimized import process with progress tracking and error handling for smooth imports.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Showcase -->
+    <section id="demos" class="demos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">20+ Professional Demo Sites</h2>
+                <p class="section-subtitle">
+                    Choose from our collection of professionally designed demos for every purpose
+                </p>
+            </div>
+            
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Community Portal</h3>
+                        <ul class="demo-features">
+                            <li>Member profiles</li>
+                            <li>Activity feeds</li>
+                            <li>Groups & forums</li>
+                            <li>Private messaging</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Online Learning</h3>
+                        <ul class="demo-features">
+                            <li>Course catalog</li>
+                            <li>Student dashboard</li>
+                            <li>Quizzes & certificates</li>
+                            <li>Instructor profiles</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Business Network</h3>
+                        <ul class="demo-features">
+                            <li>Professional profiles</li>
+                            <li>Job listings</li>
+                            <li>Company pages</li>
+                            <li>Networking events</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Gaming Community</h3>
+                        <ul class="demo-features">
+                            <li>Clan system</li>
+                            <li>Tournament brackets</li>
+                            <li>Leaderboards</li>
+                            <li>Game forums</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Dating Platform</h3>
+                        <ul class="demo-features">
+                            <li>Member matching</li>
+                            <li>Profile verification</li>
+                            <li>Private chat</li>
+                            <li>Event meetups</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-image"></div>
+                    <div class="demo-content">
+                        <h3 class="demo-title">Marketplace</h3>
+                        <ul class="demo-features">
+                            <li>Vendor shops</li>
+                            <li>Product listings</li>
+                            <li>Reviews & ratings</li>
+                            <li>Payment integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">
+                    Get your site up and running in minutes with our simple process
+                </p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Install Reign Theme</h3>
+                    <p class="step-description">
+                        Purchase and install the Reign theme on your WordPress site
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Activate Demo Installer</h3>
+                    <p class="step-description">
+                        Find the demo installer in your theme bundle and activate it
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Choose Your Demo</h3>
+                    <p class="step-description">
+                        Browse demos, preview, and select the one that fits your needs
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Import & Customize</h3>
+                    <p class="step-description">
+                        Click import, wait a few minutes, then customize with your content
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility -->
+    <section class="compatibility">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Works Seamlessly With</h2>
+                <p class="section-subtitle">
+                    Full compatibility with popular WordPress plugins and platforms
+                </p>
+            </div>
+            
+            <div class="plugin-logos">
+                <div class="plugin-logo">BuddyPress</div>
+                <div class="plugin-logo">BuddyBoss</div>
+                <div class="plugin-logo">Elementor</div>
+                <div class="plugin-logo">WooCommerce</div>
+                <div class="plugin-logo">LearnDash</div>
+                <div class="plugin-logo">bbPress</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bundle Notice -->
+    <section id="bundle" class="bundle-notice">
+        <div class="container">
+            <div class="bundle-content">
+                <div class="bundle-icon">🎁</div>
+                <h2 class="bundle-title">Included FREE with Reign Theme</h2>
+                <p class="bundle-description">
+                    The Demo Installer is exclusively available as part of the Reign theme bundle. 
+                    Get everything you need to build amazing WordPress communities.
+                </p>
+                
+                <div class="bundle-features">
+                    <div class="bundle-feature">
+                        <span>✓</span> Reign Theme
+                    </div>
+                    <div class="bundle-feature">
+                        <span>✓</span> Demo Installer Plugin
+                    </div>
+                    <div class="bundle-feature">
+                        <span>✓</span> 20+ Demo Sites
+                    </div>
+                    <div class="bundle-feature">
+                        <span>✓</span> Premium Support
+                    </div>
+                </div>
+                
+                <a href="https://wbcomdesigns.com/downloads/reign-theme/" class="btn btn-primary">
+                    Get Reign Theme Bundle
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Preview -->
+    <section class="faq-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">
+                    Quick answers to common questions about the demo installer
+                </p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">Is the demo installer sold separately?</h3>
+                    <p class="faq-answer">
+                        No, the demo installer is exclusively included with the Reign theme purchase. 
+                        It cannot be purchased or used separately.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Will it work with other themes?</h3>
+                    <p class="faq-answer">
+                        The demo installer is specifically designed for the Reign theme and will only 
+                        work when Reign is activated as your WordPress theme.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I use it on multiple sites?</h3>
+                    <p class="faq-answer">
+                        Yes, you can use the demo installer on all sites covered by your Reign theme 
+                        license. Check your license terms for the number of allowed sites.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Does it work with BuddyBoss?</h3>
+                    <p class="faq-answer">
+                        Yes! The demo installer fully supports both BuddyPress and BuddyBoss Platform, 
+                        automatically detecting and configuring for either platform.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does import take?</h3>
+                    <p class="faq-answer">
+                        Import times vary based on demo size and server performance. Small demos take 
+                        2-5 minutes, while larger demos may take 10-20 minutes.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Is support included?</h3>
+                    <p class="faq-answer">
+                        Yes, support for the demo installer is included with your Reign theme support 
+                        license. Our team is ready to help with any issues.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wbcomdesigns.com/downloads/reign-theme/">Reign Theme</a></li>
+                        <li><a href="#features">Demo Installer Features</a></li>
+                        <li><a href="#demos">View All Demos</a></li>
+                        <li><a href="https://demos.wbcomdesigns.com/reign/">Live Preview</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/docs/customer/installation-guide.md">Installation Guide</a></li>
+                        <li><a href="/docs/customer/usage-guide.md">Usage Guide</a></li>
+                        <li><a href="/docs/customer/troubleshooting-guide.md">Troubleshooting</a></li>
+                        <li><a href="/docs/customer/faq.md">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wbcomdesigns.com/support/">Support Forum</a></li>
+                        <li><a href="mailto:support@wbcomdesigns.com">Email Support</a></li>
+                        <li><a href="https://wbcomdesigns.com/docs/">Knowledge Base</a></li>
+                        <li><a href="https://youtube.com/wbcomdesigns">Video Tutorials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wbcomdesigns.com/about/">About Us</a></li>
+                        <li><a href="https://wbcomdesigns.com/blog/">Blog</a></li>
+                        <li><a href="https://wbcomdesigns.com/contact/">Contact</a></li>
+                        <li><a href="https://wbcomdesigns.com/privacy-policy/">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wbcom Designs. All rights reserved. | Demo Installer is an exclusive feature of Reign Theme</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+[
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
+        "name": "Elementor",
+        "slug": "elementor",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+        "name": "Wbcom Essential",
+        "slug": "wbcom-essential",
+        "required": true,
+        "version": "4.0.0",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
+        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
+        "name": "WooCommerce",
+        "slug": "woocommerce",
+        "required": true,
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wcfm-logo.jpg",
+        "name": "WCFM Marketplace",
+        "slug": "wc-multivendor-marketplace",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "WCFM Marketplace is the best way to create your multi-vendor marketplace and earn money from every sale."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wcfm-frontend-logo.jpg",
+        "name": "WCFM \u2013 Frontend Manager for WooCommerce",
+        "slug": "wc-frontend-manager",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "WCFM \u2013 Frontend Manager for WooCommerce along with Bookings Subscription Listings Compatible."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wcfm-membership-logo.jpg",
+        "name": "WCFM Membership",
+        "slug": "wc-multivendor-membership",
+        "required": true,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "A simple woocommerce memberships plugin for offering FREE AND PREMIUM SUBSCRIPTION for your multi-vendor marketplace."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+        "is_paid": "yes",
+        "name": "Reign WCFM Addon",
+        "slug": "reign-wcfm-addon",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "https://wbcomdesigns.com/downloads/reign-wcfm-addon/",
+        "description": "Reign WCFM Addon provides seemless integration of WCFM with Reign theme."
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
+        "name": "Buddypress",
+        "slug": "buddypress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+    },
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bbpress-logo.jpg",
+        "name": "bbPress",
+        "slug": "bbpress",
+        "required": false,
+        "version": "",
+        "force_activation": false,
+        "force_deactivation": false,
+        "external_url": "",
+        "description": "bbPress is forum software with a twist from the creators of WordPress."
+    }
+]

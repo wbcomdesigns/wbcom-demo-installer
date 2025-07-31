@@ -1,735 +1,406 @@
+
 /*
-* Enhanced Demo Importer - Sequential File Processing 
-* Processes files one by one without folder structure dependency
-* Version: 3.0.1 Fixed
+* Plugin Installer Manager Code
+*/
+jQuery( document ).ready( function( $ ) {
+
+	_check_all_required_plugin_installed();
+
+	$( 'button.plugin-action-button' ).click( function( event ) {
+		event.preventDefault();
+		var thisRef = $( this );
+
+		if( thisRef.hasClass( 'already-active' ) ) {
+			return;
+		}
+
+		_show_plugin_installer_loader();
+		jQuery.ajax({
+			url : wbcom_theme_demo_installer_params.ajax_url,
+			type : 'post',
+			dataType : 'json',
+			data : {
+				action : 'wbcom_manage_plugin_installation',
+				plugin_action : thisRef.siblings( 'input.plugin-action').val(),
+				plugin_slug : thisRef.siblings( 'input.plugin-slug').val(),
+				demo : thisRef.siblings( 'input.demo-name').val(),
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
+			},
+			success : function( response ) {
+				_hide_plugin_installer_loader();
+				if( response.success ) {
+					thisRef.siblings( 'p.plugin-status').html( 'Active' );
+					thisRef.siblings( 'p.plugin-status').addClass( 'already-active' );
+					thisRef.html( 'Already Installed & Activated' );
+					thisRef.attr( 'class', 'plugin-action-button button already-active' );
+					var temp_counter = parseInt( $( 'input#num_of_req_plugins_installed').val() );
+					temp_counter++;
+					$( 'input#num_of_req_plugins_installed').val( temp_counter );
+					_check_all_required_plugin_installed();
+				}
+				else {
+					_show_admin_notice( 'There was a problem performing the action.', 'error' );
+				}
+			},
+			'error' : function( response ) {
+				_hide_plugin_installer_loader();
+				var errorMsg = response.responseJSON && response.responseJSON.data && response.responseJSON.data.error 
+					? response.responseJSON.data.error 
+					: 'There was a problem performing the action.';
+				_show_admin_notice( errorMsg, 'error' );
+			}
+		});
+	});
+
+	function _check_all_required_plugin_installed() {
+		if( ( parseInt( $( 'input#required_plugins_to_activate').val() ) - parseInt( $( 'input#num_of_req_plugins_installed').val() ) == 0 ) ) {
+			$( 'div.goto-install-demo-step').show();
+		}
+		else {
+			$( 'div.goto-install-demo-step').hide();
+		}
+	}
+
+	function _show_plugin_installer_loader() {
+		jQuery( 'body' ).addClass( 'demo_listing_loading' );
+	}
+
+	function _hide_plugin_installer_loader() {
+		jQuery( 'body' ).removeClass( 'demo_listing_loading' );
+	}
+	
+	function _show_admin_notice( message, type ) {
+		// Remove any existing notices
+		$( '.wbcom-notice' ).remove();
+		
+		// Create notice HTML
+		var noticeClass = 'notice notice-' + type + ' is-dismissible wbcom-notice';
+		var noticeHtml = '<div class="' + noticeClass + '"><p>' + message + '</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+		
+		// Add notice after page title
+		$( '.wrap h1' ).first().after( noticeHtml );
+		
+		// Make dismissible
+		$( '.wbcom-notice .notice-dismiss' ).on( 'click', function() {
+			$( this ).parent().fadeOut( 300, function() { $( this ).remove(); } );
+		});
+		
+		// Auto-hide success messages after 5 seconds
+		if ( type === 'success' ) {
+			setTimeout( function() {
+				$( '.wbcom-notice' ).fadeOut( 300, function() { $( this ).remove(); } );
+			}, 5000 );
+		}
+	}
+
+});
+
+
+/*
+* Demo Importer Manager Code
 */
 (function($) {
     'use strict';
-
+    
     $(document).ready(function() {
-        
-        // Configuration
-        const CONFIG = {
-            maxConcurrentDownloads: 3,
-            maxConcurrentProcessing: 1, // Process one file at a time
-            downloadTimeout: 180000,
-            processingTimeout: 300000,
-            retryAttempts: 2,
-            batchSize: 5,
-            // User experience settings
-            showOptimisticProgress: true,
-            hideMinorIssues: true,
-            emphasizeSuccess: true
-        };
 
-        // File criticality mapping (internal use - hidden from user)
-        const FILE_CRITICALITY = {
-            'options': 'critical',
-            'users': 'critical',
-            'usermeta': 'critical',
-            'posts': 'important',
-            'postmeta': 'important',
-            'theme_mods': 'important',
-            'terms': 'optional',
-            'term_taxonomy': 'optional',
-            'term_relationships': 'optional',
-            'comments': 'optional',
-            'commentmeta': 'optional',
-            'widgets': 'optional',
-            'menus': 'optional',
-            'nav_menu_items': 'optional',
-            'customizer': 'optional',
-            'woocommerce': 'optional',
-            'bp_activity': 'optional',
-            'bp_groups': 'optional',
-            'bp_messages': 'optional',
-            'bp_notifications': 'optional',
-            'bp_xprofile': 'optional',
-            'learndash': 'optional',
-            'lifterlms': 'optional'
-        };
+	var wbcom_theme_demo_data = '';
+    var thisRef = '';
+    var target_url = ''; // Add target_url to global scope
 
-        // Global state
-        var importInProgress = false;
-        var startTime = 0;
-        var tempFolderId = null;
-        var downloadQueue = [];
-        var processingQueue = [];
-        var failedFiles = [];
-        var skippedFiles = [];
-        var processedFiles = [];
-        var userChoices = {
-            continueOnErrors: true,
-            skipOptionalFiles: true,
-            retryFailedFiles: false
-        };
-        
-        var downloadStats = {
-            total: 0,
-            completed: 0,
-            failed: 0,
-            inProgress: 0
-        };
-        
-        var processingStats = {
-            total: 0,
-            completed: 0,
-            failed: 0,
-            inProgress: 0,
-            skipped: 0
-        };
+    var wbcom_tdd_database_tables_count = '';
+    var wbcom_tdd_database_tables_done = 0;
 
-        // Demo import button click
-        $(document).on('click', '#wbcom_get_theme_demo_data', function(event) {
-            event.preventDefault();
-            
-            if (importInProgress) return;
-            
-            var button = $(this);
-            importInProgress = true;
-            startTime = Date.now();
-            
-            // Reset stats
-            resetStats();
-            
-            // Update UI with positive messaging
-            button.prop('disabled', true).text('Starting Import...');
-            $('#progress-bar-container').show();
-            updateProgress(0, 'Preparing your demo content...');
-            
-            // Show encouraging message
-            showUserMessage('Starting demo import. This will take a few minutes...', 'info');
-            
-            // Start import process
-            startBatchImport();
-        });
+    var wbcom_tdd_upload_folders_count = '';
+    var wbcom_tdd_upload_folders_done = 0;
 
-        function resetStats() {
-            downloadStats = { total: 0, completed: 0, failed: 0, inProgress: 0 };
-            processingStats = { total: 0, completed: 0, failed: 0, inProgress: 0, skipped: 0 };
-            failedFiles = [];
-            skippedFiles = [];
-            processedFiles = [];
-        }
+    var wbcom_tdd_database_tables_complete = false;
+    var wbcom_tdd_upload_folders_complete = false;
 
-        function startBatchImport() {
-            updateProgress(2, 'Setting up secure workspace...');
-            
-            $.ajax({
-                url: reignDemoInstaller.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'wbcom_create_temp_folder',
-                    demo_slug: $('#demo_slug').val(),
-                    plugins_json_key: getPluginsJsonKey(),
-                    theme_slug: $('#theme_slug').val(),
-                    nonce: reignDemoInstaller.nonce
-                },
-                timeout: 30000,
-                success: function(response) {
-                    if (response.success) {
-                        tempFolderId = response.data.folder_id;
-                        console.log('✓ Workspace created:', response.data);
-                        getDemoManifest();
-                    } else {
-                        handleError('Setup issue detected. Let\'s try again...', response.data?.message);
-                    }
-                },
-                error: function(xhr, status) {
-                    var debugMsg = 'Failed to initialize import: ' + (status === 'timeout' ? 'Timeout' : 'Connection error');
-                    console.error('Setup Error:', debugMsg, xhr);
-                    handleError('Connection issue. Please check your internet and try again.');
-                }
-            });
-        }
+    var total_requests = 0;
+    var percentage_increment = 0;
+    var current_percentage_progress = 0;
 
-        function getPluginsJsonKey() {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('plugins_json_key') || $('#plugins_json_key').val() || '';
-        }
+	$( 'div.wbcom-demo-importer button#wbcom_get_theme_demo_data' ).click( function( event ) {
+		event.preventDefault();
+		$( this ).siblings( 'div.loader' ).show();
+		thisRef = $( this );
+		_wbcom_read_theme_demo_package_file();
+    });
 
-        function getDemoManifest() {
-            updateProgress(5, 'Analyzing demo content structure...');
-            
-            $.ajax({
-                url: reignDemoInstaller.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'wbcom_get_demo_manifest',
-                    theme_slug: $('#theme_slug').val(),
-                    demo_slug: $('#demo_slug').val(),
-                    target_url: $('#target_url').val(),
-                    nonce: reignDemoInstaller.nonce
-                },
-                timeout: 60000,
-                success: function(response) {
-                    if (response.success && response.data.files) {
-                        // SIMPLIFIED: Just prepare files by their names - no complex path handling needed
-                        downloadQueue = response.data.files.map((file, index) => ({
-                            id: index,
-                            name: file.name, // Simple filename like "options1.json" or "07-break-1.zip"
-                            url: file.url,
-                            type: file.type,
-                            action_for: file.action_for,
-                            attempts: 0,
-                            status: 'pending',
-                            criticality: determineFileCriticality(file.name, file.action_for)
-                        }));
-                        
-                        downloadStats.total = downloadQueue.length;
-                        
-                        console.log('📁 Files prepared for processing:', {
-                            total: downloadStats.total,
-                            database_files: downloadQueue.filter(f => f.action_for === 'database_tables').length,
-                            upload_files: downloadQueue.filter(f => f.action_for === 'upload_folders').length,
-                            file_samples: downloadQueue.slice(0, 5).map(f => f.name)
-                        });
-                        
-                        updateProgress(10, `Found ${downloadStats.total} files. Starting secure download...`);
-                        showUserMessage(`Downloading ${downloadStats.total} demo files...`, 'info');
-                        
-                        startParallelDownloads();
-                    } else {
-                        var debugMsg = 'Failed to get demo files: ' + (response.data?.message || 'No files found');
-                        console.error('Manifest Error:', debugMsg, response);
-                        handleError('Demo content unavailable. Please try again in a moment.');
-                    }
-                },
-                error: function(xhr, status) {
-                    var debugMsg = 'Failed to connect to demo server: ' + (status === 'timeout' ? 'Server timeout' : 'Network error');
-                    console.error('Manifest Request Error:', debugMsg, xhr);
-                    handleError('Demo server connection issue. Please try again.');
-                }
-            });
-        }
+    function _wbcom_read_theme_demo_package_file() {
+    	wbcom_tdd_show_current_activity( 'Reading Files ...' );
+    	
+    	// Store target_url in global scope
+    	target_url = thisRef.siblings( '#target_url' ).val();
+    	
+    	jQuery.ajax({
+			url : wbcom_theme_demo_installer_params.ajax_url,
+			type : 'post',
+			dataType : 'text', // Changed from default to 'text' to handle raw response
+			data : {
+				action : 'wbcom_read_theme_demo_package_file',
+				theme_slug : thisRef.siblings( '#theme_slug' ).val(),
+				demo_slug : thisRef.siblings( '#demo_slug' ).val(),
+				target_url : target_url,
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
+			},
+			success : function( response ) {
+				try {
+					// Clean the response to remove any PHP warnings/notices before JSON
+					var cleanResponse = response;
+					
+					// Find the first occurrence of '{' or '['
+					var jsonStart = Math.min(
+						cleanResponse.indexOf('{') !== -1 ? cleanResponse.indexOf('{') : Infinity,
+						cleanResponse.indexOf('[') !== -1 ? cleanResponse.indexOf('[') : Infinity
+					);
+					
+					if (jsonStart !== Infinity && jsonStart > 0) {
+						// Extract only the JSON part
+						cleanResponse = cleanResponse.substring(jsonStart);
+						// Response contained non-JSON content before position
+					}
+					
+					// Try to parse the cleaned response
+					wbcom_theme_demo_data = JSON.parse(cleanResponse);
+					
+					// Validate the parsed data
+					if (!wbcom_theme_demo_data || typeof wbcom_theme_demo_data !== 'object') {
+						throw new Error('Invalid demo data structure');
+					}
+					
+					// Ensure required properties exist
+					if (!wbcom_theme_demo_data.database_tables || !Array.isArray(wbcom_theme_demo_data.database_tables)) {
+						wbcom_theme_demo_data.database_tables = [];
+					}
+					if (!wbcom_theme_demo_data.upload_folders || !Array.isArray(wbcom_theme_demo_data.upload_folders)) {
+						wbcom_theme_demo_data.upload_folders = [];
+					}
+					
+					wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+					$( '#progress-bar-container' ).show();
+					
+					total_requests = ( wbcom_theme_demo_data.database_tables.length + wbcom_theme_demo_data.upload_folders.length );
+					percentage_increment = total_requests > 0 ? ( 100 / total_requests ) : 100;
+					
+					_wbcom_read_theme_demo_json_files();
+					_wbcom_read_theme_demo_upload_folders();
+					
+				} catch (e) {
+					
+					// Show detailed error message
+					var errorMsg = 'Failed to parse demo data. ';
+					if (response.includes('<?php') || response.includes('Warning:') || response.includes('Notice:') || response.includes('Fatal error:')) {
+						errorMsg += 'The server response contains PHP errors. Please check the server logs.';
+					} else if (response.trim() === '') {
+						errorMsg += 'The server returned an empty response.';
+					} else {
+						errorMsg += 'Invalid JSON format: ' + e.message;
+					}
+					
+					_show_import_error(errorMsg);
+					
+					// Additional debug info removed for production
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				var errorMsg = 'Failed to connect to server. ';
+				
+				// Check if we have a JSON error response
+				if (jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.message) {
+					errorMsg = jqXHR.responseJSON.data.message;
+					if (jqXHR.responseJSON.data.details) {
+						errorMsg += ' Details: ' + jqXHR.responseJSON.data.details;
+					}
+				} else if (jqXHR.status === 0) {
+					errorMsg += 'No connection. Verify network.';
+				} else if (jqXHR.status == 404) {
+					errorMsg += 'Requested page not found [404].';
+				} else if (jqXHR.status == 500) {
+					errorMsg += 'Internal Server Error [500].';
+				} else if (textStatus === 'parsererror') {
+					errorMsg += 'Requested JSON parse failed.';
+				} else if (textStatus === 'timeout') {
+					errorMsg += 'Time out error.';
+				} else if (textStatus === 'abort') {
+					errorMsg += 'Ajax request aborted.';
+				} else {
+					errorMsg += 'Uncaught Error: ' + (errorThrown || textStatus);
+				}
+				
+				_show_import_error(errorMsg);
+			}
+		});
+	}
 
-        function determineFileCriticality(fileName, actionFor) {
-            const baseName = fileName.replace(/\d+\.json$/, '').replace(/\.json$/, '');
-            
-            if (FILE_CRITICALITY[baseName]) {
-                return FILE_CRITICALITY[baseName];
-            }
-            
-            if (actionFor === 'database_tables') {
-                return 'important';
-            } else if (actionFor === 'upload_folders') {
-                return 'optional';
-            }
-            
-            return 'optional';
-        }
+	function _wbcom_read_theme_demo_json_files() {
+		if ( typeof( wbcom_theme_demo_data.database_tables ) === "undefined" ) {
+			return;
+		}
+		wbcom_tdd_database_tables_count = wbcom_theme_demo_data.database_tables.length;
+		if( wbcom_tdd_database_tables_count == 0 ) {
+			wbcom_tdd_database_tables_complete = true;
+		}
+		_wbcom_get_theme_demo_data( wbcom_theme_demo_data.database_tables[0], 'database_tables' );
+	}
 
-        function startParallelDownloads() {
-            updateProgress(15, 'Downloading demo files securely...');
-            
-            for (let i = 0; i < CONFIG.maxConcurrentDownloads; i++) {
-                processNextDownload();
-            }
-            
-            monitorDownloadProgress();
-        }
+	function _wbcom_read_theme_demo_upload_folders() {
+		if ( typeof( wbcom_theme_demo_data.upload_folders ) === "undefined" ) {
+			return;
+		}
+		wbcom_tdd_upload_folders_count = wbcom_theme_demo_data.upload_folders.length;
+		if( wbcom_tdd_upload_folders_count == 0 ) {
+			wbcom_tdd_upload_folders_complete = true;
+		}
+		_wbcom_get_theme_demo_data( wbcom_theme_demo_data.upload_folders[0], 'upload_folders' );
+	}
 
-        function processNextDownload() {
-            const nextFile = downloadQueue.find(file => file.status === 'pending');
-            
-            if (!nextFile) {
-                return;
-            }
+	function _wbcom_get_theme_demo_data( url_to_request, action_for ) {
+		wbcom_tdd_show_current_activity( 'Reading Files ...' );
+		jQuery.ajax({
+			url : wbcom_theme_demo_installer_params.ajax_url,
+			type : 'post',
+			data : {
+				action : 'wbcom_get_theme_demo_data',
+				url_to_request : url_to_request,
+				action_for : action_for,
+				nonce : wbcom_theme_demo_installer_params.ajax_nonce
+			},
+			success : function( response ) {
+				if( action_for == 'database_tables' ) {
+					wbcom_tdd_database_tables_done = wbcom_tdd_database_tables_done + 1;
+					if( wbcom_tdd_database_tables_done == wbcom_tdd_database_tables_count ) {
+						wbcom_tdd_database_tables_complete = true;
+						if( wbcom_tdd_database_tables_complete && wbcom_tdd_upload_folders_complete ) {
+							current_percentage_progress = 100;
+							wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+							wbcom_demo_import_done();
+						}
+					}
+					else {
+						current_percentage_progress += percentage_increment;
+						wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+						_wbcom_get_theme_demo_data( wbcom_theme_demo_data.database_tables[wbcom_tdd_database_tables_done], 'database_tables' );
+					}
+				}
+				else {
+					wbcom_tdd_upload_folders_done = wbcom_tdd_upload_folders_done + 1;
+					if( wbcom_tdd_upload_folders_done == wbcom_tdd_upload_folders_count ) {
+						wbcom_tdd_upload_folders_complete = true;
+						if( wbcom_tdd_database_tables_complete && wbcom_tdd_upload_folders_complete ) {
+							current_percentage_progress = 100;
+							wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+							wbcom_demo_import_done();
+						}
+					}
+					else {
+						current_percentage_progress += percentage_increment;
+						wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+						_wbcom_get_theme_demo_data( wbcom_theme_demo_data.upload_folders[wbcom_tdd_upload_folders_done], 'upload_folders' );
+					}
+				}
+			},
+			error: function ( jqXHR, status, err ) {
+				_show_import_error( 'Error processing: ' + url_to_request + '. ' + ( err || 'Unknown error' ) );
+				if( action_for == 'database_tables' ) {
+					wbcom_tdd_database_tables_done = wbcom_tdd_database_tables_done + 1;
+					if( wbcom_tdd_database_tables_done == wbcom_tdd_database_tables_count ) {
+						wbcom_tdd_database_tables_complete = true;
+						if( wbcom_tdd_database_tables_complete && wbcom_tdd_upload_folders_complete ) {
+							current_percentage_progress = 100;
+							wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+							wbcom_demo_import_done();
+						}
+					}
+					else {
+						_wbcom_get_theme_demo_data( wbcom_theme_demo_data.database_tables[wbcom_tdd_database_tables_done], 'database_tables' );
+					}
+				}
+				else {
+					wbcom_tdd_upload_folders_done = wbcom_tdd_upload_folders_done + 1;
+					if( wbcom_tdd_upload_folders_done == wbcom_tdd_upload_folders_count ) {
+						wbcom_tdd_upload_folders_complete = true;
+						if( wbcom_tdd_database_tables_complete && wbcom_tdd_upload_folders_complete ) {
+							current_percentage_progress = 100;
+							wbcom_tdd_update_progress_bar( Math.floor(current_percentage_progress)+"%" );
+							wbcom_demo_import_done();
+						}
+					}
+					else {
+						_wbcom_get_theme_demo_data( wbcom_theme_demo_data.upload_folders[wbcom_tdd_upload_folders_done], 'upload_folders' );
+					}
+				}
+			}
+		});
+	}
 
-            nextFile.status = 'downloading';
-            downloadStats.inProgress++;
-            
-            downloadFile(nextFile).then(result => {
-                downloadStats.inProgress--;
-                
-                if (result.success) {
-                    nextFile.status = 'completed';
-                    downloadStats.completed++;
-                    processingQueue.push(nextFile);
-                    
-                    let logMessage = `✓ Downloaded: ${nextFile.name} (${downloadStats.completed}/${downloadStats.total})`;
-                    if (result.data?.cached) {
-                        logMessage = logMessage.replace('Downloaded:', 'Using cached:');
-                    }
-                    console.log(logMessage);
-                } else {
-                    nextFile.attempts++;
-                    
-                    let errorMessage = `⚠ Download failed: ${nextFile.name} - ${result.error}`;
-                    
-                    if (nextFile.attempts < CONFIG.retryAttempts) {
-                        nextFile.status = 'pending';
-                        console.log(errorMessage + ` (attempt ${nextFile.attempts + 1})`);
-                    } else {
-                        nextFile.status = 'failed';
-                        downloadStats.failed++;
-                        failedFiles.push({...nextFile, stage: 'download', error: result.error});
-                        console.error(errorMessage);
-                    }
-                }
-                
-                processNextDownload();
-                
-            }).catch(error => {
-                downloadStats.inProgress--;
-                nextFile.status = 'failed';
-                downloadStats.failed++;
-                failedFiles.push({...nextFile, stage: 'download', error: error.message});
-                console.error(`✗ Download exception: ${nextFile.name}`, error);
-                processNextDownload();
-            });
-        }
+	function wbcom_demo_import_done() {
+		// Show finalizing message
+		wbcom_tdd_show_current_activity( 'Finalizing import - replacing URLs...' );
+		
+		// Ensure target_url is defined
+		if (typeof target_url === 'undefined' || !target_url) {
+			// If no target URL, skip finalization and redirect
+			setTimeout( function() {
+				window.location = wbcom_theme_demo_installer_params.success_url;
+			}, 1500 );
+			return;
+		}
+		
+		// Call finalize AJAX
+		jQuery.ajax({
+			type : 'POST',
+			url  : wbcom_theme_demo_installer_params.ajax_url,
+			data : {
+				action: 'wbcom_demo_import_finalize',
+				target_url: target_url,
+				nonce: wbcom_theme_demo_installer_params.ajax_nonce
+			},
+			success: function( response ) {
+				if ( response.success ) {
+					wbcom_tdd_show_current_activity( 'Import completed successfully!' );
+					setTimeout( function() {
+						window.location = wbcom_theme_demo_installer_params.success_url;
+					}, 1500 );
+				} else {
+					_show_import_error( response.data.message || 'Error finalizing import' );
+				}
+			},
+			error: function( jqXHR, status, err ) {
+				// Even if finalize fails, redirect to success page
+				setTimeout( function() {
+					window.location = wbcom_theme_demo_installer_params.success_url;
+				}, 2000 );
+			}
+		});
+	}
 
-        function downloadFile(file) {
-            return new Promise((resolve) => {
-                $.ajax({
-                    url: reignDemoInstaller.ajaxUrl,
-                    type: 'POST',
-                    data: {
-                        action: 'wbcom_download_demo_file',
-                        temp_folder_id: tempFolderId,
-                        file_url: file.url,
-                        file_name: file.name,
-                        file_type: file.type,
-                        action_for: file.action_for,
-                        nonce: reignDemoInstaller.nonce
-                    },
-                    timeout: CONFIG.downloadTimeout,
-                    success: function(response) {
-                        if (response.success) {
-                            resolve({ success: true, data: response.data });
-                        } else {
-                            resolve({ success: false, error: response.data?.message || 'Download failed' });
-                        }
-                    },
-                    error: function(xhr, status) {
-                        let error = 'Network error';
-                        if (status === 'timeout') {
-                            error = 'Download timeout - file may be large';
-                        } else if (xhr.responseJSON?.data?.message) {
-                            error = xhr.responseJSON.data.message;
-                        }
-                        resolve({ success: false, error: error });
-                    }
-                });
-            });
-        }
+	function wbcom_tdd_update_progress_bar( progress_percentage ) {
+		$( '#progress-bar-container .completed' ).css( 'width', progress_percentage );
+		$( '#progress-bar-container .completed' ).html( progress_percentage );
+	}
 
-        function monitorDownloadProgress() {
-            const progressInterval = setInterval(() => {
-                const downloadProgress = Math.round((downloadStats.completed / downloadStats.total) * 50);
-                const currentProgress = 15 + downloadProgress;
-                
-                const activeDownloads = downloadStats.inProgress;
-                let statusText = `Downloading files... ${downloadStats.completed}/${downloadStats.total}`;
-                
-                if (downloadStats.completed > 0) {
-                    const percentage = Math.round((downloadStats.completed / downloadStats.total) * 100);
-                    statusText += ` (${percentage}% complete)`;
-                }
-                
-                if (activeDownloads > 0) {
-                    statusText += ` - ${activeDownloads} active`;
-                }
-                
-                updateProgress(currentProgress, statusText);
-                
-                if (downloadStats.completed + downloadStats.failed >= downloadStats.total) {
-                    clearInterval(progressInterval);
-                    
-                    if (downloadStats.failed > 0) {
-                        handleDownloadFailures();
-                    } else {
-                        showUserMessage('All files downloaded successfully! Processing content...', 'success');
-                        startSequentialProcessing();
-                    }
-                }
-                
-                // Handle stalled downloads
-                if (downloadStats.inProgress === 0 && downloadStats.completed + downloadStats.failed < downloadStats.total) {
-                    const stalledFiles = downloadQueue.filter(f => f.status === 'pending').length;
-                    if (stalledFiles > 0) {
-                        console.log(`Restarting ${stalledFiles} stalled downloads`);
-                        for (let i = 0; i < Math.min(CONFIG.maxConcurrentDownloads, stalledFiles); i++) {
-                            processNextDownload();
-                        }
-                    }
-                }
-            }, 1000);
-        }
+	function wbcom_tdd_show_current_activity( message ) {
+		$( '#wbtd-current-action' ).show();
+		$( '#wbtd-current-action' ).html( message );
+	}
+	
+	function _show_import_error( message ) {
+		// Update progress bar to show error state
+		$( '#progress-bar-container .completed' ).css( 'background-color', '#dc3232' );
+		
+		// Show error in snackbar
+		var $snackbar = $( '#progress-snackbar' );
+		$snackbar.html( '<div class="notice notice-error"><p>' + message + '</p></div>' );
+		$snackbar.show();
+		
+		// Hide loader
+		$( 'div.loader' ).hide();
+		
+		// Change button text to allow retry
+		$( '#wbcom_get_theme_demo_data' ).text( 'Retry Import' ).prop( 'disabled', false );
+	}
 
-        function handleDownloadFailures() {
-            const criticalFailures = failedFiles.filter(f => f.stage === 'download' && f.criticality === 'critical');
-            
-            if (criticalFailures.length > 0) {
-                showUserMessage('Some essential files need attention. Let\'s try to continue...', 'warning');
-                console.error('Critical download failures:', criticalFailures);
-                
-                setTimeout(() => {
-                    startSequentialProcessing();
-                }, 2000);
-            } else {
-                const skipMsg = downloadStats.failed > 0 ? 
-                    `Continuing with ${downloadStats.completed} files (${downloadStats.failed} optional files skipped)...` :
-                    'All essential files ready! Processing content...';
-                
-                showUserMessage(skipMsg, 'info');
-                console.log(`Download completed with ${downloadStats.failed} optional failures`);
-                startSequentialProcessing();
-            }
-        }
-
-        // FIXED: Sequential processing instead of parallel
-        function startSequentialProcessing() {
-            if (processingQueue.length === 0) {
-                completeImport();
-                return;
-            }
-            
-            processingStats.total = processingQueue.length;
-            updateProgress(70, `Processing ${processingStats.total} files...`);
-            showUserMessage('Setting up your demo content...', 'info');
-            
-            // Sort files by priority: database files first, then uploads
-            processingQueue.sort((a, b) => {
-                const priorityA = a.action_for === 'database_tables' ? 1 : 2;
-                const priorityB = b.action_for === 'database_tables' ? 1 : 2;
-                
-                if (priorityA !== priorityB) {
-                    return priorityA - priorityB;
-                }
-                
-                // Within same type, critical files first
-                const criticalityOrder = { 'critical': 1, 'important': 2, 'optional': 3 };
-                return (criticalityOrder[a.criticality] || 3) - (criticalityOrder[b.criticality] || 3);
-            });
-            
-            console.log('📋 Processing order:', processingQueue.map(f => `${f.name} (${f.action_for}, ${f.criticality})`));
-            
-            processNextFileSequentially();
-        }
-
-        // FIXED: Process files one by one
-        function processNextFileSequentially() {
-            const nextFile = processingQueue.find(file => !file.processing && !file.processed && !file.skipProcessing);
-            
-            if (!nextFile) {
-                // All files processed
-                completeImport();
-                return;
-            }
-
-            nextFile.processing = true;
-            processingStats.inProgress = 1;
-            
-            const currentIndex = processedFiles.length + processingStats.failed + processingStats.skipped + 1;
-            updateProgress(70 + Math.round((currentIndex / processingStats.total) * 25), 
-                          `Processing ${nextFile.name} (${currentIndex}/${processingStats.total})...`);
-            
-            console.log(`🔄 Processing file ${currentIndex}/${processingStats.total}: ${nextFile.name}`);
-            
-            processFile(nextFile).then(result => {
-                processingStats.inProgress = 0;
-                nextFile.processing = false;
-                nextFile.processed = true;
-                
-                if (result.success) {
-                    processingStats.completed++;
-                    processedFiles.push(nextFile);
-                    console.log(`✓ Processed: ${nextFile.name} (${processingStats.completed}/${processingStats.total})`);
-                } else {
-                    processingStats.failed++;
-                    failedFiles.push({...nextFile, stage: 'processing', error: result.error});
-                    console.error(`✗ Processing failed: ${nextFile.name} - ${result.error}`);
-                    
-                    handleProcessingFailure(nextFile, result.error);
-                }
-                
-                // Small delay between files to prevent overwhelming
-                setTimeout(() => {
-                    processNextFileSequentially();
-                }, 500);
-                
-            }).catch(error => {
-                processingStats.inProgress = 0;
-                nextFile.processing = false;
-                nextFile.processed = true;
-                processingStats.failed++;
-                failedFiles.push({...nextFile, stage: 'processing', error: error.message});
-                console.error(`✗ Processing exception: ${nextFile.name}`, error);
-                
-                handleProcessingFailure(nextFile, error.message);
-                
-                setTimeout(() => {
-                    processNextFileSequentially();
-                }, 500);
-            });
-        }
-
-        function handleProcessingFailure(file, error) {
-            // Auto-handle optional files silently
-            if (file.criticality === 'optional') {
-                console.log(`🔄 Auto-continuing after optional file issue: ${file.name}`);
-                skippedFiles.push({...file, reason: 'Optional file - continuing import'});
-                processingStats.skipped++;
-                return;
-            }
-            
-            // For critical files, log but still try to continue
-            if (file.criticality === 'critical') {
-                console.error(`❌ Critical file failed: ${file.name} - ${error}`);
-            }
-        }
-
-        function processFile(file) {
-            return new Promise((resolve) => {
-                $.ajax({
-                    url: reignDemoInstaller.ajaxUrl,
-                    type: 'POST',
-                    data: {
-                        action: 'wbcom_process_local_demo_file',
-                        temp_folder_id: tempFolderId,
-                        file_name: file.name,
-                        file_type: file.type,
-                        action_for: file.action_for,
-                        preserve_admin: true,
-                        allow_partial: true,
-                        file_criticality: file.criticality,
-                        nonce: reignDemoInstaller.nonce
-                    },
-                    timeout: CONFIG.processingTimeout,
-                    success: function(response) {
-                        if (response.success) {
-                            resolve({ success: true, data: response.data });
-                        } else {
-                            resolve({ success: false, error: response.data?.message || 'Processing failed' });
-                        }
-                    },
-                    error: function(xhr, status) {
-                        let error = 'Processing error';
-                        if (status === 'timeout') {
-                            error = 'Processing timeout - file may be complex';
-                        } else if (xhr.responseJSON?.data?.message) {
-                            error = xhr.responseJSON.data.message;
-                        }
-                        resolve({ success: false, error: error });
-                    }
-                });
-            });
-        }
-
-        function completeImport() {
-            updateProgress(95, 'Finalizing your demo...');
-            
-            const duration = Math.round((Date.now() - startTime) / 1000);
-            const downloadSuccessRate = Math.round((downloadStats.completed / downloadStats.total) * 100);
-            const processingSuccessRate = processingStats.total > 0 ? 
-                Math.round(((processingStats.completed + processingStats.skipped) / processingStats.total) * 100) : 100;
-            
-            // Generate detailed file reports
-            const fileReports = generateFileReports();
-            
-            // Detailed console summary for debugging
-            console.log(`🎉 Import Summary:
-                Duration: ${duration}s
-                Downloads: ${downloadStats.completed}/${downloadStats.total} (${downloadSuccessRate}%)
-                Processing: ${processingStats.completed}/${processingStats.total} (${processingSuccessRate}%)
-                Skipped: ${processingStats.skipped + skippedFiles.length}
-                Failed: ${failedFiles.length}
-            `);
-            
-            // Log detailed file reports
-            logDetailedFileReports(fileReports);
-            
-            // Store import summary for success page
-            const importSummary = {
-                duration: duration,
-                downloads: { completed: downloadStats.completed, total: downloadStats.total },
-                processing: { completed: processingStats.completed, total: processingStats.total },
-                skipped: processingStats.skipped + skippedFiles.length,
-                failed: failedFiles.length,
-                skippedFiles: skippedFiles,
-                failedFiles: failedFiles,
-                fileReports: fileReports
-            };
-            
-            // Send summary to server
-            $.ajax({
-                url: reignDemoInstaller.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'wbcom_store_import_summary',
-                    summary: JSON.stringify(importSummary),
-                    nonce: reignDemoInstaller.nonce
-                }
-            });
-            
-            // Cleanup temp folder
-            $.ajax({
-                url: reignDemoInstaller.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'wbcom_cleanup_temp_folder',
-                    temp_folder_id: tempFolderId,
-                    keep_cache: true,
-                    nonce: reignDemoInstaller.nonce
-                },
-                timeout: 30000,
-                complete: function() {
-                    updateProgress(100, `Demo imported successfully in ${duration}s!`);
-                    
-                    $(window).off('beforeunload');
-                    
-                    if (downloadSuccessRate >= 80 && processingSuccessRate >= 80) {
-                        showUserMessage('Demo imported successfully! Redirecting...', 'success');
-                    } else {
-                        showUserMessage('Demo imported! Checking final details...', 'success');
-                    }
-                    
-                    setTimeout(function() {
-                        window.location.href = reignDemoInstaller.successUrl;
-                    }, 2000);
-                }
-            });
-        }
-
-        function updateProgress(percent, message) {
-            $('#progress-bar-container .completed').css('width', percent + '%');
-            $('#progress-bar-container .completed').text(percent + '%');
-            $('#wbtd-current-action').text(message).show();
-            console.log(`[${percent}%] ${message}`);
-        }
-
-        function handleError(userMessage, debugDetails) {
-            importInProgress = false;
-            console.error('Import Error:', userMessage, debugDetails || '');
-            
-            $('#wbcom_get_theme_demo_data').prop('disabled', false).text('Try Again');
-            updateProgress(0, 'Ready to try again');
-            
-            if (tempFolderId) {
-                $.ajax({
-                    url: reignDemoInstaller.ajaxUrl,
-                    type: 'POST',
-                    data: {
-                        action: 'wbcom_cleanup_temp_folder',
-                        temp_folder_id: tempFolderId,
-                        keep_cache: true,
-                        nonce: reignDemoInstaller.nonce
-                    }
-                });
-            }
-            
-            showUserMessage(userMessage, 'error');
-        }
-
-        function showUserMessage(message, type) {
-            $('.user-message').remove();
-            
-            var notification = $(`
-                <div class="user-message ${type}">
-                    <p>${message}</p>
-                    <button type="button" class="dismiss">×</button>
-                </div>
-            `);
-            
-            $('.demo-listing-wrap').prepend(notification);
-            
-            if (type === 'info' || type === 'success') {
-                setTimeout(function() {
-                    notification.fadeOut();
-                }, type === 'success' ? 3000 : 5000);
-            }
-            
-            notification.find('.dismiss').on('click', function() {
-                notification.fadeOut();
-            });
-        }
-
-        // Prevent page unload during import
-        $(window).on('beforeunload', function(e) {
-            if (importInProgress) {
-                var message = 'Demo import is in progress. Leaving will cancel the import.';
-                e.returnValue = message;
-                return message;
-            }
-        });
-
-        // Plugin management functionality
-        _check_all_required_plugin_installed();
-
-        $(document).on('click', 'button.plugin-action-button', function(event) {
-            event.preventDefault();
-            
-            var thisRef = $(this);
-            if (thisRef.hasClass('already-active')) return;
-
-            _show_plugin_installer_loader();
-            thisRef.prop('disabled', true).text('Installing...');
-
-            var pluginData = {
-                action: 'wbcom_manage_plugin_installation',
-                plugin_action: thisRef.siblings('input.plugin-action').val(),
-                plugin_slug: thisRef.siblings('input.plugin-slug').val(),
-                demo: thisRef.siblings('input.demo-name').val(),
-                nonce: $('#plugins_nonce').val() || reignDemoInstaller.nonce
-            };
-
-            $.ajax({
-                url: reignDemoInstaller.ajaxUrl,
-                type: 'POST',
-                dataType: 'json',
-                data: pluginData,
-                timeout: 120000,
-                success: function(response) {
-                    _hide_plugin_installer_loader();
-                    thisRef.prop('disabled', false);
-
-                    if (response.success) {
-                        thisRef.siblings('p.plugin-status').html('Active').addClass('already-active');
-                        thisRef.html('Installed & Active').addClass('already-active');
-                        
-                        var temp_counter = parseInt($('input#num_of_req_plugins_installed').val()) || 0;
-                        temp_counter++;
-                        $('input#num_of_req_plugins_installed').val(temp_counter);
-                        
-                        _check_all_required_plugin_installed();
-                        showUserMessage('Plugin installed successfully!', 'success');
-                    } else {
-                        thisRef.text('Install Now');
-                        var errorMsg = response.data?.message || 'Installation had an issue. Please try again.';
-                        showUserMessage(errorMsg, 'warning');
-                    }
-                },
-                error: function(xhr, status) {
-                    _hide_plugin_installer_loader();
-                    thisRef.prop('disabled', false).text('Install Now');
-                    
-                    var errorMsg = status === 'timeout' ? 'Installation timeout. Please try again.' : 'Connection issue. Please check your internet.';
-                    showUserMessage(errorMsg, 'warning');
-                }
-            });
-        });
-
-        function _check_all_required_plugin_installed() {
-            var requiredPlugins = parseInt($('input#required_plugins_to_activate').val()) || 0;
-            var installedPlugins = parseInt($('input#num_of_req_plugins_installed').val()) || 0;
-            
-            if (requiredPlugins > 0 && (requiredPlugins - installedPlugins) === 0) {
-                $('div.goto-install-demo-step').fadeIn(500);
-            } else {
-                $('div.goto-install-demo-step').fadeOut(300);
-            }
-        }
-
-        function _show_plugin_installer_loader() {
-            $('body').addClass('demo_listing_loading');
-        }
-
-        function _hide_plugin_installer_loader() {
-            $('body').removeClass('demo_listing_loading');
-        }
-
-    }); // End document ready
-
+    });
 })(jQuery);

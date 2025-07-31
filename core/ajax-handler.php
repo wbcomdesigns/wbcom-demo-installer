@@ -1,65 +1,33 @@
 <?php
-/**
- * AJAX handler for Reign Demo Installer - SIMPLIFIED VERSION
- * Handles files one by one without complex folder structure dependency
- *
- * @package Reign_Demo_Installer
- * @since 3.0.1
- */
-
-// Prevent direct access
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
+if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 	/**
-	 * Reign_Demo_Installer_Ajax_Handler class.
+	 * @class WBCOM_Demo_Importer_Ajax_Handler
+	 * @version 1.0.0
 	 */
-	class Reign_Demo_Installer_Ajax_Handler {
+	class WBCOM_Demo_Importer_Ajax_Handler {
 
 		/**
 		 * The single instance of the class.
 		 *
-		 * @var Reign_Demo_Installer_Ajax_Handler
+		 * @var WBCOM_Demo_Importer_Ajax_Handler
+		 * @since 1.0.0
 		 */
 		protected static $_instance = null;
 
 		/**
-		 * Security instance.
+		 * Main WBCOM_Demo_Importer_Ajax_Handler Instance.
 		 *
-		 * @var Reign_Demo_Installer_Security
-		 */
-		private $security;
-
-		/**
-		 * Logger instance.
+		 * Ensures only one instance of WBCOM_Demo_Importer_Ajax_Handler is loaded or can be loaded.
 		 *
-		 * @var Reign_Demo_Installer_Logger
-		 */
-		private $logger;
-
-		/**
-		 * Current admin user backup.
-		 *
-		 * @var array
-		 */
-		private $admin_backup = null;
-
-		/**
-		 * Processing stats.
-		 *
-		 * @var array
-		 */
-		private $stats = array(
-			'processed' => 0,
-			'errors' => 0,
-			'skipped' => 0
-		);
-
-		/**
-		 * Main instance.
+		 * @since 1.0.0
+		 * @static
+		 * @see WBCOM_Demo_Importer_Ajax_Handler()
+		 * @return WBCOM_Demo_Importer_Ajax_Handler - Main instance.
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -68,919 +36,1029 @@ if ( ! class_exists( 'Reign_Demo_Installer_Ajax_Handler' ) ) :
 			return self::$_instance;
 		}
 
+
 		/**
-		 * Constructor.
+		 * WBCOM_Demo_Importer_Ajax_Handler Constructor.
 		 */
 		public function __construct() {
-			$this->security = Reign_Demo_Installer_Security::instance();
-			$this->logger = class_exists( 'Reign_Demo_Installer_Logger' ) ? new Reign_Demo_Installer_Logger() : null;
 			$this->init_hooks();
+			$this->includes();
 		}
 
 		/**
-		 * Initialize hooks.
+		 * Include required files
+		 */
+		private function includes() {
+			$plugin_dir = plugin_dir_path( dirname( __FILE__ ) );
+			if ( file_exists( $plugin_dir . 'includes/class-buddypress-components-enabler.php' ) ) {
+				require_once $plugin_dir . 'includes/class-buddypress-components-enabler.php';
+			}
+		}
+
+		/**
+		 * Hook into actions and filters.
+		 *
+		 * @since  1.0.0
 		 */
 		private function init_hooks() {
-			// Batch download AJAX actions
-			add_action( 'wp_ajax_wbcom_create_temp_folder', array( $this, 'create_temp_folder' ) );
-			add_action( 'wp_ajax_wbcom_get_demo_manifest', array( $this, 'get_demo_manifest' ) );
-			add_action( 'wp_ajax_wbcom_download_demo_file', array( $this, 'download_demo_file' ) );
-			add_action( 'wp_ajax_wbcom_process_local_demo_file', array( $this, 'process_local_demo_file' ) );
-			add_action( 'wp_ajax_wbcom_cleanup_temp_folder', array( $this, 'cleanup_temp_folder' ) );
-			add_action( 'wp_ajax_wbcom_store_import_summary', array( $this, 'store_import_summary' ) );
-
-			// Legacy compatibility
-			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'legacy_get_theme_demo_data' ) );
-			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'legacy_read_theme_demo_package_file' ) );
-			add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'manage_plugin_installation' ) );
-
-			// New naming convention (for future)
-			add_action( 'wp_ajax_reign_create_temp_folder', array( $this, 'create_temp_folder' ) );
-			add_action( 'wp_ajax_reign_get_demo_manifest', array( $this, 'get_demo_manifest' ) );
-			add_action( 'wp_ajax_reign_download_demo_file', array( $this, 'download_demo_file' ) );
-			add_action( 'wp_ajax_reign_process_local_demo_file', array( $this, 'process_local_demo_file' ) );
-			add_action( 'wp_ajax_reign_cleanup_temp_folder', array( $this, 'cleanup_temp_folder' ) );
+			add_action( 'wp_ajax_wbcom_get_theme_demo_data', array( $this, 'wbcom_get_theme_demo_data' ) );
+			add_action( 'wp_ajax_wbcom_read_theme_demo_package_file', array( $this, 'wbcom_read_theme_demo_package_file' ) );
+			add_action( 'wp_ajax_wbcom_get_demo_plugins_data', array( $this, 'wbcom_get_demo_plugins_data' ) );
+			add_action( 'wp_ajax_wbcom_demo_import_finalize', array( $this, 'wbcom_demo_import_finalize' ) );
+			add_action( 'wp_ajax_wbcom_enable_buddypress_components', array( $this, 'wbcom_enable_buddypress_components' ) );
 		}
 
-		/**
-		 * Create secure temporary folder.
-		 */
-		public function create_temp_folder() {
-			if ( ! $this->validate_request() ) return;
-
-			try {
-				$this->backup_admin_user();
-
-				$upload_dir = wp_upload_dir();
-				$folder_id = 'reign_demo_' . time() . '_' . wp_generate_password( 8, false );
-				$temp_path = $upload_dir['basedir'] . '/' . $folder_id;
-
-				if ( ! wp_mkdir_p( $temp_path ) ) {
-					wp_send_json_error( array( 'message' => 'Failed to create temp directory' ) );
-				}
-
-				// Security protection
-				file_put_contents( $temp_path . '/.htaccess', "Order deny,allow\nDeny from all\n" );
-
-				// Store folder info (2 hour expiry)
-				set_transient( 'reign_temp_folder_' . $folder_id, array(
-					'path' => $temp_path,
-					'created' => time(),
-					'user_id' => get_current_user_id()
-				), 2 * HOUR_IN_SECONDS );
-
-				$this->debug_log( "Created temp folder: {$folder_id}" );
-
-				wp_send_json_success( array( 
-					'folder_id' => $folder_id,
-					'path' => $temp_path 
-				) );
-
-			} catch ( Exception $e ) {
-				$this->debug_log( "Temp folder creation failed: {$e->getMessage()}", 'error' );
-				wp_send_json_error( array( 'message' => 'Failed to create temp folder' ) );
-			}
-		}
-
-		/**
-		 * Get demo manifest - SIMPLIFIED without complex path processing.
-		 */
-		public function get_demo_manifest() {
-			if ( ! $this->validate_request() ) return;
-
-			try {
-				$theme_slug = $this->get_param( 'theme_slug' );
-				$demo_slug = $this->get_param( 'demo_slug' );
-				$target_url = $this->get_param( 'target_url', 'url' );
-
-				if ( ! $theme_slug || ! $demo_slug || ! $target_url ) {
-					wp_send_json_error( array( 'message' => 'Missing required parameters' ) );
-				}
-
-				if ( ! $this->is_valid_demo_url( $target_url ) ) {
-					wp_send_json_error( array( 'message' => 'Invalid demo URL' ) );
-				}
-
-				$manifest_url = $target_url . 'wp-admin/?wbcom_theme_demo_listing=yes';
-				
-				$response = wp_remote_post( $manifest_url, array(
-					'method' => 'POST',
-					'timeout' => 60,
-					'sslverify' => false,
-					'user-agent' => 'Reign Demo Installer/' . REIGN_DEMO_INSTALLER_VERSION,
-					'body' => array(
-						'theme_slug' => $theme_slug,
-						'demo_slug' => $demo_slug,
-					),
-				) );
-
-				if ( is_wp_error( $response ) ) {
-					wp_send_json_error( array( 'message' => 'Failed to connect to demo server' ) );
-				}
-
-				$demo_data = json_decode( wp_remote_retrieve_body( $response ), true );
-				if ( json_last_error() !== JSON_ERROR_NONE || ! is_array( $demo_data ) ) {
-					wp_send_json_error( array( 'message' => 'Invalid demo data received' ) );
-				}
-
-				// SIMPLIFIED: Just prepare file list without complex path handling
-				$files = $this->prepare_simple_file_list( $demo_data );
-
-				if ( empty( $files ) ) {
-					wp_send_json_error( array( 'message' => 'No demo files found' ) );
-				}
-
-				$this->debug_log( "Demo manifest prepared: " . count( $files ) . " files for {$demo_slug}" );
-
-				wp_send_json_success( array( 
-					'files' => $files,
-					'total_files' => count( $files )
-				) );
-
-			} catch ( Exception $e ) {
-				$this->debug_log( "Manifest preparation failed: {$e->getMessage()}", 'error' );
-				wp_send_json_error( array( 'message' => 'Failed to get demo manifest' ) );
-			}
-		}
-
-		/**
-		 * SIMPLIFIED: Prepare file list without complex path processing.
-		 */
-		private function prepare_simple_file_list( $demo_data ) {
-			$files = array();
+		public function wbcom_read_theme_demo_package_file() {
+			// Disable error reporting to prevent PHP warnings/notices from corrupting JSON
+			error_reporting(0);
+			@ini_set('display_errors', 0);
 			
-			// Add database tables
-			if ( isset( $demo_data['database_tables'] ) && is_array( $demo_data['database_tables'] ) ) {
-				foreach ( $demo_data['database_tables'] as $url ) {
-					$files[] = array(
-						'name' => basename( $url ),
-						'url' => $url,
-						'type' => 'database_table',
-						'action_for' => 'database_tables'
-					);
-				}
-			}
-
-			// Add upload folders - simplified without path processing
-			if ( isset( $demo_data['upload_folders'] ) && is_array( $demo_data['upload_folders'] ) ) {
-				foreach ( $demo_data['upload_folders'] as $url ) {
-					$files[] = array(
-						'name' => basename( $url ),
-						'url' => $url,
-						'type' => 'upload_folder',
-						'action_for' => 'upload_folders'
-					);
-				}
-			}
-
-			return $files;
-		}
-
-		/**
-		 * Download single file.
-		 */
-		public function download_demo_file() {
-			if ( ! $this->validate_request() ) return;
-
+			// Start output buffering to catch any unexpected output
+			ob_start();
+			
 			try {
-				$temp_folder_id = $this->get_param( 'temp_folder_id' );
-				$file_url = $this->get_param( 'file_url', 'url' );
-				$file_name = $this->get_param( 'file_name', 'filename' );
-
-				if ( ! $temp_folder_id || ! $file_url || ! $file_name ) {
-					wp_send_json_error( array( 'message' => 'Missing required parameters' ) );
+				// Security check
+				if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 				}
-
-				$folder_info = get_transient( 'reign_temp_folder_' . $temp_folder_id );
-				if ( ! $folder_info || $folder_info['user_id'] !== get_current_user_id() ) {
-					wp_send_json_error( array( 'message' => 'Invalid temp folder' ) );
-				}
-
-				if ( ! $this->is_valid_demo_url( $file_url ) ) {
-					wp_send_json_error( array( 'message' => 'Invalid file URL' ) );
-				}
-
-				$file_path = $folder_info['path'] . '/' . $file_name;
-
-				// Download with retry logic
-				$file_content = $this->download_with_retry( $file_url );
 				
-				if ( ! $file_content ) {
-					wp_send_json_error( array( 'message' => 'Download failed or file is empty' ) );
+				// Capability check
+				if ( ! current_user_can( 'manage_options' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 				}
-
-				if ( file_put_contents( $file_path, $file_content ) === false ) {
-					wp_send_json_error( array( 'message' => 'Failed to save file' ) );
-				}
-
-				$this->debug_log( "Downloaded: {$file_name} (" . size_format( strlen( $file_content ) ) . ")" );
-
-				wp_send_json_success( array( 
-					'file_name' => $file_name,
-					'file_size' => strlen( $file_content ),
-					'file_path' => $file_path
-				) );
-
-			} catch ( Exception $e ) {
-				$this->debug_log( "Download failed: {$e->getMessage()}", 'error' );
-				wp_send_json_error( array( 'message' => 'Download failed' ) );
-			}
-		}
-
-		/**
-		 * SIMPLIFIED: Process file without complex path handling.
-		 */
-		public function process_local_demo_file() {
-			if ( ! $this->validate_request() ) return;
-
-			try {
-				$temp_folder_id = $this->get_param( 'temp_folder_id' );
-				$file_name = $this->get_param( 'file_name', 'filename' );
-				$action_for = $this->get_param( 'action_for' );
-				$file_criticality = $this->get_param( 'file_criticality', 'string', 'optional' );
-
-				$folder_info = get_transient( 'reign_temp_folder_' . $temp_folder_id );
-				if ( ! $folder_info || $folder_info['user_id'] !== get_current_user_id() ) {
-					wp_send_json_error( array( 'message' => 'Invalid temp folder' ) );
-				}
-
-				$file_path = $folder_info['path'] . '/' . $file_name;
 				
-				if ( ! file_exists( $file_path ) ) {
-					wp_send_json_error( array( 'message' => 'File not found in temp folder' ) );
-				}
-
-				// Set up environment
-				$this->prepare_processing_environment();
-
-				// SIMPLIFIED: Process file without path complexity
-				$result = $this->process_file_by_type_simple( $file_path, $action_for, $file_criticality );
-
-				if ( is_wp_error( $result ) ) {
-					if ( $file_criticality === 'critical' ) {
-						wp_send_json_error( array( 'message' => $result->get_error_message() ) );
-					} else {
-						// For non-critical files, log and continue
-						$this->debug_log( "Non-critical file processing failed: {$file_name} - {$result->get_error_message()}", 'warning' );
-						$this->stats['skipped']++;
-						wp_send_json_success( array( 
-							'file_name' => $file_name,
-							'processed' => false,
-							'skipped' => true,
-							'reason' => 'Non-critical file failed: ' . $result->get_error_message()
-						) );
-						return;
+				if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_read_theme_demo_package_file' ) ) {
+					if ( isset( $_POST['theme_slug'] ) && isset( $_POST['demo_slug'] ) ) {
+						// Sanitize inputs
+						$theme_slug = sanitize_text_field( $_POST['theme_slug'] );
+						$demo_slug = sanitize_text_field( $_POST['demo_slug'] );
+						$target_url = esc_url_raw( $_POST['target_url'] );
+						
+						// Validate URL
+						if ( ! filter_var( $target_url, FILTER_VALIDATE_URL ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 'message' => __( 'Invalid target URL provided', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+						}
+						
+						// Add API key for internal exporter access
+						$api_key = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
+						$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
+						
+						
+						$response = wp_remote_post(
+							$url_to_request,
+							array(
+								'method'  => 'POST',
+								'timeout' => 120,
+								'headers' => array(
+									'Content-Type' => 'application/x-www-form-urlencoded',
+									'Accept' => 'application/json',
+								),
+								'body'    => array(
+									'theme_slug' => $theme_slug,
+									'demo_slug'  => $demo_slug,
+								),
+								'sslverify' => false,
+							)
+						);
+						
+						if ( is_wp_error( $response ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 
+								'message' => __( 'Failed to connect to demo server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+								'details' => $response->get_error_message()
+							) );
+						}
+						
+						$response_code = wp_remote_retrieve_response_code( $response );
+						$response_body = wp_remote_retrieve_body( $response );
+						
+						if ( $response_code !== 200 ) {
+							ob_end_clean();
+							wp_send_json_error( array( 
+								'message' => sprintf( __( 'Demo server returned error code %d', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $response_code ),
+								'code' => $response_code
+							) );
+						}
+						
+						if ( empty( $response_body ) ) {
+							ob_end_clean();
+							wp_send_json_error( array( 'message' => __( 'Demo server returned empty response', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+						}
+						
+						// Clean any potential BOM or whitespace
+						$response_body = trim( $response_body );
+						
+						// Remove UTF-8 BOM if present
+						$bom = pack('H*','EFBBBF');
+						$response_body = preg_replace("/^$bom/", '', $response_body);
+						
+						// Validate JSON before sending
+						$json_test = json_decode( $response_body, true );
+						if ( json_last_error() !== JSON_ERROR_NONE ) {
+							ob_end_clean();
+							
+							
+							wp_send_json_error( array( 
+								'message' => __( 'Invalid JSON response from demo server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+								'json_error' => json_last_error_msg()
+							) );
+						}
+						
+						// Clear output buffer
+						ob_end_clean();
+						
+						// Set proper headers
+						header( 'Content-Type: application/json; charset=utf-8' );
+						
+						// Output the clean JSON
+						echo $response_body;
+						wp_die();
 					}
 				}
-
-				$this->stats['processed']++;
-				$this->debug_log( "Processed: {$file_name}" );
-
-				wp_send_json_success( array( 
-					'file_name' => $file_name,
-					'processed' => true,
-					'stats' => $this->stats
+			} catch ( Exception $e ) {
+				ob_end_clean();
+				wp_send_json_error( array( 
+					'message' => __( 'An error occurred while fetching demo data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+					'error' => $e->getMessage()
 				) );
-
-			} catch ( Exception $e ) {
-				$this->stats['errors']++;
-				$this->debug_log( "Processing exception: {$e->getMessage()}", 'error' );
-				
-				$file_criticality = $this->get_param( 'file_criticality', 'string', 'optional' );
-				if ( $file_criticality !== 'critical' ) {
-					wp_send_json_success( array( 
-						'file_name' => $this->get_param( 'file_name', 'filename' ),
-						'processed' => false,
-						'skipped' => true,
-						'reason' => 'Exception: ' . $e->getMessage()
-					) );
-				} else {
-					wp_send_json_error( array( 'message' => 'Critical file processing failed: ' . $e->getMessage() ) );
-				}
 			}
+			
+			ob_end_clean();
+			wp_send_json_error( array( 'message' => __( 'Invalid request', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 		}
 
-		/**
-		 * SIMPLIFIED: Process file by type without path complexity.
-		 */
-		private function process_file_by_type_simple( $file_path, $action_for, $criticality ) {
+		public function wbcom_get_theme_demo_data() {
+			// Disable error reporting to prevent PHP warnings/notices from corrupting output
+			error_reporting(0);
+			@ini_set('display_errors', 0);
+			
+			// Start output buffering to catch any unexpected output
+			ob_start();
+			
 			try {
-				switch ( $action_for ) {
-					case 'database_tables':
-						return $this->process_database_file( $file_path, $criticality );
-						
-					case 'upload_folders':
-						return $this->process_upload_file_simple( $file_path, $criticality );
-						
-					default:
-						return new WP_Error( 'invalid_type', 'Unknown file type: ' . $action_for );
+				// Security check
+				if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 				}
-			} catch ( Exception $e ) {
-				return new WP_Error( 'processing_error', $e->getMessage() );
-			}
-		}
-
-		/**
-		 * SIMPLIFIED: Process upload ZIP file - just extract to uploads directory.
-		 */
-		private function process_upload_file_simple( $file_path, $criticality ) {
-			$file_content = file_get_contents( $file_path );
-			if ( $file_content === false ) {
-				return new WP_Error( 'read_error', 'Cannot read upload file' );
-			}
-
-			$upload_dir = wp_upload_dir();
-			$temp_zip = $upload_dir['basedir'] . '/temp-' . basename( $file_path );
-
-			// Save content to temporary zip in uploads directory
-			if ( file_put_contents( $temp_zip, $file_content ) === false ) {
-				return new WP_Error( 'write_error', 'Cannot write temporary zip file' );
-			}
-
-			try {
-				// Extract directly to uploads directory - all ZIP files contain proper folder structure
-				$extract_path = $upload_dir['basedir'];
 				
-				$extraction_result = $this->extract_zip_simple( $temp_zip, $extract_path );
+				// Capability check
+				if ( ! current_user_can( 'manage_options' ) ) {
+					ob_end_clean();
+					wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+				}
 				
-				if ( is_wp_error( $extraction_result ) ) {
-					if ( $criticality !== 'critical' ) {
-						$this->debug_log( "Non-critical ZIP extraction failed, continuing: " . $extraction_result->get_error_message() );
-						return true;
+				if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'wbcom_get_theme_demo_data' ) ) {
+
+				if ( isset( $_POST['action_for'] ) && ( sanitize_text_field( $_POST['action_for'] ) == 'post_types' ) ) {
+					$url_to_request = isset( $_POST['url_to_request'] ) ? esc_url_raw( $_POST['url_to_request'] ) : '';
+					
+					// Validate URL
+					if ( ! empty( $url_to_request ) && filter_var( $url_to_request, FILTER_VALIDATE_URL ) ) {
+						$url_parts = explode( '/', $url_to_request );
+						$post_slug = end( $url_parts );
+						$post_slug = sanitize_file_name( str_replace( '.xml', '', $post_slug ) );
+						$this->clone_post_type( $post_slug, $url_to_request );
 					}
-					throw new Exception( $extraction_result->get_error_message() );
+					ob_end_clean();
+					wp_die();
 				}
 
-				$this->debug_log( "Successfully extracted ZIP: " . basename( $file_path ) . " to uploads directory" );
-				return true;
+				if ( isset( $_POST['action_for'] ) && ( sanitize_text_field( $_POST['action_for'] ) == 'database_tables' ) ) {
+					$url_to_request = isset( $_POST['url_to_request'] ) ? esc_url_raw( $_POST['url_to_request'] ) : '';
+					
+					// Validate URL
+					if ( ! empty( $url_to_request ) && filter_var( $url_to_request, FILTER_VALIDATE_URL ) ) {
+						global $wpdb;
+						$url_parts = explode( '/', $url_to_request );
+						$filename = end( $url_parts );
+						$table_name = str_replace( '.json', '', $filename );
+						
+						// Remove number suffix from table name (e.g., posts_0001 -> posts)
+						// This handles both old format (posts_1) and new format (posts_0001)
+						$table_name = preg_replace( '/_\d+$/', '', $table_name );
+						
+						// Sanitize table name to prevent SQL injection
+						$table_name = preg_replace( '/[^a-zA-Z0-9_]/', '', $table_name );
+						
+						// Ensure table name is not empty after sanitization
+						if ( empty( $table_name ) ) {
+							wp_die( __( 'Invalid table name extracted from filename', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+						}
+						
+						
+						$this->clone_database_table( $table_name, $url_to_request );
+					}
+					ob_end_clean();
+					wp_die();
+				}
 
+				if ( isset( $_POST['action_for'] ) && ( $_POST['action_for'] == 'upload_folders' ) ) {
+					$url_to_request = isset( $_POST['url_to_request'] ) ? $_POST['url_to_request'] : '';
+					$this->clone_uploads_folder( $url_to_request );
+					ob_end_clean();
+					wp_die();
+				}
+			}
 			} catch ( Exception $e ) {
-				$error_msg = "ZIP extraction failed: {$e->getMessage()}";
-				$this->debug_log( $error_msg, 'error' );
-				
-				if ( $criticality !== 'critical' ) {
-					$this->debug_log( "Continuing despite non-critical ZIP failure: " . basename( $file_path ) );
-					return true;
+				ob_end_clean();
+				wp_send_json_error( array( 
+					'message' => __( 'An error occurred while processing demo data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+					'error' => $e->getMessage()
+				) );
+			}
+			
+			ob_end_clean();
+			wp_send_json_error( array( 'message' => __( 'Invalid request', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+		}
+
+		public function clone_post_type( $post_slug = 'post', $url_to_request = '' ) {
+			// Use wp_remote_get instead of file_get_contents
+			$response = wp_remote_get( $url_to_request, array( 
+				'timeout' => 300, // 5 minutes for large files
+				'sslverify' => false 
+			) );
+			
+			// Check for errors
+			if ( is_wp_error( $response ) ) {
+				wp_die( $response->get_error_message() );
+			}
+			
+			if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+				wp_die( __( 'Failed to retrieve file from remote server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			$retrieved_data = wp_remote_retrieve_body( $response );
+			
+			if ( empty( $retrieved_data ) ) {
+				wp_die( __( 'Retrieved empty data from remote server', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			
+			$upload         = wp_upload_dir();
+			$upload_dir     = $upload['basedir'];
+			$upload_dir     = $upload_dir . '/wbcom-temp-folder';
+			if ( ! is_dir( $upload_dir ) ) {
+				wp_mkdir_p( $upload_dir );
+			}
+			$dir_path = $upload_dir . '/';
+			
+			// Use WP_Filesystem for file operations
+			global $wp_filesystem;
+			if ( ! $wp_filesystem ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+				WP_Filesystem();
+			}
+			
+			$file_path = $dir_path . sanitize_file_name( "$post_slug.xml" );
+			if ( ! $wp_filesystem->put_contents( $file_path, $retrieved_data, FS_CHMOD_FILE ) ) {
+				wp_die( __( 'Failed to write temporary file', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+
+			// Check if we have a custom importer or use WordPress importer
+			global $wbcom_xml_wp_import;
+			if ( isset( $wbcom_xml_wp_import ) && is_object( $wbcom_xml_wp_import ) ) {
+				$wbcom_xml_wp_import->import( $file_path );
+			} else {
+				// Use WordPress core importer if available
+				if ( ! defined( 'WP_LOAD_IMPORTERS' ) ) {
+					define( 'WP_LOAD_IMPORTERS', true );
 				}
 				
-				return new WP_Error( 'extract_error', $error_msg );
-			} finally {
-				// Clean up temp file
-				if ( file_exists( $temp_zip ) ) {
-					wp_delete_file( $temp_zip );
+				// Load WordPress importer
+				if ( ! class_exists( 'WP_Import' ) ) {
+					$class_wp_import = ABSPATH . 'wp-admin/includes/class-wp-import.php';
+					if ( file_exists( $class_wp_import ) ) {
+						require_once $class_wp_import;
+					}
 				}
-			}
-		}
-
-		/**
-		 * SIMPLIFIED: Extract ZIP file directly to target directory.
-		 */
-		private function extract_zip_simple( $zip_file, $extract_path ) {
-			if ( ! class_exists( 'ZipArchive' ) ) {
-				return new WP_Error( 'ziparchive_missing', 'ZipArchive not available' );
-			}
-
-			$zip = new ZipArchive();
-			$result = $zip->open( $zip_file );
-			
-			if ( $result !== true ) {
-				return new WP_Error( 'ziparchive_open_failed', "Cannot open ZIP: error {$result}" );
-			}
-
-			// Extract all files to the target directory
-			if ( ! $zip->extractTo( $extract_path ) ) {
-				$zip->close();
-				return new WP_Error( 'extraction_failed', 'ZipArchive extraction failed' );
-			}
-
-			$total_files = $zip->numFiles;
-			$zip->close();
-			
-			$this->debug_log( "ZIP extracted successfully: {$total_files} files to {$extract_path}" );
-			
-			return array( 'extracted_files' => $total_files, 'total_files' => $total_files );
-		}
-
-		/**
-		 * Process database file with improved error handling.
-		 */
-		private function process_database_file( $file_path, $criticality ) {
-			$file_content = file_get_contents( $file_path );
-			if ( $file_content === false ) {
-				return new WP_Error( 'read_error', 'Cannot read database file' );
-			}
-
-			$data = json_decode( $file_content, true );
-			if ( json_last_error() !== JSON_ERROR_NONE ) {
-				return new WP_Error( 'json_error', 'Invalid JSON: ' . json_last_error_msg() );
-			}
-
-			if ( empty( $data ) || ! is_array( $data ) ) {
-				return new WP_Error( 'empty_data', 'File contains no valid data' );
-			}
-
-			// Determine table name
-			$file_name = basename( $file_path );
-			$table_name = preg_replace( '/[0-9]+\.json$/', '', $file_name );
-			$table_name = str_replace( '.json', '', $table_name );
-
-			// Process based on table type
-			return $this->import_table_data( $table_name, $data, $criticality );
-		}
-
-		/**
-		 * Import table data with better error handling.
-		 */
-		private function import_table_data( $table_name, $data, $criticality ) {
-			try {
-				// Handle special tables
-				switch ( $table_name ) {
-					case 'theme_mods':
-						return $this->import_theme_mods( $data );
-						
-					case 'options':
-						return $this->import_options( $data, $criticality );
-						
-					case 'users':
-					case 'usermeta':
-						return $this->import_user_data( $table_name, $data, $criticality );
-						
-					default:
-						return $this->import_regular_table( $table_name, $data, $criticality );
-				}
-			} catch ( Exception $e ) {
-				return new WP_Error( 'import_error', "Table import failed: {$e->getMessage()}" );
-			}
-		}
-
-		/**
-		 * Import theme mods.
-		 */
-		private function import_theme_mods( $data ) {
-			$count = 0;
-			foreach ( $data as $key => $value ) {
-				set_theme_mod( $key, $value );
-				$count++;
-			}
-			$this->debug_log( "Imported {$count} theme mods" );
-			return true;
-		}
-
-		/**
-		 * Import options with better filtering.
-		 */
-		private function import_options( $data, $criticality ) {
-			$skip_options = array(
-				'siteurl', 'home', 'blogname', 'blogdescription', 'admin_email', 
-				'users_can_register', 'default_role', 'blog_charset', 'active_plugins',
-				'template', 'stylesheet', 'wp_user_roles', 'cron'
-			);
-
-			$imported = 0;
-			foreach ( $data as $option ) {
-				if ( ! isset( $option['option_name'] ) ) continue;
 				
-				if ( in_array( $option['option_name'], $skip_options, true ) ) continue;
-
-				$value = maybe_unserialize( $option['option_value'] );
-				$value = $this->replace_urls( $value );
-				
-				$autoload = isset( $option['autoload'] ) ? $option['autoload'] : 'yes';
-				
-				if ( update_option( $option['option_name'], $value, $autoload ) ) {
-					$imported++;
+				if ( class_exists( 'WP_Import' ) ) {
+					$wp_import = new WP_Import();
+					$wp_import->import( $file_path );
 				}
 			}
 
-			$this->debug_log( "Imported {$imported} options" );
-			return true;
+			// Use WP_Filesystem to delete file
+			$wp_filesystem->delete( $file_path );
 		}
 
-		/**
-		 * Import user data with admin protection.
-		 */
-		private function import_user_data( $table_name, $data, $criticality ) {
-			global $wpdb;
+		public function clone_database_table( $table_name = '', $url_to_request = '' ) {
+			$retrieved_data = '';
 			
-			$current_user_id = get_current_user_id();
-			$table_full_name = $wpdb->prefix . $table_name;
-			
-			// Verify table exists
-			if ( ! $this->table_exists( $table_full_name ) ) {
-				return new WP_Error( 'table_missing', "Table {$table_full_name} does not exist" );
-			}
+			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
-			$imported = 0;
-			$errors = 0;
-
-			foreach ( $data as $row ) {
-				// Skip current admin user
-				if ( isset( $row['ID'] ) && $row['ID'] == $current_user_id ) continue;
-				if ( isset( $row['user_id'] ) && $row['user_id'] == $current_user_id ) continue;
-
-				// Clean data
-				$row = $this->clean_user_row( $row );
-				$row = $this->replace_urls( $row );
-
-				$result = $wpdb->insert( $table_full_name, $row );
-				if ( $result ) {
-					$imported++;
-				} else {
-					$errors++;
-					if ( $criticality === 'critical' && $errors > 10 ) {
-						return new WP_Error( 'too_many_errors', "Too many errors importing {$table_name}" );
+			if ( ! is_wp_error( $response ) ) {
+				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+					$response = isset( $response['body'] ) ? $response['body'] : '';
+					if ( ! empty( $response ) ) {
+						$retrieved_data = json_decode( $response, true );
 					}
 				}
 			}
 
-			$this->debug_log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
-			
-			// Restore admin user after user table imports
-			if ( in_array( $table_name, array( 'users', 'usermeta' ) ) ) {
-				$this->restore_admin_user();
-			}
+			if ( ! empty( $retrieved_data ) && is_array( $retrieved_data ) ) {
+				// No URL replacement here - will be done in finalize step
 
-			return true;
-		}
-
-		/**
-		 * Import regular table with error tolerance.
-		 */
-		private function import_regular_table( $table_name, $data, $criticality ) {
-			global $wpdb;
-			
-			$table_full_name = $wpdb->prefix . $table_name;
-			
-			// Verify table exists
-			if ( ! $this->table_exists( $table_full_name ) ) {
-				if ( $criticality === 'critical' ) {
-					return new WP_Error( 'table_missing', "Critical table {$table_full_name} does not exist" );
-				} else {
-					$this->debug_log( "Table {$table_full_name} does not exist, skipping", 'warning' );
-					return true; // Skip non-critical missing tables
-				}
-			}
-
-			// Clear existing data (but track if we did it already)
-			$clear_key = "cleared_{$table_name}";
-			$import_data = get_option( 'reign_theme_demo_import_data', array() );
-			
-			if ( ! isset( $import_data[ $clear_key ] ) ) {
-				$wpdb->query( $wpdb->prepare( "DELETE FROM `{$table_full_name}`" ) );
-				$import_data[ $clear_key ] = true;
-				update_option( 'reign_theme_demo_import_data', $import_data );
-			}
-
-			$imported = 0;
-			$errors = 0;
-
-			foreach ( $data as $row ) {
-				$row = $this->replace_urls( $row );
-
-				$result = $wpdb->insert( $table_full_name, $row );
-				if ( $result ) {
-					$imported++;
-				} else {
-					$errors++;
-					// For non-critical tables, don't fail on too many errors
-					if ( $criticality === 'critical' && $errors > 20 ) {
-						return new WP_Error( 'too_many_errors', "Too many errors importing {$table_name}" );
+				// Enable all BuddyPress/BuddyBoss components before importing BP tables
+				if ( strpos( $table_name, 'bp_' ) === 0 || $table_name === 'signups' ) {
+					static $components_enabled = false;
+					
+					if ( ! $components_enabled && function_exists( 'buddypress' ) && class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+						error_log( 'WBCOM Demo Import: Enabling all BP components before importing ' . $table_name );
+						WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+						$components_enabled = true;
 					}
 				}
-			}
 
-			$this->debug_log( "Imported {$imported} rows to {$table_name} (errors: {$errors})" );
-			return true;
-		}
-
-		/**
-		 * Store import summary.
-		 */
-		public function store_import_summary() {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( array( 'message' => 'Insufficient permissions' ) );
-			}
-
-			$summary = $this->get_param( 'summary' );
-			if ( ! $summary ) {
-				wp_send_json_error( array( 'message' => 'No summary data provided' ) );
-			}
-
-			$summary_data = json_decode( stripslashes( $summary ), true );
-			if ( json_last_error() !== JSON_ERROR_NONE ) {
-				wp_send_json_error( array( 'message' => 'Invalid summary data' ) );
-			}
-
-			update_option( 'reign_demo_import_summary', $summary_data );
-			wp_send_json_success( array( 'message' => 'Summary stored' ) );
-		}
-
-		/**
-		 * Clean up temporary folder.
-		 */
-		public function cleanup_temp_folder() {
-			try {
-				$temp_folder_id = $this->get_param( 'temp_folder_id' );
-				
-				if ( ! $temp_folder_id ) {
-					wp_send_json_success( array( 'message' => 'No folder to clean' ) );
+				if ( $table_name == 'theme_mods' ) {
+					foreach ( $retrieved_data as $key => $value ) {
+						set_theme_mod( $key, $value );
+					}
 					return;
 				}
 
-				$folder_info = get_transient( 'reign_temp_folder_' . $temp_folder_id );
-				
-				if ( $folder_info && isset( $folder_info['path'] ) ) {
-					$this->delete_directory_recursive( $folder_info['path'] );
-					delete_transient( 'reign_temp_folder_' . $temp_folder_id );
-					$this->debug_log( "Cleaned up temp folder: {$temp_folder_id}" );
+				if ( $table_name == 'options' ) {
+					// Enable all BP components before importing options
+					if ( function_exists( 'buddypress' ) && class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+						error_log( 'WBCOM Demo Import: Enabling all BP components before importing options table' );
+						WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+					}
+					
+					$default_options_keys = array(
+						'siteurl',
+						'home',
+						'blogname',
+						'blogdescription',
+						'users_can_register',
+						'admin_email',
+						'new_admin_email',
+						'start_of_week',
+						'use_balanceTags',
+						'use_smilies',
+						'require_name_email',
+						'comments_notify',
+						'posts_per_rss',
+						'rss_use_excerpt',
+						'mailserver_url',
+						'mailserver_login',
+						'mailserver_pass',
+						'mailserver_port',
+						'default_category',
+						'default_comment_status',
+						'default_ping_status',
+						'default_pingback_flag',
+						// 'posts_per_page',
+						'date_format',
+						'time_format',
+						'links_updated_date_format',
+						'comment_moderation',
+						'moderation_notify',
+						// 'permalink_structure',
+						'rewrite_rules',
+						'hack_file',
+						'blog_charset',
+						'active_plugins',
+						'category_base',
+						'ping_sites',
+						'comment_max_links',
+						'gmt_offset',
+						'default_email_category',
+						'template',
+						'stylesheet',
+						'comment_whitelist',
+						'comment_registration',
+						'html_type',
+						'use_trackback',
+						'default_role',
+						'db_version',
+						'uploads_use_yearmonth_folders',
+						'upload_path',
+						'blog_public',
+						'default_link_category',
+						// 'show_on_front',
+						'tag_base',
+						'show_avatars',
+						'avatar_rating',
+						'upload_url_path',
+						'thumbnail_size_w',
+						'thumbnail_size_h',
+						'thumbnail_crop',
+						'medium_size_w',
+						'medium_size_h',
+						'avatar_default',
+						'large_size_w',
+						'large_size_h',
+						'image_default_link_type',
+						'image_default_size',
+						'image_default_align',
+						'close_comments_for_old_posts',
+						'close_comments_days_old',
+						'thread_comments',
+						'thread_comments_depth',
+						'page_comments',
+						'comments_per_page',
+						'default_comments_page',
+						'comment_order',
+						'sticky_posts',
+						// 'widget_categories',
+						// 'widget_text',
+						// 'widget_rss',
+						'timezone_string',
+						// 'page_for_posts',
+						// 'page_on_front',
+						'default_post_format',
+						'link_manager_enabled',
+						'finished_splitting_shared_terms',
+						'site_icon',
+						'medium_large_size_w',
+						'medium_large_size_h',
+						'initial_db_version',
+						'wp_user_roles',
+						'fresh_site',
+						// 'widget_search',
+						// 'widget_recent-posts',
+						// 'widget_recent-comments',
+						// 'widget_archives',
+						// 'widget_meta',
+						// 'sidebars_widgets',
+						// 'widget_pages',
+						// 'widget_calendar',
+						// 'widget_media_audio',
+						// 'widget_media_image',
+						// 'widget_media_video',
+						// 'widget_tag_cloud',
+						// 'widget_nav_menu',
+						// 'widget_custom_html',
+						// 'reign_options',
+						'cron',
+						'theme_mods_twentyseventeen',
+						// 'theme_mods_reign-theme',
+						'_transient_is_multi_author',
+						'_transient_twentyseventeen_categories',
+						'_worker_public_key',
+					);
+
+					// Store current active components before import
+					$preserve_components = bp_get_option( 'bp-active-components', array() );
+					
+					foreach ( $retrieved_data as $key => $value ) {
+						if ( ! in_array( $value['option_name'], $default_options_keys ) ) {
+							// Skip bp-active-components to preserve our enabled components
+							if ( $value['option_name'] === 'bp-active-components' ) {
+								continue;
+							}
+							
+							$option_value = maybe_unserialize( $value['option_value'] );
+							update_option( $value['option_name'], $option_value, $value['autoload'] );
+						}
+					}
+					
+					// Restore our enabled components after import
+					if ( ! empty( $preserve_components ) ) {
+						bp_update_option( 'bp-active-components', $preserve_components );
+					}
+					return;
 				}
 
-				wp_send_json_success( array( 'message' => 'Cleanup completed' ) );
+				global $wpdb;
+				
+				
+				// Start transaction for data integrity
+				$wpdb->query( 'START TRANSACTION' );
+				
+				try {
+					if ( ( $table_name == 'users' ) || ( $table_name == 'usermeta' ) ) {
+						$table_name = $wpdb->prefix . $table_name;
+						
+						// Verify table exists
+						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
+							throw new Exception( sprintf( __( 'Table %s does not exist', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name ) );
+						}
+						
+						$processed_count = 0;
+						$skipped_count = 0;
+						
+						foreach ( $retrieved_data as $key => $value ) {
+							if ( ( isset( $value['ID'] ) ) && ( $value['ID'] == get_current_user_id() ) ) {
+								$skipped_count++;
+								continue;
+							} elseif ( ( isset( $value['user_id'] ) ) && ( $value['user_id'] == get_current_user_id() ) ) {
+								$skipped_count++;
+								continue;
+							}
 
-			} catch ( Exception $e ) {
-				$this->debug_log( "Cleanup error: {$e->getMessage()}", 'error' );
-				wp_send_json_success( array( 'message' => 'Cleanup completed with warnings' ) );
+							/** user table strcuture mismatch fix */
+							if ( isset( $value['spam'] ) ) {
+								unset( $value['spam'] );
+							}
+							if ( isset( $value['deleted'] ) ) {
+								unset( $value['deleted'] );
+							}
+							/** user table strcuture mismatch fix */
+
+							// For usermeta, handle table prefix in capability keys
+							if ( $table_name == $wpdb->prefix . 'usermeta' && isset( $value['meta_key'] ) ) {
+								$current_prefix = $wpdb->prefix;
+								
+								// Common capability/role related meta keys that need prefix update
+								$prefix_keys = array( 'capabilities', 'user_level', 'dashboard_quick_press_last_post_id', 'user-settings', 'user-settings-time' );
+								
+								foreach ( $prefix_keys as $key ) {
+									// Detect source prefix by looking for the key pattern
+									if ( preg_match( '/^(.+_)' . preg_quote( $key, '/' ) . '$/', $value['meta_key'], $matches ) ) {
+										$source_prefix = $matches[1];
+										// Replace source prefix with current prefix
+										$value['meta_key'] = $current_prefix . $key;
+										break;
+									}
+								}
+								
+								// Also handle blog-specific capabilities for multisite
+								if ( preg_match( '/^(.+_)(\d+_capabilities)$/', $value['meta_key'], $matches ) ) {
+									$value['meta_key'] = $current_prefix . $matches[2];
+								}
+								
+								// If this is a last_activity key and it's empty/old, update it
+								if ( $value['meta_key'] === 'last_activity' && 
+								    ( empty( $value['meta_value'] ) || strtotime( $value['meta_value'] ) < strtotime( '-1 year' ) ) ) {
+									$value['meta_value'] = current_time( 'mysql', true );
+								}
+							}
+
+							$result = $wpdb->insert( $table_name, $value );
+							if ( $result === false ) {
+								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
+							}
+							
+							// After inserting user meta, if BuddyPress is active, ensure user is activated
+							if ( $table_name == $wpdb->prefix . 'usermeta' && 
+							     $value['meta_key'] === 'last_activity' && 
+							     function_exists( 'bp_update_user_last_activity' ) ) {
+								bp_update_user_last_activity( $value['user_id'] );
+							}
+							
+							$processed_count++;
+						}
+						
+						$wpdb->query( 'COMMIT' );
+						
+						// Log import results
+						error_log( sprintf( 
+							'WBCOM Demo Import - Table: %s, Processed: %d, Skipped: %d, Total: %d', 
+							$table_name, 
+							$processed_count, 
+							$skipped_count, 
+							count( $retrieved_data ) 
+						) );
+						
+						return;
+					} else {
+						$table_name = $wpdb->prefix . $table_name;
+
+						// Verify table exists
+						if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) != $table_name ) {
+							throw new Exception( sprintf( __( 'Table %s does not exist', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name ) );
+						}
+
+						$wbcom_theme_demo_import_data = get_option( 'wbcom_theme_demo_import_data', array() );
+						if ( ! isset( $wbcom_theme_demo_import_data[ $table_name . '_done' ] ) ) {
+							// Use proper prepared statement for safety
+							$sql = $wpdb->prepare( "DELETE FROM `%s`", $table_name );
+							// WordPress doesn't support table name placeholders, so we need to validate
+							$sql = "DELETE FROM `" . esc_sql( $table_name ) . "`";
+							$results = $wpdb->query( $sql );
+							
+							if ( $results === false ) {
+								throw new Exception( sprintf( __( 'Failed to clear table %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
+							}
+							
+							$wbcom_theme_demo_import_data[ $table_name . '_done' ] = 'yes';
+							update_option( 'wbcom_theme_demo_import_data', $wbcom_theme_demo_import_data );
+						}
+
+						$inserted_count = 0;
+						
+						// Detect if we're using BuddyBoss or BuddyPress (check once for all tables)
+						$is_buddyboss = $this->is_buddyboss_platform();
+						
+						// Check if this is a BuddyPress/BuddyBoss table and handle compatibility
+						if ( strpos( $table_name, 'bp_' ) !== false ) {
+							// Get table columns to check compatibility
+							$columns = $wpdb->get_col( "SHOW COLUMNS FROM `$table_name`" );
+							$columns = array_flip( $columns );
+							
+							if ( $is_buddyboss ) {
+								error_log( 'WBCOM Demo Import: Processing ' . $table_name . ' for BuddyBoss Platform' );
+							} else {
+								error_log( 'WBCOM Demo Import: Processing ' . $table_name . ' for standard BuddyPress' );
+							}
+						}
+						
+						foreach ( $retrieved_data as $key => $value ) {
+							// For BuddyPress tables, remove fields that don't exist
+							if ( strpos( $table_name, 'bp_' ) !== false && isset( $columns ) ) {
+								foreach ( $value as $field => $data ) {
+									if ( ! isset( $columns[ $field ] ) ) {
+										// Remove fields that don't exist in current installation
+										unset( $value[ $field ] );
+									}
+								}
+							}
+							
+							$result = $wpdb->insert( $table_name, $value );
+							if ( $result === false ) {
+								throw new Exception( sprintf( __( 'Failed to insert data into %s: %s', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ), $table_name, $wpdb->last_error ) );
+							}
+							$inserted_count++;
+						}
+					}
+					
+					$wpdb->query( 'COMMIT' );
+					
+				} catch ( Exception $e ) {
+					$wpdb->query( 'ROLLBACK' );
+					wp_die( $e->getMessage() );
+				}
+			}
+		}
+
+		public function clone_uploads_folder( $url_to_request = '' ) {
+			$parentFolderName = explode( '/', $url_to_request );
+			$parentFolderName = array_filter( $parentFolderName );
+			$parentFolderName = array_values( $parentFolderName );
+			$parentFolderName = $parentFolderName[ count( $parentFolderName ) - 2 ];
+
+			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+			$retrieved_data = array();
+			if ( ! is_wp_error( $response ) ) {
+				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+					$response = isset( $response['body'] ) ? $response['body'] : '';
+					if ( ! empty( $response ) ) {
+						$retrieved_data = $response;
+					}
+				}
+			}
+
+			if ( ! empty( $retrieved_data ) ) {
+				$upload     = wp_upload_dir();
+				$upload_dir = $upload['basedir'] . '/' . 'wbcom-theme-demo.zip';
+
+				$file = fopen( $upload_dir, 'w+' );
+				fputs( $file, $retrieved_data );
+				fclose( $file );
+
+				$zip = new ZipArchive();
+				$res = $zip->open( $upload_dir );
+				if ( $res === true ) {
+					$zip->extractTo( $upload['basedir'] . '/' . $parentFolderName . '/' );
+					$zip->close();
+				}
+
+				unlink( $upload_dir );
 			}
 		}
 
 		/**
-		 * Plugin management.
+		 * Finalize demo import - perform search and replace
 		 */
-		public function manage_plugin_installation() {
-			try {
-				$plugin_action = $this->get_param( 'plugin_action' );
-				$plugin_slug = $this->get_param( 'plugin_slug' );
-				$demo = $this->get_param( 'demo' );
-
-				if ( ! $plugin_action || ! $plugin_slug || ! $demo ) {
-					wp_send_json_error( array( 'message' => 'Missing required parameters' ) );
-				}
-
-				$plugins_manager = $this->get_plugins_manager();
-				if ( ! $plugins_manager ) {
-					wp_send_json_error( array( 'message' => 'Plugins manager not available' ) );
-				}
-
-				$result = $this->handle_plugin_action( $plugins_manager, $plugin_action, $plugin_slug );
-				
-				if ( is_wp_error( $result ) ) {
-					wp_send_json_error( array( 'message' => $result->get_error_message() ) );
-				}
-
-				wp_send_json_success( $result );
-
-			} catch ( Exception $e ) {
-				wp_send_json_error( array( 'message' => 'Plugin operation failed' ) );
+		public function wbcom_demo_import_finalize() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 			}
-		}
-
-		/**
-		 * Legacy compatibility methods.
-		 */
-		public function legacy_get_theme_demo_data() {
-			// Redirect to new batch system
-			wp_send_json_error( array( 'message' => 'Please use the new batch import system' ) );
-		}
-
-		public function legacy_read_theme_demo_package_file() {
-			// Handle legacy manifest requests
-			$this->get_demo_manifest();
-		}
-
-		// HELPER METHODS
-
-		/**
-		 * Validate request and permissions.
-		 */
-		private function validate_request() {
+			
+			// Capability check
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( array( 'message' => 'Insufficient permissions' ) );
-				return false;
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 			}
-
-			$nonce = $this->get_param( 'nonce' );
-			if ( $nonce && ! wp_verify_nonce( $nonce, 'reign_demo_installer_ajax' ) ) {
-				wp_send_json_error( array( 'message' => 'Security check failed' ) );
-				return false;
-			}
-
-			return true;
-		}
-
-		/**
-		 * Get sanitized parameter.
-		 */
-		private function get_param( $key, $type = 'string', $default = '' ) {
-			$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : $default;
 			
-			switch ( $type ) {
-				case 'url':
-					return esc_url_raw( $value );
-				case 'filename':
-					return sanitize_file_name( $value );
-				case 'int':
-					return intval( $value );
-				default:
-					return sanitize_text_field( $value );
+			// Get the source URL from the demo server
+			$source_url = isset( $_POST['target_url'] ) ? esc_url_raw( $_POST['target_url'] ) : '';
+			if ( empty( $source_url ) ) {
+				wp_send_json_error( array( 'message' => __( 'Source URL not provided', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 			}
+			
+			// Parse the source URL
+			$source_url_parsed = parse_url( $source_url );
+			
+			// Build the full source URL including path
+			$source_base_url = $source_url_parsed['scheme'] . '://' . $source_url_parsed['host'];
+			if ( ! empty( $source_url_parsed['path'] ) && $source_url_parsed['path'] !== '/' ) {
+				$source_base_url .= rtrim( $source_url_parsed['path'], '/' );
+			}
+			
+			// Get current site URL (without trailing slash)
+			$current_url = rtrim( home_url(), '/' );
+			
+			// Perform search-replace on all tables
+			$this->search_replace_all_tables( $source_base_url, $current_url );
+			
+			// Activate BuddyPress users
+			$this->activate_buddypress_users();
+			
+			// Clear caches
+			wp_cache_flush();
+			
+			// Regenerate permalinks
+			flush_rewrite_rules();
+			
+			// Clear Elementor cache if active
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			
+			wp_send_json_success( array( 
+				'message' => __( 'Demo import finalized successfully', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) 
+			) );
 		}
-
+		
 		/**
-		 * Download file with retry logic.
+		 * Search and replace in all database tables
 		 */
-		private function download_with_retry( $url, $max_attempts = 3 ) {
-			for ( $attempt = 1; $attempt <= $max_attempts; $attempt++ ) {
-				$response = wp_remote_get( $url, array(
-					'timeout' => 120,
-					'sslverify' => false,
-					'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-					'headers' => array(
-						'Accept' => 'application/zip,*/*',
-						'Cache-Control' => 'no-cache',
-					),
-					'redirection' => 10,
-				) );
-
-				if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
-					$body = wp_remote_retrieve_body( $response );
-					if ( ! empty( $body ) ) {
-						return $body;
+		private function search_replace_all_tables( $search, $replace ) {
+			global $wpdb;
+			
+			// Get all tables
+			$tables = $wpdb->get_col( "SHOW TABLES" );
+			
+			foreach ( $tables as $table ) {
+				// Skip non-WordPress tables
+				if ( strpos( $table, $wpdb->prefix ) !== 0 ) {
+					continue;
+				}
+				
+				// Get all columns
+				$columns = $wpdb->get_results( "SHOW COLUMNS FROM `$table`" );
+				if ( empty( $columns ) ) {
+					continue;
+				}
+				
+				$text_columns = array();
+				$primary_key = '';
+				foreach ( $columns as $column ) {
+					// Only process text-based columns
+					if ( preg_match( '/text|varchar|char|blob/i', $column->Type ) ) {
+						$text_columns[] = $column->Field;
+					}
+					// Find primary key
+					if ( $column->Key === 'PRI' ) {
+						$primary_key = $column->Field;
 					}
 				}
-
-				if ( $attempt < $max_attempts ) {
-					$this->debug_log( "Download attempt {$attempt} failed for {$url}, retrying..." );
-					sleep( 2 );
+				
+				if ( empty( $text_columns ) ) {
+					continue;
+				}
+				
+				// If no primary key, try to find a unique identifier
+				if ( empty( $primary_key ) ) {
+					// Look for common ID fields
+					foreach ( $columns as $column ) {
+						if ( in_array( strtolower( $column->Field ), array( 'id', 'ID', 'option_id', 'meta_id', 'comment_id', 'term_id' ) ) ) {
+							$primary_key = $column->Field;
+							break;
+						}
+					}
+					// If still no key found, skip this table
+					if ( empty( $primary_key ) ) {
+						continue;
+					}
+				}
+				
+				// Process each row individually to handle serialized data
+				foreach ( $text_columns as $column ) {
+					// Get all rows that contain the search string
+					$search_variants = array(
+						str_replace( 'https://', 'http://', $search ),
+						str_replace( 'http://', 'https://', $search )
+					);
+					
+					foreach ( $search_variants as $search_variant ) {
+						$rows = $wpdb->get_results( $wpdb->prepare(
+							"SELECT `$primary_key`, `$column` FROM `$table` WHERE `$column` LIKE %s",
+							'%' . $wpdb->esc_like( $search_variant ) . '%'
+						) );
+						
+						foreach ( $rows as $row ) {
+							$data = $row->$column;
+							$primary_value = $row->$primary_key;
+							
+							// Process the data
+							$updated_data = $this->recursive_unserialize_replace( $search_variant, $replace, $data );
+							
+							// Only update if data changed
+							if ( $updated_data !== $data ) {
+								$wpdb->update(
+									$table,
+									array( $column => $updated_data ),
+									array( $primary_key => $primary_value )
+								);
+							}
+						}
+					}
 				}
 			}
-
-			return false;
 		}
-
+		
 		/**
-		 * Prepare processing environment.
+		 * Recursively unserialize and replace data
 		 */
-		private function prepare_processing_environment() {
-			// More aggressive resource settings
-			@ini_set( 'memory_limit', '1024M' );
-			@ini_set( 'max_execution_time', 0 );
-			@ini_set( 'max_input_time', 3600 );
-			@ini_set( 'post_max_size', '256M' );
-			@ini_set( 'upload_max_filesize', '256M' );
-			
-			// Disable output buffering
-			if ( ob_get_level() ) {
-				ob_end_clean();
+		private function recursive_unserialize_replace( $search, $replace, $data ) {
+			// Check if it's serialized data
+			if ( is_serialized( $data ) ) {
+				$unserialized = @unserialize( $data );
+				if ( $unserialized !== false ) {
+					$unserialized = $this->recursive_replace( $search, $replace, $unserialized );
+					return serialize( $unserialized );
+				}
 			}
 			
-			// Prevent WordPress from timing out
-			add_filter( 'http_request_timeout', function() { return 300; } );
-			
-			$this->backup_admin_user();
-		}
-
-		/**
-		 * Backup current admin user.
-		 */
-		private function backup_admin_user() {
-			if ( $this->admin_backup || ! is_user_logged_in() ) return;
-
-			$user = wp_get_current_user();
-			$this->admin_backup = array(
-				'ID' => $user->ID,
-				'user_login' => $user->user_login,
-				'user_email' => $user->user_email,
-				'user_pass' => $user->user_pass,
-				'capabilities' => $user->allcaps,
-				'meta' => get_user_meta( $user->ID )
-			);
-		}
-
-		/**
-		 * Restore admin user after import.
-		 */
-		private function restore_admin_user() {
-			if ( ! $this->admin_backup ) return;
-
-			$user = new WP_User( $this->admin_backup['ID'] );
-			$user->set_role( 'administrator' );
-
-			if ( is_multisite() ) {
-				grant_super_admin( $this->admin_backup['ID'] );
-			}
-
-			wp_set_auth_cookie( $this->admin_backup['ID'], true );
-		}
-
-		/**
-		 * Replace URLs in data.
-		 */
-		private function replace_urls( $data ) {
+			// If not serialized, do simple replace
 			if ( is_string( $data ) ) {
-				return str_replace( '{{*home_url}}', home_url(), $data );
+				return str_replace( $search, $replace, $data );
 			}
 			
-			if ( is_array( $data ) ) {
-				array_walk_recursive( $data, function( &$value ) {
-					if ( is_string( $value ) ) {
-						$value = str_replace( '{{*home_url}}', home_url(), $value );
-					}
-				});
+			return $data;
+		}
+		
+		/**
+		 * Recursively replace strings in arrays/objects
+		 */
+		private function recursive_replace( $search, $replace, $data ) {
+			if ( is_string( $data ) ) {
+				return str_replace( $search, $replace, $data );
+			} elseif ( is_array( $data ) ) {
+				foreach ( $data as $key => $value ) {
+					$data[ $key ] = $this->recursive_replace( $search, $replace, $value );
+				}
+			} elseif ( is_object( $data ) ) {
+				foreach ( $data as $key => $value ) {
+					$data->$key = $this->recursive_replace( $search, $replace, $value );
+				}
 			}
 			
 			return $data;
 		}
 
 		/**
-		 * Clean user row data.
+		 * Activate BuddyPress users by setting last activity
 		 */
-		private function clean_user_row( $row ) {
-			$invalid_fields = array( 'spam', 'deleted' );
-			foreach ( $invalid_fields as $field ) {
-				unset( $row[ $field ] );
+		private function activate_buddypress_users() {
+			// Check if BuddyPress/BuddyBoss is active
+			if ( ! function_exists( 'bp_is_active' ) ) {
+				return;
 			}
-			return $row;
-		}
-
-		/**
-		 * Check if table exists.
-		 */
-		private function table_exists( $table_name ) {
+			
+			// Log which platform we're using
+			if ( defined( 'BP_PLATFORM_VERSION' ) ) {
+				error_log( 'WBCOM Demo Import: Activating users for BuddyBoss Platform v' . BP_PLATFORM_VERSION );
+			} else {
+				error_log( 'WBCOM Demo Import: Activating users for BuddyPress' );
+			}
+			
 			global $wpdb;
-			$result = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) );
-			return $result === $table_name;
-		}
-
-		/**
-		 * Validate demo URL.
-		 */
-		private function is_valid_demo_url( $url ) {
-			$allowed_domains = array( 'wbcomdesigns.com', 'installer.wbcomdesigns.com' );
-			$host = parse_url( $url, PHP_URL_HOST );
 			
-			foreach ( $allowed_domains as $domain ) {
-				if ( $host === $domain || str_ends_with( $host, '.' . $domain ) ) {
-					return true;
+			// Get users without last_activity meta
+			$users_without_activity = $wpdb->get_col( "
+				SELECT u.ID 
+				FROM {$wpdb->users} u
+				LEFT JOIN {$wpdb->usermeta} um ON u.ID = um.user_id AND um.meta_key = 'last_activity'
+				WHERE um.umeta_id IS NULL
+				AND u.ID != " . get_current_user_id()
+			);
+			
+			// Set last activity for users who don't have it
+			foreach ( $users_without_activity as $user_id ) {
+				bp_update_user_last_activity( $user_id );
+			}
+			
+			// Ensure all users are properly indexed by BuddyPress
+			$all_users = get_users( array( 'fields' => 'ID' ) );
+			foreach ( $all_users as $user_id ) {
+				// Also ensure user has member_type if needed
+				if ( function_exists( 'bp_set_member_type' ) ) {
+					$member_types = bp_get_member_type( $user_id, false );
+					if ( empty( $member_types ) ) {
+						// Set default member type if none exists
+						bp_set_member_type( $user_id, '' );
+					}
 				}
 			}
 			
-			return false;
-		}
-
-		/**
-		 * Get plugins manager.
-		 */
-		private function get_plugins_manager() {
-			return class_exists( 'Reign_Demo_Installer_Plugins_Manager' ) ? 
-				Reign_Demo_Installer_Plugins_Manager::instance() : null;
-		}
-
-		/**
-		 * Handle plugin action.
-		 */
-		private function handle_plugin_action( $manager, $action, $slug ) {
-			switch ( $action ) {
-				case 'install_plugin':
-					return $manager->do_plugin_install( $slug, false );
-				case 'enable_plugin':
-					return $manager->do_plugin_activate( $slug, false );
-				default:
-					return new WP_Error( 'invalid_action', 'Invalid plugin action' );
+			// Handle signups table if it exists
+			global $wpdb;
+			$signups_table = $wpdb->prefix . 'signups';
+			if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $signups_table ) ) == $signups_table ) {
+				// Activate any pending signups
+				$wpdb->update(
+					$signups_table,
+					array( 'active' => 1, 'activated' => current_time( 'mysql', true ) ),
+					array( 'active' => 0 )
+				);
 			}
 		}
 
 		/**
-		 * Delete directory recursively.
+		 * Helper function to detect if BuddyBoss Platform is active
 		 */
-		private function delete_directory_recursive( $dir ) {
-			if ( ! is_dir( $dir ) ) return;
-
-			$files = array_diff( scandir( $dir ), array( '.', '..' ) );
-			foreach ( $files as $file ) {
-				$path = $dir . '/' . $file;
-				is_dir( $path ) ? $this->delete_directory_recursive( $path ) : unlink( $path );
-			}
-			rmdir( $dir );
+		private function is_buddyboss_platform() {
+			// Check for BuddyBoss-specific constants or classes
+			return defined('BP_PLATFORM_VERSION') || class_exists('BuddyBoss_Platform');
 		}
 
 		/**
-		 * Debug logging - only when WP_DEBUG is enabled.
+		 * Enable all BuddyPress/BuddyBoss components
 		 */
-		private function debug_log( $message, $level = 'info' ) {
-			// Only log when debugging is enabled
-			if ( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-				if ( $this->logger ) {
-					$this->logger->log( $message, $level );
+		public function wbcom_enable_buddypress_components() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Check if BuddyPress or BuddyBoss is active
+			if ( ! function_exists( 'buddypress' ) ) {
+				wp_send_json_error( array( 'message' => __( 'BuddyPress or BuddyBoss Platform is not active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+			}
+			
+			// Enable all components
+			if ( class_exists( 'WBCOM_BuddyPress_Components_Enabler' ) ) {
+				$enabled_components = WBCOM_BuddyPress_Components_Enabler::enable_all_components();
+				
+				if ( $enabled_components ) {
+					wp_send_json_success( array( 
+						'message' => __( 'All components enabled successfully', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
+						'components' => $enabled_components
+					) );
 				} else {
-					error_log( "[Reign Demo Installer] [{$level}] {$message}" );
+					wp_send_json_error( array( 'message' => __( 'Failed to enable components', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 				}
+			} else {
+				wp_send_json_error( array( 'message' => __( 'Component enabler class not found', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
 			}
 		}
+
+		public function wbcom_get_demo_plugins_data() {
+			// Security check
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
+				wp_send_json_error( __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			// Capability check
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'You do not have permission to perform this action', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+			}
+			
+			if ( isset( $_POST['plugins_key'] ) ) {
+				$plugins_key = sanitize_text_field( $_POST['plugins_key'] );
+				
+				// Try local file first
+				$local_path = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
+				if ( file_exists( $local_path ) ) {
+					$plugins_data = file_get_contents( $local_path );
+					$plugins_data = json_decode( $plugins_data, true );
+					
+					if ( $plugins_data ) {
+						wp_send_json_success( $plugins_data );
+					}
+				}
+				
+				// Fallback to remote URL
+				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_key . '/plugins.json';
+				$response = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 30 ) );
+				
+				if ( ! is_wp_error( $response ) ) {
+					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+						$response_body = isset( $response['body'] ) ? $response['body'] : '';
+						if ( ! empty( $response_body ) ) {
+							$plugins_data = json_decode( $response_body, true );
+							if ( $plugins_data ) {
+								wp_send_json_success( $plugins_data );
+							}
+						}
+					}
+				}
+			}
+			
+			wp_send_json_error( __( 'Failed to fetch plugin data', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+		}
+
 	}
 
 endif;
 
 /**
- * Initialize the AJAX handler.
+ * Main instance of WBCOM_Demo_Importer_Ajax_Handler.
+ *
+ * @since  1.0.0
+ * @return WBCOM_Demo_Importer_Ajax_Handler
  */
-Reign_Demo_Installer_Ajax_Handler::instance();
+WBCOM_Demo_Importer_Ajax_Handler::instance();

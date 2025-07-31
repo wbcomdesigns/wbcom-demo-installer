@@ -1,17 +1,17 @@
 [
-    {   
-        "plugin_thumb": "wbcom-logo.jpg",
+    {
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
         "name": "Wbcom Essential",
         "slug": "wbcom-essential",
         "required": true,
-        "version": "3.9.3",
+        "version": "4.0.0",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/3.9.4/wbcom-essential.zip",
+        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
         "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
     },
     {
-        "plugin_thumb": "elementor-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
         "name": "Elementor",
         "slug": "elementor",
         "required": true,
@@ -22,18 +22,18 @@
         "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
     },
     {
-        "plugin_thumb": "bb-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bb-logo.jpg",
         "name": "BuddyBoss Platform",
         "slug": "buddyboss-platform",
         "required": false,
-        "version": "2.7.70",
+        "version": "",
         "force_activation": false,
         "force_deactivation": false,
-        "external_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.8.50/buddyboss-platform-plugin.zip",
+        "external_url": "https://buddyboss.com/free-downloads/buddyboss-platform.php",
         "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
     },
     {
-        "plugin_thumb": "woocommerce-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
         "name": "WooCommerce",
         "slug": "woocommerce",
         "required": true,
@@ -43,7 +43,7 @@
         "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
     },
     {
-        "plugin_thumb": "wcfm-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wcfm-logo.jpg",
         "name": "WCFM - WooCommerce Multivendor Marketplace",
         "slug": "wc-multivendor-marketplace",
         "required": true,
@@ -54,7 +54,7 @@
         "description": "Create your own multivendor marketplace with WordPress powered by WooCommerce. Build your own marketplace just like Amazon, Etsy, eBay or shopify, envato quickly."
     },
     {
-        "plugin_thumb": "wcfm-frontend-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wcfm-frontend-logo.jpg",
         "name": "WCFM - WooCommerce Frontend Manager",
         "slug": "wc-frontend-manager",
         "required": true,
@@ -65,7 +65,7 @@
         "description": "WCFM is the smartest and most featured frontend vendor store/shop manager on WordPress, powered by WooCommerce."
     },
     {
-        "plugin_thumb": "wbcom-logo.jpg",
+        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
         "is_paid": "yes",
         "name": "Reign WCFM Addon",
         "slug": "reign-wcfm-addon",
