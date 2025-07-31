@@ -3,7 +3,7 @@ Contributors: wbcomdesigns
 Donate link: https://wbcomdesigns.com/
 Tags: reign, theme, demo, installer, buddyboss, community, import
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.8.2
 Requires PHP: 7.4
 Stable tag: 3.0.0
 License: GPLv2 or later
