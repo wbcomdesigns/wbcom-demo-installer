@@ -3,8 +3,8 @@ Contributors: wbcomdesigns
 Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
-Tested up to: 6.7.2
-Stable tag: 2.9.7
+Tested up to: 6.8.2
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,17 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
+
+= 3.0.0 =
+* Complete rewrite for production readiness
+* Enhanced security measures and input validation
+* Improved error handling and logging
+* Better user interface and experience
+* Renamed to be Reign-specific
+* Added comprehensive documentation
+* Performance optimizations
+* Compatibility with latest WordPress and PHP versions
+
 = 2.9.7 =
 * Fix: Made bb platform requirement optional.
 * Fix: Managed reign addons requirement to be optional.
