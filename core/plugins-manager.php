@@ -472,7 +472,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$skin     = new Automatic_Upgrader_Skin();
 		$upgrader = new Plugin_Upgrader( $skin, array( 'clear_destination' => true ) );
 
+		add_filter( 'http_request_args', array( $this, 'increase_redirect_limit' ), 10, 2 );
 		$result = $upgrader->install( $url );
+		remove_filter( 'http_request_args', array( $this, 'increase_redirect_limit' ), 10 );
 
 		// There is a bug in WP where the install method can return null in case the folder already exists
 		// see https://core.trac.wordpress.org/ticket/27365
@@ -707,6 +709,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	 */
 	public function get_plugins( $plugin_folder = '' ) {
 		return $this->tgmpa->get_plugins( $plugin_folder );
+	}
+
+	public function increase_redirect_limit( $args, $url ) {
+		if ( isset( $args['redirection'] ) && $args['redirection'] < 10 ) {
+			$args['redirection'] = 10;
+		}
+		return $args;
 	}
 
 	public function get_required_plugins() {
