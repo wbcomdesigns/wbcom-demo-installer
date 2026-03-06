@@ -46,18 +46,6 @@
     "description": "Reign WP Job Manager Addon provides seemless integration of WP Job Manager with Reign theme."
   },
   {
-    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-logo.jpg",
-    "is_paid": "yes",
-    "name": "WP Job Manager - Resume Manager",
-    "slug": "wp-job-manager-resumes",
-    "required": false,
-    "version": "",
-    "force_activation": false,
-    "force_deactivation": false,
-    "external_url": "https://wpjobmanager.com/add-ons/resume-manager/",
-    "description": "Resume Manager is a plugin built on top of WP Job Manager which adds a resume submission form to your site and resume listings, all manageable from WordPress admin."
-  },
-  {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-companies-logo.jpg",
     "name": "WP Job Manager \u2013 Company Profiles",
     "slug": "wp-job-manager-companies",
@@ -78,17 +66,6 @@
     "force_deactivation": false,
     "external_url": "",
     "description": "Adds a \u201cJob Region\u201d taxonomy so the site administrator can control a set of predefined regions listings can be assigned to."
-  },
-  {
-    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-color-logo.jpg",
-    "name": "Job Colors for WP Job Manager",
-    "slug": "wp-job-manager-colors",
-    "required": false,
-    "version": "",
-    "force_activation": false,
-    "force_deactivation": false,
-    "external_url": "",
-    "description": "Select the color of each existing job type in the Job Listings\u2019 settings. Can set the color to be the background color, or text color."
   },
   {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",

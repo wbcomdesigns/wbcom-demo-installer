@@ -68,17 +68,6 @@
     "description": "Adds a \u201cJob Region\u201d taxonomy so the site administrator can control a set of predefined regions listings can be assigned to."
   },
   {
-    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-color-logo.jpg",
-    "name": "Job Colors for WP Job Manager",
-    "slug": "wp-job-manager-colors",
-    "required": false,
-    "version": "",
-    "force_activation": false,
-    "force_deactivation": false,
-    "external_url": "",
-    "description": "Select the color of each existing job type in the Job Listings\u2019 settings. Can set the color to be the background color, or text color."
-  },
-  {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bb-logo.jpg",
     "name": "BuddyBoss Platform",
     "slug": "buddyboss-platform",
