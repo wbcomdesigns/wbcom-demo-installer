@@ -1,70 +1,71 @@
 [
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
-        "name": "Elementor",
-        "slug": "elementor",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
-        "is_paid": "yes",
-        "name": "Elementor Pro",
-        "slug": "elementor-pro",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://elementor.com/pricing-plugin/",
-        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "name": "Wbcom Essential",
-        "slug": "wbcom-essential",
-        "required": true,
-        "version": "4.0.0",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
-        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/geo-directory-logo.jpg",
-        "name": "GeoDirectory \u2013 Business Directory Plugin",
-        "slug": "geodirectory",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "Turn any WordPress theme into a lightning-fast global business directory."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "is_paid": "yes",
-        "name": "Reign Geodirectory Addon",
-        "slug": "reign-geodirectory",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://wbcomdesigns.com/downloads/reign-geodirectory-addon/",
-        "description": "Reign Geodirectory Addon works as a bridge for GeoDirectory and BuddyPress plugins."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
-        "name": "BuddyPress",
-        "slug": "buddypress",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
-    }
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
+    "name": "Elementor",
+    "slug": "elementor",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
+    "is_paid": "yes",
+    "name": "Elementor Pro",
+    "slug": "elementor-pro",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://elementor.com/pricing-plugin/",
+    "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "name": "Wbcom Essential",
+    "slug": "wbcom-essential",
+    "required": true,
+    "version": "4.2.0",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
+    "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent.",
+    "download_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.0/wbcom-essential-4.2.0.zip"
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/geo-directory-logo.jpg",
+    "name": "GeoDirectory \u2013 Business Directory Plugin",
+    "slug": "geodirectory",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "Turn any WordPress theme into a lightning-fast global business directory."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "is_paid": "yes",
+    "name": "Reign Geodirectory Addon",
+    "slug": "reign-geodirectory",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://wbcomdesigns.com/downloads/reign-geodirectory-addon/",
+    "description": "Reign Geodirectory Addon works as a bridge for GeoDirectory and BuddyPress plugins."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
+    "name": "BuddyPress",
+    "slug": "buddypress",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+  }
 ]
