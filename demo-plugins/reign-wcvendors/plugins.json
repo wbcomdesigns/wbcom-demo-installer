@@ -15,12 +15,12 @@
     "name": "Wbcom Essential",
     "slug": "wbcom-essential",
     "required": true,
-    "version": "4.2.0",
+    "version": "4.2.1",
     "force_activation": false,
     "force_deactivation": false,
-    "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.0/wbcom-essential-4.2.0.zip",
+    "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip",
     "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent.",
-    "download_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.0/wbcom-essential-4.2.0.zip"
+    "download_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip"
   },
   {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
@@ -52,7 +52,7 @@
     "version": "",
     "force_activation": false,
     "force_deactivation": false,
-    "external_url": "https://wbcomdesigns.com/downloads/reign-wcvendors-addon/",
+    "external_url": "https://wbcomdesigns.com/downloads/reign-wc-vendors-addon/",
     "description": "Reign WC vendors Addon provides seemless integration of WC vendor with Reign theme."
   },
   {
