@@ -45,17 +45,6 @@
     "description": "Award your students with a certificate of completion for their completed courses."
   },
   {
-    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/sensei-media-attachments-logo.jpg",
-    "name": "Sensei LMS Media Attachments",
-    "slug": "sensei-media-attachments",
-    "required": false,
-    "version": "",
-    "force_activation": false,
-    "force_deactivation": false,
-    "external_url": "",
-    "description": "Sensei LMS Media Attachments enables you to attach media files to your courses and lessons in Sensei LMS."
-  },
-  {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
     "is_paid": "yes",
     "name": "Reign Sensei Addon",

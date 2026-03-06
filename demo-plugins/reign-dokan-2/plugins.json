@@ -67,18 +67,6 @@
     "description": "Reign Dokan Addon provides seemless integration of Dokan with Reign theme."
   },
   {
-    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/dokan-logo.jpg",
-    "is_paid": "yes",
-    "name": "Dokan Pro - Business",
-    "slug": "dokan-pro",
-    "required": false,
-    "version": "",
-    "force_activation": false,
-    "force_deactivation": false,
-    "external_url": "https://wedevs.com/dokan/",
-    "description": "An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and weDevs."
-  },
-  {
     "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/mega-menu-logo.jpg",
     "name": "Max Mega Menu",
     "slug": "megamenu",
