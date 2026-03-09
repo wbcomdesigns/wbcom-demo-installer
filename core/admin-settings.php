@@ -587,21 +587,26 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$table = $wpdb->prefix . 'geodir_' . $post_type . '_detail';
 
 				// Check if table exists.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
 					continue;
 				}
 
 				// Only populate if the detail table is empty.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$detail_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}`" );
 				if ( $detail_count > 0 ) {
 					continue;
 				}
 
 				// Get all published posts for this post type.
-				$posts = $wpdb->get_results( $wpdb->prepare(
-					"SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ('publish', 'draft', 'pending')",
-					$post_type
-				) );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$posts = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ('publish', 'draft', 'pending')",
+						$post_type
+					)
+				);
 
 				if ( empty( $posts ) ) {
 					continue;
@@ -611,29 +616,36 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 				foreach ( $posts as $post ) {
 					// Get categories from term relationships.
-					$term_ids = $wpdb->get_col( $wpdb->prepare(
-						"SELECT t.term_id FROM {$wpdb->term_relationships} tr
-						INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
-						INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
-						WHERE tr.object_id = %d AND tt.taxonomy = %s",
-						$post->ID,
-						$taxonomy
-					) );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+					$term_ids = $wpdb->get_col(
+						$wpdb->prepare(
+							"SELECT t.term_id FROM {$wpdb->term_relationships} tr
+							INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+							INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+							WHERE tr.object_id = %d AND tt.taxonomy = %s",
+							$post->ID,
+							$taxonomy
+						)
+					);
 
 					// Get tags.
-					$tag_names = $wpdb->get_col( $wpdb->prepare(
-						"SELECT t.name FROM {$wpdb->term_relationships} tr
-						INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
-						INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
-						WHERE tr.object_id = %d AND tt.taxonomy = %s",
-						$post->ID,
-						$post_type . '_tags'
-					) );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+					$tag_names = $wpdb->get_col(
+						$wpdb->prepare(
+							"SELECT t.name FROM {$wpdb->term_relationships} tr
+							INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+							INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+							WHERE tr.object_id = %d AND tt.taxonomy = %s",
+							$post->ID,
+							$post_type . '_tags'
+						)
+					);
 
 					$post_category    = ! empty( $term_ids ) ? ',' . implode( ',', $term_ids ) . ',' : '';
-					$default_category = ! empty( $term_ids ) ? $term_ids[0] : 0;
+					$default_category = ! empty( $term_ids ) ? (int) $term_ids[0] : 0;
 					$post_tags        = ! empty( $tag_names ) ? implode( ',', $tag_names ) : '';
 
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 					$wpdb->insert(
 						$table,
 						array(
@@ -647,8 +659,6 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						)
 					);
 				}
-
-				error_log( sprintf( 'WBCOM Demo Import: Populated %s with %d rows from wp_posts.', $table, count( $posts ) ) );
 			}
 		}
 
