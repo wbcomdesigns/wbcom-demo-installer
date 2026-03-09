@@ -4,7 +4,7 @@ Donate link: http://www.wbcomdesigns.com
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 6.8.2
-Stable tag: 3.1.1
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,15 +29,13 @@ It will not work standalone and will need the Wbcom Demo Exporter plugin at the 
 1. This screenshot description corresponds to screenshot-1.
 
 == Changelog ==
-= 3.1.1 =
-* Fix: GeoDirectory listings not showing after demo import
-* Fix: Bypass GeoDirectory option keys during options import to preserve local setup
-* Fix: Auto-populate geodir detail table from wp_posts when empty after import
-
 = 3.1.0 =
 * Fix: PeepSo plugin install and activate during demo installation
 * Fix: Remove closed and paid 3rd party plugin recommendations
 * Fix: Plugin download URL priority and sanitize GET input
+* Fix: GeoDirectory listings not showing after demo import
+* Fix: Bypass GeoDirectory option keys during options import to preserve local setup
+* Fix: Auto-populate geodir detail table from wp_posts when empty after import
 
 = 3.0.0 =
 * Complete rewrite for production readiness
