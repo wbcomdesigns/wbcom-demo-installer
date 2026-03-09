@@ -515,6 +515,11 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						'_transient_is_multi_author',
 						'_transient_twentyseventeen_categories',
 						'_worker_public_key',
+						// GeoDirectory - preserve local setup
+						'geodir_settings',
+						'geodirectory_db_version',
+						'geodirectory_version',
+						'geodirectory_admin_notices',
 					);
 
 					foreach ( $retrieved_data as $key => $value ) {

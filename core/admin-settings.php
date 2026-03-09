@@ -163,6 +163,10 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
 					geodir_tool_restore_cpt_from_taxonomies();
 				}
+				// Populate GeoDirectory detail table from wp_posts if empty after import.
+				if ( class_exists( 'GeoDirectory' ) ) {
+					$this->populate_geodir_detail_table();
+				}
 				return;
 			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'demo_import' ) ) {
 
@@ -565,6 +569,87 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			}
 			
 			return $categories;
+		}
+
+		/**
+		 * Populate GeoDirectory detail table from wp_posts after demo import.
+		 *
+		 * The demo exporter may not export the geodir detail table, leaving it empty
+		 * even though gd_place posts exist in wp_posts. This rebuilds the detail table
+		 * with basic data from wp_posts and term relationships.
+		 */
+		public function populate_geodir_detail_table() {
+			global $wpdb;
+
+			$post_types = function_exists( 'geodir_get_posttypes' ) ? geodir_get_posttypes() : array( 'gd_place' );
+
+			foreach ( $post_types as $post_type ) {
+				$table = $wpdb->prefix . 'geodir_' . $post_type . '_detail';
+
+				// Check if table exists.
+				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
+					continue;
+				}
+
+				// Only populate if the detail table is empty.
+				$detail_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}`" );
+				if ( $detail_count > 0 ) {
+					continue;
+				}
+
+				// Get all published posts for this post type.
+				$posts = $wpdb->get_results( $wpdb->prepare(
+					"SELECT ID, post_title, post_status FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ('publish', 'draft', 'pending')",
+					$post_type
+				) );
+
+				if ( empty( $posts ) ) {
+					continue;
+				}
+
+				$taxonomy = $post_type . 'category';
+
+				foreach ( $posts as $post ) {
+					// Get categories from term relationships.
+					$term_ids = $wpdb->get_col( $wpdb->prepare(
+						"SELECT t.term_id FROM {$wpdb->term_relationships} tr
+						INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+						INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+						WHERE tr.object_id = %d AND tt.taxonomy = %s",
+						$post->ID,
+						$taxonomy
+					) );
+
+					// Get tags.
+					$tag_names = $wpdb->get_col( $wpdb->prepare(
+						"SELECT t.name FROM {$wpdb->term_relationships} tr
+						INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+						INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+						WHERE tr.object_id = %d AND tt.taxonomy = %s",
+						$post->ID,
+						$post_type . '_tags'
+					) );
+
+					$post_category    = ! empty( $term_ids ) ? ',' . implode( ',', $term_ids ) . ',' : '';
+					$default_category = ! empty( $term_ids ) ? $term_ids[0] : 0;
+					$post_tags        = ! empty( $tag_names ) ? implode( ',', $tag_names ) : '';
+
+					$wpdb->insert(
+						$table,
+						array(
+							'post_id'          => $post->ID,
+							'post_title'       => $post->post_title,
+							'_search_title'    => sanitize_title( $post->post_title ),
+							'post_status'      => $post->post_status,
+							'post_category'    => $post_category,
+							'default_category' => $default_category,
+							'post_tags'        => $post_tags,
+						)
+					);
+				}
+
+				error_log( sprintf( 'WBCOM Demo Import: Populated %s with %d rows from wp_posts.', $table, count( $posts ) ) );
+			}
 		}
 
 	}
