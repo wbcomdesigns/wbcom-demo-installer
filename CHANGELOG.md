@@ -1,5 +1,22 @@
 # WBCOM Demo Installer Changelog
 
+## Version 3.1.1
+
+### Bug Fixes
+- Fix: GeoDirectory listings not showing after demo import — detail table was empty
+- Fix: Bypass GeoDirectory option keys (`geodir_settings`, `geodirectory_db_version`, `geodirectory_version`, `geodirectory_admin_notices`) during options import to preserve local setup
+- Fix: Auto-populate `wp_geodir_gd_place_detail` from `wp_posts` and term relationships when the detail table is empty after import
+
+## Version 3.1.0
+
+### Bug Fixes
+- Fix: PeepSo plugin not able to install and activate during demo installation
+- Fix: Remove closed and paid 3rd party plugin recommendations
+- Fix: Plugin download URL priority and sanitize GET input
+- Fix: Remove paid 3rd party plugin recommendation
+- Fix: Download URLs for wbcom-essential and reign-wcvendors-addon
+- Added church-community demo
+
 ## Version 2.9.8 (Security & Stability Update)
 
 ### Security Improvements
