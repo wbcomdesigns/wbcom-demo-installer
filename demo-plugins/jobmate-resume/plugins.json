@@ -1,136 +1,114 @@
 [
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "name": "Wbcom Essential",
-        "slug": "wbcom-essential",
-        "required": true,
-        "version": "4.0.0",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
-        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
-        "name": "Elementor",
-        "slug": "elementor",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-logo.jpg",
-        "name": "WP Job Manager",
-        "slug": "wp-job-manager",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "WP Job Manager is a lightweight job listing plugin for adding job-board like functionality to your WordPress site."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "is_paid": "yes",
-        "name": "Reign WP Job Manager Addon",
-        "slug": "reign-wp-job-manager-addon",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://wbcomdesigns.com/",
-        "description": "Reign WP Job Manager Addon provides seemless integration of WP Job Manager with Reign theme."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-logo.jpg",
-        "is_paid": "yes",
-        "name": "WP Job Manager - Resume Manager",
-        "slug": "wp-job-manager-resumes",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://wpjobmanager.com/add-ons/resume-manager/",
-        "description": "Resume Manager is a plugin built on top of WP Job Manager which adds a resume submission form to your site and resume listings, all manageable from WordPress admin."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-companies-logo.jpg",
-        "name": "WP Job Manager \u2013 Company Profiles",
-        "slug": "wp-job-manager-companies",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "Outputs a list of all companies that have submitted jobs with links to their listings and profile."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-regions-logo.jpg",
-        "name": "Regions for WP Job Manager",
-        "slug": "wp-job-manager-locations",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "Adds a \u201cJob Region\u201d taxonomy so the site administrator can control a set of predefined regions listings can be assigned to."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-color-logo.jpg",
-        "name": "Job Colors for WP Job Manager",
-        "slug": "wp-job-manager-colors",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "Select the color of each existing job type in the Job Listings\u2019 settings. Can set the color to be the background color, or text color."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
-        "name": "Buddypress",
-        "slug": "buddypress",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bbpress-logo.jpg",
-        "name": "bbPress",
-        "slug": "bbpress",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "bbPress is forum software with a twist from the creators of WordPress."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-job-manager-logo.jpg",
-        "name": "BuddyPress Job Manager",
-        "slug": "bp-job-manager",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "This plugin integrates WordPress Job Manager with BuddyPress. Allows the members to post jobs, and others to apply for those posted jobs."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/rt-media-logo.jpg",
-        "name": "rtMedia for WordPress, BuddyPress and bbPress",
-        "slug": "buddypress-media",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
-    }
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "name": "Wbcom Essential",
+    "slug": "wbcom-essential",
+    "required": true,
+    "version": "4.2.1",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip",
+    "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent.",
+    "download_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip"
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
+    "name": "Elementor",
+    "slug": "elementor",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-logo.jpg",
+    "name": "WP Job Manager",
+    "slug": "wp-job-manager",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "WP Job Manager is a lightweight job listing plugin for adding job-board like functionality to your WordPress site."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "is_paid": "yes",
+    "name": "Reign WP Job Manager Addon",
+    "slug": "reign-wp-job-manager-addon",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://wbcomdesigns.com/",
+    "description": "Reign WP Job Manager Addon provides seemless integration of WP Job Manager with Reign theme."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-companies-logo.jpg",
+    "name": "WP Job Manager \u2013 Company Profiles",
+    "slug": "wp-job-manager-companies",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "Outputs a list of all companies that have submitted jobs with links to their listings and profile."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wp-job-manager-regions-logo.jpg",
+    "name": "Regions for WP Job Manager",
+    "slug": "wp-job-manager-locations",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "Adds a \u201cJob Region\u201d taxonomy so the site administrator can control a set of predefined regions listings can be assigned to."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-logo.jpg",
+    "name": "Buddypress",
+    "slug": "buddypress",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bbpress-logo.jpg",
+    "name": "bbPress",
+    "slug": "bbpress",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "bbPress is forum software with a twist from the creators of WordPress."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bp-job-manager-logo.jpg",
+    "name": "BuddyPress Job Manager",
+    "slug": "bp-job-manager",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "This plugin integrates WordPress Job Manager with BuddyPress. Allows the members to post jobs, and others to apply for those posted jobs."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/rt-media-logo.jpg",
+    "name": "rtMedia for WordPress, BuddyPress and bbPress",
+    "slug": "buddypress-media",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "This plugin adds missing media rich features like photos, videos and audio uploading to BuddyPress which are essential if you are building social network, seriously!"
+  }
 ]

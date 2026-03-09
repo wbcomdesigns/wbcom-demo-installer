@@ -472,7 +472,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$skin     = new Automatic_Upgrader_Skin();
 		$upgrader = new Plugin_Upgrader( $skin, array( 'clear_destination' => true ) );
 
+		add_filter( 'http_request_args', array( $this, 'increase_redirect_limit' ), 10, 2 );
 		$result = $upgrader->install( $url );
+		remove_filter( 'http_request_args', array( $this, 'increase_redirect_limit' ), 10 );
 
 		// There is a bug in WP where the install method can return null in case the folder already exists
 		// see https://core.trac.wordpress.org/ticket/27365
@@ -595,9 +597,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	public function get_download_url( $slug ) {
 		$dl_source = '';
 
+		// Prefer download_url (direct ZIP) over external_url (may be a webpage)
+		if ( ! empty( $this->plugins[ $slug ]['download_url'] ) ) {
+			return $this->plugins[ $slug ]['download_url'];
+		}
+
 		if ( isset( $this->plugins[ $slug ]['external_url'] ) && ! empty( $this->plugins[ $slug ]['external_url'] ) ) {
 			return $this->plugins[ $slug ]['external_url'];
-			// $plugin_source_type = $this->_get_plugin_source_type( $this->plugins[ $slug ]['source'] );
 		} else {
 			$plugin_source_type = 'repo';
 		}
@@ -705,10 +711,18 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		return $this->tgmpa->get_plugins( $plugin_folder );
 	}
 
-	public function get_required_plugins() {
-		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === $_GET['step'] ) {
+	public function increase_redirect_limit( $args, $url ) {
+		if ( isset( $args['redirection'] ) && $args['redirection'] < 10 ) {
+			$args['redirection'] = 10;
+		}
+		return $args;
+	}
 
-			$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $_GET['plugins_json_key'] . '/plugins.json';
+	public function get_required_plugins() {
+		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === sanitize_text_field( $_GET['step'] ) ) {
+
+			$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( $_GET['plugins_json_key'] ) : '';
+			$url_to_request   = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
 			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
 
 			if ( ! is_wp_error( $response ) ) {

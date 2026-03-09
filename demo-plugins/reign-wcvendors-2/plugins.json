@@ -1,80 +1,82 @@
 [
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
-        "name": "Elementor",
-        "slug": "elementor",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "name": "Wbcom Essential",
-        "slug": "wbcom-essential",
-        "required": true,
-        "version": "4.0.0",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.0.0/wbcom-essential.zip",
-        "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
-        "name": "WooCommerce",
-        "slug": "woocommerce",
-        "required": true,
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wc-vendors-logo.jpg",
-        "name": "WC Vendors Marketplace",
-        "slug": "wc-vendors",
-        "required": true,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "",
-        "description": "WC Vendors Marketplace is the best way to create your multi-vendor marketplace and earn money from every sale."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
-        "is_paid": "yes",
-        "name": "Reign WC Vendors Addon",
-        "slug": "reign-wc-vendor-addon",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://wbcomdesigns.com/downloads/reign-wcvendors-addon/",
-        "description": "Reign WC vendors Addon provides seemless integration of WC vendor with Reign theme."
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wc-vendors-logo.jpg",
-        "is_paid": "yes",
-        "name": "WC Vendors Pro",
-        "slug": "wc-vendors-pro",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://www.wcvendors.com/product/wc-vendors-pro/",
-        "description": "The WC Vendors Pro plugin"
-    },
-    {
-        "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bb-logo.jpg",
-        "name": "BuddyBoss Platform",
-        "slug": "buddyboss-platform",
-        "required": false,
-        "version": "",
-        "force_activation": false,
-        "force_deactivation": false,
-        "external_url": "https://buddyboss.com/free-downloads/buddyboss-platform.php",
-        "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
-    }
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/elementor-logo.jpg",
+    "name": "Elementor",
+    "slug": "elementor",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "name": "Wbcom Essential",
+    "slug": "wbcom-essential",
+    "required": true,
+    "version": "4.2.1",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip",
+    "description": "Wbcom Essential is the required plugin to use REIGN theme to its maximum extent.",
+    "download_url": "https://demos.wbcomdesigns.com/exporter/plugins/wbcom-essential/4.2.1/wbcom-essential-4.2.1.zip"
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/woocommerce-logo.jpg",
+    "name": "WooCommerce",
+    "slug": "woocommerce",
+    "required": true,
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "An eCommerce toolkit that helps you sell anything. Beautifully."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wc-vendors-logo.jpg",
+    "name": "WC Vendors Marketplace",
+    "slug": "wc-vendors",
+    "required": true,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "",
+    "description": "WC Vendors Marketplace is the best way to create your multi-vendor marketplace and earn money from every sale."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wbcom-logo.jpg",
+    "is_paid": "yes",
+    "name": "Reign WC Vendors Addon",
+    "slug": "reign-wc-vendor-addon",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://wbcomdesigns.com/downloads/reign-wc-vendors-addon/",
+    "description": "Reign WC vendors Addon provides seemless integration of WC vendor with Reign theme."
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/wc-vendors-logo.jpg",
+    "is_paid": "yes",
+    "name": "WC Vendors Pro",
+    "slug": "wc-vendors-pro",
+    "required": false,
+    "version": "",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://www.wcvendors.com/product/wc-vendors-pro/",
+    "description": "The WC Vendors Pro plugin"
+  },
+  {
+    "plugin_thumb": "https://demos.wbcomdesigns.com/exporter/demos-plugin-thumb/bb-logo.jpg",
+    "name": "BuddyBoss Platform",
+    "slug": "buddyboss-platform",
+    "required": false,
+    "version": "2.20.0",
+    "force_activation": false,
+    "force_deactivation": false,
+    "external_url": "https://buddyboss.com/free-downloads/buddyboss-platform.php",
+    "description": "Buddyboss Platform adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!",
+    "download_url": "https://github.com/buddyboss/buddyboss-platform/releases/download/2.20.0/buddyboss-platform-2.20.0.zip"
+  }
 ]

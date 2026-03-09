@@ -370,5 +370,17 @@
         "motive_key": "peepso",
         "motive_name": "PeepSo",
         "plugins_json_key": "peepso-community"
+    },
+    {
+        "screenshot": "reign-church-community.jpg",
+        "demo_name": "Reign Church Community",
+        "theme_slug": "reign",
+        "demo_slug": "theme_demo",
+        "target_url": "https://installer.wbcomdesigns.com/church-community/",
+        "preview_url": "https://installer.wbcomdesigns.com/church-community/",
+        "created_on": "21-09-2019",
+        "motive_key": "buddyboss",
+        "motive_name": "Reign Church Community",
+        "plugins_json_key": "church-community"
     }
 ]
