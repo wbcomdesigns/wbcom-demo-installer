@@ -1,0 +1,249 @@
+# Copyright (C) 2026 Wbcom Designs
+# This file is distributed under the same license as the Wbcom Theme Demo Installer package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Wbcom Theme Demo Installer 3.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-09 09:16:13+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Varun Dubey\n"
+"Language-Team: Wbcom Designs\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.4\n"
+
+#: core/admin-settings.php:77 core/admin-settings.php:78
+msgid "Theme Installer"
+msgstr ""
+
+#: core/admin-settings.php:95
+msgid "Select Demo"
+msgstr ""
+
+#: core/admin-settings.php:96
+msgid "Manage Plugins"
+msgstr ""
+
+#: core/admin-settings.php:97 core/admin-settings.php:259
+msgid "Install Demo"
+msgstr ""
+
+#: core/admin-settings.php:98
+msgid "Success"
+msgstr ""
+
+#: core/admin-settings.php:109
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: core/admin-settings.php:136
+msgid "Multisite Installation Detected"
+msgstr ""
+
+#: core/admin-settings.php:137
+msgid ""
+"The Demo Importer is not compatible with WordPress Multisite installations. "
+"Please use a single site WordPress installation to import demo content."
+msgstr ""
+
+#: core/admin-settings.php:138
+msgid ""
+"Demo import modifies database tables and settings in ways that are not "
+"compatible with the multisite architecture."
+msgstr ""
+
+#: core/admin-settings.php:236 core/admin-settings.php:466
+msgid "No Theme Demo Available"
+msgstr ""
+
+#: core/admin-settings.php:323
+msgid "Go To Demo Installation"
+msgstr ""
+
+#: core/admin-settings.php:361
+msgid "Buy Now"
+msgstr ""
+
+#: core/admin-settings.php:362
+msgid "Upload Plugin"
+msgstr ""
+
+#: core/ajax-handler.php:97 core/ajax-handler.php:233 core/ajax-handler.php:829
+#: core/ajax-handler.php:1123 core/ajax-handler.php:1163
+#: core/plugins-manager.php:151
+msgid "Security check failed"
+msgstr ""
+
+#: core/ajax-handler.php:103 core/ajax-handler.php:239
+#: core/ajax-handler.php:834 core/ajax-handler.php:1128
+#: core/ajax-handler.php:1168
+msgid "You do not have permission to perform this action"
+msgstr ""
+
+#: core/ajax-handler.php:116
+msgid "Invalid target URL provided"
+msgstr ""
+
+#: core/ajax-handler.php:144
+msgid "Failed to connect to demo server"
+msgstr ""
+
+#: core/ajax-handler.php:158
+#. translators: %d: HTTP response code.
+msgid "Demo server returned error code %d"
+msgstr ""
+
+#: core/ajax-handler.php:166
+msgid "Demo server returned empty response"
+msgstr ""
+
+#: core/ajax-handler.php:183
+msgid "Invalid JSON response from demo server"
+msgstr ""
+
+#: core/ajax-handler.php:205
+msgid "An error occurred while fetching demo data"
+msgstr ""
+
+#: core/ajax-handler.php:212 core/ajax-handler.php:304
+msgid "Invalid request"
+msgstr ""
+
+#: core/ajax-handler.php:277
+msgid "Invalid table name extracted from filename"
+msgstr ""
+
+#: core/ajax-handler.php:297
+msgid "An error occurred while processing demo data"
+msgstr ""
+
+#: core/ajax-handler.php:330
+msgid "Failed to retrieve file from remote server"
+msgstr ""
+
+#: core/ajax-handler.php:336
+msgid "Retrieved empty data from remote server"
+msgstr ""
+
+#: core/ajax-handler.php:356
+msgid "Failed to write temporary file"
+msgstr ""
+
+#: core/ajax-handler.php:601 core/ajax-handler.php:694
+#. translators: %s: Table name.
+msgid "Table %s does not exist"
+msgstr ""
+
+#: core/ajax-handler.php:658 core/ajax-handler.php:752
+#. translators: %1$s: Table name, %2$s: Error message.
+msgid "Failed to insert data into %1$s: %2$s"
+msgstr ""
+
+#: core/ajax-handler.php:709
+#. translators: %1$s: Table name, %2$s: Error message.
+msgid "Failed to clear table %1$s: %2$s"
+msgstr ""
+
+#: core/ajax-handler.php:840
+msgid "Source URL not provided"
+msgstr ""
+
+#: core/ajax-handler.php:874
+msgid "Demo import finalized successfully"
+msgstr ""
+
+#: core/ajax-handler.php:1133
+msgid "BuddyPress or BuddyBoss Platform is not active"
+msgstr ""
+
+#: core/ajax-handler.php:1143
+msgid "All components enabled successfully"
+msgstr ""
+
+#: core/ajax-handler.php:1148
+msgid "Failed to enable components"
+msgstr ""
+
+#: core/ajax-handler.php:1151
+msgid "Component enabler class not found"
+msgstr ""
+
+#: core/ajax-handler.php:1209
+msgid "Failed to fetch plugin data"
+msgstr ""
+
+#: core/plugins-manager.php:156
+msgid "You do not have permission to install plugins"
+msgstr ""
+
+#: core/plugins-manager.php:395 core/plugins-manager.php:419
+msgid "Active"
+msgstr ""
+
+#: core/plugins-manager.php:396
+msgid "Child theme installed and active"
+msgstr ""
+
+#: core/plugins-manager.php:400 core/plugins-manager.php:424
+msgid "Inactive"
+msgstr ""
+
+#: core/plugins-manager.php:401
+msgid "Activate child theme"
+msgstr ""
+
+#: core/plugins-manager.php:406
+msgid "Not installed"
+msgstr ""
+
+#: core/plugins-manager.php:407
+msgid "Install child theme"
+msgstr ""
+
+#: core/plugins-manager.php:412
+msgid "Permissions needed to install child themes. Contact site administrator."
+msgstr ""
+
+#: core/plugins-manager.php:420
+msgid "Installed"
+msgstr ""
+
+#: core/plugins-manager.php:425
+msgid "Activate"
+msgstr ""
+
+#: core/plugins-manager.php:430
+msgid "Not Installed"
+msgstr ""
+
+#: core/plugins-manager.php:431
+msgid "Install Now"
+msgstr ""
+
+#: core/plugins-manager.php:436
+msgid "You don't have permission to install plugins. Contact site administrator."
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Wbcom Theme Demo Installer"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wbcomdesigns.com/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Wbcom Designs"
+msgstr ""
