@@ -1,4 +1,10 @@
 <?php
+/**
+ * Admin settings page for demo installer.
+ *
+ * @package WBCOM_Theme_Demo_Installer
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -6,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 	/**
+	 * Admin settings for the theme demo installer.
+	 *
 	 * @class WBCOM_TDI_ADMIN_SETTINGS
 	 * @version 1.0.0
 	 */
@@ -18,7 +26,13 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		 * @since 1.0.0
 		 */
 		protected static $_instance = null;
-		protected static $_slug     = 'wbcom-theme-demo-installer';
+
+		/**
+		 * Admin page slug.
+		 *
+		 * @var string
+		 */
+		protected static $_slug = 'wbcom-theme-demo-installer';
 
 		/**
 		 * Main WBCOM_TDI_ADMIN_SETTINGS Instance.
@@ -55,38 +69,49 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		}
 
+		/**
+		 * Register the admin menu page.
+		 */
 		public function add_admin_menu() {
 			add_menu_page(
-				$page_title = __( 'Theme Installer', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
-				$menu_title = __( 'Theme Installer', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ),
-				$capability = 'manage_options',
-				$menu_slug  = self::$_slug,
-				$function   = array( $this, 'render_page_for_added_menu' ),
-				$icon_url   = '',
-				$position   = null
+				__( 'Theme Installer', 'wbcom-theme-demo-installer' ),
+				__( 'Theme Installer', 'wbcom-theme-demo-installer' ),
+				'manage_options',
+				self::$_slug,
+				array( $this, 'render_page_for_added_menu' ),
+				'',
+				null
 			);
 		}
 
-		public function show_step_header( $currentTab = '' ) {
+		/**
+		 * Display the step navigation header.
+		 *
+		 * @param string $current_tab The current active tab.
+		 */
+		public function show_step_header( $current_tab = '' ) {
 			?>
 			<div class="tab">
-				<button class="tablinks <?php echo ( $currentTab == 'select-demo' ) ? 'active' : ''; ?>"><?php _e( 'Select Demo', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'manage-plugins' ) ? 'active' : ''; ?>"><?php _e( 'Manage Plugins', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'install-demo' ) ? 'active' : ''; ?>"><?php _e( 'Install Demo', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
-				<button class="tablinks <?php echo ( $currentTab == 'success' ) ? 'active' : ''; ?>"><?php _e( 'Success', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></button>
+				<button class="tablinks <?php echo ( 'select-demo' === $current_tab ) ? 'active' : ''; ?>"><?php esc_html_e( 'Select Demo', 'wbcom-theme-demo-installer' ); ?></button>
+				<button class="tablinks <?php echo ( 'manage-plugins' === $current_tab ) ? 'active' : ''; ?>"><?php esc_html_e( 'Manage Plugins', 'wbcom-theme-demo-installer' ); ?></button>
+				<button class="tablinks <?php echo ( 'install-demo' === $current_tab ) ? 'active' : ''; ?>"><?php esc_html_e( 'Install Demo', 'wbcom-theme-demo-installer' ); ?></button>
+				<button class="tablinks <?php echo ( 'success' === $current_tab ) ? 'active' : ''; ?>"><?php esc_html_e( 'Success', 'wbcom-theme-demo-installer' ); ?></button>
 			</div>
 			<?php
 		}
 
+		/**
+		 * Render the demo installer admin page.
+		 */
 		public function render_page_for_added_menu() {
-			// Security check
+			// Security check.
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( __( 'You do not have sufficient permissions to access this page.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) );
+				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'wbcom-theme-demo-installer' ) );
 			}
-			
+
 			$theme_info = wp_get_theme();
 
-			// Get parent theme name
+			// Get parent theme name.
 			$reflection = new ReflectionClass( $theme_info );
 			$property   = $reflection->getProperty( 'parent' );
 			$property->setAccessible( true );
@@ -104,13 +129,13 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 
 			echo '<div class="demo-listing-wrap">';
 
-			// Check if this is a multisite installation
+			// Check if this is a multisite installation.
 			if ( is_multisite() ) {
 				?>
 				<div class="notice notice-error">
-					<h2><?php _e( 'Multisite Installation Detected', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></h2>
-					<p><?php _e( 'The Demo Importer is not compatible with WordPress Multisite installations. Please use a single site WordPress installation to import demo content.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></p>
-					<p><?php _e( 'Demo import modifies database tables and settings in ways that are not compatible with the multisite architecture.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></p>
+					<h2><?php esc_html_e( 'Multisite Installation Detected', 'wbcom-theme-demo-installer' ); ?></h2>
+					<p><?php esc_html_e( 'The Demo Importer is not compatible with WordPress Multisite installations. Please use a single site WordPress installation to import demo content.', 'wbcom-theme-demo-installer' ); ?></p>
+					<p><?php esc_html_e( 'Demo import modifies database tables and settings in ways that are not compatible with the multisite architecture.', 'wbcom-theme-demo-installer' ); ?></p>
 				</div>
 				</div></div>
 				<?php
@@ -120,18 +145,22 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			?>
 
 		<div class="theme-info">
-			<h1><?php echo $theme_info['Name']; ?></h1>
+			<h1><?php echo esc_html( $theme_info['Name'] ); ?></h1>
 		</div>
 
 			<?php
-			if ( isset( $_GET['success'] ) && ( sanitize_text_field( $_GET['success'] ) == 'success' ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_GET['success'] ) && ( 'success' === sanitize_text_field( wp_unslash( $_GET['success'] ) ) ) ) {
 				$this->show_step_header( 'success' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'demo_import' ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( 'demo_import' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) ) {
 				$this->show_step_header( 'install-demo' );
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'plugins_manager' ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( 'plugins_manager' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) ) {
 				$this->show_step_header( 'manage-plugins' );
-			} elseif ( isset( $_GET['action'] ) && ( sanitize_text_field( $_GET['action'] ) == 'fix_buddypress_users' ) ) {
-				// Handle BuddyPress user fix
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['action'] ) && ( 'fix_buddypress_users' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) ) {
+				// Handle BuddyPress user fix.
 				$this->fix_buddypress_users();
 				return;
 			} else {
@@ -142,24 +171,25 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		<div class="reign-demos-wrapper reign-importer-section">
 			<?php
 
-			if ( isset( $_GET['success'] ) && ( sanitize_text_field( $_GET['success'] ) == 'success' ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_GET['success'] ) && ( 'success' === sanitize_text_field( wp_unslash( $_GET['success'] ) ) ) ) {
 				delete_option( 'wbcom_theme_demo_import_data' );
 				delete_option( 'wbcom_theme_demo_req_plugins' );
-				
-				// Delete specific Kirki-related options
+
+				// Delete specific Kirki-related options.
 				delete_option( '_transient_timeout_kirki_remote_url_contents' );
 				delete_option( '_transient_kirki_remote_url_contents' );
 				delete_option( '_site_transient_timeout_kirki_googlefonts_cache' );
 				delete_option( '_site_transient_kirki_googlefonts_cache' );
 				delete_option( 'kirki_downloaded_font_files' );
-				
-				// Regenerate Elementor CSS files
+
+				// Regenerate Elementor CSS files.
 				if ( class_exists( '\Elementor\Plugin' ) ) {
 					\Elementor\Plugin::$instance->files_manager->clear_cache();
 				}
-				
+
 				include_once 'success.php';
-				/** to deal with GeoDirectory import issue */
+				/** To deal with GeoDirectory import issue. */
 				if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
 					geodir_tool_restore_cpt_from_taxonomies();
 				}
@@ -168,43 +198,49 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					$this->populate_geodir_detail_table();
 				}
 				return;
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'demo_import' ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( 'demo_import' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) ) {
 
-				$target_url       = isset( $_GET['target_url'] ) ? esc_url_raw( $_GET['target_url'] ) : '';
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$target_url       = isset( $_GET['target_url'] ) ? esc_url_raw( wp_unslash( $_GET['target_url'] ) ) : '';
 				$target_demo_info = array();
 
 				$current_url           = $this->get_demo_installer_page_url();
 				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
 				$retrieved_data        = '';
-				$response              = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+				$response              = wp_remote_get(
+					$parent_url_to_request,
+					array(
+						'sslverify' => false,
+						'timeout'   => 120,
+					)
+				);
 				if ( is_wp_error( $response ) ) {
 					$error_message = $response->get_error_message();
-					echo "Something went wrong: $error_message";
-				} else {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+					echo esc_html( "Something went wrong: $error_message" );
+				} elseif ( isset( $response['response']['code'] ) && ( 200 === (int) $response['response']['code'] ) ) {
 						$response = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response ) ) {
-							$response = json_decode( $response, true );
-						}
-						if ( ! empty( $response ) && is_array( $response ) ) {
-							$motive_key = '';
-							foreach ( $response as $key => $value ) {
-								$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
-								if ( $target_url == $demo_target_url ) {
-									$target_demo_info = $value;
-									break;
-								}
+					if ( ! empty( $response ) ) {
+						$response = json_decode( $response, true );
+					}
+					if ( ! empty( $response ) && is_array( $response ) ) {
+						$motive_key = '';
+						foreach ( $response as $key => $value ) {
+							$demo_target_url = isset( $value['target_url'] ) ? $value['target_url'] : '';
+							if ( $demo_target_url === $target_url ) {
+								$target_demo_info = $value;
+								break;
 							}
-						} else {
-							_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
 						}
+					} else {
+						esc_html_e( 'No Theme Demo Available', 'wbcom-theme-demo-installer' );
 					}
 				}
 
 				echo "<div class='wrap wbcom-demo-importer'>";
 				?>
 			<div class="reign-demos-alertboxes">
-				<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $target_demo_info['screenshot']; ?>" style="width:100%;" />
+				<img src="<?php echo esc_url( WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'demos-imgs/' . $target_demo_info['screenshot'] ); ?>" style="width:100%;" />
 			</div>
 			<div class="reign-demos-progress-container">
 				<div id="progress-bar-container" style="display: none;">
@@ -213,11 +249,14 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				<div id="progress-snackbar"></div>
 				<?php
 				echo "<div class='loader' style='display:none;text-align:center;'></div>";
-				echo "<input type='hidden' id='theme_slug' value='" . esc_attr( sanitize_text_field( $_GET['theme_slug'] ) ) . "' />";
-				echo "<input type='hidden' id='demo_slug' value='" . esc_attr( sanitize_text_field( $_GET['demo_slug'] ) ) . "' />";
-				echo "<input type='hidden' id='target_url' value='" . esc_attr( esc_url_raw( $_GET['target_url'] ) ) . "' />";
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				echo "<input type='hidden' id='theme_slug' value='" . esc_attr( sanitize_text_field( wp_unslash( $_GET['theme_slug'] ) ) ) . "' />";
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				echo "<input type='hidden' id='demo_slug' value='" . esc_attr( sanitize_text_field( wp_unslash( $_GET['demo_slug'] ) ) ) . "' />";
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				echo "<input type='hidden' id='target_url' value='" . esc_attr( esc_url_raw( wp_unslash( $_GET['target_url'] ) ) ) . "' />";
 				echo "<input type='hidden' id='current_site_url' value='" . esc_attr( esc_url_raw( home_url() ) ) . "' />";
-				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . __( 'Install Demo', 'ASDF' ) . '</button>';
+				echo "<button type='submit' id='wbcom_get_theme_demo_data' class='wbcom-button'>" . esc_html__( 'Install Demo', 'wbcom-theme-demo-installer' ) . '</button>';
 				echo '<div id="wbtd-current-action" style="display:none;">downloading</div>';
 				echo '</div>';
 				?>
@@ -237,15 +276,23 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			</div>
 
 				<?php
-			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( sanitize_text_field( $_GET['step'] ) == 'plugins_manager' ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( 'plugins_manager' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) ) {
 
-				$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( $_GET['plugins_json_key'] ) : '';
-				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
-				$retrieved_data = '';
-				$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( wp_unslash( $_GET['plugins_json_key'] ) ) : '';
+				$url_to_request   = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
+				$retrieved_data   = '';
+				$response         = wp_remote_get(
+					$url_to_request,
+					array(
+						'sslverify' => false,
+						'timeout'   => 120,
+					)
+				);
 
 				if ( ! is_wp_error( $response ) ) {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+					if ( isset( $response['response']['code'] ) && ( 200 === (int) $response['response']['code'] ) ) {
 						$response = isset( $response['body'] ) ? $response['body'] : '';
 						if ( ! empty( $response ) ) {
 							$response = json_decode( $response, true );
@@ -260,39 +307,35 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$required_plugins_to_activate = 0;
 				$demo_import_url              = $this->get_demo_installer_page_url(
 					array(
-						'theme_slug' => sanitize_text_field( $_GET['theme_slug'] ),
-						'demo_slug'  => sanitize_text_field( $_GET['demo_slug'] ),
-						'target_url' => esc_url_raw( $_GET['target_url'] ),
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						'theme_slug' => sanitize_text_field( wp_unslash( $_GET['theme_slug'] ) ),
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						'demo_slug'  => sanitize_text_field( wp_unslash( $_GET['demo_slug'] ) ),
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						'target_url' => esc_url_raw( wp_unslash( $_GET['target_url'] ) ),
 						'step'       => 'demo_import',
 					)
 				);
 
-				$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
+				$plugins_list = get_option( 'wbcom_theme_demo_req_plugins', array() );
 				?>
 			<div class="goto-install-demo-step">
-				<a href="<?php echo $demo_import_url; ?>" class="button button-primary"><?php _e( 'Go To Demo Installation', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+				<a href="<?php echo esc_url( $demo_import_url ); ?>" class="button button-primary"><?php esc_html_e( 'Go To Demo Installation', 'wbcom-theme-demo-installer' ); ?></a>
 			</div>
 				<?php
 				foreach ( $plugins_list as $key => $plugin ) {
 					$plugin_status = instantiate_wbcom_demo_importer_plugins_manager()->get_plugin_status( $plugin['slug'] );
 
-					/*
-					temp code to manage count */
-					// if( isset( $plugin['is_paid'] ) ) {
-					// $num_of_req_plugins_installed++;
-					// }
-					/* temp code to manage count */
-
 					$plugin_dependency = 'Optional';
-					if ( isset( $plugin['required'] ) && ( $plugin['required'] == true ) ) {
-						$required_plugins_to_activate++;
+					if ( isset( $plugin['required'] ) && true === $plugin['required'] ) {
+						++$required_plugins_to_activate;
 						$plugin_dependency = 'Required';
-						if ( $plugin_status['status_text'] == 'Active' ) {
-							$num_of_req_plugins_installed++;
+						if ( 'Active' === $plugin_status['status_text'] ) {
+							++$num_of_req_plugins_installed;
 						}
 					}
 					$already_active_class = '';
-					if ( $plugin_status['status_text'] == 'Active' ) {
+					if ( 'Active' === $plugin_status['status_text'] ) {
 						$already_active_class = 'already-active';
 					}
 					?>
@@ -302,29 +345,30 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 						<div class="plugin-importer-sec">
 							<ul>
 								<li class="importer-plugin-thumb"><img src="<?php echo esc_url( ! empty( $plugin['plugin_thumb'] ) ? $plugin['plugin_thumb'] : WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'plugin-thumb/admin-plugins.svg' ); ?>" alt="plugin-thumb" class="plugin_image"></li>
-								<li class="plugin-name"><?php echo $plugin['name']; ?></li>
-								<li class="plugin-status"><span class="<?php echo $already_active_class; ?>"><?php echo $plugin_status['status_text']; ?></span></li>
-								<li class="plugin-dependency <?php echo strtolower( $plugin_dependency ); ?>"><?php echo $plugin_dependency; ?></li>
-								<li class="plugin-description"><?php echo $plugin['description']; ?></li>
+								<li class="plugin-name"><?php echo esc_html( $plugin['name'] ); ?></li>
+								<li class="plugin-status"><span class="<?php echo esc_attr( $already_active_class ); ?>"><?php echo esc_html( $plugin_status['status_text'] ); ?></span></li>
+								<li class="plugin-dependency <?php echo esc_attr( strtolower( $plugin_dependency ) ); ?>"><?php echo esc_html( $plugin_dependency ); ?></li>
+								<li class="plugin-description"><?php echo esc_html( $plugin['description'] ); ?></li>
 								<li class="importer-button">
-								<input type="hidden" class="demo-name" name="demo-name" value="<?php echo $_GET['plugins_json_key']; ?>">
-								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo $plugin['slug']; ?>">
-								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo $plugin_status['action']; ?>">
+								<?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+								<input type="hidden" class="demo-name" name="demo-name" value="<?php echo esc_attr( sanitize_text_field( wp_unslash( $_GET['plugins_json_key'] ) ) ); ?>">
+								<input type="hidden" class="plugin-slug" name="plugin-slug" value="<?php echo esc_attr( $plugin['slug'] ); ?>">
+								<input type="hidden" class="plugin-action" name="plugin-action" value="<?php echo esc_attr( $plugin_status['action'] ); ?>">
 									<?php
 									if ( isset( $plugin['is_paid'] ) ) {
-										if ( $plugin_status['status_text'] != 'Active' ) {
+										if ( 'Active' !== $plugin_status['status_text'] ) {
 											?>
-												<a class="button button-primary buy-now-plugins" target="_blank" href="<?php echo $plugin['external_url']; ?>"><?php _e( 'Buy Now', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
-												<a class="plugin-action-button button upload-plugins" target="_blank" href="plugin-install.php"><?php _e( 'Upload Plugin', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ); ?></a>
+												<a class="button button-primary buy-now-plugins" target="_blank" href="<?php echo esc_url( $plugin['external_url'] ); ?>"><?php esc_html_e( 'Buy Now', 'wbcom-theme-demo-installer' ); ?></a>
+												<a class="plugin-action-button button upload-plugins" target="_blank" href="plugin-install.php"><?php esc_html_e( 'Upload Plugin', 'wbcom-theme-demo-installer' ); ?></a>
 												<?php
 										} else {
 											?>
-												<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
+												<button class="plugin-action-button button <?php echo esc_attr( $already_active_class ); ?>"><?php echo esc_html( $plugin_status['action_text'] ); ?></button>
 												<?php
 										}
 									} else {
 										?>
-											<button class="plugin-action-button button <?php echo $already_active_class; ?>"><?php echo $plugin_status['action_text']; ?></button>
+											<button class="plugin-action-button button <?php echo esc_attr( $already_active_class ); ?>"><?php echo esc_html( $plugin_status['action_text'] ); ?></button>
 											<?php
 									}
 									?>
@@ -338,8 +382,8 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				}
 				?>
 			<div class="demo_listing_modal"></div>
-			<input type="hidden" id="required_plugins_to_activate" name="required_plugins_to_activate" value="<?php echo $required_plugins_to_activate; ?>">
-			<input type="hidden" id="num_of_req_plugins_installed" name="num_of_req_plugins_installed" value="<?php echo $num_of_req_plugins_installed; ?>">
+			<input type="hidden" id="required_plugins_to_activate" name="required_plugins_to_activate" value="<?php echo esc_attr( $required_plugins_to_activate ); ?>">
+			<input type="hidden" id="num_of_req_plugins_installed" name="num_of_req_plugins_installed" value="<?php echo esc_attr( $num_of_req_plugins_installed ); ?>">
 				<?php
 			} else {
 				delete_option( 'wbcom_theme_demo_import_data' );
@@ -348,75 +392,78 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$current_url = $this->get_demo_installer_page_url();
 
 				$parent_url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_URL . 'demos.json';
-				$retrieved_data = '';
-				$response       = wp_remote_get( $parent_url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+				$retrieved_data        = '';
+				$response              = wp_remote_get(
+					$parent_url_to_request,
+					array(
+						'sslverify' => false,
+						'timeout'   => 120,
+					)
+				);
 
 				echo '<div id="demos_import_filter">';
 
 				if ( is_wp_error( $response ) ) {
 					$error_message = $response->get_error_message();
-					echo "Something went wrong: $error_message";
-				} else {
-					if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+					echo esc_html( "Something went wrong: $error_message" );
+				} elseif ( isset( $response['response']['code'] ) && ( 200 === (int) $response['response']['code'] ) ) {
 						$response = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response ) ) {
-							$response = json_decode( $response, true );
-						}
-						if ( ! empty( $response ) && is_array( $response ) ) {
-							$motive_key = '';
-							foreach ( $response as $key => $value ) {
-								if ( ( $key !== 0 ) && ( $motive_key !== $value['motive_key'] ) ) {
-									echo '</div>';
-								}
-								if ( $motive_key !== $value['motive_key'] ) {
-									$motive_key = $value['motive_key'];
-									// echo '<h4 class="demo-name">'.$value['motive_name'].'</h4>';
-									echo '<div class="demo-content-wrap">';
-								}
-								$preview_url = isset( $value['preview_url'] ) ? $value['preview_url'] : '';
-								$href        = $this->get_demo_installer_page_url(
-									array(
-										'theme_slug'       => $value['theme_slug'],
-										'demo_slug'        => $value['demo_slug'],
-										'target_url'       => $value['target_url'],
-										'step'             => 'plugins_manager',
-										'plugins_json_key' => $value['plugins_json_key'],
-									)
-								);
-								
-								// Get demo categories based on plugins
-								$demo_categories = $this->get_demo_categories( $value['plugins_json_key'] );
-								$categories_attr = ! empty( $demo_categories ) ? implode( ' ', $demo_categories ) : '';
-								?>
-								<div class='wbcom-demo-importer demo-details import_filter <?php echo $value['motive_key']; ?>' data-demo-slug="<?php echo $value['demo_slug']; ?>" data-plugins-key="<?php echo $value['plugins_json_key']; ?>" data-categories="<?php echo esc_attr( $categories_attr ); ?>">
+					if ( ! empty( $response ) ) {
+						$response = json_decode( $response, true );
+					}
+					if ( ! empty( $response ) && is_array( $response ) ) {
+						$motive_key = '';
+						foreach ( $response as $key => $value ) {
+							if ( ( 0 !== $key ) && ( $motive_key !== $value['motive_key'] ) ) {
+								echo '</div>';
+							}
+							if ( $motive_key !== $value['motive_key'] ) {
+								$motive_key = $value['motive_key'];
+								echo '<div class="demo-content-wrap">';
+							}
+							$preview_url = isset( $value['preview_url'] ) ? $value['preview_url'] : '';
+							$href        = $this->get_demo_installer_page_url(
+								array(
+									'theme_slug'       => $value['theme_slug'],
+									'demo_slug'        => $value['demo_slug'],
+									'target_url'       => $value['target_url'],
+									'step'             => 'plugins_manager',
+									'plugins_json_key' => $value['plugins_json_key'],
+								)
+							);
+
+							// Get demo categories based on plugins.
+							$demo_categories = $this->get_demo_categories( $value['plugins_json_key'] );
+							$categories_attr = ! empty( $demo_categories ) ? implode( ' ', $demo_categories ) : '';
+							?>
+								<div class='wbcom-demo-importer demo-details import_filter <?php echo esc_attr( $value['motive_key'] ); ?>' data-demo-slug="<?php echo esc_attr( $value['demo_slug'] ); ?>" data-plugins-key="<?php echo esc_attr( $value['plugins_json_key'] ); ?>" data-categories="<?php echo esc_attr( $categories_attr ); ?>">
 									<div class="container">
-										<img src="<?php echo WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL .'demos-imgs/'. $value['screenshot']; ?>" alt="Avatar" class="image" style="width:100%">
+										<img src="<?php echo esc_url( WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'demos-imgs/' . $value['screenshot'] ); ?>" alt="Avatar" class="image" style="width:100%">
 										<div class="demo-title">
-											<h2 class="demo-name"><?php echo $value['demo_name']; ?></h2>
-											<?php if ( ! empty( $demo_categories ) ) : ?>
+											<h2 class="demo-name"><?php echo esc_html( $value['demo_name'] ); ?></h2>
+										<?php if ( ! empty( $demo_categories ) ) : ?>
 												<div class="category-badges">
 													<?php foreach ( $demo_categories as $category ) : ?>
 														<span class="category-badge <?php echo esc_attr( $category ); ?>"><?php echo esc_html( $category ); ?></span>
 													<?php endforeach; ?>
 												</div>
 											<?php endif; ?>
-											<form method="get" action="<?php echo $current_url; ?>">
+											<form method="get" action="<?php echo esc_url( $current_url ); ?>">
 												<div class="middle demo-import-actions">
-													<a href="<?php echo $href; ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
-													<a target="_blank" href="<?php echo $preview_url; ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
+													<a href="<?php echo esc_url( $href ); ?>" class="wbcom-button import"><?php echo 'Import'; ?></a>
+													<a target="_blank" href="<?php echo esc_url( $preview_url ); ?>" class="wbcom-button preview"><?php echo 'Preview'; ?></a>
 												</div>
 											</form>
 										</div>
 									</div>
 								</div>
 								<?php
-								if ( ( $key === ( count( $response ) - 1 ) ) ) {
+								if ( ( count( $response ) - 1 ) === $key ) {
 									echo '</div>';
 								}
-							}
-						} else {
-							_e( 'No Theme Demo Available', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
 						}
+					} else {
+						esc_html_e( 'No Theme Demo Available', 'wbcom-theme-demo-installer' );
 					}
 				}
 			}
@@ -426,32 +473,35 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			echo '</div>';
 		}
 
+		/**
+		 * Enqueue admin scripts and styles.
+		 */
 		public function admin_enqueue_scripts() {
 			$screen = get_current_screen();
-			if ( $screen->id != 'toplevel_page_wbcom-theme-demo-installer' ) {
+			if ( 'toplevel_page_wbcom-theme-demo-installer' !== $screen->id ) {
 				return; }
 
 			$required_plugins_to_activate = 0;
 			$plugins_list                 = get_option( 'wbcom_theme_demo_req_plugins', array() );
 			foreach ( $plugins_list as $key => $value ) {
 				if ( $value['required'] ) {
-					$required_plugins_to_activate++;
+					++$required_plugins_to_activate;
 				}
 			}
 
 			wp_register_script(
-				$handle    = 'wbcom_theme_demo_installer_js',
-				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/importer.js',
-				$deps      = array( 'jquery' ),
-				$ver       = time(),
-				$in_footer = true
+				'wbcom_theme_demo_installer_js',
+				WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/importer.js',
+				array( 'jquery' ),
+				time(),
+				true
 			);
 			wp_register_script(
-				$handle    = 'wbcom_theme_demo_installer_js_filter',
-				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/jquery.mixitup.min.js',
-				$deps      = array( 'jquery' ),
-				$ver       = time(),
-				$in_footer = true
+				'wbcom_theme_demo_installer_js_filter',
+				WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/jquery.mixitup.min.js',
+				array( 'jquery' ),
+				time(),
+				true
 			);
 
 			wp_localize_script(
@@ -468,36 +518,42 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 			wp_enqueue_script( 'wbcom_theme_demo_installer_js' );
 			wp_enqueue_script( 'wbcom_theme_demo_installer_js_filter' );
 
-			// Register and enqueue demo filter assets
+			// Register and enqueue demo filter assets.
 			wp_register_script(
-				$handle    = 'wbcom_demo_filter_js',
-				$src       = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/demo-filter.js',
-				$deps      = array( 'jquery' ),
-				$ver       = time(),
-				$in_footer = true
+				'wbcom_demo_filter_js',
+				WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/js/demo-filter.js',
+				array( 'jquery' ),
+				time(),
+				true
 			);
 			wp_enqueue_script( 'wbcom_demo_filter_js' );
 
 			wp_register_style(
-				$handle = 'wbcom-demo-listing-css',
-				$src    = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
-				$deps   = array(),
-				$ver    = time(),
-				$media  = 'all'
+				'wbcom-demo-listing-css',
+				WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-listing.css',
+				array(),
+				time(),
+				'all'
 			);
 			wp_enqueue_style( 'wbcom-demo-listing-css' );
 
-			// Register and enqueue demo filter styles
+			// Register and enqueue demo filter styles.
 			wp_register_style(
-				$handle = 'wbcom-demo-filter-css',
-				$src    = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-filter.css',
-				$deps   = array(),
-				$ver    = time(),
-				$media  = 'all'
+				'wbcom-demo-filter-css',
+				WBCOM_Theme_Demo_Installer_PLUGIN_DIR_URL . 'assets/css/demo-filter.css',
+				array(),
+				time(),
+				'all'
 			);
 			wp_enqueue_style( 'wbcom-demo-filter-css' );
 		}
 
+		/**
+		 * Get the demo installer page URL.
+		 *
+		 * @param array $args Query arguments to append.
+		 * @return string
+		 */
 		public function get_demo_installer_page_url( $args = array() ) {
 			$current_url        = admin_url();
 			$installer_page_url = $current_url . 'admin.php?page=wbcom-theme-demo-installer';
@@ -511,63 +567,66 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		}
 
 		/**
-		 * Get demo categories based on plugins used
+		 * Get demo categories based on plugins used.
+		 *
+		 * @param string $plugins_key The plugins JSON key identifier.
 		 */
 		public function get_demo_categories( $plugins_key ) {
 			$categories = array();
-			
-			// Plugin to category mapping
+
+			// Plugin to category mapping.
 			$plugin_category_map = array(
-				// BuddyBoss plugins
-				'buddyboss-platform' => 'buddyboss',
-				
-				// BuddyPress plugins
-				'buddypress' => 'buddypress',
-				
-				// PeepSo plugins
-				'peepso' => 'peepso',
-				'peepso-core' => 'peepso',
-				
-				// LMS plugins
-				'learndash' => 'lms',
-				'sfwd-lms' => 'lms',
-				'sensei-lms' => 'lms',
-				'tutor' => 'lms',
-				'lifterlms' => 'lms',
-				
-				// Marketplace plugins
-				'dokan-lite' => 'marketplace',
-				'dokan' => 'marketplace',
+				// BuddyBoss plugins.
+				'buddyboss-platform'         => 'buddyboss',
+
+				// BuddyPress plugins.
+				'buddypress'                 => 'buddypress',
+
+				// PeepSo plugins.
+				'peepso'                     => 'peepso',
+				'peepso-core'                => 'peepso',
+
+				// LMS plugins.
+				'learndash'                  => 'lms',
+				'sfwd-lms'                   => 'lms',
+				'sensei-lms'                 => 'lms',
+				'tutor'                      => 'lms',
+				'lifterlms'                  => 'lms',
+
+				// Marketplace plugins.
+				'dokan-lite'                 => 'marketplace',
+				'dokan'                      => 'marketplace',
 				'wc-multivendor-marketplace' => 'marketplace',
-				'wc-frontend-manager' => 'marketplace',
-				'wc-vendors' => 'marketplace',
-				
-				// Directory plugins
-				'geodirectory' => 'directory',
-				
-				// Job plugins
-				'wp-job-manager' => 'jobs'
+				'wc-frontend-manager'        => 'marketplace',
+				'wc-vendors'                 => 'marketplace',
+
+				// Directory plugins.
+				'geodirectory'               => 'directory',
+
+				// Job plugins.
+				'wp-job-manager'             => 'jobs',
 			);
-			
-			// Try to read plugins.json file
+
+			// Try to read plugins.json file.
 			$plugins_file = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
-			
+
 			if ( file_exists( $plugins_file ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 				$plugins_data = file_get_contents( $plugins_file );
 				$plugins_data = json_decode( $plugins_data, true );
-				
+
 				if ( is_array( $plugins_data ) ) {
 					foreach ( $plugins_data as $plugin ) {
 						if ( isset( $plugin['slug'] ) && isset( $plugin_category_map[ $plugin['slug'] ] ) ) {
 							$category = $plugin_category_map[ $plugin['slug'] ];
-							if ( ! in_array( $category, $categories ) ) {
+							if ( ! in_array( $category, $categories, true ) ) {
 								$categories[] = $category;
 							}
 						}
 					}
 				}
 			}
-			
+
 			return $categories;
 		}
 
@@ -661,7 +720,6 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				}
 			}
 		}
-
 	}
 
 endif;
@@ -673,4 +731,3 @@ endif;
  * @return WBCOM_TDI_ADMIN_SETTINGS
  */
 WBCOM_TDI_ADMIN_SETTINGS::instance();
-?>

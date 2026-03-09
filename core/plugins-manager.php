@@ -1,20 +1,43 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
-	return; }
+<?php
+/**
+ * Plugin manager for demo installer.
+ *
+ * @package WBCOM_Theme_Demo_Installer
+ */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	return;
+}
+
+/**
+ * Handles plugin installation, activation, and status checks for demo imports.
+ *
+ * @class WBCOM_Demo_Importer_Plugins_Manager
+ * @since 1.0.0
+ */
 class WBCOM_Demo_Importer_Plugins_Manager {
 
 	/**
-	 * @var WBCOM_Demo_Importer_Plugins_Manager The single instance of the class
+	 * The single instance of the class.
+	 *
+	 * @var WBCOM_Demo_Importer_Plugins_Manager
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
-	var $plugins = array();
+	/**
+	 * Registered plugins array.
+	 *
+	 * @var array
+	 */
+	public $plugins = array();
 
 	/**
-	 * @var TGM_Plugin_Activation Instance
+	 * TGM Plugin Activation instance.
+	 *
+	 * @var TGM_Plugin_Activation
 	 */
-	var $tgmpa;
+	public $tgmpa;
 
 	const WP_REPO_REGEX = '|^http[s]?://wordpress\.org/(?:extend/)?plugins/|';
 	const IS_URL_REGEX  = '|^http[s]?://|';
@@ -38,24 +61,22 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Main class constructor
+	 * Main class constructor.
 	 */
-	function __construct() {
+	public function __construct() {
 
-		// register the plugins in our class
+		// Register the plugins in our class.
 		add_action( 'init', array( $this, 'populate_plugins' ) );
 
-		// Register Ajax actions
+		// Register Ajax actions.
 		add_action( 'wp_ajax_wbcom_manage_plugin_installation', array( $this, 'do_plugin_action' ) );
 
 		add_action( 'tgmpa_register', array( $this, 'required_plugins' ) );
-
-		// run code on class init
-		// do_action( 'WBCOM_Demo_Importer_Plugins_Manager_init' );
-
-		// add_filter( 'tgmpa_load', array( $this, 'tgmpa_load_hook' ) );
 	}
 
+	/**
+	 * Register required plugins with TGMPA.
+	 */
 	public function required_plugins() {
 		/*
 		 * Array of plugin arrays. Required keys are name and slug.
@@ -91,6 +112,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 
+	/**
+	 * Populate plugins list from required plugins configuration.
+	 */
 	public function populate_plugins() {
 
 		include_once 'class-tgm-plugin-activation.php';
@@ -98,9 +122,6 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$this->tgmpa = TGM_Plugin_Activation::get_instance();
 
 		$this->tgmpa->populate_file_path();
-
-		// $this->plugins = $this->tgmpa->plugins;
-		// $this->plugins = $this->get_required_plugins();
 
 		$get_required_plugins  = $this->get_required_plugins();
 		$_get_required_plugins = array();
@@ -110,33 +131,46 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			}
 		}
 		$this->plugins = $_get_required_plugins;
-
 	}
 
+	/**
+	 * Hook to determine if TGMPA should load.
+	 *
+	 * @return bool Whether to load TGMPA.
+	 */
 	public function tgmpa_load_hook() {
 		return is_admin();
 	}
 
+	/**
+	 * Handle plugin install/activate AJAX actions.
+	 */
 	public function do_plugin_action() {
-		// Security check
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wbcom_demo_installer_nonce' ) ) {
-			wp_send_json_error( array( 'error' => __( 'Security check failed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
-		}
-		
-		// Capability check
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( array( 'error' => __( 'You do not have permission to install plugins', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN ) ) );
+		// Security check.
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wbcom_demo_installer_nonce' ) ) {
+			wp_send_json_error( array( 'error' => __( 'Security check failed', 'wbcom-theme-demo-installer' ) ) );
 		}
 
-		$action                = ! empty( $_POST['plugin_action'] ) ? sanitize_text_field( $_POST['plugin_action'] ) : false;
-		$slug                  = ! empty( $_POST['plugin_slug'] ) ? sanitize_text_field( $_POST['plugin_slug'] ) : false;
-		$demo                  = ! empty( $_POST['demo'] ) ? sanitize_text_field( $_POST['demo'] ) : false;
+		// Capability check.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( array( 'error' => __( 'You do not have permission to install plugins', 'wbcom-theme-demo-installer' ) ) );
+		}
+
+		$action                = ! empty( $_POST['plugin_action'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_action'] ) ) : false;
+		$slug                  = ! empty( $_POST['plugin_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_slug'] ) ) : false;
+		$demo                  = ! empty( $_POST['demo'] ) ? sanitize_text_field( wp_unslash( $_POST['demo'] ) ) : false;
 		$_get_required_plugins = array();
 		$url_to_request        = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $demo . '/plugins.json';
-		$response              = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+		$response              = wp_remote_get(
+			$url_to_request,
+			array(
+				'sslverify' => false,
+				'timeout'   => 120,
+			)
+		);
 
 		if ( ! is_wp_error( $response ) ) {
-			if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+			if ( isset( $response['response']['code'] ) && 200 === (int) $response['response']['code'] ) {
 				$response = isset( $response['body'] ) ? $response['body'] : '';
 				if ( ! empty( $response ) ) {
 					$response = json_decode( $response, true );
@@ -162,15 +196,14 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			default:
 				break;
 		}
-
 	}
 
 	/**
-	 * Performs the plugin update
+	 * Performs the plugin update.
 	 *
-	 * @param string $slug [description]
+	 * @param string $slug Plugin slug.
 	 */
-	function do_plugin_update( $slug ) {
+	public function do_plugin_update( $slug ) {
 
 		$status = $this->get_plugin_status( $slug );
 
@@ -203,7 +236,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 				wp_send_json_error( $status );
 			}
 
-			if ( $active === true ) {
+			if ( true === $active ) {
 				$this->tgmpa->populate_file_path( $slug );
 				$result = activate_plugin( $this->plugins[ $slug ]['file_path'] );
 				if ( is_wp_error( $result ) ) {
@@ -211,29 +244,28 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 				}
 			}
 
-			// Return the status of the plugin
+			// Return the status of the plugin.
 			$status = $this->get_plugin_status( $slug );
 			wp_send_json_success( $status );
 		}
 
 		$status['error'] = 'The plugin does not have an update.';
 		wp_send_json_error( $status );
-
 	}
 
 	/**
-	 * Enable a child theme
+	 * Enable a child theme.
 	 *
-	 * @param  string $slug The slug used in the addons config file for the child theme
-	 * @return string A json formatted value
+	 * @param  string $slug The slug used in the addons config file for the child theme.
+	 * @return void
 	 */
-	function enable_child_theme( $slug ) {
+	public function enable_child_theme( $slug ) {
 
 		$status = $this->get_plugin_status( $slug );
 
-		// Get all installed themes
+		// Get all installed themes.
 		$current_installed_themes = wp_get_themes();
-		// Get the themes currently installed
+		// Get the themes currently installed.
 		$active_theme      = wp_get_theme();
 		$theme_folder_name = $active_theme->get_template();
 
@@ -247,7 +279,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			}
 		}
 
-		if ( $child_theme !== false ) {
+		if ( false !== $child_theme ) {
 			switch_theme( $child_theme->get_stylesheet() );
 			$status = $this->get_plugin_status( $slug );
 		}
@@ -255,7 +287,12 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		wp_send_json_success( $status );
 	}
 
-	function install_child_theme( $slug ) {
+	/**
+	 * Install a child theme from its download URL.
+	 *
+	 * @param string $slug The child theme slug.
+	 */
+	public function install_child_theme( $slug ) {
 		if ( empty( $this->plugins[ $slug ] ) ) {
 			wp_send_json_error( array( 'error' => 'We don\'t know anything about this theme' ) );
 		}
@@ -276,9 +313,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$upgrader = new Theme_Upgrader( $skin, array( 'clear_destination' => true ) );
 		$result   = $upgrader->install( $url );
 
-		// There is a bug in WP where the install method can return null in case the folder already exists
-		// see https://core.trac.wordpress.org/ticket/27365
-		if ( $result === null && ! empty( $skin->result ) ) {
+		// There is a bug in WP where the install method can return null in case the folder already exists.
+		// see https://core.trac.wordpress.org/ticket/27365.
+		if ( null === $result && ! empty( $skin->result ) ) {
 			$result = $skin->result;
 		}
 
@@ -292,15 +329,15 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Will check if a child theme is installed for the current theme
+	 * Will check if a child theme is installed for the current theme.
 	 *
-	 * @return boolean true/false if a child theme is installed or not
+	 * @return boolean true/false if a child theme is installed or not.
 	 */
-	function is_child_theme_installed() {
+	public function is_child_theme_installed() {
 
-		// Get all installed themes
+		// Get all installed themes.
 		$current_installed_themes = wp_get_themes();
-		// Get the themes currently installed
+		// Get the themes currently installed.
 		$active_theme      = wp_get_theme();
 		$theme_folder_name = $active_theme->get_template();
 
@@ -316,84 +353,88 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Checks if a child theme is active or not
+	 * Checks if a child theme is active or not.
 	 *
-	 * @return boolean If the child theme is in use
+	 * @return boolean If the child theme is in use.
 	 */
-	function is_child_theme_active() {
+	public function is_child_theme_active() {
 		$active_theme = wp_get_theme();
 		$template     = $active_theme->get( 'Template' );
 		return ! empty( $template );
 	}
 
-	function get_addon_config( $plugin_slug ) {
+	/**
+	 * Retrieve the addon configuration for a given plugin slug.
+	 *
+	 * @param string $plugin_slug The plugin slug.
+	 * @return array|void The plugin configuration array or void if not found.
+	 */
+	public function get_addon_config( $plugin_slug ) {
 		if ( ! empty( $this->plugins[ $plugin_slug ] ) ) {
 			return $this->plugins[ $plugin_slug ];
 		}
 	}
 
 	/**
-	 * Returns the status and actions for a plugin
+	 * Returns the status and actions for a plugin.
 	 *
-	 * @param  string $plugin_slug The plugin slug
-	 * @return array  The status and actions for the requested plugin
+	 * @param  string $plugin_slug The plugin slug.
+	 * @return array  The status and actions for the requested plugin.
 	 */
-	function get_plugin_status( $plugin_slug ) {
+	public function get_plugin_status( $plugin_slug ) {
 
 		$status        = array();
 		$plugin_config = $this->get_addon_config( $plugin_slug );
 
-		if ( isset( $plugin_config['addon_type'] ) && $plugin_config['addon_type'] === 'child_theme' ) {
-			// We have a theme
+		if ( isset( $plugin_config['addon_type'] ) && 'child_theme' === $plugin_config['addon_type'] ) {
+			// We have a theme.
 			if ( $this->is_child_theme_installed() ) {
-				// Check if the theme is active or not
+				// Check if the theme is active or not.
 				if ( $this->is_child_theme_active() ) {
 					$status['status']      = 'wbcom-active wbcom-addons-disabled';
-					$status['status_text'] = __( 'Active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Child theme installed and active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+					$status['status_text'] = __( 'Active', 'wbcom-theme-demo-installer' );
+					$status['action_text'] = __( 'Child theme installed and active', 'wbcom-theme-demo-installer' );
 					$status['action']      = 'no_action';
 				} else {
 					$status['status']      = 'wbcom-inactive';
-					$status['status_text'] = __( 'Inactive', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Activate child theme', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+					$status['status_text'] = __( 'Inactive', 'wbcom-theme-demo-installer' );
+					$status['action_text'] = __( 'Activate child theme', 'wbcom-theme-demo-installer' );
 					$status['action']      = 'enable_child_theme';
 				}
 			} else {
 				$status['status']      = 'wbcom-needs-install';
-				$status['status_text'] = __( 'Not installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action_text'] = __( 'Install child theme', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+				$status['status_text'] = __( 'Not installed', 'wbcom-theme-demo-installer' );
+				$status['action_text'] = __( 'Install child theme', 'wbcom-theme-demo-installer' );
 				$status['action']      = 'install_theme';
 
 				if ( ! current_user_can( 'install_themes' ) ) {
 					$status['status']      = 'wbcom-not-installed wbcom-addons-disabled';
-					$status['action_text'] = __( 'Permissions needed to install child themes. Contact site administrator.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
+					$status['action_text'] = __( 'Permissions needed to install child themes. Contact site administrator.', 'wbcom-theme-demo-installer' );
 					$status['action']      = 'contact_network_admin';
 				}
 			}
-		} else {
-			if ( $this->is_plugin_installed( $plugin_slug ) ) {
-				if ( $this->is_plugin_active( $plugin_slug ) ) {
-					$status['status']      = 'wbcom-active';
-					$status['status_text'] = __( 'Active', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'disable_plugin';
-				} else {
-					$status['status']      = 'wbcom-inactive';
-					$status['status_text'] = __( 'Inactive', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action_text'] = __( 'Activate', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'enable_plugin';
-				}
+		} elseif ( $this->is_plugin_installed( $plugin_slug ) ) {
+			if ( $this->is_plugin_active( $plugin_slug ) ) {
+				$status['status']      = 'wbcom-active';
+				$status['status_text'] = __( 'Active', 'wbcom-theme-demo-installer' );
+				$status['action_text'] = __( 'Installed', 'wbcom-theme-demo-installer' );
+				$status['action']      = 'disable_plugin';
 			} else {
-				$status['status']      = 'wbcom-not-installed';
-				$status['status_text'] = __( 'Not Installed', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action_text'] = __( 'Install Now', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-				$status['action']      = 'install_plugin';
+				$status['status']      = 'wbcom-inactive';
+				$status['status_text'] = __( 'Inactive', 'wbcom-theme-demo-installer' );
+				$status['action_text'] = __( 'Activate', 'wbcom-theme-demo-installer' );
+				$status['action']      = 'enable_plugin';
+			}
+		} else {
+			$status['status']      = 'wbcom-not-installed';
+			$status['status_text'] = __( 'Not Installed', 'wbcom-theme-demo-installer' );
+			$status['action_text'] = __( 'Install Now', 'wbcom-theme-demo-installer' );
+			$status['action']      = 'install_plugin';
 
-				if ( ! current_user_can( 'install_plugins' ) ) {
-					$status['status']      = 'wbcom-not-installed wbcom-addons-disabled';
-					$status['action_text'] = __( 'You don\'t have permission to install plugins. Contact site administrator.', WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-					$status['action']      = 'contact_network_admin';
-				}
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				$status['status']      = 'wbcom-not-installed wbcom-addons-disabled';
+				$status['action_text'] = __( 'You don\'t have permission to install plugins. Contact site administrator.', 'wbcom-theme-demo-installer' );
+				$status['action']      = 'contact_network_admin';
 			}
 		}
 
@@ -412,11 +453,12 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Performs plugin update
+	 * Performs plugin update.
 	 *
-	 * @return type
+	 * @param string $slug Plugin slug.
+	 * @return bool Whether the plugin has an update available.
 	 */
-	function plugin_has_update( $slug ) {
+	public function plugin_has_update( $slug ) {
 		if ( empty( $this->plugins[ $slug ] ) ) {
 			return false;
 		}
@@ -425,17 +467,16 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$minimum_version   = $this->plugins[ $slug ]['version'];
 
 		return version_compare( $minimum_version, $installed_version, '>' );
-
 	}
 
 	/**
-	 * Performs plugins installation
+	 * Performs plugins installation.
 	 *
-	 * @param string  $slug
-	 * @param boolean $echo
-	 * @return void | array
+	 * @param string  $slug Plugin slug.
+	 * @param boolean $echo Whether to echo JSON response or return status array.
+	 * @return void|array Status array when echo is false, void otherwise.
 	 */
-	function do_plugin_install( $slug, $echo = true ) {
+	public function do_plugin_install( $slug, $echo = true ) {
 
 		if ( empty( $this->plugins[ $slug ] ) ) {
 			return false;
@@ -456,7 +497,8 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 
 		$method = ''; // Leave blank so WP_Filesystem can populate it as necessary.
 
-		if ( false === ( $creds = request_filesystem_credentials( esc_url_raw( $url ), $method, false, false, array() ) ) ) {
+		$creds = request_filesystem_credentials( esc_url_raw( $url ), $method, false, false, array() );
+		if ( false === $creds ) {
 			return true;
 		}
 
@@ -476,9 +518,9 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		$result = $upgrader->install( $url );
 		remove_filter( 'http_request_args', array( $this, 'increase_redirect_limit' ), 10 );
 
-		// There is a bug in WP where the install method can return null in case the folder already exists
-		// see https://core.trac.wordpress.org/ticket/27365
-		if ( $result === null && ! empty( $skin->result ) ) {
+		// There is a bug in WP where the install method can return null in case the folder already exists.
+		// See https://core.trac.wordpress.org/ticket/27365.
+		if ( null === $result && ! empty( $skin->result ) ) {
 			$result = $skin->result;
 		}
 
@@ -510,15 +552,15 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		} else {
 			return $status;
 		}
-
 	}
 
 	/**
-	 * Performs a plugin deactivation
+	 * Performs a plugin deactivation.
 	 *
-	 * @return type
+	 * @param string $slug Plugin slug.
+	 * @return void
 	 */
-	function do_plugin_deactivate( $slug ) {
+	public function do_plugin_deactivate( $slug ) {
 
 		$status = $this->get_plugin_status( $slug );
 
@@ -531,17 +573,16 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 
 		$status = $this->get_plugin_status( $slug );
 		wp_send_json_success( $status );
-
 	}
 
 	/**
-	 * Performs plugins activation
+	 * Performs plugins activation.
 	 *
-	 * @param string $slug
-	 * @param bool   $echo
-	 * @return void | array
+	 * @param string $slug Plugin slug.
+	 * @param bool   $echo Whether to echo JSON response or return status array.
+	 * @return void|array Status array when echo is false, void otherwise.
 	 */
-	function do_plugin_activate( $slug, $echo = true ) {
+	public function do_plugin_activate( $slug, $echo = true ) {
 
 		$status = $this->get_plugin_status( $slug );
 
@@ -574,7 +615,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		}
 	}
 
-	function _get_plugin_file_path_from_slug( $slug ) {
+	/**
+	 * Get the plugin file path from slug by searching installed plugins.
+	 *
+	 * @param string $slug Plugin slug.
+	 * @return string The plugin file path or the slug if not found.
+	 */
+	public function _get_plugin_file_path_from_slug( $slug ) {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
@@ -589,15 +636,15 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	}
 
 	/**
-	 * Returns the install url for the current plugin
+	 * Returns the install url for the current plugin.
 	 *
-	 * @param string $slug
-	 * @return string
+	 * @param string $slug Plugin slug.
+	 * @return string The download URL for the plugin.
 	 */
 	public function get_download_url( $slug ) {
 		$dl_source = '';
 
-		// Prefer download_url (direct ZIP) over external_url (may be a webpage)
+		// Prefer download_url (direct ZIP) over external_url (may be a webpage).
 		if ( ! empty( $this->plugins[ $slug ]['download_url'] ) ) {
 			return $this->plugins[ $slug ]['download_url'];
 		}
@@ -620,7 +667,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		return $dl_source; // Should never happen.
 	}
 
-	function _get_plugin_source_type( $source ) {
+	/**
+	 * Determine the plugin source type based on the source string.
+	 *
+	 * @param string $source The plugin source string.
+	 * @return string The source type: 'repo', 'external', or 'bundled'.
+	 */
+	public function _get_plugin_source_type( $source ) {
 		if ( 'repo' === $source || preg_match( self::WP_REPO_REGEX, $source ) ) {
 			return 'repo';
 		} elseif ( preg_match( self::IS_URL_REGEX, $source ) ) {
@@ -630,8 +683,14 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		}
 	}
 
-	function get_wp_repo_download_url( $slug ) {
-		include_once ABSPATH . 'wp-admin/includes/plugin-install.php'; // for plugins_api..
+	/**
+	 * Get the download URL for a plugin from the WordPress.org repository.
+	 *
+	 * @param string $slug Plugin slug.
+	 * @return string The download link from the WordPress.org API.
+	 */
+	public function get_wp_repo_download_url( $slug ) {
+		include_once ABSPATH . 'wp-admin/includes/plugin-install.php'; // For plugins_api.
 		$api = plugins_api(
 			'plugin_information',
 			array(
@@ -711,6 +770,13 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		return $this->tgmpa->get_plugins( $plugin_folder );
 	}
 
+	/**
+	 * Increase the HTTP redirect limit for plugin downloads.
+	 *
+	 * @param array  $args HTTP request arguments.
+	 * @param string $url  The request URL.
+	 * @return array Modified HTTP request arguments.
+	 */
 	public function increase_redirect_limit( $args, $url ) {
 		if ( isset( $args['redirection'] ) && $args['redirection'] < 10 ) {
 			$args['redirection'] = 10;
@@ -718,15 +784,28 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 		return $args;
 	}
 
+	/**
+	 * Retrieve the list of required plugins from a remote JSON configuration.
+	 *
+	 * @return array|void Array of required plugins or void if conditions are not met.
+	 */
 	public function get_required_plugins() {
-		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === sanitize_text_field( $_GET['step'] ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['theme_slug'] ) && isset( $_GET['step'] ) && 'plugins_manager' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) {
 
-			$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( $_GET['plugins_json_key'] ) : '';
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$plugins_json_key = isset( $_GET['plugins_json_key'] ) ? sanitize_text_field( wp_unslash( $_GET['plugins_json_key'] ) ) : '';
 			$url_to_request   = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_json_key . '/plugins.json';
-			$response       = wp_remote_get( $url_to_request, array( 'sslverify' => false, 'timeout' => 120 ) );
+			$response         = wp_remote_get(
+				$url_to_request,
+				array(
+					'sslverify' => false,
+					'timeout'   => 120,
+				)
+			);
 
 			if ( ! is_wp_error( $response ) ) {
-				if ( isset( $response['response']['code'] ) && ( $response['response']['code'] == 200 ) ) {
+				if ( isset( $response['response']['code'] ) && 200 === (int) $response['response']['code'] ) {
 					$response = isset( $response['body'] ) ? $response['body'] : '';
 					if ( ! empty( $response ) ) {
 						$response = json_decode( $response, true );
@@ -737,9 +816,7 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 				}
 			}
 		}
-
 	}
-
 }
 
 /**
@@ -749,4 +826,3 @@ function instantiate_wbcom_demo_importer_plugins_manager() {
 	return WBCOM_Demo_Importer_Plugins_Manager::instance();
 }
 instantiate_wbcom_demo_importer_plugins_manager();
-

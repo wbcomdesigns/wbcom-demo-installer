@@ -18,7 +18,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
@@ -78,6 +78,7 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 
 		/**
 		 * Hook into actions and filters.
+		 *
 		 * @since  1.0.0
 		 */
 		private function init_hooks() {
@@ -86,7 +87,13 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 			add_action( 'wp', array( $this, 'installer_update_checker' ) );
 		}
 
-		function alter_plugin_action_links( $plugin_links ) {
+		/**
+		 * Add settings link to plugin action links.
+		 *
+		 * @param array $plugin_links Existing plugin links.
+		 * @return array Modified plugin links.
+		 */
+		public function alter_plugin_action_links( $plugin_links ) {
 			$settings_link = '<a href="admin.php?page=wbcom-theme-demo-installer">Settings</a>';
 			array_unshift( $plugin_links, $settings_link );
 			return $plugin_links;
@@ -109,8 +116,8 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 		/**
 		 * Define constant if not already set.
 		 *
-		 * @param  string $name
-		 * @param  string|bool $value
+		 * @param  string      $name  Constant name.
+		 * @param  string|bool $value Constant value.
 		 */
 		private function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
@@ -132,21 +139,23 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 		 * Load Localisation files.
 		 */
 		public function load_plugin_textdomain() {
-			$locale = apply_filters( 'wbcom_theme_demo_installer_plugin_locale', get_locale(), WBCOM_Theme_Demo_Installer_TEXT_DOMAIN );
-			load_textdomain( WBCOM_Theme_Demo_Installer_TEXT_DOMAIN, WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'language/' . WBCOM_Theme_Demo_Installer_TEXT_DOMAIN . '-' . $locale . '.mo' );
-			load_plugin_textdomain( WBCOM_Theme_Demo_Installer_TEXT_DOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/language' );
+			$locale = apply_filters( 'wbcom_theme_demo_installer_plugin_locale', get_locale(), 'wbcom-theme-demo-installer' );
+			load_textdomain( 'wbcom-theme-demo-installer', WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'language/wbcom-theme-demo-installer-' . $locale . '.mo' );
+			load_plugin_textdomain( 'wbcom-theme-demo-installer', false, plugin_basename( __DIR__ ) . '/language' );
 		}
 
+		/**
+		 * Initialize the plugin update checker.
+		 */
 		public function installer_update_checker() {
-			if( class_exists( 'PucFactory' ) ){
-				$myUpdateChecker = PucFactory::buildUpdateChecker(
+			if ( class_exists( 'PucFactory' ) ) {
+				$my_update_checker = PucFactory::buildUpdateChecker(
 					'https://demos.wbcomdesigns.com/exporter/free-plugins/wbcom-demo-installer.json',
 					__FILE__,
 					'wbcom-demo-installer'
 				);
 			}
 		}
-
 	}
 
 endif;
@@ -165,4 +174,3 @@ function instantiate_wbcom_theme_demo_installer() {
 
 // Global for backwards compatibility.
 $GLOBALS['wbcom_theme_demo_installer'] = instantiate_wbcom_theme_demo_installer();
-
