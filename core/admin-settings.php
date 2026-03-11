@@ -67,6 +67,111 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 		private function init_hooks() {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_init', array( $this, 'maybe_repair_geodir_detail_table' ) );
+		}
+
+		/**
+		 * One-time repair: ensure every imported GeoDirectory place post has a matching
+		 * detail-table row, and that all custom field columns exist in the detail table.
+		 * Runs once and sets a flag so it never runs again.
+		 *
+		 * Two problems after demo import:
+		 * 1. Post IDs mismatch: XML import reassigns IDs but JSON import keeps source IDs.
+		 * 2. Missing columns: custom field ALTER TABLE statements were never run because the
+		 *    geodir_custom_fields table was imported directly, bypassing the admin UI that
+		 *    normally triggers geodir_add_column_if_not_exist().
+		 */
+		public function maybe_repair_geodir_detail_table() {
+			if ( get_option( 'wbcom_geodir_detail_repaired_v2' ) ) {
+				return;
+			}
+
+			if ( class_exists( 'GeoDirectory' ) ) {
+				$this->sync_geodir_custom_field_columns();
+				$this->populate_geodir_detail_table();
+			}
+
+			update_option( 'wbcom_geodir_detail_repaired_v2', true );
+		}
+
+		/**
+		 * Add any missing custom field columns to the GeoDirectory detail tables.
+		 *
+		 * When the demo imports geodir_custom_fields directly via JSON, the ALTER TABLE
+		 * operations that normally add matching columns to the detail table are skipped.
+		 * This method runs those operations for any columns that are missing.
+		 */
+		public function sync_geodir_custom_field_columns() {
+			global $wpdb;
+
+			if ( ! function_exists( 'geodir_add_column_if_not_exist' ) ) {
+				return;
+			}
+
+			$custom_fields_table = defined( 'GEODIR_CUSTOM_FIELDS_TABLE' ) ? GEODIR_CUSTOM_FIELDS_TABLE : $wpdb->prefix . 'geodir_custom_fields';
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$fields = $wpdb->get_results( "SELECT post_type, htmlvar_name, data_type, field_type FROM `{$custom_fields_table}` WHERE is_active = 1" );
+
+			if ( empty( $fields ) ) {
+				return;
+			}
+
+			// Core columns that are part of the base table schema - never need ALTER TABLE.
+			$core_columns = array(
+				'post_title', 'post_status', 'post_tags', 'post_category',
+				'default_category', 'featured', 'featured_image', 'submit_ip',
+				'overall_rating', 'rating_count', 'street', 'street2', 'city',
+				'region', 'country', 'zip', 'latitude', 'longitude', 'mapview', 'mapzoom',
+			);
+
+			foreach ( $fields as $field ) {
+				if ( empty( $field->htmlvar_name ) || empty( $field->post_type ) ) {
+					continue;
+				}
+
+				// Core columns already exist in the table schema.
+				if ( in_array( $field->htmlvar_name, $core_columns, true ) ) {
+					continue;
+				}
+
+				// Fieldset fields do not have a corresponding column.
+				if ( 'fieldset' === $field->field_type ) {
+					continue;
+				}
+
+				$table = $wpdb->prefix . 'geodir_' . $field->post_type . '_detail';
+
+				// Check if detail table exists.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
+					continue;
+				}
+
+				// Map data_type to an appropriate column definition.
+				$data_type = strtoupper( (string) $field->data_type );
+				if ( 'INT' === $data_type ) {
+					$col_def = 'INT NULL DEFAULT NULL';
+				} elseif ( 'DECIMAL' === $data_type ) {
+					$col_def = 'DECIMAL(11,4) NULL DEFAULT NULL';
+				} elseif ( 'FLOAT' === $data_type ) {
+					$col_def = 'FLOAT NULL DEFAULT NULL';
+				} elseif ( 'TINYINT' === $data_type ) {
+					$col_def = "TINYINT(1) NOT NULL DEFAULT '0'";
+				} elseif ( 'VARCHAR' === $data_type ) {
+					$col_def = 'VARCHAR(255) NULL DEFAULT NULL';
+				} elseif ( 'DATE' === $data_type ) {
+					$col_def = 'DATE NULL DEFAULT NULL';
+				} elseif ( 'TIME' === $data_type ) {
+					$col_def = 'TIME NULL DEFAULT NULL';
+				} elseif ( 'DATETIME' === $data_type ) {
+					$col_def = 'DATETIME NULL DEFAULT NULL';
+				} else {
+					$col_def = 'TEXT NULL DEFAULT NULL';
+				}
+
+				geodir_add_column_if_not_exist( $table, $field->htmlvar_name, $col_def );
+			}
 		}
 
 		/**
@@ -193,10 +298,21 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				if ( function_exists( 'geodir_tool_restore_cpt_from_taxonomies' ) ) {
 					geodir_tool_restore_cpt_from_taxonomies();
 				}
-				// Populate GeoDirectory detail table from wp_posts if empty after import.
+				// Sync GeoDirectory custom field columns and populate detail table after import.
 				if ( class_exists( 'GeoDirectory' ) ) {
+					$this->sync_geodir_custom_field_columns();
 					$this->populate_geodir_detail_table();
+					// Rebuild GeoDirectory page references in case pages were re-imported with new IDs.
+					if ( class_exists( 'GeoDir_Admin_Install' ) ) {
+						GeoDir_Admin_Install::create_pages();
+					}
+					// Reset repair flag so it re-runs on next admin load for any missed items.
+					delete_option( 'wbcom_geodir_detail_repaired_v2' );
 				}
+
+				// Flush rewrite rules so CPT archive slugs (e.g. /places/) work correctly
+				// after re-import. Without this, WordPress serves stale routing rules.
+				flush_rewrite_rules( false );
 				return;
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( isset( $_GET['theme_slug'] ) && isset( $_GET['demo_slug'] ) && isset( $_GET['step'] ) && ( 'demo_import' === sanitize_text_field( wp_unslash( $_GET['step'] ) ) ) ) {
@@ -651,13 +767,6 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 					continue;
 				}
 
-				// Only populate if the detail table is empty.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				$detail_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}`" );
-				if ( $detail_count > 0 ) {
-					continue;
-				}
-
 				// Get all published posts for this post type.
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$posts = $wpdb->get_results(
@@ -674,6 +783,15 @@ if ( ! class_exists( 'WBCOM_TDI_ADMIN_SETTINGS' ) ) :
 				$taxonomy = $post_type . 'category';
 
 				foreach ( $posts as $post ) {
+					// Skip if a detail row already exists for this post ID.
+					// Handles the case where the demo JSON import populated the table with
+					// source-site IDs that don't match the locally re-assigned post IDs.
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+					$existing = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM `{$table}` WHERE post_id = %d", $post->ID ) );
+					if ( $existing ) {
+						continue;
+					}
+
 					// Get categories from term relationships.
 					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 					$term_ids = $wpdb->get_col(

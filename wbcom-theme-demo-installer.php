@@ -85,6 +85,73 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 			add_filter( 'plugin_action_links_' . WBCOM_Theme_Demo_Installer_PLUGIN_BASENAME, array( $this, 'alter_plugin_action_links' ) );
 			add_action( 'wp', array( $this, 'installer_update_checker' ) );
+			add_filter( 'geodir_is_archive_page_id', array( $this, 'fix_geodir_archive_page_id' ), 10, 2 );
+		}
+
+		/**
+		 * Fix GeoDirectory archive page loop warnings after demo re-import.
+		 *
+		 * Root cause: GeoDir_Template_Loader::setup_archive_loop_as_page() replaces
+		 * $wp_query->posts with [archive_page] (1 element) and only resets post_count
+		 * to 1 when no places exist. When places DO exist, post_count stays at 10 but
+		 * posts has 1 element. GeoDirectory's setup_archive_page_content() filter was
+		 * supposed to stop the outer loop (by setting current_post = post_count), but
+		 * it only fires when is_archive_page_content() returns true — which requires
+		 * is_archive_page_id($post->ID) to match geodir_settings['page_archive'].
+		 *
+		 * After re-import, the settings can be stale (old page IDs) so the IDs don't
+		 * match, the outer loop stopper never fires, and next_post() generates
+		 * "Undefined array key 1...9" warnings.
+		 *
+		 * Fix: add a geodir_is_archive_page_id filter that returns true for the exact
+		 * archive page GeoDirectory chose ($wp_query->posts[0]) when $gd_temp_wp_query
+		 * is non-empty (i.e., we are inside the GeoDirectory archive page setup state).
+		 * This allows GeoDirectory's own loop management to run correctly:
+		 * - restores all place posts into $wp_query->posts
+		 * - runs the inner listing loop at full post_count
+		 * - stops the outer theme loop via current_post = post_count
+		 *
+		 * @param bool $result Current result.
+		 * @param int  $id     Page ID being checked.
+		 * @return bool
+		 */
+		public function fix_geodir_archive_page_id( $result, $id ) {
+			if ( $result ) {
+				return $result;
+			}
+
+			// Only applies on GeoDirectory CPT archives (/places/) and taxonomy archives
+			// (/places/category/restaurants/ etc.) — the two page types that call
+			// setup_archive_loop_as_page() which triggers this mismatch.
+			$is_gd_archive = (
+				( function_exists( 'geodir_is_post_type_archive' ) && geodir_is_post_type_archive() ) ||
+				( function_exists( 'geodir_is_taxonomy' ) && geodir_is_taxonomy() )
+			);
+
+			if ( ! $is_gd_archive ) {
+				return $result;
+			}
+
+			global $wp_query, $gd_temp_wp_query;
+
+			// Only apply when GeoDirectory has saved the real listing posts in $gd_temp_wp_query
+			// (i.e., setup_archive_loop_as_page has run and replaced $wp_query->posts with a
+			// single archive template page) AND the $id being checked is exactly that page.
+			// This ensures setup_archive_page_content() fires and:
+			//   1. Restores all listing posts into $wp_query->posts.
+			//   2. Runs the inner listing loop at the full post_count.
+			//   3. Stops the outer theme loop via current_post = post_count.
+			if (
+				! empty( $gd_temp_wp_query ) &&
+				! empty( $wp_query->posts ) &&
+				count( $wp_query->posts ) === 1 &&
+				! empty( $wp_query->posts[0]->ID ) &&
+				(int) $wp_query->posts[0]->ID === (int) $id
+			) {
+				return true;
+			}
+
+			return $result;
 		}
 
 		/**
