@@ -486,6 +486,16 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 
 		$status = $this->get_plugin_status( $slug );
 
+		// Unreachable via AJAX (get_wp_repo_download_url dies there); WP-CLI callers get the error back.
+		if ( is_wp_error( $url ) ) {
+			$status['error'] = $url->get_error_message();
+			if ( $echo ) {
+				wp_send_json_error( $status );
+			} else {
+				return $status;
+			}
+		}
+
 		if ( ! current_user_can( 'install_plugins' ) ) {
 			$status['error'] = 'You don\'t have permissions to install plugins';
 			if ( $echo ) {
@@ -687,7 +697,8 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 	 * Get the download URL for a plugin from the WordPress.org repository.
 	 *
 	 * @param string $slug Plugin slug.
-	 * @return string The download link from the WordPress.org API.
+	 * @return string|WP_Error The download link from the WordPress.org API, or WP_Error
+	 *                         for non-AJAX callers (e.g. WP-CLI) when the API fails.
 	 */
 	public function get_wp_repo_download_url( $slug ) {
 		include_once ABSPATH . 'wp-admin/includes/plugin-install.php'; // For plugins_api.
@@ -699,8 +710,12 @@ class WBCOM_Demo_Importer_Plugins_Manager {
 			)
 		); // Save on a bit of bandwidth.
 		if ( is_wp_error( $api ) ) {
-			$status['error'] = $api->get_error_message();
-			wp_send_json_error( $status );
+			if ( wp_doing_ajax() ) {
+				$status['error'] = $api->get_error_message();
+				wp_send_json_error( $status );
+			}
+
+			return $api;
 		}
 
 		return $api->download_link;

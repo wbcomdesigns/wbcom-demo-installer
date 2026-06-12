@@ -110,80 +110,11 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						$demo_slug  = sanitize_text_field( wp_unslash( $_POST['demo_slug'] ) );
 						$target_url = isset( $_POST['target_url'] ) ? esc_url_raw( wp_unslash( $_POST['target_url'] ) ) : '';
 
-						// Validate URL.
-						if ( ! filter_var( $target_url, FILTER_VALIDATE_URL ) ) {
+						$manifest = $this->fetch_demo_package_manifest( $theme_slug, $demo_slug, $target_url );
+
+						if ( is_wp_error( $manifest ) ) {
 							ob_end_clean();
-							wp_send_json_error( array( 'message' => __( 'Invalid target URL provided', 'wbcom-theme-demo-installer' ) ) );
-						}
-
-						// Add API key for internal exporter access.
-						$api_key        = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
-						$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
-
-						$response = wp_remote_post(
-							$url_to_request,
-							array(
-								'method'    => 'POST',
-								'timeout'   => 120,
-								'headers'   => array(
-									'Content-Type' => 'application/x-www-form-urlencoded',
-									'Accept'       => 'application/json',
-								),
-								'body'      => array(
-									'theme_slug' => $theme_slug,
-									'demo_slug'  => $demo_slug,
-								),
-								'sslverify' => false,
-							)
-						);
-
-						if ( is_wp_error( $response ) ) {
-							ob_end_clean();
-							wp_send_json_error(
-								array(
-									'message' => __( 'Failed to connect to demo server', 'wbcom-theme-demo-installer' ),
-									'details' => $response->get_error_message(),
-								)
-							);
-						}
-
-						$response_code = wp_remote_retrieve_response_code( $response );
-						$response_body = wp_remote_retrieve_body( $response );
-
-						if ( 200 !== $response_code ) {
-							ob_end_clean();
-							wp_send_json_error(
-								array(
-									/* translators: %d: HTTP response code. */
-									'message' => sprintf( __( 'Demo server returned error code %d', 'wbcom-theme-demo-installer' ), $response_code ),
-									'code'    => $response_code,
-								)
-							);
-						}
-
-						if ( empty( $response_body ) ) {
-							ob_end_clean();
-							wp_send_json_error( array( 'message' => __( 'Demo server returned empty response', 'wbcom-theme-demo-installer' ) ) );
-						}
-
-						// Clean any potential BOM or whitespace.
-						$response_body = trim( $response_body );
-
-						// Remove UTF-8 BOM if present.
-						$bom           = pack( 'H*', 'EFBBBF' );
-						$response_body = preg_replace( "/^$bom/", '', $response_body );
-
-						// Validate JSON before sending.
-						$json_test = json_decode( $response_body, true );
-						if ( JSON_ERROR_NONE !== json_last_error() ) {
-							ob_end_clean();
-
-							wp_send_json_error(
-								array(
-									'message'    => __( 'Invalid JSON response from demo server', 'wbcom-theme-demo-installer' ),
-									'json_error' => json_last_error_msg(),
-								)
-							);
+							wp_send_json_error( $manifest->get_error_data() );
 						}
 
 						// Clear output buffer.
@@ -194,7 +125,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 						// Output the clean JSON.
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw JSON passthrough.
-						echo $response_body;
+						echo $manifest['raw'];
 						wp_die();
 					}
 				}
@@ -210,6 +141,127 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 
 			ob_end_clean();
 			wp_send_json_error( array( 'message' => __( 'Invalid request', 'wbcom-theme-demo-installer' ) ) );
+		}
+
+		/**
+		 * Fetch the demo package manifest from the remote demo server.
+		 *
+		 * Shared by the AJAX handler and the WP-CLI command so both surfaces
+		 * resolve the demo package exactly the same way.
+		 *
+		 * @param string $theme_slug The theme slug.
+		 * @param string $demo_slug  The demo slug.
+		 * @param string $target_url The demo site URL to request the package from.
+		 * @return array|WP_Error Array with 'raw' (clean JSON string) and 'data' (decoded array) keys,
+		 *                        or WP_Error whose error data matches the AJAX error payload.
+		 */
+		public function fetch_demo_package_manifest( $theme_slug, $demo_slug, $target_url ) {
+			// Validate URL.
+			if ( ! filter_var( $target_url, FILTER_VALIDATE_URL ) ) {
+				$message = __( 'Invalid target URL provided', 'wbcom-theme-demo-installer' );
+				return new WP_Error( 'wbcom_demo_invalid_url', $message, array( 'message' => $message ) );
+			}
+
+			// Add API key for internal exporter access.
+			$api_key        = apply_filters( 'wbcom_demo_exporter_api_key', 'demo-export-2024' );
+			$url_to_request = $target_url . '?wbcom_theme_demo_listing=yes&api_key=' . $api_key;
+
+			$response = wp_remote_post(
+				$url_to_request,
+				array(
+					'method'    => 'POST',
+					'timeout'   => 120,
+					'headers'   => array(
+						'Content-Type' => 'application/x-www-form-urlencoded',
+						'Accept'       => 'application/json',
+					),
+					'body'      => array(
+						'theme_slug' => $theme_slug,
+						'demo_slug'  => $demo_slug,
+					),
+					'sslverify' => false,
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				return new WP_Error(
+					'wbcom_demo_http_error',
+					__( 'Failed to connect to demo server', 'wbcom-theme-demo-installer' ),
+					array(
+						'message' => __( 'Failed to connect to demo server', 'wbcom-theme-demo-installer' ),
+						'details' => $response->get_error_message(),
+					)
+				);
+			}
+
+			$response_code = wp_remote_retrieve_response_code( $response );
+			$response_body = wp_remote_retrieve_body( $response );
+
+			if ( 200 !== $response_code ) {
+				/* translators: %d: HTTP response code. */
+				$message = sprintf( __( 'Demo server returned error code %d', 'wbcom-theme-demo-installer' ), $response_code );
+				return new WP_Error(
+					'wbcom_demo_bad_status',
+					$message,
+					array(
+						'message' => $message,
+						'code'    => $response_code,
+					)
+				);
+			}
+
+			if ( empty( $response_body ) ) {
+				$message = __( 'Demo server returned empty response', 'wbcom-theme-demo-installer' );
+				return new WP_Error( 'wbcom_demo_empty_response', $message, array( 'message' => $message ) );
+			}
+
+			// Clean any potential BOM or whitespace.
+			$response_body = trim( $response_body );
+
+			// Remove UTF-8 BOM if present.
+			$bom           = pack( 'H*', 'EFBBBF' );
+			$response_body = preg_replace( "/^$bom/", '', $response_body );
+
+			// Validate JSON before sending.
+			$json_test = json_decode( $response_body, true );
+			if ( JSON_ERROR_NONE !== json_last_error() ) {
+				return new WP_Error(
+					'wbcom_demo_invalid_json',
+					__( 'Invalid JSON response from demo server', 'wbcom-theme-demo-installer' ),
+					array(
+						'message'    => __( 'Invalid JSON response from demo server', 'wbcom-theme-demo-installer' ),
+						'json_error' => json_last_error_msg(),
+					)
+				);
+			}
+
+			return array(
+				'raw'  => $response_body,
+				'data' => $json_test,
+			);
+		}
+
+		/**
+		 * Derive a database table name from a demo package file URL.
+		 *
+		 * Shared by the AJAX handler and the WP-CLI command.
+		 *
+		 * @param string $url_to_request The demo package file URL (e.g. .../posts_0001.json).
+		 * @return string The sanitized table name (without prefix), or empty string if invalid.
+		 */
+		public function get_table_name_from_file_url( $url_to_request ) {
+			$url_parts  = explode( '/', $url_to_request );
+			$filename   = end( $url_parts );
+			$table_name = str_replace( '.json', '', $filename );
+
+			// Remove number suffix from table name (e.g., posts_0001 -> posts).
+			// This handles both old format (posts_1) and new format (posts_0001).
+			$table_name = preg_replace( '/_\d+$/', '', $table_name );
+
+			// Sanitize table name to prevent SQL injection.
+			$table_name = preg_replace( '/[^a-zA-Z0-9_]/', '', $table_name );
+
+			return $table_name;
 		}
 
 		/**
@@ -261,16 +313,7 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 						// Validate URL.
 						if ( ! empty( $url_to_request ) && filter_var( $url_to_request, FILTER_VALIDATE_URL ) ) {
 							global $wpdb;
-							$url_parts  = explode( '/', $url_to_request );
-							$filename   = end( $url_parts );
-							$table_name = str_replace( '.json', '', $filename );
-
-							// Remove number suffix from table name (e.g., posts_0001 -> posts).
-							// This handles both old format (posts_1) and new format (posts_0001).
-							$table_name = preg_replace( '/_\d+$/', '', $table_name );
-
-							// Sanitize table name to prevent SQL injection.
-							$table_name = preg_replace( '/[^a-zA-Z0-9_]/', '', $table_name );
+							$table_name = $this->get_table_name_from_file_url( $url_to_request );
 
 							// Ensure table name is not empty after sanitization.
 							if ( empty( $table_name ) ) {
@@ -840,6 +883,25 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 				wp_send_json_error( array( 'message' => __( 'Source URL not provided', 'wbcom-theme-demo-installer' ) ) );
 			}
 
+			$this->finalize_import( $source_url );
+
+			wp_send_json_success(
+				array(
+					'message' => __( 'Demo import finalized successfully', 'wbcom-theme-demo-installer' ),
+				)
+			);
+		}
+
+		/**
+		 * Finalize a demo import for a given source URL.
+		 *
+		 * Performs the URL search-replace, activates BuddyPress users and clears
+		 * caches. Shared by the AJAX handler and the WP-CLI command.
+		 *
+		 * @param string $source_url The demo source URL imported content came from.
+		 * @return void
+		 */
+		public function finalize_import( $source_url ) {
 			// Parse the source URL.
 			$source_url_parsed = wp_parse_url( $source_url );
 
@@ -868,12 +930,6 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			if ( class_exists( '\Elementor\Plugin' ) ) {
 				\Elementor\Plugin::$instance->files_manager->clear_cache();
 			}
-
-			wp_send_json_success(
-				array(
-					'message' => __( 'Demo import finalized successfully', 'wbcom-theme-demo-installer' ),
-				)
-			);
 		}
 
 		/**
@@ -1169,44 +1225,61 @@ if ( ! class_exists( 'WBCOM_Demo_Importer_Ajax_Handler' ) ) :
 			}
 
 			if ( isset( $_POST['plugins_key'] ) ) {
-				$plugins_key = sanitize_text_field( wp_unslash( $_POST['plugins_key'] ) );
+				$plugins_key  = sanitize_text_field( wp_unslash( $_POST['plugins_key'] ) );
+				$plugins_data = $this->get_demo_plugins_list( $plugins_key );
 
-				// Try local file first.
-				$local_path = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
-				if ( file_exists( $local_path ) ) {
-					// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-					$plugins_data = file_get_contents( $local_path );
-					$plugins_data = json_decode( $plugins_data, true );
-
-					if ( $plugins_data ) {
-						wp_send_json_success( $plugins_data );
-					}
+				if ( $plugins_data ) {
+					wp_send_json_success( $plugins_data );
 				}
+			}
 
-				// Fallback to remote URL.
-				$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_key . '/plugins.json';
-				$response       = wp_remote_get(
-					$url_to_request,
-					array(
-						'sslverify' => false,
-						'timeout'   => 30,
-					)
-				);
+			wp_send_json_error( __( 'Failed to fetch plugin data', 'wbcom-theme-demo-installer' ) );
+		}
 
-				if ( ! is_wp_error( $response ) ) {
-					if ( isset( $response['response']['code'] ) && ( 200 === (int) $response['response']['code'] ) ) {
-						$response_body = isset( $response['body'] ) ? $response['body'] : '';
-						if ( ! empty( $response_body ) ) {
-							$plugins_data = json_decode( $response_body, true );
-							if ( $plugins_data ) {
-								wp_send_json_success( $plugins_data );
-							}
+		/**
+		 * Get the plugin stack for a demo, preferring the bundled local file.
+		 *
+		 * Shared by the AJAX handler and the WP-CLI command.
+		 *
+		 * @param string $plugins_key The demo plugins key (demo-plugins/<key>/plugins.json).
+		 * @return array|false The decoded plugin stack, or false when unavailable.
+		 */
+		public function get_demo_plugins_list( $plugins_key ) {
+			// Try local file first.
+			$local_path = WBCOM_Theme_Demo_Installer_PLUGIN_DIR_PATH . 'demo-plugins/' . $plugins_key . '/plugins.json';
+			if ( file_exists( $local_path ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+				$plugins_data = file_get_contents( $local_path );
+				$plugins_data = json_decode( $plugins_data, true );
+
+				if ( $plugins_data ) {
+					return $plugins_data;
+				}
+			}
+
+			// Fallback to remote URL.
+			$url_to_request = WBCOM_DEMO_INSTALLER_PACKAGE_PLUGINS_URL . $plugins_key . '/plugins.json';
+			$response       = wp_remote_get(
+				$url_to_request,
+				array(
+					'sslverify' => false,
+					'timeout'   => 30,
+				)
+			);
+
+			if ( ! is_wp_error( $response ) ) {
+				if ( isset( $response['response']['code'] ) && ( 200 === (int) $response['response']['code'] ) ) {
+					$response_body = isset( $response['body'] ) ? $response['body'] : '';
+					if ( ! empty( $response_body ) ) {
+						$plugins_data = json_decode( $response_body, true );
+						if ( $plugins_data ) {
+							return $plugins_data;
 						}
 					}
 				}
 			}
 
-			wp_send_json_error( __( 'Failed to fetch plugin data', 'wbcom-theme-demo-installer' ) );
+			return false;
 		}
 	}
 
