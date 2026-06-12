@@ -133,6 +133,10 @@ if ( ! class_exists( 'WBCOM_Theme_Demo_Installer' ) ) :
 			include_once 'core/ajax-handler.php';
 			include_once 'core/plugins-manager.php';
 			include_once 'update-checker/update-checker.php';
+
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				include_once 'includes/class-wbcom-demo-cli.php';
+			}
 		}
 
 		/**
